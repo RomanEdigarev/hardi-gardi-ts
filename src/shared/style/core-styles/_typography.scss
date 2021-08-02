@@ -1,0 +1,63 @@
+@import "variables";
+
+// Heading
+
+.displayFont, h1, h2 {
+  font-weight: $semi-bold;
+}
+
+.displayFont {
+  font-size: 60px;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3, h4, h5, h6 {
+  font-weight: $bold;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 18px;
+}
+
+.displayFont, h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
+
+// Body
+
+.bodyBig {
+  font-size: 18px;
+}
+
+body {
+  font-family: $desktopFontFamily;
+  font-size: 15px;
+}
+
+.bodyExtraSmall {
+  font-size: 12px;
+}
+
+.bodyBig, body, .bodyExtraSmall {
+  font-weight: $regular;
+  line-height: 1.5;
+}
