@@ -1,7 +1,7 @@
 <template>
   <section class="prolog">
     <div class="prolog__image">
-      <img src="/images/prolog.svg" alt="prolog-image" />
+      <img src="/dist/images/prolog.svg" alt="prolog-image" />
     </div>
     <div class="prolog__info">
       <div class="prolog__title">
@@ -35,7 +35,7 @@
         <PrologCard :color="card.color" :title="card.title">
           <template v-slot:image>
             <img
-              :src="`/images/cards/${index}-card.svg`"
+              :src="`/dist/images/cards/${index}-card.svg`"
               :alt="`${index}-card`"
             />
           </template>
@@ -53,9 +53,9 @@
 <script lang="ts">
 import PrologCard from "./ui/PrologCard/PrologCard.vue";
 import { useCards } from "./lib/useCards";
-import {BetaButton} from "@/shared/ui/buttons";
-import {PlusIcon} from "@/shared/ui/icons";
-import {defineComponent} from "vue";
+import { BetaButton } from "@/shared/ui/buttons";
+import { PlusIcon } from "@/shared/ui/icons";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Prolog",

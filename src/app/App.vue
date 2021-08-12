@@ -12,21 +12,24 @@
       </div>
     </div>
 
+    <div class="app__scroll-btn-container">
+      <ScrollUpPage />
+    </div>
+
     <div class="app__footer">
       <Footer />
     </div>
 
-    <img class="app__footer-bg" src="images/footer-bg.svg" alt="" />
-    <img class="app__header-bg" src="images/header-bg.svg" alt="" />
-    <img class="app__header-image" src="images/header-image.png" alt="" />
+    <img class="app__footer-bg" src="/dist/images/footer-bg.svg" alt="" />
   </div>
 </template>
 
 <script lang="ts">
-import {Header, Footer} from "./ui";
-import {defineComponent} from "vue";
+import { Header, Footer } from "./ui";
+import { ScrollUpPage } from "@/features";
+import { defineComponent } from "vue";
 export default defineComponent({
-  components: { Header, Footer },
+  components: { Header, Footer, ScrollUpPage },
 });
 </script>
 
@@ -50,7 +53,7 @@ export default defineComponent({
     height: 100%;
     margin: 0 auto;
     min-height: 100vh;
-    max-width: 1193px;
+    max-width: 1195px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,6 +82,7 @@ export default defineComponent({
 
   &__header-bg {
     top: 0;
+    left: 0;
     height: 821px;
   }
 
@@ -92,6 +96,12 @@ export default defineComponent({
     position: absolute;
     top: 22px;
     right: 23.8%;
+  }
+
+  &__scroll-btn-container {
+    position: fixed;
+    bottom: 780px;
+    right: 13.54%;
   }
 }
 </style>
