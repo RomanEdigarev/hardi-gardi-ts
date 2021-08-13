@@ -1,11 +1,14 @@
 <template>
-  <div class="card" :style="`border-radius: ${borderRadiusPX}px;`">
+  <div
+    class="card"
+    :style="`border-radius: ${borderRadiusPX}px; background-color: ${bgColor}`"
+  >
     <slot name="content" />
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Card",
@@ -13,6 +16,10 @@ export default defineComponent({
     borderRadiusPX: {
       type: String,
       default: "16",
+    },
+    bgColor: {
+      type: String,
+      default: "transparent",
     },
   },
 });

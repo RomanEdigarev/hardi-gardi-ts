@@ -1,7 +1,7 @@
 import Navigation from "./Navigation.vue";
 
 export default {
-  title: "features/Navigation",
+  title: "widgets/Navigation",
   component: Navigation,
   argTypes: {},
   parameters: {

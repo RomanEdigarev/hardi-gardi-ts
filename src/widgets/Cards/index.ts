@@ -1,3 +1,4 @@
-export * as ui from "./ui"
-export * as lib from "../../features/InfoProductCard/lib"
-export * as model from "../../features/InfoProductCard/model"
+export {default as PackingCard} from "./PackingCard/PackingCard.vue"
+export {default as ProductCardCart} from "./ProductCardCart/ProductCardCart.vue"
+export {default as ProductCardCatalog} from "./ProductCardCatalog/ProductCardCatalog.vue"
+export {default as ProductCardHome} from "./ProductCardHome/ProductCardHome.vue"

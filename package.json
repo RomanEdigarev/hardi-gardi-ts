@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 4000",
     "build": "vue-cli-service build",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
@@ -29,6 +29,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "animejs": "^3.2.1",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.5",
     "node-sass": "^4.12.0",

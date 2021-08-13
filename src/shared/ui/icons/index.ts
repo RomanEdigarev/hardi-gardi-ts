@@ -1,7 +1,7 @@
 export { default as FavoriteIcon } from "./Favorite/FavoriteIcon.vue";
 export { default as ShopIcon } from "./Shop/ShopIcon.vue";
 export { default as ArrowIcon } from "./Arrow/ArrowIcon.vue";
-export * as ConfirmIcon  from "./Confirm/ConfirmIcon.vue";
+export * as ConfirmIcon from "./Confirm/ConfirmIcon.vue";
 export { default as DeleteIcon } from "./Delete/DeleteIcon.vue";
 export { default as CloseIcon } from "./Close/CloseIcon.vue";
 export { default as PlusIcon } from "./Plus/PlusIcon.vue";
@@ -16,3 +16,4 @@ export { default as VKIcon } from "./Social/VKIcon.vue";
 export { default as YouTubeIcon } from "./Social/YouTubeIcon.vue";
 export { default as LocationIcon } from "./Location/LocationIcon.vue";
 export { default as MinusIcon } from "./Minus/MinusIcon.vue";
+export { default as ScrollUp } from "./ScrollUp/ScrollUp.vue";

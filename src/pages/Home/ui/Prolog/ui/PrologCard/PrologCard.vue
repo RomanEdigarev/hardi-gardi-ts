@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Card } from "../../../../../../widgets/Cards/ui";
+import { Card } from "@/shared/ui";
 import {defineComponent} from "vue";
 
 export default defineComponent({

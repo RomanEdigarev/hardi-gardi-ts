@@ -30,7 +30,7 @@ export const prologCard = () => ({
     <div style="width: 270px; height: 370px;">
       <PrologCard :color="$props.color"  :title="$props.title">
         <template v-slot:image>
-          <img src="/images/cards/one.svg" alt="">
+          <img src="/distScrollUpPage/cards/one.svg" alt="">
         </template>
       </PrologCard>
     </div>

@@ -4,10 +4,14 @@
 
     <div class="navigation__container">
       <nav class="navigation__links">
-        <a class="navigation__link" href="/">Каталог</a>
-        <a class="navigation__link" href="/">Акции</a>
-        <a class="navigation__link" href="/">Доставка и оплата</a>
-        <a class="navigation__link" href="/">О компании</a>
+        <router-link to="catalog" class="navigation__link">Каталог</router-link>
+        <router-link to="promotion" class="navigation__link">Акции</router-link>
+        <router-link to="" class="navigation__link"
+          >Доставка и оплата</router-link
+        >
+        <router-link to="about" class="navigation__link"
+          >О компании</router-link
+        >
       </nav>
       <div class="navigation__tooltip">
         <NavigationButton />
@@ -17,9 +21,9 @@
 </template>
 
 <script lang="ts">
-import {NavigationButton} from "./ui";
-import {Location} from "@/features/";
-import {defineComponent} from "vue";
+import { NavigationButton } from "./ui";
+import { Location } from "@/features/";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Navigation",
@@ -57,6 +61,7 @@ export default defineComponent({
   &__link {
     transition: text-shadow 0.2s ease-in-out;
     white-space: nowrap;
+    cursor: pointer;
 
     flex: 0.1;
     &:hover {

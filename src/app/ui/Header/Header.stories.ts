@@ -1,7 +1,7 @@
 import Header from "./Header.vue";
 
 export default {
-  title: "Header",
+  title: "app/Header",
   component: Header,
   argTypes: {},
   parameters: {
@@ -11,7 +11,7 @@ export default {
   },
 };
 
-export const Template = (args) => ({
+export const header = (args) => ({
   components: {
     Header,
   },

@@ -18,18 +18,18 @@
 
     <template v-slot:content>
       <div class="links">
-        <a class="link" href="/">Наша история</a>
-        <a class="link" href="/">Философия</a>
-        <a class="link" href="/">Продукция и качество</a>
-        <a class="link" href="/">Сотрудничество</a>
-        <a class="link" href="/">Контакты</a>
+        <router-link to="#" class="link">Наша история</router-link>
+        <router-link to="#" class="link">Философия</router-link>
+        <router-link to="#" class="link">Продукция и качество</router-link>
+        <router-link to="#" class="link">Сотрудничество</router-link>
+        <router-link to="#" class="link">Контакты</router-link>
       </div>
     </template>
   </Tooltip>
 </template>
 <script lang="ts">
 import Tooltip from "@/shared/ui/Tooltip/Tooltip.vue";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "NavigationButton",
@@ -50,6 +50,7 @@ export default defineComponent({
   padding: 6px 0;
   line-height: 1.75;
   transition: text-shadow 0.3s ease-in-out;
+  cursor: pointer;
   &:hover {
     text-shadow: 0 0 1px $clr-phi;
   }

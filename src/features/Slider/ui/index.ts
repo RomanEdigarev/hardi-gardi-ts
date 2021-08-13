@@ -1,0 +1,1 @@
+export {default as SliderPanel} from "./SliderPanel.vue"
