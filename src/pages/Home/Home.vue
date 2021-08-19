@@ -77,12 +77,21 @@
     </section>
   </div>
 
-  <img class="app__header-bg" src="/dist/images/header-bg.svg" alt="" />
-  <img class="app__header-image" src="/dist/images/header-image.png" alt="" />
+  <img
+    class="app__header-bg"
+    :src="require('/public/images/header-bg.svg')"
+    alt=""
+  />
+  <img
+    class="app__header-image"
+    :src="require('/public/images/header-image.png')"
+    alt=""
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import {
   Prolog,
   SectionBestsellers,

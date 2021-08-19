@@ -87,7 +87,7 @@ export default defineComponent({
   &__items-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(582px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
     column-gap: 30px;
     row-gap: 40px;
   }

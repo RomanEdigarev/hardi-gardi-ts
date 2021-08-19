@@ -1,7 +1,7 @@
 <template>
   <section class="prolog">
     <div class="prolog__image">
-      <img src="/dist/images/prolog.svg" alt="prolog-image" />
+      <img :src="require('/public/images/prolog.svg')" alt="prolog-image" />
     </div>
     <div class="prolog__info">
       <div class="prolog__title">
@@ -35,7 +35,7 @@
         <PrologCard :color="card.color" :title="card.title">
           <template v-slot:image>
             <img
-              :src="`/dist/images/cards/${index}-card.svg`"
+              :src="require(`/public/images/cards/${index}-card.svg`)"
               :alt="`${index}-card`"
             />
           </template>

@@ -1,7 +1,6 @@
-const path = require("path");
-
 module.exports = {
-  publicPath: "/dist/",
+  publicPath: process.env.NODE_ENV === "production" ? "/app/" : "/",
+  outputDir: "app",
   css: {
     loaderOptions: {
       sass: {

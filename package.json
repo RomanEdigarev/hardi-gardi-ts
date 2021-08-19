@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 4000",
     "build": "vue-cli-service build",
-    "storybook": "start-storybook -s ./public -p 6006",
+    "storybook": "start-storybook -s ./ -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

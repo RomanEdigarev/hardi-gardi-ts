@@ -32,7 +32,7 @@
               <template v-slot:content>
                 <img
                   class="new-games__first-row__image-card"
-                  src="/dist/images/newGames.png"
+                  :src="require('/public/images/newGames.png')"
                   alt=""
                 />
               </template>

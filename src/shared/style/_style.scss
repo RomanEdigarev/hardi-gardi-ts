@@ -81,10 +81,9 @@ button {
 .alfa-link {
   cursor: pointer;
   color: $clr-zeta;
-  a {
+  transition: text-shadow 0.3s ease-in-out;
     &:hover {
       text-shadow: 0 0 1px $clr-zeta;
     }
-  }
 }
 

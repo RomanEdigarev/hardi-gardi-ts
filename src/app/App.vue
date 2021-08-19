@@ -1,35 +1,58 @@
 <template>
   <div class="app">
-    <div class="app__header">
-      <Header />
-    </div>
+    <template v-if="loading">
+      <h1>{{ "LOADING" }}</h1>
+    </template>
+    <template v-else>
+      <div class="app__header">
+        <Header />
+      </div>
 
-    <div class="app__wrapper">
-      <div class="app__container">
-        <div class="app__body">
-          <router-view />
+      <div class="app__wrapper">
+        <div class="app__container">
+          <div class="app__body">
+            <router-view />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="app__scroll-btn-container">
-      <ScrollUpPage />
-    </div>
+      <div class="app__scroll-btn-container">
+        <ScrollUpPage />
+      </div>
 
-    <div class="app__footer">
-      <Footer />
-    </div>
+      <div class="app__footer">
+        <Footer />
+      </div>
 
-    <img class="app__footer-bg" src="/dist/images/footer-bg.svg" alt="" />
+      <img
+        class="app__footer-bg"
+        :src="require('/public/images/footer-bg.svg')"
+        alt=""
+      />
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { Header, Footer } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { useStore } from "@/services/vuex";
+import { getMenu } from "@/entities/Menu/lib";
+
 export default defineComponent({
   components: { Header, Footer, ScrollUpPage },
+  name: "App",
+  setup() {
+    const store = useStore();
+    onMounted(async () => {
+      await getMenu();
+    });
+    return {
+      menu: computed(() => store.state.menu),
+      loading: computed(() => store.state.loading),
+    };
+  },
 });
 </script>
 
@@ -61,6 +84,7 @@ export default defineComponent({
 
   &__header {
     background: white;
+    position: relative;
   }
 
   &__body {

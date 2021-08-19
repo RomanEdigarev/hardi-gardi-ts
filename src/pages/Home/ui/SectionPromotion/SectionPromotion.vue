@@ -7,7 +7,7 @@
             <template v-slot:content>
               <img
                 class="promotion-section__image"
-                src="/dist/images/promotionSection.png"
+                :src="require('/public/images/promotionSection.png')"
                 alt=""
               />
             </template>

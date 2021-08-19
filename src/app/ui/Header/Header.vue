@@ -5,19 +5,33 @@
         <div class="header__logo">
           <Logo />
         </div>
-        <div class="header__navigation"><Navigation /></div>
+        <div class="header__navigation">
+          <Navigation @show-modal="toggleModal" />
+        </div>
         <div class="header__phone">+7 921 961 14 41</div>
         <div class="header__cabinet"><Cabinet /></div>
+      </div>
+      <div ref="headerModal" class="header__header-modal-container">
+        <HeaderModal>
+          <template v-slot:content>
+            <div class="header__header-modal__content">
+              <CatalogSubmenu :items="catalogMenu" />
+            </div>
+          </template>
+        </HeaderModal>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import Logo from "./assets/Logo.vue";
-import {Cabinet} from "@/features";
-import {Navigation} from "@/widgets"
+import { Cabinet } from "@/features";
+import { Navigation } from "@/widgets";
+import { CatalogSubmenu } from "@/widgets/Navigation/ui";
+import { HeaderModal } from "./ui";
+import { useCatalogMenu, useHeaderModal } from "./lib";
 
 export default defineComponent({
   name: "Header",
@@ -25,13 +39,21 @@ export default defineComponent({
     Logo,
     Navigation,
     Cabinet,
+    HeaderModal,
+    CatalogSubmenu,
+  },
+  setup() {
+    return {
+      ...useHeaderModal(),
+      ...useCatalogMenu(),
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-
 .header {
+  position: relative;
   &__wrapper {
     width: 100%;
     padding: 0 19vw;
@@ -69,6 +91,19 @@ export default defineComponent({
     font-size: 24px;
     font-weight: $semi-bold;
     color: $clr-zeta;
+  }
+
+  &__header-modal-container {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &__header-modal__content {
+    width: 100%;
+    padding: 0 27.5vw;
   }
 }
 </style>

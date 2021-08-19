@@ -1,2 +1,3 @@
 import { VScrollPage } from "./v-scroll-page";
-export const directives = [VScrollPage];
+import { VBlockScroll } from "./v-block-scroll";
+export const directives = [VScrollPage, VBlockScroll];

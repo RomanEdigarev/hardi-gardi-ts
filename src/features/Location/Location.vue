@@ -1,6 +1,6 @@
 <template>
   <div class="location">
-    <Tooltip offset="35">
+    <Tooltip :offset="35">
       <template v-slot:reference>
         <div class="location__info" ref="info">
           <span class="location__icon"><LocationIcon /></span>
@@ -36,7 +36,7 @@ import Tooltip from "../../shared/ui/Tooltip/Tooltip.vue";
 import AlfaButton from "../../shared/ui/buttons/AlfaButton/AlfaButton.vue";
 import BetaButton from "../../shared/ui/buttons/BetaButton/BetaButton.vue";
 import { CloseIcon } from "../../shared/ui/icons";
-import {defineComponent, ref} from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "Location",
