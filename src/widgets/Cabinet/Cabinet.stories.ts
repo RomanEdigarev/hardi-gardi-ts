@@ -2,7 +2,7 @@ import Cabinet from "./Cabinet.vue";
 import { boolean, text } from "@storybook/addon-knobs";
 
 export default {
-  title: "features/Cabinet",
+  title: "widgets/Cabinet",
   component: Cabinet,
   parameters: {
     backgrounds: {

@@ -6,16 +6,22 @@
           <Logo />
         </div>
         <div class="header__navigation">
-          <Navigation @show-modal="toggleModal" />
+          <Navigation @show-modal="setCurrentModal" />
         </div>
         <div class="header__phone">+7 921 961 14 41</div>
-        <div class="header__cabinet"><Cabinet /></div>
+        <div class="header__cabinet"><Cabinet @show-modal="setCurrentModal"/></div>
       </div>
       <div ref="headerModal" class="header__header-modal-container">
         <HeaderModal>
           <template v-slot:content>
             <div class="header__header-modal__content">
-              <CatalogSubmenu :items="catalogMenu" />
+              <keep-alive>
+                <component :is="currentModal" :items="catalogMenu">
+                  <template v-if="currentModal==='search'" v-slot:serch-results>
+                    SearchResults
+                  </template>
+                </component>
+              </keep-alive>
             </div>
           </template>
         </HeaderModal>
@@ -25,13 +31,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import Logo from "./assets/Logo.vue";
-import { Cabinet } from "@/features";
-import { Navigation } from "@/widgets";
-import { CatalogSubmenu } from "@/widgets/Navigation/ui";
-import { HeaderModal } from "./ui";
-import { useCatalogMenu, useHeaderModal } from "./lib";
+import { Navigation, Cabinet } from "@/widgets";
+import { HeaderModal, CatalogSubmenu, Search } from "./ui";
+import { useCatalogMenu } from "./lib";
 
 export default defineComponent({
   name: "Header",
@@ -41,11 +45,18 @@ export default defineComponent({
     Cabinet,
     HeaderModal,
     CatalogSubmenu,
+    Search
   },
   setup() {
+    const currentModal = ref('search')
+    const setCurrentModal = (currentModalName) => {
+      currentModal.value = currentModalName
+    }
+
     return {
-      ...useHeaderModal(),
-      ...useCatalogMenu(),
+      currentModal,
+      setCurrentModal,
+       ...useCatalogMenu(),
     };
   },
 });

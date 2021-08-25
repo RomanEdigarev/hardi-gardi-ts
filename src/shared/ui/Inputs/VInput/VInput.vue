@@ -14,7 +14,7 @@
       ref="input"
       class="input"
       type="text"
-      placeholder="Placeholder"
+      :placeholder="placeholder"
       :id="id"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -38,7 +38,7 @@ import BetaButton from "../../buttons/BetaButton/BetaButton.vue";
 import { CloseIcon } from "../../icons";
 
 export default defineComponent({
-  name: "Input",
+  name: "VInput",
   components: {
     BetaButton,
     CloseIcon,
@@ -50,6 +50,7 @@ export default defineComponent({
     isSuccess: Boolean,
     isError: Boolean,
     isDisabled: Boolean,
+    placeholder: String
   },
   setup(props, { emit }) {
     const input = ref(null);
@@ -149,7 +150,7 @@ export default defineComponent({
 
 .close-btn {
   opacity: 0;
-  width: 32px;
+  width: 15px;
   position: absolute;
   z-index: 1;
   top: 50%;

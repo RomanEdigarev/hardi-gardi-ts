@@ -30,6 +30,9 @@
         alt=""
       />
     </template>
+    <div class="modal-bg">
+
+    </div>
   </div>
 </template>
 
@@ -85,6 +88,7 @@ export default defineComponent({
   &__header {
     background: white;
     position: relative;
+    z-index: 2;
   }
 
   &__body {
@@ -126,6 +130,21 @@ export default defineComponent({
     position: fixed;
     bottom: 780px;
     right: 13.54%;
+  }
+
+  .modal-bg {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(81, 98, 142, 0.3);
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1;
+    display: none;
+    opacity: 0.3;
+    &--header {
+      z-index: 1;
+    }
   }
 }
 </style>

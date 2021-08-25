@@ -1,7 +1,7 @@
 import Input from "./Input.vue";
 
 export default {
-  title: "features/Subscription/Input",
+  title: "features/Subscription/VInput",
   component: Input,
   parameters: {
     backgrounds: {

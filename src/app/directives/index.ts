@@ -1,3 +1,4 @@
 import { VScrollPage } from "./v-scroll-page";
 import { VBlockScroll } from "./v-block-scroll";
-export const directives = [VScrollPage, VBlockScroll];
+import { VToggleModal } from "./v-toggle-modal";
+export const directives = [VScrollPage, VBlockScroll, VToggleModal];

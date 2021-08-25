@@ -19,7 +19,12 @@
       <span>{{ text }}</span>
     </div>
     <div class="cabinet__links">
-      <a class="cabinet__link" href="/"><SearchIcon /></a>
+      <span
+        v-toggle-modal="{ modal: 'header-modal', name: 'search' }"
+        class="cabinet__link"
+        @click="$emit('show-modal', 'search')"
+        ><SearchIcon
+      /></span>
       <a class="cabinet__link" href="/">
         <IconWithCount>
           <template v-slot:svg-icon>
@@ -39,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
+import { computed, defineComponent } from "vue";
 import {
   ProfileIcon,
   SearchIcon,
@@ -132,6 +137,7 @@ export default defineComponent({
     display: inline-block;
     width: 27px;
     height: 27px;
+    cursor: pointer;
   }
 
   &__link[id="shop"] {

@@ -1,10 +1,10 @@
-import Input from "./Input.vue";
+import Input from "./VInput.vue";
 import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { ref } from "vue";
 
 export default {
-  title: "ui/Inputs/Input",
+  title: "ui/inputs/VInput",
   component: {
     Input,
   },

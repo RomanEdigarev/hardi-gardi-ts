@@ -7,9 +7,12 @@
             <div class="catalog-submenu__link-icon-container">
               <img :src="require('/public/images/static-icons/1.svg')" alt="" />
             </div>
-            <a href="#" class="catalog-submenu__link-text alfa-link">
+            <router-link
+              to="catalog"
+              class="catalog-submenu__link-text alfa-link"
+            >
               Весь каталог
-            </a>
+            </router-link>
           </div>
         </div>
         <div v-for="column in result" class="catalog-submenu__content__column">

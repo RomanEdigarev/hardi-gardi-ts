@@ -2,7 +2,7 @@ import Checkbox from "./Checkbox.vue";
 import { ref } from "vue";
 import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 export default {
-  title: "ui/Inputs/Checkbox",
+  title: "ui/inputs/Checkbox",
   component: {
     Checkbox,
   },

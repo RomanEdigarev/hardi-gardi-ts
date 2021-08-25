@@ -5,9 +5,9 @@
     <div class="navigation__container">
       <nav class="navigation__links">
         <span
-          v-block-scroll
+          v-toggle-modal="{ modal: 'header-modal', name: 'catalogMenu' }"
           class="navigation__link with-submenu"
-          @click="$emit('show-modal')"
+          @click="$emit('show-modal', 'catalogSubmenu')"
         >
           Каталог
           <svg

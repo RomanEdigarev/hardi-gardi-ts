@@ -1,6 +1,6 @@
 import Submenu from "./CatalogSubmenu.vue";
 import { Menu } from "@/entities/Menu/model";
-import CatalogSubmenu from "@/widgets/Navigation/ui/CatalogSubmenu/CatalogSubmenu.vue";
+import CatalogSubmenu from "@/app/ui/Header/ui/CatalogSubmenu/CatalogSubmenu.vue";
 
 export default {
   title: "widgets/Navigation/ui",

@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "ui/Inputs/Select",
+  title: "ui/inputs/Select",
   component: {
     Select,
   },
