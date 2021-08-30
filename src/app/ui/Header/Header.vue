@@ -3,13 +3,15 @@
     <div class="header__wrapper">
       <div class="header__container">
         <div class="header__logo">
-          <Logo />
+          <Logo @click="$router.push('/')" />
         </div>
         <div class="header__navigation">
           <Navigation @show-modal="setCurrentModal" />
         </div>
         <div class="header__phone">+7 921 961 14 41</div>
-        <div class="header__cabinet"><Cabinet @show-modal="setCurrentModal"/></div>
+        <div class="header__cabinet">
+          <Cabinet @show-modal="setCurrentModal" />
+        </div>
       </div>
       <div ref="headerModal" class="header__header-modal-container">
         <HeaderModal>
@@ -17,7 +19,10 @@
             <div class="header__header-modal__content">
               <keep-alive>
                 <component :is="currentModal" :items="catalogMenu">
-                  <template v-if="currentModal==='search'" v-slot:serch-results>
+                  <template
+                    v-if="currentModal === 'search'"
+                    v-slot:serch-results
+                  >
                     SearchResults
                   </template>
                 </component>
@@ -45,18 +50,18 @@ export default defineComponent({
     Cabinet,
     HeaderModal,
     CatalogSubmenu,
-    Search
+    Search,
   },
   setup() {
-    const currentModal = ref('search')
+    const currentModal = ref("search");
     const setCurrentModal = (currentModalName) => {
-      currentModal.value = currentModalName
-    }
+      currentModal.value = currentModalName;
+    };
 
     return {
       currentModal,
       setCurrentModal,
-       ...useCatalogMenu(),
+      ...useCatalogMenu(),
     };
   },
 });

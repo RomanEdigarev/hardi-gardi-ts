@@ -73,7 +73,7 @@ import { Card } from "@/shared/ui";
 import { SliderPanel } from "@/features";
 
 export default defineComponent({
-  name: "SectionPromotion",
+  name: "PromotionSection",
   components: { Card, SliderPanel },
 });
 </script>
@@ -81,7 +81,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .promotion-section {
   width: 100%;
-  height: 100%;
+  max-width: 1195px;
+  height: 614px;
 
   // *** Containers *** //
 

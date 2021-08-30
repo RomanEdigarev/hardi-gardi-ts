@@ -66,10 +66,16 @@ export const VToggleModal = {
     };
 
     const listenerForDoc = (e) => {
-      if (e.target === el) {
+      const isCloseModal: boolean =
+        (e.target as HTMLElement).tagName === "A" ||
+        (!(e.target as HTMLElement).closest(".header") && e.target != el);
+      console.log(isCloseModal);
+      console.log((e.target as HTMLElement).tagName);
+
+      if (!isCloseModal) {
         return false;
       }
-      if (!(e.target as HTMLElement).closest(".header") && e.target != el) {
+      if (isCloseModal) {
         closeModal();
       }
     };

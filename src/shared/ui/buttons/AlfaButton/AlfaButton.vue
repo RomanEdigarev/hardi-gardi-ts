@@ -7,23 +7,23 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AlfaButton",
   props: {
     styling: {
       type: String,
-      default: () => "primary"
+      default: () => "primary",
     },
     isPending: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     text: {
       type: String,
-      default: () => ""
-    }
+      default: () => "",
+    },
   },
 });
 </script>
@@ -31,13 +31,16 @@ export default defineComponent({
 <style scoped lang="scss">
 .btn {
   width: 100%;
-  height: 100%;
-  font-size: 16px;
+  padding: 20px 0;
   position: relative;
-  font-weight: $semi-bold;
   border-radius: 16px;
-  line-height: 1.75;
   transition: background-color 0.3s ease-in-out;
+  span {
+    display: inline-block;
+    font-family: Montserrat;
+    font-weight: $bold;
+    font-size: 12px;
+  }
 
   &:focus {
     outline: none;

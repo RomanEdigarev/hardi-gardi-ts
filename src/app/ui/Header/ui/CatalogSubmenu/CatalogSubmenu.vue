@@ -8,7 +8,7 @@
               <img :src="require('/public/images/static-icons/1.svg')" alt="" />
             </div>
             <router-link
-              to="catalog"
+              to="/catalog"
               class="catalog-submenu__link-text alfa-link"
             >
               Весь каталог
@@ -26,7 +26,7 @@
                   />
                 </div>
                 <a
-                  :href="linkItem.link"
+                  :href="linkItem.link.toLowerCase()"
                   class="catalog-submenu__link-text alfa-link"
                 >
                   {{ linkItem.name }}
@@ -38,7 +38,7 @@
               >
                 <a
                   v-for="sublinkItem in linkItem.items"
-                  :href="sublinkItem.link"
+                  :href="sublinkItem.link.toLowerCase()"
                   class="catalog-submenu__sublink alfa-link"
                 >
                   {{ sublinkItem.name }}

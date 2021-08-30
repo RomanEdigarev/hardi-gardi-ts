@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { VInput } from "@/shared/ui/inputs";
 import { BetaButton } from "@/shared/ui/buttons";
 import { ArrowIcon } from "@/shared/ui/icons";
+import { VInput } from "@/shared/ui/Inputs";
 
 export default defineComponent({
   name: "SearchInput",
@@ -36,8 +36,8 @@ export default defineComponent({
     width: 64px;
     height: 48px;
     position: absolute;
-    top:50%;
-    right:6px;
+    top: 50%;
+    right: 6px;
     transform: translateY(-50%);
   }
 }

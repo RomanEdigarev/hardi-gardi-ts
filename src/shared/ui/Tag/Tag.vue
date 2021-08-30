@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import BetaButton from "../buttons/BetaButton/BetaButton";
 import { CloseIcon } from "../icons";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
+import { BetaButton } from "@/shared/ui/buttons";
 
 export default defineComponent({
   name: "Tag",
@@ -34,7 +34,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
 .tag {
   position: relative;
   display: flex;

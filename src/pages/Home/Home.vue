@@ -10,7 +10,7 @@
       <SectionNewGames :products="[product, product]" />
     </section>
     <section class="home__promotion-container">
-      <SectionPromotion />
+      <PromotionSection />
     </section>
     <section class="home__sales-container">
       <SectionSales />
@@ -96,12 +96,12 @@ import {
   Prolog,
   SectionBestsellers,
   SectionNewGames,
-  SectionPromotion,
   SectionSales,
   SectionSets,
   CategoryCard,
 } from "./ui";
 import { useProduct } from "@/entities/Product/lib";
+import { PromotionSection } from "@/widgets";
 
 export default defineComponent({
   name: "Home",
@@ -109,7 +109,7 @@ export default defineComponent({
     Prolog,
     SectionBestsellers,
     SectionNewGames,
-    SectionPromotion,
+    PromotionSection,
     SectionSales,
     SectionSets,
     CategoryCard,
