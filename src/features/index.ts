@@ -5,4 +5,5 @@ export { default as AddToFavorite } from "./AddToFavorite/AddToFavorite.vue";
 export { default as AddToBasket } from "./AddToBasket/AddToBasket.vue";
 export { default as ScrollUpPage } from "./ScrollUpPage/ScrollUpPage.vue";
 export { default as SearchInput } from "./SearchInput/SearchInput.vue";
+export { default as Sorting } from "./Sorting/Sorting.vue";
 export * from "./Slider";

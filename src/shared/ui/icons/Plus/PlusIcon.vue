@@ -10,7 +10,7 @@
     <path
       d="M21.5215 2V42"
       stroke="#D23C50"
-      stroke-width="3"
+      stroke-width="7"
       stroke-miterlimit="10"
       stroke-linecap="round"
       stroke-linejoin="round"
@@ -18,7 +18,7 @@
     <path
       d="M2 21.5215H42"
       stroke="#D23C50"
-      stroke-width="3"
+      stroke-width="7"
       stroke-miterlimit="10"
       stroke-linecap="round"
       stroke-linejoin="round"

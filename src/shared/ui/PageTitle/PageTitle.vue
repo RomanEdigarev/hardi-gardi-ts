@@ -1,5 +1,10 @@
 <template>
-  <h1 class="page-title">{{ text }}</h1>
+  <h1 v-if="text" class="page-title">
+    {{ text }}
+  </h1>
+  <div v-else class="page-title">
+    <slot name="text"></slot>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,8 +15,12 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      required: true,
+      required: false,
+      // default: "Заголовок страницы",
     },
+  },
+  mounted() {
+    console.log(this.text);
   },
 });
 </script>

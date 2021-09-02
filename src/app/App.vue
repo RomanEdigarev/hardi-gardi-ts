@@ -30,9 +30,7 @@
         alt=""
       />
     </template>
-    <div class="modal-bg">
-
-    </div>
+    <div class="modal-bg"></div>
   </div>
 </template>
 
@@ -137,8 +135,8 @@ export default defineComponent({
     height: 100vh;
     background-color: rgba(81, 98, 142, 0.3);
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     z-index: 1;
     display: none;
     opacity: 0.3;

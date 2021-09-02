@@ -51,9 +51,10 @@
 import { defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
-import { CatalogFilter, Sorting } from "./ui";
+import { CatalogFilter } from "./ui";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { useProduct } from "@/entities/Product/lib";
+import { Sorting } from "@/features";
 const { product } = useProduct();
 
 export default defineComponent({

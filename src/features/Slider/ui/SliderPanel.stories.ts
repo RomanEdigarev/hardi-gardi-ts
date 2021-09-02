@@ -2,7 +2,7 @@ import SliderPanel from "@/features/Slider/ui/SliderPanel.vue";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "ui/Slider/SliderPanel",
+  title: "features/Slider/ui/SliderPanel",
   component: {
     SliderPanel,
   },
