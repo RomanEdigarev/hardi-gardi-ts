@@ -37,10 +37,10 @@
 </template>
 
 <script lang="ts">
-import {Card} from "@/shared/ui";
+import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Product/lib";
 import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -65,11 +65,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .cart-product-card-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 786px;
+  height: 197px;
 }
 
 .cart-product-card {

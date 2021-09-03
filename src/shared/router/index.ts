@@ -1,5 +1,12 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { Home, Catalog, SearchResultsPage, Product, Favorites } from "@/pages";
+import {
+  Home,
+  Catalog,
+  SearchResultsPage,
+  Product,
+  Favorites,
+  Basket,
+} from "@/pages";
 import "vue-router";
 declare module "vue-router" {
   interface RouteMeta {
@@ -68,6 +75,11 @@ const routes = [
     path: "/favorites",
     name: "Favorites",
     component: Favorites,
+  },
+  {
+    path: "/basket",
+    name: "Basket",
+    component: Basket,
   },
 ];
 
