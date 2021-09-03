@@ -4,10 +4,14 @@
       <BreadCrumbs />
     </div>
     <div class="product-page__body">
-      <div class="product-page__body__left"></div>
+      <div class="product-page__body__left">
+        <div class="product-page__body__left__slider">
+          <MainSlider @zoom="zoomSlider" :is-zoom="isZoomSlider" />
+        </div>
+      </div>
       <div class="product-page__body__right">
         <div class="product-page__body__about-container">
-          <About />
+          <About :is-sets="true" />
         </div>
         <div class="product-page__body__right-body">
           <div class="product-page__body__description">
@@ -105,9 +109,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { BreadCrumbs } from "@/widgets";
-import { About, Description, FooterSlider } from "./ui";
+import { About, Description, FooterSlider, MainSlider, SetSlider } from "./ui";
 
 export default defineComponent({
   name: "Product",
@@ -116,6 +120,19 @@ export default defineComponent({
     About,
     Description,
     FooterSlider,
+    MainSlider,
+    SetSlider,
+  },
+  setup() {
+    const isZoomSlider = ref(false);
+    const zoomSlider = () => {
+      isZoomSlider.value = !isZoomSlider.value;
+    };
+
+    return {
+      isZoomSlider,
+      zoomSlider,
+    };
   },
 });
 </script>

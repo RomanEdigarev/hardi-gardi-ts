@@ -38,6 +38,9 @@
           <AlfaButton styling="secondary" text="В корзине"></AlfaButton>
         </div>
       </div>
+      <div v-if="isSets" class="about-product__body__set-slider">
+        <SetSlider />
+      </div>
     </div>
     <div class="about-product__footer">
       <div class="about-product__footer__item">
@@ -102,10 +105,17 @@
 import { defineComponent } from "vue";
 import { AddToFavorite } from "@/features";
 import { CounterButton, AlfaButton } from "@/shared/ui/buttons";
+import SetSlider from "../SetSlider/SetSlider.vue";
 
 export default defineComponent({
   name: "About",
-  components: { AddToFavorite, CounterButton, AlfaButton },
+  components: { AddToFavorite, CounterButton, AlfaButton, SetSlider },
+  props: {
+    isSets: {
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 </script>
 
@@ -180,6 +190,12 @@ export default defineComponent({
           margin: 0 18px;
         }
       }
+    }
+    &__set-slider {
+      margin-top: 44px;
+      padding: 34px 0;
+      border-top: 1px solid $clr-upsilon;
+      border-bottom: 1px solid $clr-upsilon;
     }
   }
   // *** Body END *** //
