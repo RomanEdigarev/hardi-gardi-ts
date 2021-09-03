@@ -1,11 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { Home, Catalog } from "@/pages";
+import { Home, Catalog, SearchResultsPage, Product, Favorites } from "@/pages";
 import "vue-router";
-import SearchResultsPage from "@/pages/SearchResultsPage/SearchResultsPage.vue";
-import Product from "@/pages/Product/Product.vue";
 declare module "vue-router" {
   interface RouteMeta {
-    breadcrumb: Breadcrumb[];
+    breadcrumb?: Breadcrumb[];
   }
 }
 
@@ -61,10 +59,15 @@ const routes = [
       breadcrumb: [
         {
           name: "Каталог",
-          link: "search-results",
+          link: "product",
         },
       ],
     },
+  },
+  {
+    path: "/favorites",
+    name: "Favorites",
+    component: Favorites,
   },
 ];
 

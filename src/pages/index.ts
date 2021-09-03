@@ -1,2 +1,5 @@
 export { default as Home } from "./Home/Home.vue";
 export { default as Catalog } from "./Catalog/Catalog.vue";
+export { default as Product } from "./Product/Product.vue";
+export { default as Favorites } from "./Favorites/Favorites.vue";
+export { default as SearchResultsPage } from "./SearchResultsPage/SearchResultsPage.vue";
