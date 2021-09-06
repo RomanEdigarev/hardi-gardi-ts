@@ -24,17 +24,29 @@
       <span class="product-card__price__prev">430 &#8381;</span>
       <span class="product-card__price__current">400 &#8381;/шт</span>
     </div>
-    <div class="product-card__del-btn"></div>
-    <div class="product-card__fav-btn"></div>
+    <div
+      v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"
+      class="product-card__del-btn"
+    >
+      <BetaButton styling="beta-gamma-btn">
+        <DeleteIcon />
+      </BetaButton>
+    </div>
+    <div class="product-card__fav-btn">
+      <BetaButton styling="beta-gamma-btn">
+        <FavoriteIcon />
+      </BetaButton>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { CounterButton } from "@/shared/ui/buttons";
+import { CounterButton, BetaButton } from "@/shared/ui/buttons";
+import { DeleteIcon, FavoriteIcon } from "@/shared/ui/icons";
 export default defineComponent({
   name: "ProductCard",
-  components: { CounterButton },
+  components: { CounterButton, BetaButton, DeleteIcon, FavoriteIcon },
 });
 </script>
 
@@ -42,13 +54,14 @@ export default defineComponent({
 .product-card {
   width: 100%;
   max-width: 786px;
-  padding: 36px;
+  padding: 36px 95px 36px 36px;
   border: 1px solid $clr-upsilon;
   border-radius: 25px;
   color: $clr-phi;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   // *** Product *** //
   &__product {
@@ -122,5 +135,24 @@ export default defineComponent({
     }
   }
   // *** Price END *** //
+
+  // *** Buttons *** //
+  &__del-btn,
+  &__fav-btn {
+    position: absolute;
+  }
+  &__del-btn {
+    width: 38px;
+    height: 38px;
+    top: 26px;
+    right: 26px;
+  }
+  &__fav-btn {
+    width: 20px;
+    bottom: 26px;
+    right: 35px;
+  }
+
+  // *** Buttons END *** //
 }
 </style>

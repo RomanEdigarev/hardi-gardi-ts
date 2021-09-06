@@ -22,9 +22,9 @@
                 styling="beta-delta-btn"
                 @click=""
                 :is-confirm="isSelected"
-                :size="'20'"
+                :size="'32'"
               >
-                <PlusIcon />
+                <PlusIcon v-if="!isSelected" />
               </BetaButton>
             </div>
           </div>
@@ -36,9 +36,9 @@
 
 <script lang="ts">
 import Card from "../../../shared/ui/Card/Card.vue";
-import { PlusIcon } from "@/shared/ui/icons";
-import {BetaButton} from "@/shared/ui/buttons";
-import {defineComponent} from "vue";
+import { PlusIcon, ConfirmIcon } from "@/shared/ui/icons";
+import { BetaButton } from "@/shared/ui/buttons";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "PackingCard",
@@ -46,6 +46,7 @@ export default defineComponent({
     Card,
     BetaButton,
     PlusIcon,
+    ConfirmIcon,
   },
   props: {
     packingName: {
@@ -65,14 +66,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .packing-card {
-  width: 100%;
-  height: 100%;
+  width: 276px;
+  height: 454px;
   color: $clr-phi;
 
   &__content {
     width: 100%;
     height: 100%;
     background-color: $clr-tau;
+    border: 3px solid $clr-zeta;
+    border-radius: 25px;
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -120,6 +123,10 @@ export default defineComponent({
     width: 60px;
     height: 60px;
   }
+}
+
+.packing-card__content.unselected {
+  border-color: transparent;
 }
 
 .unselected {

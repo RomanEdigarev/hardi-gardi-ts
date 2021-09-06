@@ -6,43 +6,76 @@
       </div>
       <div class="basket__body">
         <div class="basket__body__products-list">
-          <ProductCardCatalog is-cart />
+          <div class="basket__body__products-list__item">
+            <ProductCard />
+          </div>
+          <div class="basket__body__products-list__item">
+            <ProductCard />
+          </div>
+          <div class="basket__body__products-list__item">
+            <ProductCard />
+          </div>
+          <div class="basket__body__products-list__item">
+            <ProductCard />
+          </div>
         </div>
         <div class="basket__body__checkout"><Checkout /></div>
       </div>
+      <div class="basket__footer">
+        <Package />
+      </div>
     </main>
+    <div ref="deleteModal" class="basket__delete-modal-container">
+      <DeleteModal />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Checkout } from "./ui";
+import { Checkout, ProductCard, DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
-import { ProductCardCart, ProductCardCatalog } from "@/widgets";
 export default defineComponent({
   name: "Basket",
   components: {
     Checkout,
     PageTitle,
-    ProductCardCatalog,
+    ProductCard,
+    DeleteModal,
+    Package,
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .basket {
+  position: relative;
+  .page-main__header {
+    margin-bottom: 32px;
+  }
   // *** Body *** //
   &__body {
     display: flex;
     width: 100%;
+    margin-bottom: 36px;
     &__products-list {
       width: 100%;
-      height: 10px;
+      &__item {
+        margin-bottom: 12px;
+      }
     }
     &__checkout {
       min-width: 378px;
     }
   }
   // *** Body END *** //
+
+  &__delete-modal-container {
+    width: 582px;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    display: none;
+  }
 }
 </style>

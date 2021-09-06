@@ -15,8 +15,17 @@ export const VToggleModal = {
     const modal: HTMLElement = document.querySelector("." + binding.value.modal)
       .parentElement;
     modal.setAttribute("data-modal-status", "close");
+    let containerModalName = "header";
+    modal.classList.add("modal");
     let isOpenedModal: boolean = false;
     const modalBG: HTMLElement = document.querySelector(".modal-bg");
+
+    if (binding.value.modal !== "header-modal") {
+      containerModalName = "modal";
+      modal.style.top = "50%";
+      modal.style.transform = "translate(50%, -50%)";
+      modal.style.zIndex = "10";
+    }
 
     const changeStyle = (status: "open" | "close") => {
       const isOpened = !(status === "open");
@@ -40,6 +49,16 @@ export const VToggleModal = {
     };
 
     const openModal = () => {
+      if (containerModalName !== "header") {
+        const closingModalBtns = document.querySelectorAll(
+          "[data-close-modal]"
+        );
+        closingModalBtns.forEach((item) => {
+          item.addEventListener("click", listener, { once: true });
+        });
+        console.log(closingModalBtns);
+      }
+
       changeStatus("open");
       anime({
         targets: [modal, modalBG],
@@ -53,6 +72,10 @@ export const VToggleModal = {
     };
 
     const closeModal = () => {
+      if (containerModalName !== "header") {
+        document.removeEventListener("click", listenerForDoc, true);
+      }
+
       anime({
         targets: [modal, modalBG],
         opacity: [1, 0],
@@ -68,7 +91,9 @@ export const VToggleModal = {
     const listenerForDoc = (e) => {
       const isCloseModal: boolean =
         (e.target as HTMLElement).tagName === "A" ||
-        (!(e.target as HTMLElement).closest(".header") && e.target != el);
+        (!(e.target as HTMLElement).closest(`.${containerModalName}`) &&
+          e.target != el);
+      console.log("e.closest=", !(e.target as HTMLElement).closest(".modal"));
       console.log(isCloseModal);
       console.log((e.target as HTMLElement).tagName);
 
@@ -76,6 +101,7 @@ export const VToggleModal = {
         return false;
       }
       if (isCloseModal) {
+        document.removeEventListener("click", listenerForDoc, true);
         closeModal();
       }
     };

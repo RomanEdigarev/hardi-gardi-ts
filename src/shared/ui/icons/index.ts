@@ -1,7 +1,7 @@
 export { default as FavoriteIcon } from "./Favorite/FavoriteIcon.vue";
 export { default as ShopIcon } from "./Shop/ShopIcon.vue";
 export { default as ArrowIcon } from "./Arrow/ArrowIcon.vue";
-export * as ConfirmIcon from "./Confirm/ConfirmIcon.vue";
+export { default as ConfirmIcon } from "./Confirm/ConfirmIcon.vue";
 export { default as DeleteIcon } from "./Delete/DeleteIcon.vue";
 export { default as CloseIcon } from "./Close/CloseIcon.vue";
 export { default as PlusIcon } from "./Plus/PlusIcon.vue";

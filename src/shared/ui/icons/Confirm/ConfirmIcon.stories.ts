@@ -1,7 +1,7 @@
 import ConfirmIcon from "./ConfirmIcon.vue";
 
 export default {
-  title: "src/ui/icons/Confirm",
+  title: "ui/icons/Confirm",
   component: ConfirmIcon,
   parameters: {
     backgrounds: {

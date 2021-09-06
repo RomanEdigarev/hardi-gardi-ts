@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import { ConfirmIcon } from "../../icons/index";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
+import { ConfirmIcon } from "@/shared/ui/icons";
 
 export default defineComponent({
   name: "BetaButton",
