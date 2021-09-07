@@ -6,4 +6,5 @@ export { default as AddToBasket } from "./AddToBasket/AddToBasket.vue";
 export { default as ScrollUpPage } from "./ScrollUpPage/ScrollUpPage.vue";
 export { default as SearchInput } from "./SearchInput/SearchInput.vue";
 export { default as Sorting } from "./Sorting/Sorting.vue";
+export { default as ObtainingItem } from "./Obtaining/ui/ObtainingItem/ObtainingItem.vue";
 export * from "./Slider";

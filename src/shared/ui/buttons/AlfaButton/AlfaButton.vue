@@ -38,7 +38,7 @@ export default defineComponent({
   span {
     display: inline-block;
     font-family: Montserrat;
-    font-weight: $bold;
+    font-weight: $medium;
     font-size: 12px;
   }
 

@@ -6,6 +6,7 @@ import {
   Product,
   Favorites,
   Basket,
+  Ordering,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -80,6 +81,11 @@ const routes = [
     path: "/basket",
     name: "Basket",
     component: Basket,
+  },
+  {
+    path: "/ordering",
+    name: "Ordering",
+    component: Ordering,
   },
 ];
 

@@ -3,7 +3,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { useProduct } from "@/entities/Product/lib";
 
 export default {
-  title: "pages/Basket/ui/Checkout",
+  title: "widgets/Checkout",
   component: {
     Checkout,
   },

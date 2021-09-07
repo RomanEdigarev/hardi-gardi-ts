@@ -1,7 +1,7 @@
 import SearchIcon from "./SearchIcon.vue";
 
 export default {
-  title: "src/ui/icons/Search",
+  title: "ui/icons/Search",
   component: SearchIcon,
 };
 

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <label :for="id" class="label">Label</label>
+    <label :for="id" class="label">{{ labelText }}</label>
     <input
       class="input"
       ref="input"
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import CheckboxIcon from "../../icons/Checkbox/CheckboxIcon.vue";
 import { ref, onMounted } from "vue";
 
@@ -50,10 +50,9 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const isFocused  = ref(false);
+    const isFocused = ref(false);
     const isChecked = ref(false);
     const input = ref(null);
-
 
     const check = () => {
       if (!props.isDisabled) {

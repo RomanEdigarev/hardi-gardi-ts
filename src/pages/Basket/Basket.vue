@@ -33,8 +33,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Checkout, ProductCard, DeleteModal, Package } from "./ui";
+import { ProductCard, DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
+import { Checkout } from "@/widgets";
 export default defineComponent({
   name: "Basket",
   components: {
