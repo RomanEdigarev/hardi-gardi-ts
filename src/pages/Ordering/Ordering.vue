@@ -64,6 +64,7 @@
         <Checkout is-ordering />
       </div>
     </div>
+    <div class="ordering__modal-container"><Goods /></div>
   </div>
 </template>
 
@@ -71,7 +72,7 @@
 import { defineComponent } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
-import { Contacts } from "./ui";
+import { Contacts, Goods } from "./ui";
 import { Checkbox } from "@/shared/ui/inputs";
 
 export default defineComponent({
@@ -83,6 +84,7 @@ export default defineComponent({
     Obtaining,
     ToggleMenu,
     Checkbox,
+    Goods,
   },
   setup() {
     const paymentItems = ["Картой на сайте", "При получении"];
@@ -96,6 +98,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .ordering {
   margin-top: 10px;
+  position: relative;
   color: $clr-phi;
 
   // *** Header *** //
@@ -158,6 +161,13 @@ export default defineComponent({
     }
   }
   // *** Body END *** //
+
+  &__modal-container {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    display: none;
+  }
 
   .contacts {
     &__inputs {

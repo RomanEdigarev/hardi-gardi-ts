@@ -23,7 +23,9 @@ export const VToggleModal = {
     if (binding.value.modal !== "header-modal") {
       containerModalName = "modal";
       modal.style.top = "50%";
-      modal.style.transform = "translate(50%, -50%)";
+      modal.style.left = "calc(50% + 100px)";
+      modal.style.transform = "translate(-50%, -50%)";
+      modal.style.position = "fixed";
       modal.style.zIndex = "10";
     }
 
@@ -31,8 +33,8 @@ export const VToggleModal = {
       const isOpened = !(status === "open");
       modal.style.display = isOpened ? "none" : "block";
       modalBG.style.display = isOpened ? "none" : "block";
-      document.documentElement.style.overflow = isOpened ? "auto" : "hidden";
-      document.body.style.overflow = isOpened ? "auto" : "hidden";
+      document.documentElement.style.overflow = isOpened ? "visible" : "hidden";
+      document.body.style.overflow = isOpened ? "visible" : "hidden";
     };
 
     const changeAttribute = (status: "open" | "close") => {

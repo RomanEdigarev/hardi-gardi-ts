@@ -1,202 +1,185 @@
 <template>
-  <div class="cart-product-card-wrapper">
-    <Card borderRadiusPX="25">
-      <template v-slot:content>
-        <div class="cart-product-card">
-          <!-- Product Image -->
-          <div class="cart-product-card__image-wrapper">
-            <img class="cart-product-card__image" :src="img" :alt="title" />
-          </div>
-
-          <!-- Product Info -->
-          <div class="cart-product-card__info-wrapper">
-            <div class="cart-product-card__info">
-              <div class="cart-product-card__title">{{ title }}</div>
-              <div class="cart-product-card__price">
-                <div class="cart-product-card__price__prev">
-                  {{ prevPrice }}&#8381;
-                </div>
-                <div class="cart-product-card__price__current">
-                  {{ currentPrice }} &#8381;/шт
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </template>
-    </Card>
-
-    <!-- buttons -->
-    <div class="cart-product-card__favorite-btn">
-      <FavoriteButton :isActive="isFavorite" />
+  <div class="product-card" :class="{ toModal: toModal }">
+    <div class="product-card__product">
+      <img
+        src="./assets/product_0.jpg"
+        class="product-card__product__img"
+        alt=""
+      />
+      <div class="product-card__product__title">
+        <span>Артикул: 3900005</span>
+        <p>Магнитная игра «Удивительные обитатели морей и океанов»</p>
+      </div>
     </div>
-    <div class="cart-product-card__shop-btn">
-      <ShopButton />
+    <div class="product-card__count">
+      <div v-if="!toModal">
+        <span class="product-card__count__btn">
+          <CounterButton :isPlus="false" />
+        </span>
+        <span class="product-card__count__value"> 1 </span>
+        <span class="product-card__count__btn">
+          <CounterButton :isPlus="true" />
+        </span>
+      </div>
+      <div v-else>
+        <span>1 шт</span>
+      </div>
+    </div>
+    <div class="product-card__price">
+      <span class="product-card__price__prev">430 &#8381;</span>
+      <span class="product-card__price__current">400 &#8381;/шт</span>
+    </div>
+    <!--     v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"-->
+    <div
+      v-if="!toModal"
+      v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"
+      class="product-card__del-btn"
+    >
+      <BetaButton styling="beta-gamma-btn">
+        <DeleteIcon />
+      </BetaButton>
+    </div>
+    <div v-if="!toModal" class="product-card__fav-btn">
+      <BetaButton styling="beta-gamma-btn">
+        <FavoriteIcon />
+      </BetaButton>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Card } from "@/shared/ui";
-import { useProduct } from "@/entities/Product/lib";
-import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
 import { defineComponent } from "vue";
-
+import { CounterButton, BetaButton } from "@/shared/ui/buttons";
+import { DeleteIcon, FavoriteIcon } from "@/shared/ui/icons";
 export default defineComponent({
-  name: "ProductCardHome",
-  components: {
-    Card,
-    FavoriteButton,
-    ShopButton,
-  },
+  name: "ProductCard",
+  components: { CounterButton, BetaButton, DeleteIcon, FavoriteIcon },
   props: {
-    isSearchResult: {
+    toModal: {
       type: Boolean,
-      default: false,
+      defaults: false,
     },
-  },
-  setup() {
-    const { product } = useProduct();
-    return {
-      ...product,
-    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.cart-product-card-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 786px;
-  height: 197px;
-}
-
-.cart-product-card {
+.product-card {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
+  max-width: 786px;
+  padding: 36px 95px 36px 36px;
+  border: 1px solid $clr-upsilon;
+  border-radius: 25px;
   color: $clr-phi;
-  background-color: $clr-alpha-delta;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 
-  &__image-wrapper {
-    height: 100%;
-    flex: 0.4;
-    margin-bottom: 12px;
-  }
-
-  &__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 25px;
-  }
-
-  &__info-wrapper {
-    position: relative;
-    flex: 0.6;
-  }
-
-  &__info {
-    width: 100%;
-    height: 100%;
+  // *** Product *** //
+  &__product {
     display: flex;
-    flex-direction: column;
-    background-color: $clr-alpha-delta;
-  }
+    height: 100%;
 
-  &__title {
-    font-weight: $bold;
-    margin-bottom: 32px;
-  }
-
-  &__price {
-    margin-bottom: 27px;
-
-    &__prev {
-      font-weight: $bold;
-      margin-right: 17px;
-      text-decoration: line-through;
-      margin-bottom: 4px;
+    &__img {
+      //width: 100px;
+      //height: 125px;
+      height: 100%;
+      width: 100%;
+      max-width: 100px;
+      max-height: 125px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-right: 24px;
     }
-
-    &__current {
-      font-size: 22px;
-      font-weight: $bold;
-      color: $clr-zeta;
-    }
-  }
-
-  &__favorite-btn,
-  &__shop-btn {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    right: 15px;
-  }
-
-  &__favorite-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  &__favorite-btn {
-    top: 15px;
-  }
-
-  &__shop-btn {
-    bottom: 15px;
-  }
-}
-
-.isSearchResult {
-  .cart-product-card {
-    flex-direction: row;
-
-    &__image-wrapper {
-      flex: 0.3;
-    }
-
-    &__image {
-      object-fit: contain;
-    }
-
-    &__info {
-      justify-content: center;
-    }
-
     &__title {
-      font-size: 13px;
-      margin-bottom: 9px;
-      line-height: 1.3;
-    }
-
-    &__price {
+      max-width: 219px;
       display: flex;
-      align-items: center;
-      margin-bottom: 0;
-
-      &__current {
-        font-size: 16px;
-      }
-
-      &__prev {
+      flex-direction: column;
+      span {
+        display: inline-block;
         font-size: 14px;
-        margin-bottom: 0;
-        margin-right: 9px;
+        line-height: 1.71;
       }
-    }
-
-    &__favorite-btn {
-      display: none;
-    }
-
-    &__shop-btn {
-      width: 44px;
-      height: 44px;
+      p {
+        font-weight: $bold;
+        font-size: 15px;
+        line-height: 1.33;
+      }
     }
   }
+  // *** Product END *** //
+
+  // *** Count *** //
+  &__count {
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    display: contents;
+    width: 140px;
+    height: 44px;
+    &__btn {
+      height: 100%;
+      width: 44px;
+      display: inline-block;
+    }
+    &__value {
+      font-weight: $bold;
+      font-size: 16px;
+      line-height: 1.12;
+      color: $clr-phi;
+      margin: 0 18px;
+    }
+  }
+  // *** Count END *** //
+
+  // *** Price *** //
+  &__price {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__prev {
+      display: inline-block;
+      font-weight: $bold;
+      font-size: 16px;
+      line-height: 1.25;
+      text-decoration-line: line-through;
+    }
+    &__current {
+      display: inline-block;
+      font-weight: $bold;
+      font-size: 16px;
+      line-height: 1.25;
+      color: $clr-zeta;
+      width: 100%;
+    }
+  }
+  // *** Price END *** //
+
+  // *** Buttons *** //
+  &__del-btn,
+  &__fav-btn {
+    position: absolute;
+  }
+  &__del-btn {
+    width: 38px;
+    height: 38px;
+    top: 26px;
+    right: 26px;
+  }
+  &__fav-btn {
+    width: 20px;
+    bottom: 26px;
+    right: 35px;
+  }
+
+  // *** Buttons END *** //
+}
+.product-card.toModal {
+  padding: 0;
+  border: none;
 }
 </style>

@@ -18,7 +18,11 @@
         <div class="checkout__body__list__row">
           <div class="checkout__body__list__goods">
             <span>Товары (4)</span>
-            <div v-if="isOrdering" class="checkout__body__list__goods__link">
+            <div
+              v-if="isOrdering"
+              class="checkout__body__list__goods__link"
+              v-toggle-modal="{ modal: 'goods-modal', name: 'goods' }"
+            >
               Подробнее
             </div>
           </div>

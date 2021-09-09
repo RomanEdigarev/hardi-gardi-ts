@@ -1,10 +1,11 @@
-import ProductCardCart from "./ProductCardCart.vue";
+import ProductCard from "./ProductCardCart.vue";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
+import { useProduct } from "@/entities/Product/lib";
 
 export default {
-  title: "widgets/Cards/ProductCards/Cart",
+  title: "widgets/Cards/ProductCards/Basket",
   component: {
-    ProductCardCart,
+    ProductCard,
   },
   parameters: {
     backgrounds: {
@@ -14,18 +15,22 @@ export default {
   decorators: [withKnobs],
 };
 
-export const Card = () => ({
+export const productCard = () => ({
   components: {
-    ProductCardCart,
+    ProductCard,
   },
   props: {
-    isSearchResult: {
-      default: boolean("isSearchResult", false),
-    },
+    toModal: { default: boolean("toModal", false) },
+  },
+  setup() {
+    const { product } = useProduct();
+    return {
+      product,
+    };
   },
   template: `
-    <div style="width: 276px; height: 472px; background: transparent">
-      <ProductCardCart v-bind="$props"/>
-    </div>
+      <div style="width:786px; height: auto; background-color: white;">
+        <ProductCard v-bind="$props"/>
+      </div>
     `,
 });

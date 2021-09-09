@@ -7,16 +7,16 @@
       <div class="basket__body">
         <div class="basket__body__products-list">
           <div class="basket__body__products-list__item">
-            <ProductCard />
+            <ProductCardCart />
           </div>
           <div class="basket__body__products-list__item">
-            <ProductCard />
+            <ProductCardCart />
           </div>
           <div class="basket__body__products-list__item">
-            <ProductCard />
+            <ProductCardCart />
           </div>
           <div class="basket__body__products-list__item">
-            <ProductCard />
+            <ProductCardCart />
           </div>
         </div>
         <div class="basket__body__checkout"><Checkout /></div>
@@ -33,17 +33,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ProductCard, DeleteModal, Package } from "./ui";
+import { DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
-import { Checkout } from "@/widgets";
+import { Checkout, ProductCardCart } from "@/widgets";
 export default defineComponent({
   name: "Basket",
   components: {
     Checkout,
     PageTitle,
-    ProductCard,
     DeleteModal,
     Package,
+    ProductCardCart,
   },
 });
 </script>

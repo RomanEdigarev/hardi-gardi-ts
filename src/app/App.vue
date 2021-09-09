@@ -132,12 +132,12 @@ export default defineComponent({
 
   .modal-bg {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-color: rgba(81, 98, 142, 0.3);
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     display: none;
     opacity: 0.3;
     &--header {
