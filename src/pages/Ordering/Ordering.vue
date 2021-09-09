@@ -61,7 +61,7 @@
         <!-- Checkbox END -->
       </div>
       <div class="ordering__body__right">
-        <Checkout />
+        <Checkout is-ordering />
       </div>
     </div>
   </div>
@@ -114,6 +114,7 @@ export default defineComponent({
   &__body {
     width: 100%;
     display: flex;
+    position: relative;
     &__left {
       width: 100%;
       max-width: 786px;
@@ -149,6 +150,12 @@ export default defineComponent({
         }
       }
     }
+    &__right {
+      div {
+        position: sticky;
+        top: 20px;
+      }
+    }
   }
   // *** Body END *** //
 
@@ -157,7 +164,6 @@ export default defineComponent({
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      background-color: red;
     }
   }
   .payment {

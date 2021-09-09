@@ -1,5 +1,5 @@
 import Checkout from "./Checkout.vue";
-import { withKnobs } from "@storybook/addon-knobs";
+import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { useProduct } from "@/entities/Product/lib";
 
 export default {
@@ -19,6 +19,11 @@ export const checkout = () => ({
   components: {
     Checkout,
   },
+  props: {
+    isOrdering: {
+      default: boolean("isOrdering", false),
+    },
+  },
   setup() {
     const { product } = useProduct();
     return {
@@ -27,7 +32,7 @@ export const checkout = () => ({
   },
   template: `
       <div style="width:378px; height: auto; background-color: white;">
-        <Checkout />
+        <Checkout v-bind="$props"/>
       </div>
     `,
 });
