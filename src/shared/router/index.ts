@@ -8,6 +8,7 @@ import {
   Basket,
   Ordering,
   Payment,
+  History,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -92,6 +93,19 @@ const routes = [
     path: "/payment",
     name: "Payment",
     component: Payment,
+  },
+  {
+    path: "/history",
+    name: "History",
+    component: History,
+    meta: {
+      breadcrumb: [
+        {
+          name: "Наша история",
+          link: "history ",
+        },
+      ],
+    },
   },
 ];
 

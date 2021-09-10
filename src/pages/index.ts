@@ -6,3 +6,4 @@ export { default as SearchResultsPage } from "./SearchResultsPage/SearchResultsP
 export { default as Basket } from "./Basket/Basket.vue";
 export { default as Ordering } from "./Ordering/Ordering.vue";
 export { default as Payment } from "./Payment/Payment.vue";
+export { default as History } from "./History/History.vue";
