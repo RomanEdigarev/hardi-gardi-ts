@@ -7,6 +7,7 @@ import {
   Favorites,
   Basket,
   Ordering,
+  Payment,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -86,6 +87,11 @@ const routes = [
     path: "/ordering",
     name: "Ordering",
     component: Ordering,
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    component: Payment,
   },
 ];
 
