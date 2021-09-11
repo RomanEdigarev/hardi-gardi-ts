@@ -10,6 +10,7 @@ import {
   Payment,
   History,
   Philosophy,
+  Quality,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -117,6 +118,19 @@ const routes = [
         {
           name: "Философия",
           link: "philosophy ",
+        },
+      ],
+    },
+  },
+  {
+    path: "/quality",
+    name: "Quality",
+    component: Quality,
+    meta: {
+      breadcrumb: [
+        {
+          name: "Продукция и качество",
+          link: "quality",
         },
       ],
     },

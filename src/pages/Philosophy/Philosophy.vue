@@ -135,8 +135,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
-import { BreadCrumbs } from "@/widgets";
-import { FooterCard } from "@/pages/History/ui";
+import { BreadCrumbs, FooterCard } from "@/widgets";
 export default defineComponent({
   name: "History",
   components: {
