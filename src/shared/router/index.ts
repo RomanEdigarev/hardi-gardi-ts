@@ -9,6 +9,7 @@ import {
   Ordering,
   Payment,
   History,
+  Philosophy,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -103,6 +104,19 @@ const routes = [
         {
           name: "Наша история",
           link: "history ",
+        },
+      ],
+    },
+  },
+  {
+    path: "/philosophy",
+    name: "Philosophy",
+    component: Philosophy,
+    meta: {
+      breadcrumb: [
+        {
+          name: "Философия",
+          link: "philosophy ",
         },
       ],
     },

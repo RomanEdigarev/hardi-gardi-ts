@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-card">
+  <div class="footer-card" :style="`background: ${bgString};`">
     <div class="footer-card__text">
       <slot name="text"></slot>
     </div>
@@ -13,6 +13,12 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "FooterCard",
+  props: {
+    bgString: {
+      type: String,
+      default: "#fceef4",
+    },
+  },
 });
 </script>
 

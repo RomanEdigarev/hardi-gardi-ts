@@ -68,7 +68,7 @@
 
             <img
               class="history__body__item__img"
-              src="./assets/2018.jpg"
+              :src="require('/public/images/pages/2019.jpg')"
               alt=""
               style="
                 width: 357px;
@@ -213,9 +213,9 @@
       <div class="history__footer">
         <FooterCard>
           <template v-slot:text>
-            Подобно бренду и его продукции компания растет с каждым годом.
-            Сегодня более 30 человек способствуют тому, чтобы детские глаза
-            сияли радостью.
+            Мы уверены, что создание/изготовление товаров для детей одно из
+            самых сложных, интересных и ответственных производств. Ведь дети —
+            это самые непосредственные и непредвзятые потребители.
           </template>
         </FooterCard>
       </div>
@@ -227,8 +227,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
-import { BreadCrumbs } from "@/widgets";
-import { TextBlock, FooterCard } from "./ui";
+import { BreadCrumbs, FooterCard } from "@/widgets";
+import { TextBlock } from "./ui";
 export default defineComponent({
   name: "History",
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard },

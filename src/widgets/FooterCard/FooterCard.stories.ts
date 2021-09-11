@@ -1,7 +1,8 @@
 import FooterCard from "./FooterCard.vue";
+import { text } from "@storybook/addon-knobs";
 
 export default {
-  title: "pages/history/ui/FooterCard",
+  title: "widgets/FooterCard",
   component: FooterCard,
   parameters: {
     backgrounds: {
@@ -13,6 +14,11 @@ export default {
 export const footerCard = (args) => ({
   components: {
     FooterCard,
+  },
+  props: {
+    bgString: {
+      default: text("bgColor", "#fceef4"),
+    },
   },
   setup() {
     return { args };
