@@ -11,6 +11,7 @@ import {
   History,
   Philosophy,
   Quality,
+  TextPage,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -131,6 +132,19 @@ const routes = [
         {
           name: "Продукция и качество",
           link: "quality",
+        },
+      ],
+    },
+  },
+  {
+    path: "/text-page",
+    name: "TextPage",
+    component: TextPage,
+    meta: {
+      breadcrumb: [
+        {
+          name: "О компании",
+          link: "text-page",
         },
       ],
     },

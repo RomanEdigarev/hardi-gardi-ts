@@ -9,3 +9,4 @@ export { default as Payment } from "./Payment/Payment.vue";
 export { default as History } from "./History/History.vue";
 export { default as Philosophy } from "./Philosophy/Philosophy.vue";
 export { default as Quality } from "./Quality/Quality.vue";
+export { default as TextPage } from "./TextPage/TextPage.vue";
