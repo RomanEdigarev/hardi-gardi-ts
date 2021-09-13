@@ -15,7 +15,7 @@
         </div>
 
         <div class="promotion-section__info-container">
-          <div class="promotion-section__title-container">
+          <div v-if="!isSimple" class="promotion-section__title-container">
             <span class="promotion-section__title title">
               Акции ХардиГарди
             </span>
@@ -57,7 +57,7 @@
                 </div>
               </template>
             </Card>
-            <div class="promotion-section__slider-container">
+            <div v-if="!isSimple" class="promotion-section__slider-container">
               <SliderPanel :count="4" />
             </div>
           </div>
@@ -75,6 +75,12 @@ import { SliderPanel } from "@/features";
 export default defineComponent({
   name: "PromotionSection",
   components: { Card, SliderPanel },
+  props: {
+    isSimple: {
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 </script>
 

@@ -12,6 +12,7 @@ import {
   Philosophy,
   Quality,
   TextPage,
+  Promotion,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -145,6 +146,19 @@ const routes = [
         {
           name: "О компании",
           link: "text-page",
+        },
+      ],
+    },
+  },
+  {
+    path: "/promotion",
+    name: "Promotion",
+    component: Promotion,
+    meta: {
+      breadcrumb: [
+        {
+          name: "Акции",
+          link: "promotion",
         },
       ],
     },
