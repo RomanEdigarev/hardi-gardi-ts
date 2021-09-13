@@ -11,3 +11,4 @@ export { default as Philosophy } from "./Philosophy/Philosophy.vue";
 export { default as Quality } from "./Quality/Quality.vue";
 export { default as TextPage } from "./TextPage/TextPage.vue";
 export { default as Promotion } from "./Promotion/Promotion.vue";
+export { default as Contacts } from "./Contacts/Contacts.vue";

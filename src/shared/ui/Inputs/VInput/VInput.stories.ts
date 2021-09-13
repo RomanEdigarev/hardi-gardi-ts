@@ -1,4 +1,4 @@
-import Input from "./VInput.vue";
+import VInput from "./VInput.vue";
 import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { ref } from "vue";
@@ -6,7 +6,7 @@ import { ref } from "vue";
 export default {
   title: "ui/inputs/VInput",
   component: {
-    Input,
+    VInput,
   },
   argTypes: {},
   parameters: {
@@ -19,7 +19,7 @@ export default {
 
 export const InputTemplate = (args) => ({
   components: {
-    Input,
+    VInput,
   },
   props: {
     labelText: {
@@ -44,7 +44,7 @@ export const InputTemplate = (args) => ({
   },
   template: `
         <div style="width: 384px; height: 72px">
-          <Input v-bind="$props" @clear-input="clearInput" v-model="modelValue" @update:model-value="changeValue"/>
+          <VInput v-bind="$props" @clear-input="clearInput" v-model="modelValue" @update:model-value="changeValue"/>
         </div> 
     `,
   methods: {

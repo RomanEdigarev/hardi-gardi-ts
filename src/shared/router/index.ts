@@ -13,6 +13,7 @@ import {
   Quality,
   TextPage,
   Promotion,
+  Contacts,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -159,6 +160,19 @@ const routes = [
         {
           name: "Акции",
           link: "promotion",
+        },
+      ],
+    },
+  },
+  {
+    path: "/contacts",
+    name: "Contacts",
+    component: Contacts,
+    meta: {
+      breadcrumb: [
+        {
+          name: "Контакты",
+          link: "contacts",
         },
       ],
     },
