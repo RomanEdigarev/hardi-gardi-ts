@@ -13,3 +13,4 @@ export { default as TextPage } from "./TextPage/TextPage.vue";
 export { default as Promotion } from "./Promotion/Promotion.vue";
 export { default as Contacts } from "./Contacts/Contacts.vue";
 export { default as Error } from "./Error/Error.vue";
+export { default as SignIn } from "./SignIn/SignIn.vue";

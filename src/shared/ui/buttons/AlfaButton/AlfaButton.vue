@@ -50,6 +50,7 @@ export default defineComponent({
 .primary {
   color: $clr-tau;
   background-color: $clr-zeta;
+  border: 3px solid $clr-zeta;
 
   &:hover,
   &:active {

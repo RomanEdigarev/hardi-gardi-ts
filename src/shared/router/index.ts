@@ -15,6 +15,7 @@ import {
   Promotion,
   Contacts,
   Error,
+  SignIn,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -182,6 +183,11 @@ const routes = [
     path: "/error",
     name: "Error",
     component: Error,
+  },
+  {
+    path: "/sign-in",
+    name: "SignIn",
+    component: SignIn,
   },
 ];
 

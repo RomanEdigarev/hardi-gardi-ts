@@ -1,0 +1,132 @@
+<template>
+  <div class="login">
+    <div class="login__body">
+      <div class="login__body__inputs">
+        <div class="login__body__inputs__item">
+          <VInput type="email" placeholder="Email" label-text="Email" />
+        </div>
+        <div class="login__body__inputs__item">
+          <VInput type="password" placeholder="Пароль" label-text="Пароль" />
+        </div>
+      </div>
+
+      <div class="login__body__status">
+        <div class="login__body__status__checkbox">
+          <Checkbox id="remember" label-text="Запомнить меня" />
+        </div>
+        <div class="login__body__status__link alfa-link">Забыли пароль?</div>
+      </div>
+
+      <div class="login__body__btns">
+        <div class="login__body__btns__item">
+          <AlfaButton text="Войти" />
+        </div>
+        <div class="login__body__btns__item">
+          <AlfaButton text="Регистрация" styling="secondary" />
+        </div>
+      </div>
+    </div>
+
+    <div class="login__footer">
+      <div class="login__footer__title">
+        <div class="login__footer__title__line"></div>
+        <div class="login__footer__title__text">или войти через</div>
+        <div class="login__footer__title__line"></div>
+      </div>
+      <div class="login__footer__social">
+        <div class="login__footer__social__item">
+          <img src="./assets/google.svg" alt="" />
+        </div>
+        <div class="login__footer__social__item">
+          <img src="./assets/vk.svg" alt="" />
+        </div>
+        <div class="login__footer__social__item">
+          <img src="./assets/facebook.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { Checkbox, VInput } from "@/shared/ui/inputs";
+import { AlfaButton } from "@/shared/ui/buttons";
+
+export default defineComponent({
+  name: "Login",
+  components: { VInput, Checkbox, AlfaButton },
+});
+</script>
+
+<style lang="scss" scoped>
+.login {
+  width: 100%;
+  max-width: 578px;
+  color: $clr-phi;
+  // *** Body *** //
+  &__body {
+    margin-bottom: 52px;
+    &__inputs {
+      margin-bottom: 24px;
+      &__item {
+        width: 100%;
+        margin-bottom: 28px;
+      }
+    }
+    &__status {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 34px;
+    }
+    &__btns {
+      display: flex;
+      justify-content: space-between;
+      &__item {
+        width: 282px;
+      }
+    }
+  }
+  // *** Body END *** //
+
+  // *** Footer *** //
+  &__footer {
+    &__title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      &__line {
+        width: 100%;
+        height: 1px;
+        background-color: $clr-upsilon;
+      }
+      &__text {
+        flex-shrink: 0;
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 0 48px;
+      }
+    }
+    &__social {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 222px;
+      &__item {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid $clr-upsilon;
+        img {
+          object-fit: contain;
+        }
+      }
+    }
+  }
+  // *** Footer END *** //
+}
+</style>

@@ -13,7 +13,7 @@
     <input
       ref="input"
       class="input"
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       :id="id"
       :value="modelValue"
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import { defineComponent, ref } from "vue";
 import BetaButton from "../../buttons/BetaButton/BetaButton.vue";
 import { CloseIcon } from "../../icons";
 
@@ -50,7 +50,8 @@ export default defineComponent({
     isSuccess: Boolean,
     isError: Boolean,
     isDisabled: Boolean,
-    placeholder: String
+    placeholder: String,
+    type: String,
   },
   setup(props, { emit }) {
     const input = ref(null);
