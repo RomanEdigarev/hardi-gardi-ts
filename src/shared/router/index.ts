@@ -14,6 +14,7 @@ import {
   TextPage,
   Promotion,
   Contacts,
+  Error,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -176,6 +177,11 @@ const routes = [
         },
       ],
     },
+  },
+  {
+    path: "/error",
+    name: "Error",
+    component: Error,
   },
 ];
 
