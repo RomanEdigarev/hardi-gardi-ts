@@ -3,10 +3,22 @@
     <div class="login__body">
       <div class="login__body__inputs">
         <div class="login__body__inputs__item">
-          <VInput type="email" placeholder="Email" label-text="Email" />
+          <VInput
+            type="email"
+            placeholder="Email"
+            label-text="Email"
+            name="email"
+            :validation="isEmail"
+          />
         </div>
         <div class="login__body__inputs__item">
-          <VInput type="password" placeholder="Пароль" label-text="Пароль" />
+          <VInput
+            type="password"
+            placeholder="Пароль"
+            label-text="Пароль"
+            name="password"
+            :validation="isPassword"
+          />
         </div>
       </div>
 
@@ -52,10 +64,24 @@
 import { defineComponent } from "vue";
 import { Checkbox, VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
+import * as yup from "yup";
 
 export default defineComponent({
   name: "Login",
   components: { VInput, Checkbox, AlfaButton },
+  setup() {
+    const isEmail = yup
+      .string()
+      .email("Неверный формат")
+      .required("Обязательное поле");
+
+    const isPassword = yup.string().required("Обязательное поле");
+
+    return {
+      isEmail,
+      isPassword,
+    };
+  },
 });
 </script>
 
@@ -71,7 +97,7 @@ export default defineComponent({
       margin-bottom: 24px;
       &__item {
         width: 100%;
-        margin-bottom: 28px;
+        margin-bottom: 38px;
       }
     }
     &__status {

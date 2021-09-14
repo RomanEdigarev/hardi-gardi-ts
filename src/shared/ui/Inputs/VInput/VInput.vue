@@ -3,32 +3,32 @@
     class="container"
     :class="{
       focused: isFocused,
-      dirty: isDirty,
+      dirty: meta.dirty || errors.length > 0,
       success: isSuccess,
-      error: isError,
+      error: errors.length > 0,
       disabled: isDisabled,
     }"
   >
-    <label class="label" :for="id">{{ labelText }}</label>
     <input
       ref="input"
       class="input"
+      :name="name"
       :type="type"
       :placeholder="placeholder"
       :id="id"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-      @change="$emit('update:modelValue', $event.target.value)"
-      @focus="isFocused = true"
-      @blur="onBlur"
+      :value="value"
+      @input="handleChange"
+      @change="handleChange"
+      @blur="handleChange"
       :disabled="isDisabled"
     />
+    <label class="label" :for="id">{{ labelText }}</label>
     <span class="close-btn">
       <BetaButton @click="clearInput" styling="beta-gamma-btn">
         <CloseIcon />
       </BetaButton>
     </span>
-    <span class="message">Message</span>
+    <span class="message">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -36,6 +36,7 @@
 import { defineComponent, ref } from "vue";
 import BetaButton from "../../buttons/BetaButton/BetaButton.vue";
 import { CloseIcon } from "../../icons";
+import { useField } from "vee-validate";
 
 export default defineComponent({
   name: "VInput",
@@ -46,12 +47,17 @@ export default defineComponent({
   props: {
     id: String,
     labelText: String,
-    modelValue: String,
     isSuccess: Boolean,
+    value: { type: String, default: "" },
     isError: Boolean,
     isDisabled: Boolean,
     placeholder: String,
     type: String,
+    name: { type: String, required: true },
+    validation: {
+      type: Object,
+      default: {},
+    },
   },
   setup(props, { emit }) {
     const input = ref(null);
@@ -72,12 +78,30 @@ export default defineComponent({
       }
     };
 
+    const {
+      value,
+      errorMessage,
+      handleBlur,
+      handleChange,
+      meta,
+      errors,
+    } = useField(props.name as string, props.validation, {
+      initialValue: props.value,
+      validateOnValueUpdate: false,
+    });
+
     return {
       clearInput,
       onBlur,
       input,
       isFocused,
       isDirty,
+      handleChange,
+      handleBlur,
+      errorMessage,
+      value,
+      meta,
+      errors,
     };
   },
 });

@@ -76,7 +76,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    min-height: 100vh;
+    //min-height: 100vh;
     max-width: 1195px;
     display: flex;
     flex-direction: column;
@@ -96,6 +96,8 @@ export default defineComponent({
   &__footer {
     bottom: 0;
     max-width: 100%;
+    position: fixed;
+    width: 100%;
   }
 
   &__header-bg,
