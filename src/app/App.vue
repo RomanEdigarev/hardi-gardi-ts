@@ -62,7 +62,7 @@ export default defineComponent({
 @import "src/shared/style/style";
 .app {
   width: 100%;
-  min-height: 100vh;
+  min-height: 130vh;
   height: 100%;
   position: relative;
 
@@ -96,7 +96,7 @@ export default defineComponent({
   &__footer {
     bottom: 0;
     max-width: 100%;
-    position: fixed;
+    position: absolute;
     width: 100%;
   }
 

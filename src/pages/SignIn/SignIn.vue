@@ -2,21 +2,26 @@
   <div class="sign-in">
     <div class="sign-in__header">
       <div class="sign-in__header__title">
-        <PageTitle text="Вход" />
+        <PageTitle text="Восстановление пароля" />
       </div>
     </div>
     <div class="sign-in__body">
-      <Login />
+      <!--      <Login />-->
+      <!--      <Registration />-->
+      <NewPassword />
     </div>
     <div class="sign-in__bg">
       <img src="./assets/bg.svg" alt="" />
     </div>
   </div>
+  <div class="sign-in__modal-container">
+    <RecoveryPassModal />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Login } from "./ui";
+import { Login, NewPassword, RecoveryPassModal, Registration } from "./ui";
 import { PageTitle } from "@/shared/ui";
 
 export default defineComponent({
@@ -24,6 +29,9 @@ export default defineComponent({
   components: {
     Login,
     PageTitle,
+    Registration,
+    NewPassword,
+    RecoveryPassModal,
   },
 });
 </script>
@@ -48,6 +56,13 @@ export default defineComponent({
     position: absolute;
     top: 0;
     left: 0;
+  }
+
+  &__modal-container {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    display: none;
   }
 }
 </style>
