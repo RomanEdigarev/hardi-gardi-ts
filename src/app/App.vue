@@ -96,7 +96,7 @@ export default defineComponent({
   &__footer {
     bottom: 0;
     max-width: 100%;
-    position: absolute;
+    //position: absolute;
     width: 100%;
   }
 

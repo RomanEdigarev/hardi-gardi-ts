@@ -30,11 +30,7 @@
       <span class="product-card__price__current">400 &#8381;/шт</span>
     </div>
     <!--     v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"-->
-    <div
-      v-if="!toModal"
-      v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"
-      class="product-card__del-btn"
-    >
+    <div v-if="!toModal" class="product-card__del-btn">
       <BetaButton styling="beta-gamma-btn">
         <DeleteIcon />
       </BetaButton>

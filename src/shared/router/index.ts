@@ -16,6 +16,7 @@ import {
   Contacts,
   Error,
   SignIn,
+  Personal,
 } from "@/pages";
 import "vue-router";
 declare module "vue-router" {
@@ -188,6 +189,11 @@ const routes = [
     path: "/sign-in",
     name: "SignIn",
     component: SignIn,
+  },
+  {
+    path: "/personal",
+    name: "Personal",
+    component: Personal,
   },
 ];
 
