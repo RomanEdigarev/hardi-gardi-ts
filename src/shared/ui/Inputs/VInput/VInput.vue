@@ -22,7 +22,7 @@
       @blur="handleChange"
       :disabled="isDisabled"
     />
-    <label class="label" :for="id">{{ labelText }}</label>
+    <label class="label" :for="id">{{ labelText || placeholder }}</label>
     <span class="close-btn">
       <BetaButton @click="clearInput" styling="beta-gamma-btn">
         <CloseIcon />
