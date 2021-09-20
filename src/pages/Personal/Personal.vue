@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="personal__body">
-        <History />
+        <component :is="items[currentItemNumber].name"></component>
       </div>
     </main>
   </div>
@@ -27,11 +27,11 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
-import { History, Details } from "./ui";
+import { History, Details, Data, Notifications } from "./ui";
 
 export default defineComponent({
   name: "Personal",
-  components: { PageTitle, History, Details },
+  components: { PageTitle, History, Details, Data, Notifications },
   setup() {
     const items = [
       {

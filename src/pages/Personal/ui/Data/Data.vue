@@ -39,13 +39,7 @@
           />
         </div>
         <div class="data__body__item">
-          <VInput
-            name="email"
-            placeholder="Email"
-            id="email"
-            type="email"
-            :validation="isEmail"
-          />
+          <DateInput name="userDate" />
         </div>
       </div>
       <div class="data__body__item">
@@ -61,13 +55,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { VInput } from "@/shared/ui/inputs";
+import { DateInput, VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import { ChangeChild, ChangePass } from "./ui";
 
 export default defineComponent({
   name: "data",
-  components: { VInput, ChangePass, ChangeChild },
+  components: { VInput, ChangePass, ChangeChild, DateInput },
   setup() {
     const isFirstName = yup.string().required("Обязательное поле");
     const isEmail = yup

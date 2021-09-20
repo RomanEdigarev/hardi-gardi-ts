@@ -1,7 +1,7 @@
 import NavigationButton from "./NavigationButton.vue";
 
 export default {
-  title: "features/Navigation/ui/NavigationButton",
+  title: "widgets/Navigation/ui/NavigationButton",
   component: NavigationButton,
   argTypes: {},
   parameters: {

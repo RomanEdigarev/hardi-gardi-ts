@@ -15,7 +15,7 @@
           />
         </div>
         <div class="change-child__body__item">
-          <DateInput />
+          <DateInput name="userChildDate" />
         </div>
       </div>
       <div class="change-child__body__checkbox">
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="change-child__footer">
-      <button class="change-child__footer__btn"></button>
+      <button class="change-child__footer__btn">Добавить ребенка</button>
     </div>
   </div>
 </template>
@@ -99,7 +99,6 @@ export default defineComponent({
       font-weight: $bold;
       font-size: 16px;
       line-height: 1.5;
-      /* identical to box height, or 150% */
     }
   }
   // *** Header END *** //
@@ -118,6 +117,7 @@ export default defineComponent({
       display: flex;
       gap: 56px;
       position: relative;
+      margin-bottom: 42px;
       &__delete-btn {
         display: flex;
         justify-content: center;
@@ -138,6 +138,20 @@ export default defineComponent({
 
   // *** Footer *** //
   &__footer {
+    width: 100%;
+    &__btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 14.4px 0;
+      border: 3px dashed $cherub;
+      box-sizing: border-box;
+      border-radius: 16px;
+      font-weight: $semi-bold;
+      font-size: 16px;
+      line-height: 1.75;
+      color: $brickRed;
+    }
   }
   // *** Footer END *** //
 }

@@ -22,12 +22,21 @@ import { useField } from "vee-validate";
 export default defineComponent({
   name: "DateInput",
   components: { Datepicker },
-  setup() {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
     const picked = ref<Date>(new Date());
     const date = ref(null);
     const { handleChange } = useField("date");
     onMounted(() => {
-      (date.value.inputRef as HTMLInputElement).setAttribute("name", "date");
+      (date.value.inputRef as HTMLInputElement).setAttribute(
+        props.name as string,
+        "date"
+      );
     });
 
     watch(picked, () => {
