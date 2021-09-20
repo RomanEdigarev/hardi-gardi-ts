@@ -17,6 +17,7 @@
       :class="{ focused: isFocused, checked: isChecked, unchecked: !isChecked }"
       @click="check"
     >
+      {{ value }}
       <CheckboxIcon v-if="isChecked" class="icon" />
     </div>
   </div>
@@ -24,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CheckboxIcon from "../../icons/Checkbox/CheckboxIcon.vue";
 import { ref, onMounted } from "vue";
+import { CheckboxIcon } from "@/shared/ui/icons";
 
 export default defineComponent({
   name: "Checkbox",
@@ -47,6 +48,7 @@ export default defineComponent({
     },
     modelValue: {
       type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {

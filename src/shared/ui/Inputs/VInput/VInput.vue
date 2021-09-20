@@ -34,9 +34,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import BetaButton from "../../buttons/BetaButton/BetaButton.vue";
-import { CloseIcon } from "../../icons";
 import { useField } from "vee-validate";
+import { BetaButton } from "@/shared/ui/buttons";
+import { CloseIcon } from "@/shared/ui/icons";
 
 export default defineComponent({
   name: "VInput",

@@ -4,17 +4,17 @@
       ref="input"
       type="radio"
       :id="id"
-      name="name"
-      value="TESTING"
-      @change="toggle"
-      v-model="picked"
+      :name="name"
+      :value="value"
+      @change="handleChange"
     />
     <label :for="id">{{ text }}</label>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { useField } from "vee-validate";
 
 export default defineComponent({
   name: "RadioInput",
@@ -32,18 +32,18 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    value: {
+      type: String,
+      required: true,
+    },
   },
   setup(props, { emit }) {
-    const picked = ref("");
-    const input = ref<HTMLInputElement>(null);
-    const toggle = (value: Event) => {
-      emit("toggle", props.id);
-    };
+    const { handleChange } = useField(props.name as string, undefined, {
+      type: "radio",
+    });
 
     return {
-      picked,
-      input,
-      toggle,
+      handleChange,
     };
   },
 });
@@ -54,13 +54,12 @@ export default defineComponent({
   color: $clr-phi;
   label {
     position: relative;
-    background: #ecf0f8;
     border-radius: 16px;
     display: flex;
     align-items: center;
     padding: 16px 0 16px 69px;
     cursor: pointer;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
     &:after {
       content: "";
       width: 32px;

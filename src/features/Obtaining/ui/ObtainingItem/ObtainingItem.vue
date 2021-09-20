@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { RadioInput } from "../index";
+import { RadioInput } from "@/shared/ui/inputs";
 
 export default defineComponent({
   name: "ObtainingItem",

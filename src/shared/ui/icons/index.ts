@@ -17,3 +17,4 @@ export { default as YouTubeIcon } from "./Social/YouTubeIcon.vue";
 export { default as LocationIcon } from "./Location/LocationIcon.vue";
 export { default as MinusIcon } from "./Minus/MinusIcon.vue";
 export { default as ScrollUp } from "./ScrollUp/ScrollUp.vue";
+export { default as CheckboxIcon } from "./Checkbox/CheckboxIcon.vue";

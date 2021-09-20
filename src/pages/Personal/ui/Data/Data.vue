@@ -48,26 +48,11 @@
           />
         </div>
       </div>
-      <div class="grid change-pass">
-        <div class="data__body__item">
-          <VInput
-            name="newPassword"
-            placeholder="Новый пароль"
-            id="newPassword"
-            type="password"
-            :validation="isPassword"
-          />
-        </div>
-        <div class="data__body__item">
-          <VInput
-            name="confirmPassword"
-            placeholder="Подтверждение пароля"
-            id="confirmPassword"
-            type="password"
-            :validation="isPassword"
-          />
-        </div>
-        <div class="change-pass__btn"></div>
+      <div class="data__body__item">
+        <ChangePass />
+      </div>
+      <div class="data__body__item">
+        <ChangeChild />
       </div>
     </div>
     <div class="data__footer"></div>
@@ -78,10 +63,11 @@
 import { defineComponent } from "vue";
 import { VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
+import { ChangeChild, ChangePass } from "./ui";
 
 export default defineComponent({
   name: "data",
-  components: { VInput },
+  components: { VInput, ChangePass, ChangeChild },
   setup() {
     const isFirstName = yup.string().required("Обязательное поле");
     const isEmail = yup
