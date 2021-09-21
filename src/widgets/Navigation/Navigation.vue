@@ -1,7 +1,6 @@
 <template>
   <div class="navigation">
     <div class="navigation__location"><Location city="Санкт-Петербург" /></div>
-
     <div class="navigation__container">
       <nav class="navigation__links">
         <span
@@ -27,13 +26,16 @@
             />
           </svg>
         </span>
-        <router-link to="promotion" class="navigation__link">Акции</router-link>
-        <router-link to="" class="navigation__link"
-          >Доставка и оплата</router-link
-        >
-        <router-link to="about" class="navigation__link"
-          >О компании</router-link
-        >
+        <router-link v-for="menuItem in topMenu" :to="menuItem.link">
+          {{ menuItem.name }}
+        </router-link>
+        <!--        <router-link to="promotion" class="navigation__link">Акции</router-link>-->
+        <!--        <router-link to="" class="navigation__link"-->
+        <!--          >Доставка и оплата</router-link-->
+        <!--        >-->
+        <!--        <router-link to="about" class="navigation__link"-->
+        <!--          >О компании</router-link-->
+        <!--        >-->
       </nav>
       <div class="navigation__tooltip">
         <NavigationButton />
@@ -52,6 +54,7 @@ import { NavigationButton } from "./ui";
 import { Location } from "@/features/";
 import { defineComponent } from "vue";
 import { CatalogSubmenu } from "./ui";
+import { useTopMenu } from "@/widgets/Navigation/lib";
 
 export default defineComponent({
   name: "Navigation",
@@ -59,6 +62,11 @@ export default defineComponent({
     NavigationButton,
     Location,
     CatalogSubmenu,
+  },
+  setup() {
+    return {
+      ...useTopMenu(),
+    };
   },
 });
 </script>

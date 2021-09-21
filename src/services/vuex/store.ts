@@ -1,17 +1,17 @@
 import { InjectionKey } from "vue";
 import { createStore, Store, useStore as baseUseStore } from "vuex";
-import { Menu } from "@/entities/Menu/model";
-import { menuModule } from "@/entities/Menu/store";
+import { Shop } from "@/entities/Shop/model";
+import { shopModule } from "@/entities/Shop/store";
 
 export type State = {
   loading: boolean;
-  menu?: any;
+  shop?: Shop;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
   state: {
-    loading: false,
+    loading: true,
   },
   mutations: {
     toggleLoading: (state, payload: boolean) => {
@@ -19,7 +19,7 @@ export const store = createStore<State>({
     },
   },
   modules: {
-    menu: menuModule,
+    shop: shopModule,
   },
 });
 

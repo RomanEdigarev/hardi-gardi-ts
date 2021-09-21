@@ -142,7 +142,7 @@ const routes = [
     },
   },
   {
-    path: "/text-page",
+    path: "/about/about.html",
     name: "TextPage",
     component: TextPage,
     meta: {
@@ -155,7 +155,7 @@ const routes = [
     },
   },
   {
-    path: "/promotion",
+    path: "/actions",
     name: "Promotion",
     component: Promotion,
     meta: {

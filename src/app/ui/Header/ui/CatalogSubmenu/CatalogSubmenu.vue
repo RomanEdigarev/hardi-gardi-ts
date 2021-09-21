@@ -54,7 +54,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { MenuLink } from "@/entities/Menu/model";
+import { MenuLink } from "@/entities/Shop/Menu/model";
 
 export default defineComponent({
   name: "CatalogSubmenu",

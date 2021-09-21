@@ -37,9 +37,9 @@
 <script lang="ts">
 import { Header, Footer } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { useStore } from "@/services/vuex";
-import { getMenu } from "@/entities/Menu/lib";
+import { initShop } from "@/entities/Shop/lib";
 
 export default defineComponent({
   components: { Header, Footer, ScrollUpPage },
@@ -47,10 +47,9 @@ export default defineComponent({
   setup() {
     const store = useStore();
     onMounted(async () => {
-      await getMenu();
+      await initShop();
     });
     return {
-      menu: computed(() => store.state.menu),
       loading: computed(() => store.state.loading),
     };
   },
@@ -67,6 +66,7 @@ export default defineComponent({
   position: relative;
 
   &__wrapper {
+    min-height: 50vh;
     height: 100%;
     padding: 0 19vw;
     margin-bottom: 250px;

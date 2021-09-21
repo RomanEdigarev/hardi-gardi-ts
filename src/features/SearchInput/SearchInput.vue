@@ -1,6 +1,6 @@
 <template>
   <div class="search-input">
-    <VInput placeholder="Поиск" />
+    <VInput placeholder="Поиск" name="search" />
     <div class="search-input__btn-container">
       <BetaButton styling="beta-alfa-btn" :is-pending="false">
         <ArrowIcon />

@@ -4,7 +4,7 @@ type LinkPath = string;
 type Icon = string;
 
 type TopMenu = MenuLink[];
-type CatalogMenu = MenuLink[];
+export type CatalogMenu = MenuLink[];
 type FooterMenu = MenuLink[];
 // *** AliasType END *** //
 

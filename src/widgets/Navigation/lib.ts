@@ -1,2 +1,8 @@
-import { computed } from "vue";
-import { getCatalogMenu } from "@/entities/Menu/lib";
+import { computed, onMounted } from "vue";
+import { getTopMenu } from "@/entities/Shop/lib";
+
+export const useTopMenu = () => {
+  let topMenu = computed(() => getTopMenu());
+
+  return { topMenu };
+};

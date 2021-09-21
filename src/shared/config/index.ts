@@ -4,6 +4,9 @@ const getEnvVar = (key: string): string => {
   }
   return process.env[key] || "";
 };
-
-export const API_URL = getEnvVar("VUE_APP_BASE_URL");
+export const API_URL = getEnvVar(
+  process.env.NODE_ENV === "production"
+    ? "VUE_APP_BASE_URL_PROD"
+    : "VUE_APP_BASE_URL_DEV"
+);
 export const TOKEN = getEnvVar("VUE_APP_TOKEN");

@@ -40,7 +40,6 @@ import { defineComponent, ref } from "vue";
 import Logo from "./assets/Logo.vue";
 import { Navigation, Cabinet } from "@/widgets";
 import { HeaderModal, CatalogSubmenu, Search } from "./ui";
-import { useCatalogMenu } from "./lib";
 
 export default defineComponent({
   name: "Header",
@@ -61,7 +60,6 @@ export default defineComponent({
     return {
       currentModal,
       setCurrentModal,
-      ...useCatalogMenu(),
     };
   },
 });
