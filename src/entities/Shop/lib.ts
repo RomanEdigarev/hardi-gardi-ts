@@ -1,7 +1,7 @@
 import { useStore } from "@/services/vuex";
 import { Shop } from "./model";
 import { Catalog } from "./Catalog/model";
-import { TopMenu } from "./Menu/model";
+import { FooterMenu, TopMenu } from "./Menu/model";
 
 export const initShop = async (): Promise<Shop> => {
   const store = useStore();
@@ -18,4 +18,9 @@ export const getTopMenu = (): TopMenu => {
   const store = useStore();
 
   return store.getters["shop/getTopMenu"];
+};
+
+export const getFooterMenu = (): FooterMenu => {
+  const store = useStore();
+  return store.getters["shop/getFooterMenu"];
 };

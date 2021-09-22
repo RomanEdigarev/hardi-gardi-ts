@@ -1,6 +1,6 @@
 import FooterSlider from "./FooterSlider.vue";
 import { withKnobs } from "@storybook/addon-knobs";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default {
   title: "pages/Product/ui/FooterSlider",

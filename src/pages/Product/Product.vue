@@ -3,7 +3,7 @@
     <div class="product-page__header">
       <BreadCrumbs />
     </div>
-    <div class="product-page__body">
+    <div v-if="currentProduct" class="product-page__body">
       <div class="product-page__body__left">
         <div class="product-page__body__left__slider">
           <MainSlider @zoom="zoomSlider" :is-zoom="isZoomSlider" />
@@ -11,7 +11,12 @@
       </div>
       <div class="product-page__body__right">
         <div class="product-page__body__about-container">
-          <About :is-sets="true" />
+          <About
+            :is-sets="true"
+            :title="currentProduct.title"
+            :price-prev="currentProduct.prevPrice"
+            :price-current="currentProduct.currentPrice"
+          />
         </div>
         <div class="product-page__body__right-body">
           <div class="product-page__body__description">
@@ -21,35 +26,22 @@
               :is-close="false"
             >
               <template v-slot:content>
-                <div class="product-page__body__description__text">
-                  Знакомьтесь! Это Каролина, она, как любая девочка, очень любит
-                  наряжаться. Для похода на пляж у неё есть очаровательная
-                  шляпка и купальник, для дождливой погоды — модные резиновые
-                  сапожки, ну а на более холодную — теплая куртка. Маленькие
-                  модницы с удовольствием будут выбирать наряды для Каролины для
-                  любого случая: будь то прогулка в лесу или вечерний променад.
-                  Эта магнитная игра поможет ребёнку научиться подбирать одежду
-                  по погоде и по сезону, а также создать веселое настроение.
-                  Большой выбор одежды позволит ребёнку самому придумывать сюжет
-                  игры, интересно и разнообразно проводя время. Вариаций игр
-                  множество. Играйте всей семьей вместе с Харди Гарди! В серии
-                  также представлены магнитные игры «Одень мальчика. Макс» и
-                  «Одень девочку. Алиса». Персонажей можно «знакомить» между
-                  собой и сочетать предметы одежды.
+                <div ref="text" class="product-page__body__description__text">
+                  {{ currentProduct.description }}
                 </div>
                 <div class="product-page__body__description__list">
-                  <span>Цели игры</span>
-                  <ul>
-                    <li>познакомить ребенка с окружающим миром;</li>
-                    <li>
-                      воспитать интерес к природе, к различным профессиям;
-                    </li>
-                    <li>
-                      развить у ребенка кругозор, воображение и логическое
-                      мышление;
-                    </li>
-                    <li>пополнить словарный запас малыша.</li>
-                  </ul>
+                  <!--                  <span>Цели игры</span>-->
+                  <!--                  <ul>-->
+                  <!--                    <li>познакомить ребенка с окружающим миром;</li>-->
+                  <!--                    <li>-->
+                  <!--                      воспитать интерес к природе, к различным профессиям;-->
+                  <!--                    </li>-->
+                  <!--                    <li>-->
+                  <!--                      развить у ребенка кругозор, воображение и логическое-->
+                  <!--                      мышление;-->
+                  <!--                    </li>-->
+                  <!--                    <li>пополнить словарный запас малыша.</li>-->
+                  <!--                  </ul>-->
                 </div>
               </template>
             </Description>
@@ -61,35 +53,28 @@
               :is-close="true"
             >
               <template v-slot:content>
-                <div class="product-page__body__characteristic__text">
-                  Знакомьтесь! Это Каролина, она, как любая девочка, очень любит
-                  наряжаться. Для похода на пляж у неё есть очаровательная
-                  шляпка и купальник, для дождливой погоды — модные резиновые
-                  сапожки, ну а на более холодную — теплая куртка. Маленькие
-                  модницы с удовольствием будут выбирать наряды для Каролины для
-                  любого случая: будь то прогулка в лесу или вечерний променад.
-                  Эта магнитная игра поможет ребёнку научиться подбирать одежду
-                  по погоде и по сезону, а также создать веселое настроение.
-                  Большой выбор одежды позволит ребёнку самому придумывать сюжет
-                  игры, интересно и разнообразно проводя время. Вариаций игр
-                  множество. Играйте всей семьей вместе с Харди Гарди! В серии
-                  также представлены магнитные игры «Одень мальчика. Макс» и
-                  «Одень девочку. Алиса». Персонажей можно «знакомить» между
-                  собой и сочетать предметы одежды.
-                </div>
+                <div class="product-page__body__characteristic__text"></div>
                 <div class="product-page__body__characteristic__list">
-                  <span>Цели игры</span>
-                  <ul>
-                    <li>познакомить ребенка с окружающим миром;</li>
-                    <li>
-                      воспитать интерес к природе, к различным профессиям;
-                    </li>
-                    <li>
-                      развить у ребенка кругозор, воображение и логическое
-                      мышление;
-                    </li>
-                    <li>пополнить словарный запас малыша.</li>
-                  </ul>
+                  <div class="product-page__body__characteristic__list__item">
+                    <span>Артикул</span>
+                    <div></div>
+                    <span>{{ currentProduct.characteristics.article }}</span>
+                  </div>
+                  <div class="product-page__body__characteristic__list__item">
+                    <span>Размеры</span>
+                    <div></div>
+                    <span>{{ currentProduct.characteristics.size }}</span>
+                  </div>
+                  <div class="product-page__body__characteristic__list__item">
+                    <span>Вес</span>
+                    <div></div>
+                    <span>{{ currentProduct.characteristics.weight }}</span>
+                  </div>
+                  <div class="product-page__body__characteristic__list__item">
+                    <span>Пол</span>
+                    <div></div>
+                    <span>{{ currentProduct.characteristics.gender }}</span>
+                  </div>
                 </div>
               </template>
             </Description>
@@ -109,9 +94,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUpdated,
+  PropType,
+  ref,
+} from "vue";
 import { BreadCrumbs } from "@/widgets";
 import { About, Description, FooterSlider, MainSlider, SetSlider } from "./ui";
+import { getCurrentProduct } from "@/entities/Products/lib";
+import { useStore } from "@/services/vuex";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "Product",
@@ -123,15 +118,36 @@ export default defineComponent({
     MainSlider,
     SetSlider,
   },
-  setup() {
+  props: {
+    productId: {
+      type: Object as PropType<string>,
+    },
+  },
+  setup(props) {
     const isZoomSlider = ref(false);
     const zoomSlider = () => {
       isZoomSlider.value = !isZoomSlider.value;
     };
+    const store = useStore();
+    let currentProduct = ref<Product>(null);
+    const isLoading = computed(() => store.state.products.isLoading);
+
+    const text = ref<HTMLElement>(null);
+
+    onMounted(async () => {
+      currentProduct.value = await getCurrentProduct(props.productId as string);
+    });
+
+    onUpdated(() => {
+      text.value.innerHTML = currentProduct.value.description;
+    });
 
     return {
       isZoomSlider,
       zoomSlider,
+      isLoading,
+      currentProduct,
+      text,
     };
   },
 });
@@ -184,6 +200,21 @@ export default defineComponent({
     &__characteristic {
       width: 100%;
       margin-bottom: 76px;
+      &__list {
+        &__item {
+          margin-bottom: 16px;
+          display: flex;
+          span {
+            display: inline-block;
+          }
+          div {
+            margin: 2px 4px;
+            flex: 1;
+            flex-shrink: 0;
+            border-bottom: 2px dotted #b3b3b3;
+          }
+        }
+      }
     }
   }
 

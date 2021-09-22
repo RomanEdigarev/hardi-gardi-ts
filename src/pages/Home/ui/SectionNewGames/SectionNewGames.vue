@@ -61,8 +61,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Card } from "@/shared/ui";
-import { InfoProductCard, ImageProductCard } from "@/entities/Product/ui";
-import { useProduct } from "@/entities/Product/lib";
+import { InfoProductCard, ImageProductCard } from "@/widgets";
+import { useProduct } from "@/entities/Products/Product/lib";
 import { ProductCardHome } from "@/widgets";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";

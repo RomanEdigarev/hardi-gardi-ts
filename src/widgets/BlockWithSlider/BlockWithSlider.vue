@@ -35,9 +35,9 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import anime from "animejs";
-import { ImageProductCard, InfoProductCard } from "@/entities/Product/ui";
+import { ImageProductCard, InfoProductCard } from "@/widgets";
 import { SliderPanel } from "@/features";
-import { Product } from "@/entities/Product/model";
+import { Product } from "@/entities/Products/Product/model";
 import { getUserCity } from "@/services/api";
 
 export default defineComponent({

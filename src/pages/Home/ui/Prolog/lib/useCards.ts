@@ -1,31 +1,24 @@
+import { getCatalog } from "@/entities/Shop/lib";
+
 type PrologCard = {
-  title: string,
-  color: string
-}
+  title: string;
+  color: string;
+};
 
 type PrologCards = {
-  cards: PrologCard[]
-}
+  cards: PrologCard[];
+};
 
-export const useCards = () : PrologCards => {
-  const cards = [
-    {
-      title: "Магнитные игры",
-      color: "FFC124",
-    },
-    {
-      title: "Рисуй-стирай",
-      color: "5F73AA",
-    },
-    {
-      title: "Пазлы",
-      color: "F27F94",
-    },
-    {
-      title: "Игры с бумагой",
-      color: "5F73AA",
-    },
-  ];
+export const useCards = (): PrologCards => {
+  const catalog = getCatalog();
+  const titles = catalog.sections.slice(0, 4).map((item) => item.name);
+  const colors = ["FFC124", "5F73AA", "5F73AA", "5F73AA"];
+  const cards = titles.map((title, index) => {
+    return {
+      title,
+      color: colors[index],
+    };
+  });
 
   return {
     cards,

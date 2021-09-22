@@ -7,6 +7,7 @@ import { Menu } from "./Menu/model";
 export const getShopAdapter = async (): Promise<Shop> => {
   // Response API here //
   const response = await getMenuAPI();
+
   // Response API  //
 
   // Transformation API data here //
@@ -34,5 +35,6 @@ export const getShopAdapter = async (): Promise<Shop> => {
     },
     contacts: undefined,
     menu,
+    history: undefined,
   };
 };

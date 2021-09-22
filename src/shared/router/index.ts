@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import {
   Home,
   Catalog,
@@ -44,9 +44,10 @@ const routes = [
     },
   },
   {
-    path: "/catalog",
+    path: "/catalog/:section?/:subsection?",
     name: "Catalog",
     component: Catalog,
+    props: true,
     meta: {
       breadcrumb: [
         {
@@ -70,8 +71,9 @@ const routes = [
     },
   },
   {
-    path: "/product/:id",
+    path: "/product/:productId",
     name: "Product",
+    props: true,
     component: Product,
     meta: {
       breadcrumb: [
@@ -198,7 +200,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

@@ -2,7 +2,7 @@
   <div class="about-product">
     <div class="about-product__header">
       <div class="about-product__title">
-        Магнитная игра «Одень девочку Каролина»
+        {{ title }}
       </div>
     </div>
     <div class="about-product__body">
@@ -13,10 +13,10 @@
       </div>
       <div class="about-product__body__price-container">
         <div class="about-product__body__price-container__price-prev">
-          430 &#8381;
+          {{ pricePrev }} &#8381;
         </div>
         <div class="about-product__body__price-container__price-current">
-          400 &#8381;/шт
+          {{ priceCurrent }} &#8381;/шт
         </div>
         <div class="about-product__body__price-container__add-to-fav">
           <AddToFavorite :is-favorite="false" />
@@ -114,6 +114,17 @@ export default defineComponent({
     isSets: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    pricePrev: {
+      type: String,
+    },
+    priceCurrent: {
+      type: String,
+      required: true,
     },
   },
 });

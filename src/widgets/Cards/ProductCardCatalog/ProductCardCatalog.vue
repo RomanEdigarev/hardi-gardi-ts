@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { Card } from "@/shared/ui";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
 import { defineComponent } from "vue";
 

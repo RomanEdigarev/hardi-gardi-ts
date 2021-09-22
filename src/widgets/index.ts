@@ -5,5 +5,7 @@ export { default as BreadCrumbs } from "./BreadCrumbs/BreadCrumbs.vue";
 export { default as Checkout } from "./Checkout/Checkout.vue";
 export { default as Obtaining } from "./Obtaining/Obtaining.vue";
 export { default as FooterCard } from "./FooterCard/FooterCard.vue";
+
 export * from "./Sections";
+export * from "./Product";
 export * from "./Cards";

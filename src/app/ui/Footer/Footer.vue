@@ -5,32 +5,50 @@
         <div class="footer__item catalog">
           <div class="footer__item__title">Каталог</div>
           <div class="footer__item__links">
-            <a href="#" class="footer__item__link">Наборы со скидкой</a>
-            <a href="#" class="footer__item__link">Игровые домики</a>
-            <a href="#" class="footer__item__link small">Магнитные игры</a>
-            <a href="#" class="footer__item__link small">Набор магнитов</a>
-            <a href="#" class="footer__item__link">Рисуй-стирай</a>
-            <a href="#" class="footer__item__link">Пазлы</a>
-            <a href="#" class="footer__item__link small">Макси пазлы</a>
-            <br />
-            <a href="#" class="footer__item__link">Игры с бумагой</a>
-            <a href="#" class="footer__item__link small">Книжки-вырезалки</a>
-            <a href="#" class="footer__item__link small">Апликации</a>
-            <a href="#" class="footer__item__link small">Маски</a>
-            <a href="#" class="footer__item__link small">Раскраски</a>
-            <a href="#" class="footer__item__link">Деткие книги</a>
-            <a href="#" class="footer__item__link">Игры бродилки</a>
+            <div class="footer__item__link__left">
+              <div v-for="item in leftLinks">
+                <router-link :to="item.link" class="footer__item__link">
+                  {{ item.name }}
+                </router-link>
+                <div v-if="item.sections.length > 0">
+                  <router-link
+                    v-for="footerSubsection in item.sections"
+                    :to="footerSubsection.link"
+                    class="footer__item__link small"
+                  >
+                    {{ footerSubsection.name }}
+                  </router-link>
+                </div>
+              </div>
+            </div>
+            <div class="footer__item__link__right">
+              <div v-for="item in rightLinks">
+                <router-link :to="item.link" class="footer__item__link">
+                  {{ item.name }}
+                </router-link>
+                <div v-if="item.sections.length > 0">
+                  <router-link
+                    v-for="footerSubsection in item.sections"
+                    :to="footerSubsection.link"
+                    class="footer__item__link small"
+                  >
+                    {{ footerSubsection.name }}
+                  </router-link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="footer__item help">
           <div class="footer__item__title">Помощь</div>
           <div class="footer__item__links">
-            <a href="#" class="footer__item__link">Доставка и оплата</a>
-            <a href="#" class="footer__item__link">О компании</a>
-            <a href="#" class="footer__item__link">Сертификат</a>
-            <a href="#" class="footer__item__link">Договор оферты</a>
-            <a href="#" class="footer__item__link">Сотрудничество</a>
-            <a href="#" class="footer__item__link">Благотварительность</a>
+            <router-link
+              class="footer__item__link"
+              v-for="footerItem in footerMenu"
+              :to="footerItem.link"
+            >
+              {{ footerItem.name }}
+            </router-link>
           </div>
         </div>
 
@@ -60,14 +78,34 @@
 </template>
 
 <script lang="ts">
-import {Subscription} from "@/features";
+import { Subscription } from "@/features";
 import { Copyright } from "@/shared/ui";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
+import { useFooterCatalog, useFooterMenu } from "@/app/ui/Footer/lib";
 export default defineComponent({
   name: "Footer",
   components: {
     Subscription,
     Copyright,
+  },
+  setup() {
+    const footerCatalog = useFooterCatalog();
+    const firstPartFooterLinks = footerCatalog.sections.slice(0, 4);
+    const secondPartFooterLinks = footerCatalog.sections.slice(4);
+    const leftLinks =
+      firstPartFooterLinks.length > secondPartFooterLinks.length
+        ? firstPartFooterLinks
+        : secondPartFooterLinks;
+    const rightLinks =
+      firstPartFooterLinks.length < secondPartFooterLinks.length
+        ? secondPartFooterLinks
+        : firstPartFooterLinks;
+    return {
+      footerMenu: useFooterMenu(),
+      footerCatalog,
+      leftLinks,
+      rightLinks,
+    };
   },
 });
 </script>
@@ -85,7 +123,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1fr;
     justify-content: space-between;
   }
 
@@ -135,6 +173,10 @@ export default defineComponent({
 .catalog {
   max-height: 280px;
   margin-bottom: 48px;
+  .footer__item__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .phone {
@@ -149,6 +191,7 @@ export default defineComponent({
 }
 
 .small {
+  display: block;
   font-size: 14px;
 }
 </style>

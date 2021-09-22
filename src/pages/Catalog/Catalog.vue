@@ -11,7 +11,7 @@
           <BreadCrumbs />
         </div>
         <div class="page-main__title-container">
-          <PageTitle text="Весь каталог" />
+          <PageTitle :text="title" />
         </div>
       </div>
 
@@ -48,13 +48,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
 import { CatalogFilter } from "./ui";
 import { AlfaButton } from "@/shared/ui/buttons";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 import { Sorting } from "@/features";
+import { useRoute } from "vue-router";
+import { getCatalog } from "@/entities/Shop/lib";
+import { Section } from "@/entities/Shop/Catalog/model";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -68,10 +71,38 @@ export default defineComponent({
     AlfaButton,
     PromotionSection,
   },
-  setup() {
+  props: {
+    section: {
+      type: String,
+    },
+    subsection: {
+      type: String,
+    },
+  },
+  setup(props) {
+    const route = useRoute();
     const { product } = useProduct();
+    const catalog = getCatalog();
+
+    const searchSectionByParams = (link: string, items: Section[]): Section => {
+      const result = items.find((item) => {
+        return item.link.includes(link);
+      });
+      return result;
+    };
+    const section = searchSectionByParams(
+      props.section as string,
+      catalog.sections
+    );
+    const subsection = searchSectionByParams(
+      props.subsection as string,
+      section.sections
+    );
+    const title = subsection?.name || section.name;
+
     return {
       product,
+      title,
     };
   },
 });

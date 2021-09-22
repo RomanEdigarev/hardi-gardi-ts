@@ -25,24 +25,24 @@
                     alt=""
                   />
                 </div>
-                <a
-                  :href="linkItem.link.toLowerCase()"
+                <router-link
+                  :to="linkItem.link.toLowerCase()"
                   class="catalog-submenu__link-text alfa-link"
                 >
                   {{ linkItem.name }}
-                </a>
+                </router-link>
               </div>
               <div
-                v-if="linkItem.items.length > 0"
+                v-if="linkItem.sections.length > 0"
                 class="catalog-submenu__sublinks-container"
               >
-                <a
-                  v-for="sublinkItem in linkItem.items"
-                  :href="sublinkItem.link.toLowerCase()"
+                <router-link
+                  v-for="sublinkItem in linkItem.sections"
+                  :to="sublinkItem.link.toLowerCase()"
                   class="catalog-submenu__sublink alfa-link"
                 >
                   {{ sublinkItem.name }}
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -53,39 +53,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-import { MenuLink } from "@/entities/Shop/Menu/model";
+import { defineComponent } from "vue";
+import { useCatalogSubmenu } from "./lib";
 
 export default defineComponent({
   name: "CatalogSubmenu",
-  props: {
-    items: {
-      type: Object as PropType<MenuLink[]>,
-      required: true,
-    },
-  },
-  setup({ items }) {
-    const copyItems = [...(items as MenuLink[])];
-    let columns = {
-      0: [],
-      1: [],
-      2: [],
-    };
-    let result = [];
-    const tmp = [];
-    while (copyItems.length > 0) {
-      tmp.push(copyItems.splice(0, 3));
-    }
-    tmp.forEach((arr) => {
-      for (let i = 0; i < arr.length; i++) {
-        arr[i] && columns[i].push(arr[i]);
-      }
-    });
-
-    for (let key in columns) {
-      result.push(columns[key]);
-    }
-
+  setup() {
+    const { result } = useCatalogSubmenu();
+    console.log(result);
     return {
       result,
     };

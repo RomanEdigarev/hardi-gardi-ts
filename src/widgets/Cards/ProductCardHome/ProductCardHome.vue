@@ -2,26 +2,25 @@
   <div class="home-product-card" :class="{ isReverse }">
     <!-- Product Image -->
     <div class="home-product-card__image-wrapper">
-      <ImageProductCard  :img-path="product.img"/>
+      <ImageProductCard :img-path="product.img" />
     </div>
 
     <!-- Product Info -->
     <div class="home-product-card__info-wrapper">
-      <InfoProductCard v-bind="product" :is-simple="isSimple"/>
+      <InfoProductCard v-bind="product" :is-simple="isSimple" />
     </div>
-
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {InfoProductCard, ImageProductCard} from "@/entities/Product/ui"
-import {Card} from "@/shared/ui";
-import {useProduct} from "@/entities/Product/lib";
+import { defineComponent } from "vue";
+import { InfoProductCard, ImageProductCard } from "@/widgets";
+import { Card } from "@/shared/ui";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "ProductCardHome",
-  components: {InfoProductCard, Card, ImageProductCard},
+  components: { InfoProductCard, Card, ImageProductCard },
   props: {
     isReverse: {
       type: Boolean,
@@ -29,12 +28,12 @@ export default defineComponent({
     },
     isFavorite: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isSimple: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
     const { product } = useProduct();
@@ -61,8 +60,6 @@ export default defineComponent({
     width: 100%;
   }
 }
-
-
 
 .isReverse {
   flex-direction: row-reverse;

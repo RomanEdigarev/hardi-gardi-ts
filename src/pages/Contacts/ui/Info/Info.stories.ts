@@ -1,6 +1,6 @@
 import Info from "./Info.vue";
 import { withKnobs } from "@storybook/addon-knobs";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default {
   title: "pages/Contacts/ui/Info",

@@ -1,9 +1,8 @@
-import { Product } from "../model";
+import { Product } from "./model";
 
 export const useProduct = () => {
   const product: Product = {
     title: "Набор пазлов «Веселые Зверята»",
-    article: "3900005",
     currentPrice: "500",
     prevPrice: "400",
     description:
@@ -11,6 +10,7 @@ export const useProduct = () => {
       "«Веселая Африка», «Веселый паровозик», «Фигурки», «Веселый паровозик», «Фигурки», «Веселый паровозик» ...",
     img: "/images/product-card.jpg",
     isFavorite: false,
+    characteristics: undefined,
   };
 
   return {

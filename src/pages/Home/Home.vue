@@ -100,7 +100,7 @@ import {
   SectionSets,
   CategoryCard,
 } from "./ui";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 import { PromotionSection } from "@/widgets";
 
 export default defineComponent({

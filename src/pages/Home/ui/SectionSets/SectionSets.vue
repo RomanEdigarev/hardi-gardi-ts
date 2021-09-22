@@ -39,7 +39,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { BlockWithSlider } from "@/widgets";
-import { Product } from "@/entities/Product/model";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "SectionSets",

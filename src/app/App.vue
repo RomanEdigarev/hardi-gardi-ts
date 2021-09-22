@@ -47,7 +47,9 @@ export default defineComponent({
   setup() {
     const store = useStore();
     onMounted(async () => {
-      await initShop();
+      if (!store.state.isInit) {
+        await initShop();
+      }
     });
     return {
       loading: computed(() => store.state.loading),
@@ -86,7 +88,7 @@ export default defineComponent({
   &__header {
     background: white;
     position: relative;
-    z-index: 2;
+    z-index: 3;
   }
 
   &__body {

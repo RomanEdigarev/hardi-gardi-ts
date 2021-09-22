@@ -1,6 +1,6 @@
 import Checkout from "./Checkout.vue";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
-import { useProduct } from "@/entities/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default {
   title: "widgets/Checkout",
