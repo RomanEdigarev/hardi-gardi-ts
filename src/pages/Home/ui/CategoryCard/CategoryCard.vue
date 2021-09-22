@@ -132,4 +132,23 @@ export default defineComponent({
     height: 100%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .category-card {
+    width: 220px;
+    &__svg-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      :deep svg {
+        width: 74%;
+        height: 100%;
+      }
+    }
+    &__title {
+      font-size: 22px;
+      line-height: 27px;
+    }
+  }
+}
 </style>

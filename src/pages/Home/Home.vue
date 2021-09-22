@@ -173,4 +173,18 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .home {
+    &__prolog-container {
+      height: auto;
+    }
+    &__new-games-container {
+      margin-bottom: 241px;
+    }
+    &__category-cards-container {
+      gap: 30px;
+    }
+  }
+}
 </style>

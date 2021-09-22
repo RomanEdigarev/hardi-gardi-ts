@@ -219,5 +219,16 @@ export default defineComponent({
   }
 
   // *** Body END *** //
+
+  @media screen and (max-width: 768px) {
+    .product-page {
+      &__body {
+        grid-template-columns: 100%;
+        &__left {
+          margin-bottom: 48px;
+        }
+      }
+    }
+  }
 }
 </style>

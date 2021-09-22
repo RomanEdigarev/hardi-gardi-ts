@@ -187,4 +187,42 @@ export default defineComponent({
     color: $clr-nu;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .promotion-section {
+    &__image {
+      width: 345px;
+      height: 431px;
+      border-radius: 45px;
+    }
+    &__title-container {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -135%);
+      &__bg-container {
+        left: -40px;
+      }
+    }
+    &__info {
+      width: 450px;
+      height: 300px;
+      top: 16%;
+      &__content {
+        padding: 34px;
+        padding-right: 96px;
+        border-radius: 25px;
+      }
+      &__title {
+        font-size: 20px;
+        line-height: 24px;
+      }
+      &__text {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 48px;
+      }
+    }
+  }
+}
 </style>

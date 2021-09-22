@@ -157,5 +157,29 @@ export default defineComponent({
   }
 
   // *** Results END *** //
+
+  @media screen and (max-width: 768px) {
+    .catalog {
+      &__content {
+        grid-template-columns: 1fr;
+        margin-bottom: 212px;
+      }
+      &__filter-container {
+        display: none;
+      }
+
+      &__results {
+        &__body {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+      }
+      &__bg {
+        top: 2%;
+        left: 9%;
+        z-index: -1;
+        width: 138vw;
+      }
+    }
+  }
 }
 </style>

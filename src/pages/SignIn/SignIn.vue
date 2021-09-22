@@ -56,6 +56,7 @@ export default defineComponent({
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -2;
   }
 
   &__modal-container {
@@ -63,6 +64,14 @@ export default defineComponent({
     left: 0;
     opacity: 0;
     display: none;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .sign-in {
+    &__bg {
+      left: -17%;
+    }
   }
 }
 </style>

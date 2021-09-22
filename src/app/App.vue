@@ -149,4 +149,24 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 1366px) {
+  .app {
+    &__wrapper {
+      padding: 0 86px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    &__wrapper {
+      padding: 0 24px;
+      margin-bottom: 136px;
+    }
+    &__footer-bg {
+      height: 1157px;
+    }
+  }
+}
 </style>

@@ -1,22 +1,7 @@
 <template>
   <div class="cabinet">
     <div class="cabinet__title" :class="{ isLogin: isLogin }">
-      <Tooltip v-if="isLogin">
-        <template v-slot:reference>
-          <span class="cabinet__icon"><ProfileIcon /></span>
-        </template>
-        <template v-slot:content>
-          <div class="tooltip-content">
-            <span class="tooltip-content__name">{{ name }}</span>
-            <a class="tooltip-content__link" href="">История заказов</a>
-            <a class="tooltip-content__link" href="">Персональные данные</a>
-            <a class="tooltip-content__link" href="">Уведомления</a>
-            <a class="tooltip-content__link-out" href="">Выйти</a>
-          </div>
-        </template>
-      </Tooltip>
-      <span v-else class="cabinet__icon"><ProfileIcon /></span>
-      <span>{{ text }}</span>
+      <CabinetTitle />
     </div>
     <div class="cabinet__links">
       <span
@@ -53,6 +38,7 @@ import {
 } from "../../shared/ui/icons";
 import IconWithCount from "../../app/ui/Header/ui/IconWithCount/IconWithCount.vue";
 import Tooltip from "../../shared/ui/Tooltip/Tooltip.vue";
+import CabinetTitle from "./ui/CabinetTitle.vue";
 
 export default defineComponent({
   name: "Cabinet",
@@ -63,6 +49,7 @@ export default defineComponent({
     FavoriteIcon,
     ShopIcon,
     Tooltip,
+    CabinetTitle,
   },
   props: {
     isLogin: {
@@ -182,6 +169,19 @@ export default defineComponent({
 
     &:hover {
       text-shadow: 0 0 1px $clr-zeta;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cabinet {
+    align-items: center;
+    justify-content: center;
+    &__title {
+      display: none;
+    }
+    &__links {
+      gap: 21px;
     }
   }
 }

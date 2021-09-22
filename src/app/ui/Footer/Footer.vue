@@ -194,4 +194,48 @@ export default defineComponent({
   display: block;
   font-size: 14px;
 }
+@media screen and (max-width: 1366px) {
+  .footer {
+    &__wrapper {
+      padding: 0 86px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    &__wrapper {
+      padding: 0 24px;
+    }
+
+    &__content-container {
+      grid-template-columns: 400px 1fr;
+      row-gap: 41px;
+    }
+
+    &__subscription {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      flex-direction: column;
+    }
+    .contacts {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+    &__item {
+      &__link {
+        font-size: 16px;
+        line-height: 34px;
+      }
+      &__title {
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+    .small {
+      font-size: 14px;
+      line-height: 34px;
+    }
+  }
+}
 </style>

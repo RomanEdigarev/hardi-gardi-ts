@@ -23,7 +23,7 @@
 <script lang="ts">
 import FooterInput from "./ui/Input/Input.vue";
 import Social from "../../shared/ui/Social/Social.vue";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Subscription",
@@ -70,6 +70,32 @@ export default defineComponent({
   &__social {
     flex: 0.25;
     height: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .subscription {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    &__content {
+      flex-direction: column;
+      width: 100%;
+    }
+    &__info {
+      width: 100%;
+    }
+    &__input {
+      width: 100%;
+      flex: 1;
+      margin-bottom: 75px;
+    }
+    &__text {
+      margin-bottom: 42px;
+    }
+    &__social {
+      width: 70%;
+    }
   }
 }
 </style>

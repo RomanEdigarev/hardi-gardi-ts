@@ -163,4 +163,12 @@ export default defineComponent({
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .product-card-info {
+    &__content {
+      padding: 48px 36px;
+    }
+  }
+}
 </style>

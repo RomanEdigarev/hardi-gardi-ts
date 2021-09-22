@@ -29,17 +29,13 @@
         <router-link v-for="menuItem in topMenu" :to="menuItem.link">
           {{ menuItem.name }}
         </router-link>
-        <!--        <router-link to="promotion" class="navigation__link">Акции</router-link>-->
-        <!--        <router-link to="" class="navigation__link"-->
-        <!--          >Доставка и оплата</router-link-->
-        <!--        >-->
-        <!--        <router-link to="about" class="navigation__link"-->
-        <!--          >О компании</router-link-->
-        <!--        >-->
       </nav>
       <div class="navigation__tooltip">
         <NavigationButton />
       </div>
+    </div>
+    <div class="navigation__cabinet">
+      <CabinetTitle />
     </div>
     <div ref="submenu" class="navigation__submenu-container">
       <div class="navigation__submenu">
@@ -55,6 +51,7 @@ import { Location } from "@/features/";
 import { defineComponent } from "vue";
 import { CatalogSubmenu } from "./ui";
 import { useTopMenu } from "@/widgets/Navigation/lib";
+import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle.vue";
 
 export default defineComponent({
   name: "Navigation",
@@ -62,6 +59,7 @@ export default defineComponent({
     NavigationButton,
     Location,
     CatalogSubmenu,
+    CabinetTitle,
   },
   setup() {
     return {
@@ -86,6 +84,9 @@ export default defineComponent({
     display: flex;
     justify-content: space-evenly;
     flex: 0.8;
+  }
+  &__cabinet {
+    display: none;
   }
 
   &__submenu-container {
@@ -153,6 +154,17 @@ export default defineComponent({
 
   &__tooltip {
     flex: 0.2;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    &__container {
+      display: none;
+    }
+    &__cabinet {
+      display: block;
+    }
   }
 }
 </style>

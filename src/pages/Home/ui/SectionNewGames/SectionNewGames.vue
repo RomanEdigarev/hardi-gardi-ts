@@ -167,4 +167,28 @@ export default defineComponent({
     margin: 0 auto;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .new-games {
+    &__first-row {
+      display: grid;
+      grid-template-columns: 375px 1fr;
+      grid-template-rows: 375px 390px;
+      height: auto;
+      div:nth-child(3) {
+        width: 100%;
+        grid-column: 1 /3;
+      }
+    }
+    &__second-row {
+      height: auto;
+      width: 100%;
+      flex-direction: column;
+      &__item {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
 </style>

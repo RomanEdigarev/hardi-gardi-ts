@@ -121,4 +121,26 @@ export default defineComponent({
     padding: 0 27.5vw;
   }
 }
+
+@media screen and (max-width: 1366px) {
+  .header {
+    &__wrapper {
+      padding: 0 86px;
+    }
+    &__header-modal__content {
+      padding: 0px 18.3vw;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    &__wrapper {
+      padding: 0 24px;
+    }
+    &__phone {
+      display: none;
+    }
+  }
+}
 </style>

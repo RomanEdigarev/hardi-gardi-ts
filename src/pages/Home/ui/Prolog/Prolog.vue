@@ -143,4 +143,27 @@ export default defineComponent({
     left: 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .prolog {
+    &__text {
+      max-width: 514px;
+    }
+    &__info {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: 60px;
+    }
+    &__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+    }
+    &__card {
+      height: 301px;
+      flex-shrink: 0;
+    }
+  }
+}
 </style>

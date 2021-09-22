@@ -1,6 +1,9 @@
 import { onMounted, ref } from "vue";
 
 const getSecondaryOptions = () => {
+  const isMobile = document.documentElement.clientWidth <= 768;
+  console.log(isMobile);
+
   return {
     type: "loop",
     perPage: 5,
@@ -9,8 +12,9 @@ const getSecondaryOptions = () => {
     rewind: true,
     isNavigation: true,
     focus: "center",
-    direction: "ttb",
-    height: "480px",
+    direction: isMobile ? "ltr" : "ttb",
+    height: isMobile ? "auto" : "480px",
+    width: isMobile ? "480px" : "auto",
   };
 };
 

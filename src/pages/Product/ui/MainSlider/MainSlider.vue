@@ -252,6 +252,21 @@ export default defineComponent({
     border: 2px solid $clr-zeta;
   }
   // *** Splide END *** //
+
+  @media screen and (max-width: 768px) {
+    .main-slider {
+      &__body {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        &__thumbnails {
+          height: auto;
+          flex-direction: row;
+          width: 600px;
+        }
+      }
+    }
+  }
 }
 .main-slider.zoom {
   background-color: white;
