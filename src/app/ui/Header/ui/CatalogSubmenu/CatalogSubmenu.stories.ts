@@ -1,5 +1,4 @@
 import Submenu from "./CatalogSubmenu.vue";
-import { Menu } from "@/entities/Menu/model";
 import CatalogSubmenu from "@/app/ui/Header/ui/CatalogSubmenu/CatalogSubmenu.vue";
 
 export default {
@@ -13,7 +12,7 @@ export default {
   },
 };
 
-const menu: Menu = {
+const menu = {
   top: [
     {
       name: "Акции",

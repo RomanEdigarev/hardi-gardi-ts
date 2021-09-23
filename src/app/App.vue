@@ -5,7 +5,7 @@
     </template>
     <template v-else>
       <div class="app__header">
-        <Header />
+        <Header @open-burger="openBurger" />
       </div>
 
       <div class="app__wrapper">
@@ -29,7 +29,16 @@
         :src="require('/public/images/footer-bg.svg')"
         alt=""
       />
+      <div ref="burger" v-if="isMobile" class="app__burger-menu">
+        <BurgerMenu />
+        <div
+          ref="burgerBG"
+          class="app__burger-menu__bg"
+          @click="closeBurger"
+        ></div>
+      </div>
     </template>
+
     <div class="modal-bg"></div>
   </div>
 </template>
@@ -37,23 +46,33 @@
 <script lang="ts">
 import { Header, Footer } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
+import { BurgerMenu } from "@/widgets";
+import { useBurgerMenu } from "./lib";
 
 export default defineComponent({
-  components: { Header, Footer, ScrollUpPage },
+  components: { Header, Footer, ScrollUpPage, BurgerMenu },
   name: "App",
   setup() {
     const store = useStore();
     onMounted(async () => {
       if (!store.state.isInit) {
         await initShop();
-        store.commit('setIsMobile', document.documentElement.clientWidth <= 768)
+        store.commit(
+          "setIsMobile",
+          document.documentElement.clientWidth <= 768
+        );
       }
     });
+
+    const isMobile = computed(() => store.state.isMobile);
+
     return {
       loading: computed(() => store.state.loading),
+      isMobile,
+      ...useBurgerMenu(),
     };
   },
 });
@@ -133,6 +152,29 @@ export default defineComponent({
     position: fixed;
     bottom: 780px;
     right: 13.54%;
+  }
+
+  &__burger-menu {
+    width: 100%;
+    position: fixed;
+    margin-top: 90px;
+    z-index: 6;
+    bottom: -90px;
+    transform: translateY(100%);
+    & > div:first-child {
+      position: relative;
+      z-index: 8;
+    }
+    &__bg {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      background: #51628e;
+      opacity: 0;
+      z-index: 5;
+      top: 0;
+      left: 0;
+    }
   }
 
   .modal-bg {

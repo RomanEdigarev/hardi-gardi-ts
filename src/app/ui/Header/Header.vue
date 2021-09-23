@@ -12,6 +12,9 @@
         <div class="header__cabinet">
           <Cabinet @show-modal="setCurrentModal" />
         </div>
+        <button class="header__burger" @click="$emit('open-burger')">
+          <img src="./assets/burger.svg" alt="" />
+        </button>
       </div>
       <div ref="headerModal" class="header__header-modal-container">
         <HeaderModal>
@@ -51,6 +54,7 @@ export default defineComponent({
     CatalogSubmenu,
     Search,
   },
+  emits: ["open-burger"],
   setup() {
     const currentModal = ref("search");
     const setCurrentModal = (currentModalName) => {
