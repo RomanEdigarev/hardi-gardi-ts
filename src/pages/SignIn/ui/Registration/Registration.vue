@@ -144,4 +144,33 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
+@media screen and (max-width: 768px) {
+  .registration {
+    max-width: 345px;
+    &__body {
+      &__inputs {
+        margin-bottom: 0;
+        &__item {
+          margin-bottom: 16px;
+        }
+      }
+      &__inputs.double {
+        flex-direction: column;
+        gap: 0;
+      }
+      &__btns {
+        flex-direction: column;
+        &__item {
+          width: 100%;
+        }
+      }
+    }
+    &__footer {
+      &__text {
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+  }
+}
 </style>

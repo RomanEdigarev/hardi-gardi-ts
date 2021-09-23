@@ -155,4 +155,21 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+
+@media screen and (max-width: 768px) {
+  .login {
+    max-width: 345px;
+    &__body {
+      &__btns {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        &__item {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
 </style>

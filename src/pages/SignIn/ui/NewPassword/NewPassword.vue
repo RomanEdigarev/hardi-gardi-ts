@@ -81,4 +81,8 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen and (max-width: 768px) {
+  .new-password {
+  }
+}
 </style>
