@@ -2,16 +2,16 @@ import "../src/shared/style/_style.scss";
 
 const customViewports = {
   kindleFire2: {
-    name: "Kindle Fire 2",
+    name: "768px",
     styles: {
-      width: "600px",
+      width: "768px",
       height: "963px",
     },
   },
   kindleFireHD: {
-    name: "Kindle Fire HD",
+    name: "375px",
     styles: {
-      width: "533px",
+      width: "375px",
       height: "801px",
     },
   },

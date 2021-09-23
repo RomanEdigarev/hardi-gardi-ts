@@ -1,7 +1,7 @@
 <template>
   <div class="footer-card">
     <div class="footer-card__title">
-      <span>Создание игрушки – это очень захватывающий процесс</span>
+      <span>Создание игрушки – это очень захватываю&shy;щий процесс</span>
       <svg
         width="243"
         height="226"
@@ -94,6 +94,31 @@ export default defineComponent({
     position: relative;
     svg {
       position: absolute;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-card {
+    padding: 80px 40px;
+    &__title {
+      max-width: 305px;
+      span {
+        font-size: 36px;
+        line-height: 45px;
+      }
+      svg {
+        top: -3%;
+        left: -8%;
+      }
+    }
+    &__text {
+      max-width: 312px;
+      font-size: 18px;
+      line-height: 27px;
+      svg {
+        display: none;
+      }
     }
   }
 }

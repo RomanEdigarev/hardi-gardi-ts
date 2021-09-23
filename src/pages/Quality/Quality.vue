@@ -14,7 +14,7 @@
           Каждый день мы используем наш опыт для создания игрушек Харди Гарди.
         </div>
         <div class="quality__header__img-container">
-          <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+          <img :src="require('./assets/01.png')" alt="" />
           <img src="./assets/mask.svg" alt="" />
           <svg
             width="33"
@@ -365,9 +365,6 @@ export default defineComponent({
         width: 100%;
         height: 100%;
         object-fit: cover;
-        mask-image: url("./assets/mask.svg");
-        mask-size: cover;
-        mask-repeat: no-repeat;
       }
       img:nth-child(2) {
         width: 354px;
@@ -470,6 +467,100 @@ export default defineComponent({
   }
 
   // *** Other END *** //
+}
+@media screen and (max-width: 768px) {
+  .quality {
+    // *** Header *** //
+    &__header {
+      &__bg {
+        top: -88%;
+        left: -4%;
+      }
+      &__title {
+        max-width: 336px;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      &__img-container {
+        width: 331px;
+        height: 274px;
+        top: 10%;
+        left: 46%;
+        img:nth-child(2) {
+          width: 250px;
+          height: 204px;
+          top: -13%;
+        }
+      }
+    }
+    // *** Header END *** //
+
+    // *** Body *** //
+    &__body {
+      &__item {
+        &__text-block {
+          max-width: 345px !important;
+        }
+      }
+      &__item:first-child {
+        padding-left: 0;
+        .quality__body__item__img-container {
+          max-width: 339px;
+          max-height: 201px;
+        }
+      }
+
+      &__item:nth-child(2) {
+        .quality__body__item__img-container {
+          max-width: 248px;
+          max-height: 311px;
+        }
+      }
+
+      &__item:nth-child(3),
+      &__item:nth-child(4) {
+        padding-left: 0;
+        .quality__body__item__img-container {
+          max-width: 339px;
+          max-height: 201px;
+        }
+      }
+
+      &__item:nth-child(5) {
+        padding-left: 0;
+        .quality__body__item__img-container {
+          max-width: 248px;
+          max-height: 311px;
+        }
+      }
+    }
+    // *** Body END *** //
+
+    // *** Footer *** //
+    &__footer {
+      &__docs {
+        padding-right: 125px;
+        padding-left: 125px;
+        &__text {
+          font-size: 14px;
+          line-height: 21px;
+        }
+        svg:nth-child(3) {
+          top: 7% !important;
+          left: 4% !important;
+        }
+        svg:nth-child(4) {
+          top: 18% !important;
+          left: 9% !important;
+        }
+        svg:nth-child(5) {
+          top: 85% !important;
+          left: 63% !important;
+        }
+      }
+    }
+    // *** Footer END *** //
+  }
 }
 </style>
 <style lang="scss">

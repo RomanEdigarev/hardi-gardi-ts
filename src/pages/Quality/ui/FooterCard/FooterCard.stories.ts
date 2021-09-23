@@ -18,7 +18,7 @@ export const footerCard = (args) => ({
     return { args };
   },
   template: `
-    <div style="background-color: white; width: 1194px">
+    <div style="background-color: white; width: 100%">
      <FooterCard/>
     </div>
   `,

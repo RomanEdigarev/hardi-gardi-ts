@@ -55,4 +55,16 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen and (max-width: 768px) {
+  .text-block {
+    &__header {
+      &__title {
+        font-size: 20px;
+      }
+      &__number {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
 </style>
