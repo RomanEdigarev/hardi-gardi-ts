@@ -25,7 +25,7 @@
           желание познавать окружающий мир.
         </p>
         <div class="philosophy__header__image-container">
-          <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+          <img :src="require('./assets/f.png')" alt="" />
           <svg
             width="77"
             height="83"
@@ -185,8 +185,8 @@ export default defineComponent({
         width: 420px;
         height: 420px;
         object-fit: cover;
-        mask-image: url("./assets/mask.svg");
-        mask-position: center center;
+        //mask-image: url("./assets/mask.svg");
+        //mask-position: center center;
       }
       svg {
         position: absolute;
@@ -276,11 +276,11 @@ export default defineComponent({
     // *** Header *** //
     &__header {
       max-width: 338px;
-      &__bg {
-        display: none;
-      }
       &__image-container {
-        display: none;
+        svg {
+          bottom: -40px;
+          left: 46px;
+        }
       }
 
       &__title {
@@ -308,6 +308,15 @@ export default defineComponent({
         .philosophy__body__item__img-container {
           width: 339px !important;
           height: 196px !important;
+          svg:nth-child(2) {
+            bottom: -45% !important;
+            left: 103% !important;
+          }
+
+          svg:nth-child(3) {
+            bottom: -60%;
+            left: 122%;
+          }
         }
       }
       &__item:nth-child(2) {

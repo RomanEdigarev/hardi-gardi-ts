@@ -15,7 +15,6 @@
     />
     <div class="range-slider__slider-container">
       <vue-slider
-        v-model="[price.min, price.max]"
         :min="0"
         :max="1000"
         :tooltip="'none'"
