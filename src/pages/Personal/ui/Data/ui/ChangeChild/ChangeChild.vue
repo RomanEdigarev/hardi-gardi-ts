@@ -155,4 +155,22 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+
+@media screen and (max-width: 768px) {
+  .change-child {
+    max-width: 410px;
+    &__body {
+      &__inputs {
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+      }
+      &__checkbox {
+        gap: 30px;
+        :deep label {
+          padding: 16px 0 16px 56px;
+        }
+      }
+    }
+  }
+}
 </style>

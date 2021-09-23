@@ -116,4 +116,12 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
+@media screen and (max-width: 768px) {
+  .data {
+    max-width: 410px;
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
 </style>

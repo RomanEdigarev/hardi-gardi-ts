@@ -1,5 +1,6 @@
 import ChangePass from "./ChangePass.vue";
 import { boolean } from "@storybook/addon-knobs";
+import { useStore } from "@/services/vuex";
 
 export default {
   title: "pages/Personal/ui/Data/ui/ChangePass",

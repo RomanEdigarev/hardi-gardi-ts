@@ -316,6 +316,10 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+@media screen and (max-width: 768px) {
+  .text-page {
+  }
+}
 </style>
 <style lang="scss">
 .text-page {

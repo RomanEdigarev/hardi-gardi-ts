@@ -25,14 +25,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { History, Details, Data, Notifications } from "./ui";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Personal",
   components: { PageTitle, History, Details, Data, Notifications },
   setup() {
+    const store = useStore();
+    const isMobile = computed(() => store.state.isMobile);
     const items = [
       {
         title: "История заказов",
@@ -52,6 +55,7 @@ export default defineComponent({
     return {
       currentItemNumber,
       items,
+      isMobile,
     };
   },
 });
@@ -104,6 +108,28 @@ export default defineComponent({
 
   .current-item {
     background: #ecf0f8;
+  }
+}
+@media screen and (max-width: 768px) {
+  .personal {
+    // *** Header *** //
+    &__header {
+      max-width: 470px;
+      &__item {
+        text-align: center;
+      }
+      &__item:last-child {
+        border-bottom-right-radius: 0;
+      }
+    }
+    // *** Header END *** //
+
+    // *** Body *** //
+    &__body {
+      padding: 20px;
+      max-width: 472px;
+    }
+    // *** Body END *** //
   }
 }
 </style>

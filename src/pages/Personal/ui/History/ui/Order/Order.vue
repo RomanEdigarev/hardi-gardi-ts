@@ -209,4 +209,10 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .order {
+    max-width: 430px;
+  }
+}
 </style>

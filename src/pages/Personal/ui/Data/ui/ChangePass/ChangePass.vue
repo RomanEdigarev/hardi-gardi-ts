@@ -49,14 +49,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import anime from "animejs";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "ChangePass",
   components: { VInput },
   setup() {
+    const store = useStore();
+    const isMobile = computed(() => store.state.isMobile);
     const isPassword = yup.string().required("Обязательное поле");
     const isOpen = ref(false);
     const body = ref(null);
@@ -67,7 +70,7 @@ export default defineComponent({
           .timeline({
             targets: body.value,
             maxHeight: [0, "1000px"],
-            height: ["72px"],
+            height: isMobile.value ? "166px" : "72px",
             duration: 600,
             easing: "easeOutCirc",
           })
@@ -127,6 +130,15 @@ export default defineComponent({
       span {
         color: #d23c50;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .change-pass {
+    &__body {
+      grid-template-columns: 1fr;
+      row-gap: 30px;
     }
   }
 }

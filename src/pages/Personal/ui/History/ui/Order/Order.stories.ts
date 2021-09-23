@@ -24,3 +24,18 @@ export const order = (args) => ({
   `,
   methods: {},
 });
+
+export const orderMobile = (args) => ({
+  components: {
+    Order,
+  },
+  setup() {
+    return { args };
+  },
+  template: `
+    <div style="background-color: white;">
+     <Order/>
+    </div>
+  `,
+  methods: {},
+});

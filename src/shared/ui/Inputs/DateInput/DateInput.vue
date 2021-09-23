@@ -57,7 +57,6 @@ export default defineComponent({
 .date-input {
   width: 100%;
   height: 72px;
-  max-width: 355px;
   position: relative;
   color: $clr-phi;
 

@@ -177,4 +177,60 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
+
+@media screen and (max-width: 768px) {
+  .details {
+    max-width: 220px;
+    padding: 30px 20px;
+
+    // *** Header *** //
+    &__header {
+      &__title {
+        font-size: 21px;
+        line-height: 26px;
+      }
+    }
+    // *** Header END *** //
+
+    // *** Body *** //
+    &__body {
+      &__info {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        &__row {
+          flex-direction: column;
+          span {
+            font-size: 12px;
+            line-height: 15px;
+          }
+        }
+      }
+      &__delivery {
+        &__title {
+          font-size: 14px;
+          line-height: 17px;
+        }
+        &__text {
+          font-size: 12px;
+          line-height: 15px;
+          margin-bottom: 15px;
+        }
+        &__row {
+          font-size: 12px;
+          line-height: 15px;
+          flex-direction: column;
+        }
+      }
+    }
+    // *** Body END *** //
+
+    // *** Footer *** //
+    &__footer {
+      &__btn {
+        width: 180px;
+      }
+    }
+    // *** Footer END *** //
+  }
+}
 </style>
