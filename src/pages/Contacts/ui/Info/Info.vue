@@ -76,4 +76,28 @@ export default defineComponent({
     //flex-direction: column;
   }
 }
+@media screen and (max-width: 768px) {
+  .info {
+    max-width: 261px;
+    padding: 0 20px;
+    &__body {
+      &__item {
+        padding: 20px 0;
+        &__title {
+          display: inline-block;
+          font-size: 12px;
+          line-height: 15px;
+          margin-bottom: 10px;
+        }
+        &__text {
+          font-size: 10px;
+          line-height: 16px;
+        }
+        &__icon {
+          width: 15px;
+        }
+      }
+    }
+  }
+}
 </style>

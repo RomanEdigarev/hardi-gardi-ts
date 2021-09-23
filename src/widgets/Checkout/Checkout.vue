@@ -182,6 +182,40 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+@media screen and (max-width: 768px) {
+  .checkout {
+    padding: 12px;
+    &__header {
+      margin-bottom: 24px;
+
+    }
+    &__body {
+      padding-bottom: 0;
+      margin-bottom: 11px;
+      &__title {
+        span {
+          font-size: 22px;
+          line-height: 27px;
+        }
+      }
+      &__subtitle {
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 16px;
+      }
+      &__list {
+        span {
+          font-size: 14px;
+          line-height: 150%;
+        }
+        &__goods {
+          margin-bottom: 0;
+        }
+      }
+
+    }
+  }
+}
 </style>
 <style lang="scss">
 // *** Footer  *** //
@@ -191,6 +225,16 @@ export default defineComponent({
     span {
       font-size: 16px !important;
       line-height: 1.75;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .checkout__footer {
+    &__btn {
+      span {
+        font-size: 15px !important;
+        line-height: 1.75;
+      }
     }
   }
 }

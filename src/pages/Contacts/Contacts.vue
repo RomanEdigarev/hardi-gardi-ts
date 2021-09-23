@@ -139,6 +139,28 @@ export default defineComponent({
     }
   }
   // *** Footer END *** //
+
+  @media screen and (max-width: 768px) {
+    .contacts {
+      &__body {
+        &__map-container {
+          height: 340px;
+          &__info {
+            top: 46px;
+            left: 34px;
+          }
+        }
+      }
+      &__footer {
+        &__form {
+          &__inputs {
+            flex-direction: column;
+            gap: 10px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 <style lang="scss">

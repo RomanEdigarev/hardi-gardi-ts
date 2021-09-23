@@ -136,4 +136,10 @@ export default defineComponent({
     border-top-color: $clr-zeta;
   }
 }
+@media screen and (max-width: 768px) {
+  .btn {
+    padding: 13px 0;
+    font-size: 15px;
+  }
+}
 </style>

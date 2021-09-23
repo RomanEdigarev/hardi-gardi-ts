@@ -127,6 +127,7 @@ export default defineComponent({
     const isZoomSlider = ref(false);
     const zoomSlider = () => {
       isZoomSlider.value = !isZoomSlider.value;
+      console.log(isZoomSlider.value)
     };
     const store = useStore();
     let currentProduct = ref<Product>(null);

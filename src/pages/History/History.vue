@@ -12,7 +12,7 @@
       <div class="history__body">
         <div
           class="history__body__item pl-130 pr-123"
-          style="margin-bottom: 300px"
+          :class="{'pl-40': isMobile, 'pr-88': isMobile}"
         >
           <div class="history__body__item__text">
             <TextBlock>
@@ -39,14 +39,12 @@
               </template>
             </TextBlock>
           </div>
-          <div class="history__body__item__img-container">
+          <div class="history__body__item__img-container first-block">
             <svg
-              width="498"
-              height="605"
+
               viewBox="0 0 498 605"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style="top: -238px"
             >
               <rect
                 x="29.2475"
@@ -67,19 +65,19 @@
             </svg>
 
             <img
-              class="history__body__item__img"
+              class="history__body__item__img w-357 h-462"
+              :class="{'firstImageMobile': isMobile}"
               :src="require('/public/images/pages/2019.jpg')"
               alt=""
               style="
-                width: 357px;
-                height: 462px;
+
                 border-radius: 30px;
                 margin-top: -115px;
               "
             />
           </div>
         </div>
-        <div class="history__body__item" style="margin-bottom: 355px">
+        <div class="history__body__item second-block" style="margin-bottom: 355px">
           <div class="history__body__item__img-container">
             <svg
               width="187"
@@ -99,12 +97,6 @@
               class="history__body__item__img"
               src="./assets/2019.jpg"
               alt=""
-              style="
-                width: 394px;
-                height: 272px;
-                border-radius: 30px;
-                object-fit: cover;
-              "
             />
           </div>
           <div class="history__body__item__text">
@@ -140,7 +132,7 @@
             </TextBlock>
           </div>
         </div>
-        <div class="history__body__item pl-130" style="margin-bottom: 227px">
+        <div class="history__body__item pl-130" style="margin-bottom: 227px" :class="{'pl-40': isMobile, 'pr-88': isMobile}">
           <div class="history__body__item__text">
             <TextBlock>
               <template v-slot:title>
@@ -198,6 +190,7 @@
             <img
               class="history__body__item__img"
               src="./assets/2019.jpg"
+              :class="{'firstImageMobile': isMobile}"
               alt=""
               style="
                 width: 345px;
@@ -225,13 +218,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent} from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, FooterCard } from "@/widgets";
 import { TextBlock } from "./ui";
+import {useStore} from "@/services/vuex";
 export default defineComponent({
   name: "History",
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard },
+  setup() {
+   const store = useStore()
+    const isMobile = computed(() => store.state.isMobile)
+    return {
+      isMobile
+    }
+  }
 });
 </script>
 
@@ -268,6 +269,7 @@ export default defineComponent({
       position: absolute;
       top: 285px;
       left: 0;
+      z-index: -1;
     }
   }
   // *** Footer END *** //
@@ -279,7 +281,85 @@ export default defineComponent({
   .pr-123 {
     padding-right: 123px;
   }
+
+  .pl-40 {
+    padding-left: 40px;
+  }
+  .pr-88 {
+    padding-right: 88px;
+  }
+  .w-357 {
+    width: 357px;
+  }
+  .h-462 {
+    height: 462px;
+  }
+
+  .firstImageMobile {
+    width: 238px !important;
+    height: 308px !important;
+    margin-top: 0 !important;
+  }
+
+  .first-block {
+    svg {
+      width: 498px;
+      height: 605px;
+      top: -238px
+    }
+  }
+
+  .history__body__item:first-child {
+    margin-bottom: 300px;
+  }
+
+  .second-block {
+    .history__body__item__img {
+      width: 394px;
+      height: 272px;
+      border-radius: 30px;
+      object-fit: cover;
+    }
+  }
   // *** Other END *** //
+}
+@media screen and (max-width: 768px) {
+  .history {
+    &__body {
+      &__item {
+        &__text {
+          margin-right: 30px;
+        }
+      }
+    }
+    &__footer {
+      height: auto;
+      &__line {
+        left: -16px;
+      }
+    }
+    .history__body__item:first-child {
+      margin-bottom: 328px;
+    }
+    .first-block {
+      svg {
+        width: 326px;
+        top: -171px
+      }
+    }
+
+    .second-block {
+      margin-bottom: 322px !important;
+      .history__body__item__img {
+        width: 339px;
+        height: 234px;
+      }
+      .history__body__item__text {
+        margin-right: 0;
+        margin-left: 30px;
+      }
+    }
+  }
 }
 </style>
 <style lang="scss">

@@ -54,4 +54,14 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .footer-card {
+    height: 446px;
+    &__text {
+      position: relative;
+      font-size: 20px;
+      z-index: 2;
+    }
+  }
+}
 </style>

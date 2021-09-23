@@ -52,4 +52,23 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen and (max-width: 768px) {
+  .text-block {
+    &__header {
+      &__subtitle {
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+    &__body {
+      font-size: 16px;
+      line-height: 24px;
+
+      :deep p {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+}
 </style>

@@ -178,4 +178,43 @@ export default defineComponent({
   padding: 0;
   border: none;
 }
+@media screen and (max-width: 768px) {
+  .product-card {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 18px 22px;
+    max-width: 470px;
+
+    &__product {
+      &__img {
+        max-width: 75px;
+        max-height:93px;
+      }
+      &__title {
+        p, span {
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+    }
+    &__price {
+      padding-left: 100px;
+      grid-row: 2 / 3;
+      margin-bottom: 16px;
+      &__prev {
+        width: 100%;
+      }
+
+    }
+    &__count {
+      grid-row: 3 / 4;
+      div {
+        padding-left: 100px;
+
+      }
+
+    }
+  }
+}
 </style>

@@ -62,5 +62,13 @@ export default defineComponent({
     }
   }
   // *** Body END *** //
+
+  @media screen and (max-width: 768px) {
+    .favorites {
+      &__body {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+    }
+  }
 }
 </style>

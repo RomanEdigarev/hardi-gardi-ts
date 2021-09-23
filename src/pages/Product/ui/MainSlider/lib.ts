@@ -1,4 +1,5 @@
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useStore } from "@/services/vuex";
 
 const getSecondaryOptions = () => {
   const isMobile = document.documentElement.clientWidth <= 768;
@@ -19,21 +20,22 @@ const getSecondaryOptions = () => {
 };
 
 const getPrimaryOptions = (isZoom) => {
+  const store = useStore();
   return {
     type: "loop",
     perPage: 1,
     perMove: 1,
     gap: "1rem",
     pagination: false,
-    width: isZoom ? "35.625vw" : "684px",
+    width: isZoom ? "35.625vw" : store.state.isMobile ? "590px" : "684px",
     heightRatio: isZoom ? 1.25 : 0,
   };
 };
 
 export const useMainSlider = (isZoom) => {
+  console.log("useMainSLider");
   const secondaryOptions = getSecondaryOptions();
   const primaryOptions = getPrimaryOptions(isZoom);
-
   const secondarySplide = ref(null);
   const primarySplide = ref(null);
   const nextSlideBtn = ref<HTMLElement>(null);

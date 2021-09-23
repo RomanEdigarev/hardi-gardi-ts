@@ -49,6 +49,7 @@ export default defineComponent({
     onMounted(async () => {
       if (!store.state.isInit) {
         await initShop();
+        store.commit('setIsMobile', document.documentElement.clientWidth <= 768)
       }
     });
     return {
@@ -160,6 +161,7 @@ export default defineComponent({
 
 @media screen and (max-width: 768px) {
   .app {
+    overflow-x: hidden;
     &__wrapper {
       padding: 0 24px;
       margin-bottom: 136px;

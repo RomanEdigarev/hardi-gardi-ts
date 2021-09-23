@@ -119,7 +119,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUpdated } from "vue";
+import {defineComponent, onUpdated, ref} from "vue";
 import { BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon, SlideArrowIcon } from "@/shared/ui/icons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
@@ -144,8 +144,9 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const slider = useMainSlider(props.isZoom);
-    const zoom = () => {};
+
     onUpdated(() => {
+      console.log('updated')
       document.documentElement.style.overflow = props.isZoom
         ? "hidden"
         : "visible";
@@ -153,7 +154,6 @@ export default defineComponent({
     });
     return {
       ...slider,
-      zoom,
     };
   },
 });
@@ -259,10 +259,20 @@ export default defineComponent({
         flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
+        &__current-slide {
+          margin-bottom: 30px;
+        }
+
         &__thumbnails {
           height: auto;
           flex-direction: row;
           width: 600px;
+          &__down-btn {
+            transform: rotate(-180deg);
+          }
+          &__up-btn {
+            transform: rotate(0deg);
+          }
         }
       }
     }
@@ -299,6 +309,22 @@ export default defineComponent({
   .main-slider__close-btn {
     display: block;
     z-index: 25;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-slider.zoom {
+    overflow-y: scroll;
+    .main-slider__body {
+      height: auto;
+      padding: 114px 86px 42px 86px;
+      &__current-slide {
+        height: 740px;
+      }
+      &__thumbnails {
+        height: 62px;
+      }
+    }
   }
 }
 </style>

@@ -79,4 +79,15 @@ export default defineComponent({
     display: none;
   }
 }
+@media screen and (max-width: 768px) {
+  .basket {
+    &__body {
+      &__checkout {
+        width: 232px;
+        min-width:  232px;
+      }
+    }
+
+  }
+}
 </style>

@@ -8,6 +8,7 @@ import { productsModule } from "@/entities/Products/store";
 export type State = {
   loading: boolean;
   isInit: boolean;
+  isMobile: boolean;
   shop?: Shop;
   products?: Products;
 };
@@ -17,6 +18,7 @@ export const store = createStore<State>({
   state: {
     loading: true,
     isInit: false,
+    isMobile: false,
   },
   mutations: {
     init: (state, payload) => {
@@ -24,6 +26,9 @@ export const store = createStore<State>({
     },
     toggleLoading: (state, payload?: boolean) => {
       state.loading = payload ? payload : !state.loading;
+    },
+    setIsMobile: (state, payload: boolean) => {
+      state.isMobile = payload;
     },
   },
   modules: {
