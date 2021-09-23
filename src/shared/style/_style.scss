@@ -98,3 +98,12 @@ button {
   }
 }
 
+@media screen and (max-width: 768px){
+  .page-main {
+    &__header {
+      margin-bottom: 66px;
+    }
+  }
+
+}
+

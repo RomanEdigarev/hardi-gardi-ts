@@ -270,4 +270,65 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
+
+@media screen and (max-width: 768px) {
+  .philosophy {
+    // *** Header *** //
+    &__header {
+      max-width: 338px;
+      &__bg {
+        display: none;
+      }
+      &__image-container {
+        display: none;
+      }
+
+      &__title {
+        font-size: 22px;
+        line-height: 24px;
+      }
+      &__text-block {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+    // *** Header END *** //
+
+    // *** Body *** //
+    &__body {
+      &__item {
+        &__text-block {
+          max-width: 339px;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+      &__item:first-child {
+        padding-right: 0;
+        .philosophy__body__item__img-container {
+          width: 339px !important;
+          height: 196px !important;
+        }
+      }
+      &__item:nth-child(2) {
+        .philosophy__body__item__text-block {
+        }
+      }
+    }
+    // *** Body END *** //
+
+    .image-grid {
+      max-width: 339px;
+      gap: 11px;
+      grid-template-rows: 73px 174px;
+      grid-template-columns: 206px 122px;
+      img {
+        border-radius: 14px;
+      }
+      img:first-child {
+        max-width: 72px !important;
+      }
+    }
+  }
+}
 </style>

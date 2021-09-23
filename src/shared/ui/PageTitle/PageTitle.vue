@@ -33,4 +33,10 @@ export default defineComponent({
   color: $clr-nu;
   margin: 0;
 }
+@media screen and (max-width: 768px) {
+  .page-title {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+}
 </style>
