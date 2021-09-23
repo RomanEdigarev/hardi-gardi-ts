@@ -2,19 +2,20 @@
   <div class="range-slider">
     <input
       class="range-slider__input"
-      v-model="price.min"
+      v-model="arr[0]"
       type="text"
       placeholder="от"
     />
     <div class="range-slider__line"></div>
     <input
       class="range-slider__input"
-      v-model="price.max"
+      v-model="arr[1]"
       type="text"
       placeholder="до"
     />
     <div class="range-slider__slider-container">
       <vue-slider
+        v-model="arr"
         :min="0"
         :max="1000"
         :tooltip="'none'"
@@ -30,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 
@@ -40,13 +41,9 @@ export default defineComponent({
     VueSlider,
   },
   setup() {
-    const price = reactive({
-      min: 10,
-      max: 500,
-    });
-
+    const arr = ref([10, 500]);
     return {
-      price,
+      arr,
     };
   },
 });
@@ -101,6 +98,11 @@ export default defineComponent({
     width: 1px;
     height: 21px;
     background-color: $clr-alpha-beta;
+  }
+}
+@media screen and (max-width: 768px) {
+  .range-slider {
+    width: 351px;
   }
 }
 </style>

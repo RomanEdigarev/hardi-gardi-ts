@@ -16,7 +16,16 @@
       </div>
 
       <div class="catalog__content">
-        <div class="catalog__filter-container"><CatalogFilter /></div>
+        <button
+          class="catalog__content__mobile-filter-btn"
+          @click="showFilterMobile"
+        >
+          <img src="./assets/mobile-filter-icon.svg" alt="" />
+        </button>
+        <div ref="filter" class="catalog__filter-container">
+          <CatalogFilter @hide-mobile-filter="hideFilterMobile" />
+          <div ref="filterBG" class="catalog__filter-container__bg"></div>
+        </div>
         <div class="catalog__results">
           <div class="catalog__results__header">
             <Sorting />
@@ -48,16 +57,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
 import { CatalogFilter } from "./ui";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { Sorting } from "@/features";
-import { useRoute } from "vue-router";
-import { getCatalog } from "@/entities/Shop/lib";
-import { Section } from "@/entities/Shop/Catalog/model";
+import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -80,29 +87,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const route = useRoute();
     const { product } = useProduct();
-    const catalog = getCatalog();
-
-    const searchSectionByParams = (link: string, items: Section[]): Section => {
-      const result = items.find((item) => {
-        return item.link.includes(link);
-      });
-      return result;
-    };
-    const section = searchSectionByParams(
-      props.section as string,
-      catalog.sections
-    );
-    const subsection = searchSectionByParams(
-      props.subsection as string,
-      section.sections
-    );
-    const title = subsection?.name || section.name;
 
     return {
       product,
-      title,
+      ...useMobileFilter(),
+      ...defineTitle(props),
     };
   },
 });
@@ -127,6 +117,9 @@ export default defineComponent({
     padding-left: 20px;
     column-gap: 50px;
     margin-bottom: 132px;
+    &__mobile-filter-btn {
+      display: none;
+    }
   }
 
   &__filter-container {
@@ -163,9 +156,39 @@ export default defineComponent({
       &__content {
         grid-template-columns: 1fr;
         margin-bottom: 212px;
+        position: relative;
+        &__mobile-filter-btn {
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 26px;
+          transform: translateY(-50%);
+        }
       }
       &__filter-container {
-        display: none;
+        background-color: white;
+        max-width: 399px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        min-height: 100vh;
+        transform: translateX(-100%);
+        div:first-child {
+          position: relative;
+          z-index: 4;
+        }
+        &__bg {
+          background-color: #51628e;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 200vw;
+          height: 100vh;
+          opacity: 0;
+          display: none;
+          z-index: 2;
+        }
       }
 
       &__results {

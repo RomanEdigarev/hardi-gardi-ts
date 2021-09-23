@@ -1,6 +1,28 @@
 <template>
   <div class="catalog-filter">
     <div class="catalog-filter__content">
+      <div
+        class="catalog-filter__content__back"
+        @click="$emit('hide-mobile-filter')"
+      >
+        <svg
+          width="10"
+          height="16"
+          viewBox="0 0 10 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.69995 14L1.49995 7.7L7.69995 1.5"
+            stroke="#D23C50"
+            stroke-width="3"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>Назад в каталог</span>
+      </div>
       <div class="catalog-filter__item active categories">
         <div
           class="catalog-filter__item__title-container"
@@ -225,6 +247,7 @@ export default defineComponent({
     RangeSlider,
     AlfaButton,
   },
+  emits: ["hide-mobile-filter"],
   setup() {
     const setActiveClass = (e) => {
       const item: HTMLElement = e.currentTarget.closest(
@@ -246,9 +269,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .catalog-filter {
-  &__filter-content {
+  &__content {
     width: 100%;
     height: 100%;
+    &__back {
+      display: none;
+      padding: 25px 25px 18px 24px;
+      align-items: center;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 20px;
+      span {
+        font-size: 14px;
+        line-height: 21px;
+        color: #d23c50;
+      }
+      svg {
+        margin-right: 21px;
+      }
+    }
   }
 
   .categories {
@@ -351,5 +389,17 @@ export default defineComponent({
     }
   }
   // *** Footer END *** //
+}
+@media screen and (max-width: 768px) {
+  .catalog-filter {
+    background-color: white;
+    min-height: 100vh;
+    padding: 0 24px;
+    &__content {
+      &__back {
+        display: flex;
+      }
+    }
+  }
 }
 </style>
