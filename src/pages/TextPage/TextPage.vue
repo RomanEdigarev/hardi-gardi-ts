@@ -1,12 +1,15 @@
 <template>
   <div class="text-page">
-    <div class="text-page__sidebar">
-      <Sidebar />
-    </div>
     <main class="page-main">
+      <div v-if="!isMobile" class="text-page__sidebar">
+        <Sidebar />
+      </div>
       <div class="page-main__header">
         <BreadCrumbs />
         <PageTitle text="О компании" />
+      </div>
+      <div class="text-page__sidebar">
+        <SidebarMobile v-if="isMobile" />
       </div>
       <div class="text-page__header">
         <p class="text-page__header__text">
@@ -141,10 +144,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs } from "@/widgets";
-import { Slider, Sidebar } from "./ui";
+import { Slider, Sidebar, SidebarMobile } from "./ui";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "TextPage",
   components: {
@@ -152,6 +156,14 @@ export default defineComponent({
     PageTitle,
     Slider,
     Sidebar,
+    SidebarMobile,
+  },
+  setup() {
+    const store = useStore();
+    const isMobile = computed(() => store.state.isMobile);
+    return {
+      isMobile,
+    };
   },
 });
 </script>
@@ -318,6 +330,12 @@ export default defineComponent({
 }
 @media screen and (max-width: 768px) {
   .text-page {
+    &__sidebar {
+      position: static;
+      padding-top: 0;
+      float: none;
+      height: 60px;
+    }
   }
 }
 </style>

@@ -6,6 +6,7 @@ import { useProduct } from "@/entities/Products/Product/lib";
 export default {
   title: "pages/Text Page/ui/Sidebar",
   component: {
+    SidebarMobile,
     Sidebar,
   },
   parameters: {
@@ -35,7 +36,7 @@ export const sidebar = () => ({
 
 export const sidebarMobile = () => ({
   components: {
-    Sidebar,
+    SidebarMobile,
   },
   setup() {
     const { product } = useProduct();
