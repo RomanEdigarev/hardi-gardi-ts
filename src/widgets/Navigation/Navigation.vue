@@ -47,11 +47,11 @@
 
 <script lang="ts">
 import { NavigationButton } from "./ui";
-import { Location } from "@/features/";
+import { Location } from "@/widgets";
 import { defineComponent } from "vue";
 import { CatalogSubmenu } from "./ui";
 import { useTopMenu } from "@/widgets/Navigation/lib";
-import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle.vue";
+import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle/CabinetTitle.vue";
 
 export default defineComponent({
   name: "Navigation",

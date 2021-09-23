@@ -7,20 +7,25 @@
 
     <!-- Product Info -->
     <div class="home-product-card__info-wrapper">
-      <InfoProductCard v-bind="product" :is-simple="isSimple" />
+      <!--      <InfoProductCard v-bind="product" :is-simple="isSimple" />-->
+      <InfoProductCardPhone v-bind="product" :is-simple="isSimple" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { InfoProductCard, ImageProductCard } from "@/widgets";
+import {
+  InfoProductCard,
+  ImageProductCard,
+  InfoProductCardPhone,
+} from "@/widgets";
 import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "ProductCardHome",
-  components: { InfoProductCard, Card, ImageProductCard },
+  components: { InfoProductCard, InfoProductCardPhone, Card, ImageProductCard },
   props: {
     isReverse: {
       type: Boolean,
@@ -63,5 +68,21 @@ export default defineComponent({
 
 .isReverse {
   flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 376px) {
+  .home-product-card {
+    &__image-wrapper {
+      min-width: auto;
+      max-width: 159px;
+      max-height: 230px;
+    }
+    &__info-wrapper {
+      max-width: 180px;
+      max-height: 230px;
+    }
+    :deep .product-card-info {
+    }
+  }
 }
 </style>

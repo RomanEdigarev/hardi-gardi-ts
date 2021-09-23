@@ -3,7 +3,7 @@ import { number } from "@storybook/addon-knobs";
 import { FavoriteIcon, ShopIcon } from "@/shared/ui/icons";
 
 export default {
-  title: "Header/src/ui/IconWithCount",
+  title: "features/IconWithCount",
   component: IconWithCount,
   argTypes: {},
   parameters: {

@@ -166,4 +166,29 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 375px) {
+  .prolog {
+    padding: 0;
+    &__info {
+      padding: 0;
+    }
+    &__title {
+      span {
+        font-size: 36px;
+        line-height: 1.11;
+        /* or 111% */
+      }
+    }
+    &__cards {
+      grid-template-columns: 160px 160px;
+      grid-template-rows: 219px;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    &__card {
+      height: 100%;
+    }
+  }
+}
 </style>

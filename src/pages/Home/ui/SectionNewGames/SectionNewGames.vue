@@ -6,8 +6,6 @@
           <span class="new-games__title title">Новые игры для тебя</span>
           <div class="new-games__title-container__bg-image">
             <svg
-              width="365"
-              height="106"
               viewBox="0 0 365 106"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +186,28 @@ export default defineComponent({
         max-width: 100%;
         margin-bottom: 30px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .new-games {
+    &__first-row {
+      grid-template-columns: 170px 170px;
+      grid-template-rows: 216px 184px;
+    }
+    &__second-row {
+      display: none;
+    }
+    &__title-container__bg-image {
+      width: 242px;
+      top: 8px;
+      left: 32px;
+    }
+    &__title {
+      max-width: 200px;
+      font-size: 28px;
+      line-height: 34px;
     }
   }
 }

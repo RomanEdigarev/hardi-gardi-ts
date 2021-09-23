@@ -171,4 +171,41 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .product-card-info {
+    max-width: 339px;
+    max-height: 258px;
+    &__content {
+      padding: 26px;
+    }
+    &__title {
+      font-size: 16px;
+      line-height: 18px;
+      margin-bottom: 16px;
+    }
+    &__description {
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    &__favorite-btn-container {
+      display: none;
+    }
+    &__shop-btn-container {
+      display: none;
+    }
+  }
+  .isSimple {
+    .product-card-info__title {
+      font-size: 22px;
+      line-height: 1.27;
+    }
+    .product-card-info__price {
+      &__current {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+}
 </style>

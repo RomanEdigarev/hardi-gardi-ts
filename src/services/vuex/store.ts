@@ -9,6 +9,7 @@ export type State = {
   loading: boolean;
   isInit: boolean;
   isMobile: boolean;
+  isPhone: boolean;
   shop?: Shop;
   products?: Products;
 };
@@ -19,6 +20,7 @@ export const store = createStore<State>({
     loading: true,
     isInit: false,
     isMobile: false,
+    isPhone: false,
   },
   mutations: {
     init: (state, payload) => {
@@ -29,6 +31,9 @@ export const store = createStore<State>({
     },
     setIsMobile: (state, payload: boolean) => {
       state.isMobile = payload;
+    },
+    setIsPhone: (state, payload: boolean) => {
+      state.isPhone = payload;
     },
   },
   modules: {

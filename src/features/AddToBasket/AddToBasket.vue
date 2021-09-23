@@ -5,21 +5,21 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {ShopButton} from "@/shared/ui/buttons";
+import { defineComponent } from "vue";
+import { ShopButton } from "@/shared/ui/buttons";
 
 export default defineComponent({
   name: "AddToBasket",
   components: {
-    ShopButton
+    ShopButton,
   },
   setup() {
-    const addToBasket = () => console.log("add to basket")
+    const addToBasket = () => console.log("add to basket");
     return {
-      addToBasket
-    }
-  }
-})
+      addToBasket,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -29,5 +29,12 @@ export default defineComponent({
     height: 60px;
   }
 }
-
+@media screen and (max-width: 376px) {
+  .add-to-basket {
+    &__shop-btn-container {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
 </style>

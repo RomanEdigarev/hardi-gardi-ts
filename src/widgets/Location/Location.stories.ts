@@ -2,7 +2,7 @@ import Location from "./Location.vue";
 import { text, withKnobs } from "@storybook/addon-knobs";
 
 export default {
-  title: "Header/Location",
+  title: "widgets/Location",
   component: Location,
   parameters: {
     backgrounds: {

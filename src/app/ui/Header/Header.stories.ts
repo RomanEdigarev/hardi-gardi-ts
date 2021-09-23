@@ -1,4 +1,5 @@
 import Header from "./Header.vue";
+import HeaderForPhone from "./HeaderForPhone.vue";
 
 export default {
   title: "app/Header",
@@ -22,4 +23,16 @@ export const header = (args) => ({
      <Header />
   `,
   methods: {},
+});
+
+export const headerForPhone = (args) => ({
+  components: {
+    HeaderForPhone,
+  },
+  setup() {
+    return { args };
+  },
+  template: `
+     <HeaderForPhone />
+  `,
 });

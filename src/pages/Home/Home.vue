@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 import {
   Prolog,
@@ -102,6 +102,7 @@ import {
 } from "./ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { PromotionSection } from "@/widgets";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Home",
@@ -115,9 +116,11 @@ export default defineComponent({
     CategoryCard,
   },
   setup() {
+    const store = useStore();
     const { product } = useProduct();
     return {
       product,
+      isPhone: computed(() => store.state.isPhone),
     };
   },
 });
@@ -184,6 +187,14 @@ export default defineComponent({
     }
     &__category-cards-container {
       gap: 30px;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .home {
+    &__prolog-container {
+      margin-top: 427px;
+      margin-bottom: 52px;
     }
   }
 }

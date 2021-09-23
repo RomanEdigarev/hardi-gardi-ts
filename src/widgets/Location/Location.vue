@@ -103,6 +103,14 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 374px) {
+  .location {
+    background-color: rebeccapurple;
+    &__text {
+      font-size: 13px;
+    }
+  }
+}
 
 .tooltip-content {
   position: relative;

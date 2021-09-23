@@ -1,4 +1,5 @@
 import InfoProductCard from "./InfoProductCard.vue";
+import InfoProductCardPhone from "./InfoProductCardPhone.vue";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { useProduct } from "@/entities/Products/Product/lib";
 
@@ -28,6 +29,25 @@ export const infoProductCard = () => ({
   template: `
       <div style="width: 582px; height: 390px; background: transparent">
         <InfoProductCard v-bind="product" bg-color="#FFEDC6" :is-simple="isSimple"/>
+      </div>
+    `,
+});
+
+export const infoProductCardPhone = () => ({
+  components: {
+    InfoProductCardPhone,
+  },
+  setup() {
+    const { product } = useProduct();
+    const isSimple = boolean("isSimple", false);
+    return {
+      isSimple,
+      product,
+    };
+  },
+  template: `
+      <div style="width: 582px; height: 390px; background: transparent">
+        <InfoProductCardPhone v-bind="product" bg-color="#FFEDC6" :is-simple="isSimple"/>
       </div>
     `,
 });

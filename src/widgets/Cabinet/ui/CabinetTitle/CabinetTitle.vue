@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import { ProfileIcon } from "../../../shared/ui/icons";
-import Tooltip from "../../../shared/ui/Tooltip/Tooltip";
+import { ProfileIcon } from "../../../../shared/ui/icons";
+import Tooltip from "../../../../shared/ui/Tooltip/Tooltip";
 import { computed } from "vue";
 
 export default {

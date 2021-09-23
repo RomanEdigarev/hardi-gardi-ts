@@ -225,4 +225,14 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 376px) {
+  .promotion-section {
+    &__image {
+      width: 100px;
+      height: 431px;
+      border-radius: 45px;
+    }
+  }
+}
 </style>

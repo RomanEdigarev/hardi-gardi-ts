@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Card } from "@/shared/ui";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "PrologCard",
@@ -95,6 +95,15 @@ export default defineComponent({
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .prolog-card {
+    &__title {
+      font-size: 16px;
+      line-height: 1.12;
+      /* or 112% */
     }
   }
 }

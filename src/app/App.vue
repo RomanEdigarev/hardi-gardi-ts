@@ -5,7 +5,8 @@
     </template>
     <template v-else>
       <div class="app__header">
-        <Header @open-burger="openBurger" />
+        <HeaderForPhone v-if="isPhone" />
+        <Header v-else @open-burger="openBurger" />
       </div>
 
       <div class="app__wrapper">
@@ -44,16 +45,16 @@
 </template>
 
 <script lang="ts">
-import { Header, Footer } from "./ui";
+import { Header, Footer, HeaderForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu } from "./lib";
 
 export default defineComponent({
-  components: { Header, Footer, ScrollUpPage, BurgerMenu },
+  components: { Header, Footer, ScrollUpPage, BurgerMenu, HeaderForPhone },
   name: "App",
   setup() {
     const store = useStore();
@@ -64,6 +65,7 @@ export default defineComponent({
           "setIsMobile",
           document.documentElement.clientWidth <= 768
         );
+        store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
       }
     });
 
@@ -71,6 +73,7 @@ export default defineComponent({
 
     return {
       loading: computed(() => store.state.loading),
+      isPhone: computed(() => store.state.isPhone),
       isMobile,
       ...useBurgerMenu(),
     };

@@ -11,27 +11,26 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {Card} from "@/shared/ui";
+import { defineComponent } from "vue";
+import { Card } from "@/shared/ui";
 
 export default defineComponent({
   name: "ImageProductCard",
-  components: {Card},
+  components: { Card },
   props: {
     imgPath: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      default: 'image'
-    }
-  }
-})
+      default: "image",
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
-
 .product-image-card {
   width: 100%;
   height: 100%;
@@ -47,7 +46,11 @@ export default defineComponent({
     object-fit: cover;
   }
 }
-
-
-
+@media screen and (max-width: 376px) {
+  .product-image-card {
+    &__content-container {
+      min-width: auto;
+    }
+  }
+}
 </style>

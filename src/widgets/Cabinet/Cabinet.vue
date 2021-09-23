@@ -4,52 +4,23 @@
       <CabinetTitle />
     </div>
     <div class="cabinet__links">
-      <span
-        v-toggle-modal="{ modal: 'header-modal', name: 'search' }"
-        class="cabinet__link"
-        @click="$emit('show-modal', 'search')"
-        ><SearchIcon
-      /></span>
-      <a class="cabinet__link" href="/">
-        <IconWithCount>
-          <template v-slot:svg-icon>
-            <FavoriteIcon />
-          </template>
-        </IconWithCount>
-      </a>
-      <a class="cabinet__link" id="shop" href="/">
-        <IconWithCount>
-          <template v-slot:svg-icon>
-            <ShopIcon />
-          </template>
-        </IconWithCount>
-      </a>
+      <CabinetLinks />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import {
-  ProfileIcon,
-  SearchIcon,
-  FavoriteIcon,
-  ShopIcon,
-} from "../../shared/ui/icons";
-import IconWithCount from "../../app/ui/Header/ui/IconWithCount/IconWithCount.vue";
 import Tooltip from "../../shared/ui/Tooltip/Tooltip.vue";
-import CabinetTitle from "./ui/CabinetTitle.vue";
+import CabinetTitle from "./ui/CabinetTitle/CabinetTitle.vue";
+import { CabinetLinks } from "./ui";
 
 export default defineComponent({
   name: "Cabinet",
   components: {
-    ProfileIcon,
-    SearchIcon,
-    IconWithCount,
-    FavoriteIcon,
-    ShopIcon,
     Tooltip,
     CabinetTitle,
+    CabinetLinks,
   },
   props: {
     isLogin: {

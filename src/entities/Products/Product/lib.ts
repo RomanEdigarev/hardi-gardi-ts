@@ -8,7 +8,7 @@ export const useProduct = () => {
     description:
       "В набор входит 3 вида пазлов:\n" +
       "«Веселая Африка», «Веселый паровозик», «Фигурки», «Веселый паровозик», «Фигурки», «Веселый паровозик» ...",
-    img: "/images/product-card.jpg",
+    img: "public/images/product-card.jpg",
     isFavorite: false,
     characteristics: undefined,
   };
