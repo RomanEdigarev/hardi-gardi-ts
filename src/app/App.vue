@@ -216,4 +216,13 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 376px) {
+  .app {
+    &__wrapper {
+      padding: 0 18px;
+      margin-bottom: 136px;
+    }
+  }
+}
 </style>

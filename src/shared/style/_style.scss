@@ -106,7 +106,13 @@ button {
   }
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: 376px) {
+  .page-main {
+    padding-top: 16px;
+    &__header {
+      margin-bottom: 30px;
+    }
+  }
   .title {
     font-size: 28px;
     line-height: 1.21;

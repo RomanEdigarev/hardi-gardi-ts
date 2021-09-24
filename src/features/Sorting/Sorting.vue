@@ -1,7 +1,25 @@
 <template>
   <div class="sorting">
     <div class="sorting__title">Сортировать по:</div>
-    <div class="sorting__item">популярности</div>
+    <div class="sorting__item">
+      популярности
+      <svg
+        width="11"
+        height="6"
+        viewBox="0 0 11 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.07715 1.07666L5.52159 4.63222L1.96604 1.07666"
+          stroke="#606060"
+          stroke-width="2"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
     <div class="sorting__item">новизне</div>
     <div class="sorting__item">
       <span>цене</span>
@@ -16,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 export default defineComponent({
   name: "Sorting",
 });
@@ -43,6 +61,9 @@ export default defineComponent({
     cursor: pointer;
     margin-right: 19px;
     transition: text-shadow 0.3s ease-in-out;
+    svg {
+      display: none;
+    }
     &:hover {
       text-shadow: 0 0 1px $clr-phi;
     }
@@ -90,5 +111,25 @@ export default defineComponent({
   }
 
   // *** Item END *** //
+}
+@media screen and (max-width: 376px) {
+  .sorting {
+    &__title {
+      margin-right: 6px;
+    }
+    &__item ~ &__item {
+      display: none;
+    }
+    &__item:nth-child(2) {
+      display: flex;
+      align-items: center;
+      font-weight: $semi-bold;
+      svg {
+        padding-top: 2px;
+        margin-left: 5px;
+        display: block;
+      }
+    }
+  }
 }
 </style>

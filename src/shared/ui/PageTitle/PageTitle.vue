@@ -39,4 +39,11 @@ export default defineComponent({
     line-height: 1.25;
   }
 }
+
+@media screen and (max-width: 376px) {
+  .page-title {
+    font-size: 28px;
+    line-height: 1.21;
+  }
+}
 </style>

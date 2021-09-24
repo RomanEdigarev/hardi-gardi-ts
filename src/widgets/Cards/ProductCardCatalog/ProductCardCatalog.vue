@@ -31,10 +31,10 @@
 
     <!-- buttons -->
     <div class="catalog-product-card__favorite-btn">
-      <FavoriteButton :isActive="isFavorite" />
+      <AddToFavorite :is-favorite="false" />
     </div>
     <div class="catalog-product-card__shop-btn">
-      <ShopButton />
+      <AddToBasket />
     </div>
   </div>
 </template>
@@ -44,13 +44,14 @@ import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
 import { defineComponent } from "vue";
+import { AddToBasket, AddToFavorite } from "@/features";
 
 export default defineComponent({
   name: "ProductCardHome",
   components: {
+    AddToBasket,
+    AddToFavorite,
     Card,
-    FavoriteButton,
-    ShopButton,
   },
   props: {
     isSearchResult: {
@@ -137,8 +138,8 @@ export default defineComponent({
   &__favorite-btn,
   &__shop-btn {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    //width: 60px;
+    //height: 60px;
     right: 15px;
   }
 
@@ -238,6 +239,21 @@ export default defineComponent({
 
     &__shop-btn {
       display: none;
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .catalog-product-card {
+    padding: 10px;
+    &__info {
+      padding: 6px;
+    }
+    &__price {
+      margin-bottom: 0;
+      &__current {
+        font-size: 16px;
+        line-height: 20px;
+      }
     }
   }
 }

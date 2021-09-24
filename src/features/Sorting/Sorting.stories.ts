@@ -1,7 +1,7 @@
 import Sorting from "./Sorting.vue";
 
 export default {
-  title: "pages/catalog/ui/Sorting",
+  title: "features/Sorting",
   component: Sorting,
   parameters: {
     backgrounds: {

@@ -30,7 +30,22 @@
           <div class="catalog__results__header">
             <Sorting />
           </div>
-          <div class="catalog__results__body">
+          <div
+            class="catalog__results__header__change-phone-view"
+            :class="phoneView"
+          >
+            <img
+              src="./assets/phone-view_01.svg"
+              alt=""
+              @click="changePhoneView('cl-2')"
+            />
+            <img
+              src="./assets/phone-view_02.svg"
+              alt=""
+              @click="changePhoneView('cl-1')"
+            />
+          </div>
+          <div class="catalog__results__body" :class="phoneView">
             <div class="catalog__results__item">
               <ProductCardCatalog />
             </div>
@@ -50,14 +65,14 @@
         </div>
       </div>
       <div class="catalog__footer">
-        <PromotionSection />
+        <PromotionSection :products="[product, product]" />
       </div>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
 import { CatalogFilter } from "./ui";
@@ -88,11 +103,17 @@ export default defineComponent({
   },
   setup(props) {
     const { product } = useProduct();
+    const phoneView = ref("cl-1");
+    const changePhoneView = (viewType: string) => {
+      phoneView.value = viewType;
+    };
 
     return {
       product,
       ...useMobileFilter(),
       ...defineTitle(props),
+      phoneView,
+      changePhoneView,
     };
   },
 });
@@ -131,6 +152,9 @@ export default defineComponent({
   &__results {
     &__header {
       margin-bottom: 33px;
+      &__change-phone-view {
+        display: none;
+      }
     }
     &__body {
       display: grid;
@@ -150,57 +174,125 @@ export default defineComponent({
   }
 
   // *** Results END *** //
+}
 
-  @media screen and (max-width: 768px) {
-    .catalog {
-      &__content {
-        grid-template-columns: 1fr;
-        margin-bottom: 212px;
-        position: relative;
-        &__mobile-filter-btn {
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 26px;
-          transform: translateY(-50%);
-        }
-      }
-      &__filter-container {
-        background-color: white;
-        max-width: 399px;
-        position: fixed;
+@media screen and (max-width: 768px) {
+  .catalog {
+    &__content {
+      grid-template-columns: 1fr;
+      margin-bottom: 212px;
+      position: relative;
+      &__mobile-filter-btn {
+        display: block;
+        position: absolute;
         top: 0;
-        left: 0;
-        z-index: 3;
-        min-height: 100vh;
-        transform: translateX(-100%);
-        div:first-child {
-          position: relative;
-          z-index: 4;
-        }
-        &__bg {
-          background-color: #51628e;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 200vw;
-          height: 100vh;
-          opacity: 0;
-          display: none;
-          z-index: 2;
-        }
+        right: 26px;
+        transform: translateY(-50%);
       }
-
-      &__results {
-        &__body {
-          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        }
+    }
+    &__filter-container {
+      background-color: white;
+      max-width: 399px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      min-height: 100vh;
+      transform: translateX(-100%);
+      div:first-child {
+        position: relative;
+        z-index: 4;
       }
       &__bg {
-        top: 2%;
-        left: 9%;
-        z-index: -1;
-        width: 138vw;
+        background-color: #51628e;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200vw;
+        height: 100vh;
+        opacity: 0;
+        display: none;
+        z-index: 2;
+      }
+    }
+
+    &__results {
+      &__body {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+    }
+    &__bg {
+      top: 2%;
+      left: 9%;
+      z-index: -1;
+      width: 138vw;
+    }
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .catalog {
+    &__content {
+      padding: 0;
+      margin-bottom: 80px;
+      &__mobile-filter-btn {
+        width: 44px;
+        height: 44px;
+        right: 0;
+        top: 8px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    &__results {
+      &__header {
+        margin-bottom: 16px;
+        &__change-phone-view {
+          display: block;
+          margin-bottom: 23px;
+          img {
+            transition: opacity 0.3s ease-in-out;
+          }
+          img:first-child {
+            cursor: pointer;
+            margin-right: 15px;
+          }
+        }
+        &__change-phone-view.cl-1 {
+          img:first-child {
+            opacity: 0.3;
+          }
+        }
+        &__change-phone-view.cl-2 {
+          img:nth-child(2) {
+            opacity: 0.3;
+          }
+        }
+      }
+      &__body {
+        grid-template-columns: 160px 160px;
+        row-gap: 19px;
+        justify-content: space-between;
+      }
+
+      &__body.cl-1 {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 160px;
+        :deep .catalog-product-card {
+          flex-direction: row;
+          &__info {
+            padding-left: 16px;
+            max-width: 135px;
+            justify-content: space-between;
+          }
+        }
+      }
+
+      &__item {
+        padding: 0;
       }
     }
   }
