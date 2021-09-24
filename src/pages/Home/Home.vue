@@ -10,7 +10,7 @@
       <SectionNewGames :products="[product, product]" />
     </section>
     <section class="home__promotion-container">
-      <PromotionSection />
+      <PromotionSection :products="[product, product]" />
     </section>
     <section class="home__sales-container">
       <SectionSales />
@@ -195,6 +195,29 @@ export default defineComponent({
     &__prolog-container {
       margin-top: 427px;
       margin-bottom: 52px;
+    }
+    &__new-games-container {
+      margin-bottom: 51px;
+    }
+    &__sets-container {
+      margin-bottom: 51px;
+    }
+    &__sales-container {
+      margin-bottom: 51px;
+    }
+
+    &__category-cards-container {
+      display: grid;
+      width: 100%;
+      height: auto;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 158px;
+      gap: 18px;
+      margin-bottom: 88px;
+
+      &__card-container {
+        max-width: 100%;
+      }
     }
   }
 }

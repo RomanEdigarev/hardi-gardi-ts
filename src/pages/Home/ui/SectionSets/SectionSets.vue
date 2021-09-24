@@ -1,6 +1,26 @@
 <template>
   <div class="sets-section">
+    <BlockWithSliderPhone
+      v-if="isPhone"
+      :products="products"
+      title="Готовые наборы по выгодной цене"
+    >
+      <template v-slot:title-bg-container>
+        <svg
+          viewBox="0 0 497 136"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M443.187 116.015L438.087 116.215C408.387 115.515 375.487 115.315 340.187 115.615C272.787 116.215 204.087 119.815 143.187 126.115C114.087 129.115 88.0872 132.215 65.7872 135.215L63.3872 135.415C48.3872 136.215 34.9872 132.715 23.4872 124.915C13.8872 118.415 2.08719 105.615 0.787188 82.0149C0.0871875 69.3149 3.38719 57.0149 10.6872 45.7149C16.5872 36.5149 28.1872 24.8149 49.7872 21.3149L50.5872 21.2149C80.3872 17.2149 110.487 13.7149 139.987 10.9149C169.787 8.11493 200.387 5.81493 231.087 4.11493C296.787 0.514926 367.187 -0.485074 440.287 1.11493C463.587 1.11493 476.887 12.0149 483.987 21.1149C492.587 32.2149 496.987 45.1149 496.887 58.5149C496.687 71.6149 492.487 83.8149 484.387 94.7149C477.587 103.715 464.987 114.815 443.187 116.015Z"
+            fill="#E6EFFF"
+          />
+        </svg>
+      </template>
+    </BlockWithSliderPhone>
+
     <BlockWithSlider
+      v-else
       :products="products"
       title="Готовые наборы по выгодной цене"
     >
@@ -37,20 +57,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-import { BlockWithSlider } from "@/widgets";
+import { computed, defineComponent, PropType } from "vue";
+import { BlockWithSlider, BlockWithSliderPhone } from "@/widgets";
 import { Product } from "@/entities/Products/Product/model";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "SectionSets",
   components: {
     BlockWithSlider,
+    BlockWithSliderPhone,
   },
   props: {
     products: {
       type: Object as PropType<Product[]>,
       required: true,
     },
+  },
+  setup() {
+    const store = useStore();
+    return {
+      isPhone: computed(() => store.state.isPhone),
+    };
   },
 });
 </script>
