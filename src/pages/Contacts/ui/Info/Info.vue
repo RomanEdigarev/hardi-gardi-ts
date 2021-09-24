@@ -100,4 +100,9 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .info {
+    max-width: 100%;
+  }
+}
 </style>

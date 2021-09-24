@@ -5,7 +5,7 @@
     </template>
     <template v-else>
       <div class="app__header">
-        <HeaderForPhone v-if="isPhone" />
+        <HeaderForPhone v-if="isPhone" @open-burger="openBurger" />
         <Header v-else @open-burger="openBurger" />
       </div>
 

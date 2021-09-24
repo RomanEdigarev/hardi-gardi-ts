@@ -17,8 +17,6 @@
         <div class="contacts__footer__title">
           Связаться с нами
           <svg
-            width="423"
-            height="116"
             viewBox="0 0 423 116"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -139,24 +137,67 @@ export default defineComponent({
     }
   }
   // *** Footer END *** //
-
-  @media screen and (max-width: 768px) {
-    .contacts {
-      &__body {
-        &__map-container {
-          height: 340px;
-          &__info {
-            top: 46px;
-            left: 34px;
-          }
+}
+@media screen and (max-width: 768px) {
+  .contacts {
+    &__body {
+      &__map-container {
+        height: 340px;
+        &__info {
+          top: 46px;
+          left: 34px;
         }
       }
-      &__footer {
-        &__form {
-          &__inputs {
-            flex-direction: column;
-            gap: 10px;
-          }
+    }
+    &__footer {
+      &__form {
+        &__inputs {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .contacts {
+    &__body {
+      &__map-container {
+        margin-bottom: 50px;
+        height: auto;
+        img {
+          min-width: 100vw;
+          border-radius: 0;
+          margin-left: -19px;
+        }
+        &__info {
+          position: static;
+          width: 100%;
+        }
+      }
+    }
+    &__footer {
+      border: 1px solid #e3e4e9;
+      border-radius: 25px;
+      padding: 47px 15px;
+      &__title {
+        margin-bottom: 47px;
+        font-size: 28px;
+        line-height: 1.21;
+        svg {
+          left: 0;
+          top: -56%;
+          width: 252px;
+        }
+      }
+      &__text {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      &__form {
+        width: 100%;
+        &__inputs__input {
+          width: 100%;
         }
       }
     }

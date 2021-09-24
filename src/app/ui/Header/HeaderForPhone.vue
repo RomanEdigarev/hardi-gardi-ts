@@ -15,7 +15,10 @@
       <div class="header-for-phone__body__ui">
         <CabinetLinks />
       </div>
-      <button class="header-for-phone__body__burger-btn">
+      <button
+        class="header-for-phone__body__burger-btn"
+        @click="$emit('open-burger')"
+      >
         <img src="./assets/burger.svg" alt="" />
       </button>
     </div>

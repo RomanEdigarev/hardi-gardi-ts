@@ -295,6 +295,9 @@ export default defineComponent({
         padding: 0;
       }
     }
+    &__filter-container {
+      max-width: 100vh;
+    }
   }
 }
 </style>

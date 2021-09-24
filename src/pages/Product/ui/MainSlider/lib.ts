@@ -1,13 +1,24 @@
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
 import { useStore } from "@/services/vuex";
 
 const getSecondaryOptions = () => {
-  const isMobile = document.documentElement.clientWidth <= 768;
-  console.log(isMobile);
+  const store = useStore();
+  const isMobile = store.state.isMobile;
+  const isPhone = store.state.isPhone;
 
+  console.log(isMobile);
+  const getWidthForOptions = () => {
+    if (store.state.isPhone) {
+      return "273px";
+    } else if (store.state.isMobile) {
+      return "480px";
+    } else {
+      return "auto";
+    }
+  };
   return {
     type: "loop",
-    perPage: 5,
+    perPage: isPhone ? 4 : 5,
     perMove: 1,
     pagination: false,
     rewind: true,
@@ -15,19 +26,32 @@ const getSecondaryOptions = () => {
     focus: "center",
     direction: isMobile ? "ltr" : "ttb",
     height: isMobile ? "auto" : "480px",
-    width: isMobile ? "480px" : "auto",
+    width: getWidthForOptions(),
   };
 };
 
-const getPrimaryOptions = (isZoom) => {
+export const getPrimaryOptions = (isZoom) => {
   const store = useStore();
+  const getWidthForOptions = () => {
+    if (store.state.isPhone) {
+      return "273px";
+    } else if (store.state.isMobile) {
+      return "590px";
+    } else {
+      return "684px";
+    }
+  };
+
+  const getZoomWidth = () => {
+    return store.state.isPhone ? "20px" : "35.625vw";
+  };
   return {
     type: "loop",
     perPage: 1,
     perMove: 1,
     gap: "1rem",
     pagination: false,
-    width: isZoom ? "35.625vw" : store.state.isMobile ? "590px" : "684px",
+    width: isZoom ? getZoomWidth() : getWidthForOptions(),
     heightRatio: isZoom ? 1.25 : 0,
   };
 };

@@ -133,4 +133,13 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .product-description {
+    padding: 27px;
+    &__toggle-btn {
+      top: 26px;
+      right: 27px;
+    }
+  }
+}
 </style>

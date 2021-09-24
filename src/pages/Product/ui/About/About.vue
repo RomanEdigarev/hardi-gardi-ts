@@ -254,4 +254,30 @@ export default defineComponent({
 
   // *** Footer END *** //
 }
+@media screen and (max-width: 376px) {
+  .about-product {
+    &__header {
+    }
+    &__title {
+      font-size: 22px;
+      line-height: 1.27;
+    }
+    &__body {
+      &__add-container__btn {
+        width: 182px;
+      }
+    }
+    &__footer__item {
+      width: 102px;
+      height: 84px;
+      &__value {
+        font-size: 22px;
+        line-height: 24px;
+      }
+      &__text {
+        font-size: 14px;
+      }
+    }
+  }
+}
 </style>

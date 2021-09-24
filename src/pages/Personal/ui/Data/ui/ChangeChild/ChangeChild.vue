@@ -173,4 +173,12 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .change-child {
+    &__body__checkbox {
+      flex-direction: column;
+      gap: 0px;
+    }
+  }
+}
 </style>

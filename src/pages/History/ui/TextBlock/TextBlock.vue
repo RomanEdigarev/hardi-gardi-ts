@@ -71,4 +71,15 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 376px) {
+  .text-block {
+    max-width: 100%;
+    &__header {
+    }
+    &__body {
+      max-width: none;
+    }
+  }
+}
 </style>

@@ -119,11 +119,11 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onUpdated, ref} from "vue";
+import { computed, defineComponent, onUpdated, ref } from "vue";
 import { BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon, SlideArrowIcon } from "@/shared/ui/icons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import { useMainSlider } from "./lib";
+import { getPrimaryOptions, useMainSlider } from "./lib";
 
 export default defineComponent({
   name: "MainSlider",
@@ -146,7 +146,7 @@ export default defineComponent({
     const slider = useMainSlider(props.isZoom);
 
     onUpdated(() => {
-      console.log('updated')
+      console.log("updated");
       document.documentElement.style.overflow = props.isZoom
         ? "hidden"
         : "visible";
@@ -324,6 +324,28 @@ export default defineComponent({
       &__thumbnails {
         height: 62px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .main-slider {
+    &__body {
+      &__current-slide {
+        width: auto;
+        height: auto;
+      }
+      &__thumbnails {
+        &__item {
+          max-width: 56px;
+          max-height: 56px;
+        }
+      }
+    }
+  }
+  .main-slider.zoom {
+    .main-slider__body {
+      padding: 0;
     }
   }
 }

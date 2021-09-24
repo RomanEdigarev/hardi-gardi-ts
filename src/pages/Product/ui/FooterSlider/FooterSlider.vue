@@ -104,7 +104,7 @@ import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ProductCardCatalog, ProductCardHome } from "@/widgets";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "FooterSlider",
@@ -128,7 +128,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const store = useStore()
+    const store = useStore();
     const getOptionsForSplide = () => {
       if (props.withHomeCards) {
         return {
@@ -141,7 +141,7 @@ export default defineComponent({
       } else {
         return {
           type: "loop",
-          perPage: store.state.isMobile ? 3 : 2,
+          perPage: store.state.isMobile ? 2 : 3,
           perMove: 1,
           gap: "30px",
           pagination: false,
@@ -210,7 +210,8 @@ export default defineComponent({
   }
 
   @media screen and (max-width: 768px) {
-    .footer-slider {}
+    .footer-slider {
+    }
   }
 }
 </style>

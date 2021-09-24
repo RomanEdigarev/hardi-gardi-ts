@@ -5,8 +5,6 @@
         <div class="order__body__left__btn" @click="toggle">
           <button>
             <svg
-              width="18"
-              height="11"
               viewBox="0 0 18 11"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +37,9 @@
       </div>
     </div>
     <div ref="footer" class="order__footer">
+      <div class="order__footer__details">
+        <Details />
+      </div>
       <div class="order__footer__item">
         <ProductCardCart to-modal />
       </div>
@@ -56,11 +57,13 @@
 import { defineComponent, ref } from "vue";
 import { ProductCardCart } from "@/widgets";
 import anime from "animejs";
+import Details from "@/pages/Personal/ui/Details/Details.vue";
 
 export default defineComponent({
   name: "Order",
   components: {
     ProductCardCart,
+    Details,
   },
   setup() {
     const isOpen = ref(false);
@@ -71,7 +74,7 @@ export default defineComponent({
           .timeline({
             targets: footer.value,
             maxHeight: [0, "1000px"],
-            easing: "spring(1, 20, 10, 0)",
+            easing: "spring(1, 70, 10, 0)",
           })
           .add({
             targets: footer.value,
@@ -136,6 +139,7 @@ export default defineComponent({
           align-items: center;
         }
         svg {
+          width: 20px;
           transition: transform 0.3s ease-in-out;
         }
       }
@@ -193,6 +197,10 @@ export default defineComponent({
       border: 1px solid $clr-upsilon;
       border-radius: 25px;
     }
+    &__details {
+      display: none;
+      margin-bottom: 10px;
+    }
   }
   // *** Footer END *** //
 }
@@ -213,6 +221,89 @@ export default defineComponent({
 @media screen and (max-width: 768px) {
   .order {
     max-width: 430px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .order {
+    max-width: 310px;
+
+    &__body {
+      padding: 20px 10px;
+      &__left {
+        align-items: center;
+        &__info {
+          &__title {
+            span:first-child {
+              font-size: 14px;
+              line-height: 18px;
+            }
+            span:nth-child(2) {
+              font-size: 12px;
+              line-height: 1.5;
+            }
+          }
+          &__status {
+            span,
+            span:nth-child(2) {
+              font-size: 12px;
+              line-height: 1.5;
+            }
+          }
+        }
+        &__btn {
+          width: 24px;
+          height: 24px;
+          border-radius: 10px;
+          button {
+            background: #d23c50;
+            border-radius: 10px;
+          }
+          svg {
+            width: 10px;
+          }
+        }
+      }
+      &__right {
+        &__price {
+          font-size: 16px;
+          line-height: 1.12;
+        }
+        &__quantity {
+          font-size: 12px;
+          line-height: 1.5;
+        }
+      }
+    }
+    &__footer {
+      &__item {
+        padding: 14px;
+        :deep .product-card__price {
+          flex-direction: row;
+          padding: 0;
+          margin: 0;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          span {
+            width: auto;
+            flex-shrink: 0;
+          }
+          &__current {
+            font-size: 14px;
+            line-height: 18px;
+            margin-left: 8px;
+          }
+          &__prev {
+            font-size: 11px;
+            line-height: 1.45;
+          }
+        }
+      }
+      &__details {
+        display: block;
+      }
+    }
   }
 }
 </style>

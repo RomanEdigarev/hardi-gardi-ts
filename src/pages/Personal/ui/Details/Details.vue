@@ -233,4 +233,29 @@ export default defineComponent({
     // *** Footer END *** //
   }
 }
+
+@media screen and (max-width: 376px) {
+  .details {
+    max-width: 310px;
+    &__body {
+      &__info {
+        &__row {
+          flex-direction: row;
+          span {
+            font-size: 12px;
+            line-height: 15px;
+          }
+        }
+      }
+      &__delivery {
+        &__row {
+          flex-direction: row;
+        }
+      }
+    }
+    &__footer__btn {
+      width: 100%;
+    }
+  }
+}
 </style>

@@ -12,7 +12,7 @@
       <div class="history__body">
         <div
           class="history__body__item pl-130 pr-123"
-          :class="{'pl-40': isMobile, 'pr-88': isMobile}"
+          :class="{ 'pl-40': isMobile, 'pr-88': isMobile }"
         >
           <div class="history__body__item__text">
             <TextBlock>
@@ -41,7 +41,6 @@
           </div>
           <div class="history__body__item__img-container first-block">
             <svg
-
               viewBox="0 0 498 605"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -66,18 +65,17 @@
 
             <img
               class="history__body__item__img w-357 h-462"
-              :class="{'firstImageMobile': isMobile}"
+              :class="{ firstImageMobile: isMobile }"
               :src="require('/public/images/pages/2019.jpg')"
               alt=""
-              style="
-
-                border-radius: 30px;
-                margin-top: -115px;
-              "
+              style="border-radius: 30px; margin-top: -115px"
             />
           </div>
         </div>
-        <div class="history__body__item second-block" style="margin-bottom: 355px">
+        <div
+          class="history__body__item second-block"
+          style="margin-bottom: 355px"
+        >
           <div class="history__body__item__img-container">
             <svg
               width="187"
@@ -132,7 +130,11 @@
             </TextBlock>
           </div>
         </div>
-        <div class="history__body__item pl-130" style="margin-bottom: 227px" :class="{'pl-40': isMobile, 'pr-88': isMobile}">
+        <div
+          class="history__body__item pl-130"
+          style="margin-bottom: 227px"
+          :class="{ 'pl-40': isMobile, 'pr-88': isMobile }"
+        >
           <div class="history__body__item__text">
             <TextBlock>
               <template v-slot:title>
@@ -190,7 +192,7 @@
             <img
               class="history__body__item__img"
               src="./assets/2019.jpg"
-              :class="{'firstImageMobile': isMobile}"
+              :class="{ firstImageMobile: isMobile }"
               alt=""
               style="
                 width: 345px;
@@ -213,26 +215,31 @@
         </FooterCard>
       </div>
       <img class="history__footer__line" src="./assets/Line.svg" alt="" />
+      <img
+        class="history__footer__line-phone"
+        src="./assets/Line_phone.svg"
+        alt=""
+      />
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
+import { computed, defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, FooterCard } from "@/widgets";
 import { TextBlock } from "./ui";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "History",
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard },
   setup() {
-   const store = useStore()
-    const isMobile = computed(() => store.state.isMobile)
+    const store = useStore();
+    const isMobile = computed(() => store.state.isMobile);
     return {
-      isMobile
-    }
-  }
+      isMobile,
+    };
+  },
 });
 </script>
 
@@ -265,11 +272,15 @@ export default defineComponent({
   &__footer {
     width: 100%;
     height: 621px;
-    &__line {
+    &__line,
+    &__line-phone {
       position: absolute;
       top: 285px;
       left: 0;
       z-index: -1;
+    }
+    &__line-phone {
+      display: none;
     }
   }
   // *** Footer END *** //
@@ -305,7 +316,7 @@ export default defineComponent({
     svg {
       width: 498px;
       height: 605px;
-      top: -238px
+      top: -238px;
     }
   }
 
@@ -344,7 +355,7 @@ export default defineComponent({
     .first-block {
       svg {
         width: 326px;
-        top: -171px
+        top: -171px;
       }
     }
 
@@ -357,6 +368,56 @@ export default defineComponent({
       .history__body__item__text {
         margin-right: 0;
         margin-left: 30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .history {
+    padding: 0 10px;
+    &__body {
+      &__item {
+        padding: 0 !important;
+        flex-direction: column;
+        &__text {
+          font-size: 16px;
+          line-height: 1.5;
+          margin-left: 0 !important;
+          margin-right: 0;
+          margin-bottom: 101px;
+        }
+      }
+      .history__body__item:first-child {
+        margin-bottom: 57px;
+      }
+      .second-block {
+        flex-direction: column-reverse;
+        margin-bottom: 98px !important;
+        .history__body__item__text {
+          margin-bottom: 40px !important;
+        }
+        .history__body__item__img-container {
+          svg {
+            bottom: -14px !important;
+            right: -20px !important;
+          }
+        }
+      }
+      &__item:nth-child(3) {
+        margin-bottom: 160px !important;
+        .history__body__item__text {
+          margin-bottom: 40px;
+        }
+      }
+    }
+    &__footer {
+      &__line {
+        display: none;
+      }
+      &__line-phone {
+        display: block;
+        top: 196px;
+        left: -19px;
       }
     }
   }

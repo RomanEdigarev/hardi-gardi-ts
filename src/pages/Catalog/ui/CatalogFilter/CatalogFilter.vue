@@ -402,4 +402,16 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 376px) {
+  .catalog-filter {
+    padding: 0 18px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 100vh;
+    .categories {
+      margin-bottom: 30px;
+    }
+  }
+}
 </style>

@@ -102,7 +102,8 @@ export default defineComponent({
 }
 @media screen and (max-width: 768px) {
   .range-slider {
-    width: 351px;
+    width: 100%;
+    max-width: 351px;
   }
 }
 </style>

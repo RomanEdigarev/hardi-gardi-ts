@@ -14,7 +14,7 @@
           :class="{ 'current-item': index === currentItemNumber }"
           @click="currentItemNumber = index"
         >
-          {{ item.title }}
+          <span>{{ item.title }}</span>
         </div>
       </div>
       <div class="personal__body">
@@ -130,6 +130,32 @@ export default defineComponent({
       max-width: 472px;
     }
     // *** Body END *** //
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .personal {
+    &__header {
+      justify-content: space-between;
+      &__item {
+        height: 70px;
+        flex-shrink: 1.5;
+        padding: 0;
+        font-size: 11px;
+        line-height: 1.45;
+        font-weight: $bold;
+        color: #606060;
+        justify-content: center;
+        span {
+          padding: 6px;
+          display: inline-block;
+          max-width: 95%;
+        }
+      }
+    }
+    &__footer {
+      display: none;
+    }
   }
 }
 </style>

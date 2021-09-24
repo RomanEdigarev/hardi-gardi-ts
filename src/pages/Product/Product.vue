@@ -127,7 +127,7 @@ export default defineComponent({
     const isZoomSlider = ref(false);
     const zoomSlider = () => {
       isZoomSlider.value = !isZoomSlider.value;
-      console.log(isZoomSlider.value)
+      console.log(isZoomSlider.value);
     };
     const store = useStore();
     let currentProduct = ref<Product>(null);
@@ -220,14 +220,27 @@ export default defineComponent({
   }
 
   // *** Body END *** //
+}
+@media screen and (max-width: 768px) {
+  .product-page {
+    &__body {
+      grid-template-columns: 100%;
+      &__left {
+        margin-bottom: 48px;
+      }
+    }
+  }
+}
 
-  @media screen and (max-width: 768px) {
-    .product-page {
-      &__body {
-        grid-template-columns: 100%;
-        &__left {
-          margin-bottom: 48px;
-        }
+@media screen and (max-width: 376px) {
+  .product-page {
+    &__body {
+      &__about-container {
+        padding: 0;
+      }
+      &__description__text {
+        font-size: 14px;
+        line-height: 1.5;
       }
     }
   }
