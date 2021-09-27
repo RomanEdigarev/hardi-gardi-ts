@@ -27,10 +27,11 @@ export default defineComponent({
     // const items = ["Самовывоз", "Курьер", "Почта России"];
     const currentItemIndex = ref(0);
     const bg = ref<HTMLElement>(null);
+    const isPhone = document.documentElement.offsetWidth <= 375
     const animation = () => {
       anime({
         targets: bg.value,
-        translateX: `${currentItemIndex.value * 100}%`,
+        [isPhone ? 'translateY' : 'translateX']: `${currentItemIndex.value * 100}%`,
         easing: "spring(1, 60, 11, 0)",
       });
     };
@@ -77,6 +78,18 @@ export default defineComponent({
     top: 0;
     left: 0;
     transform: translateX(0%);
+  }
+}
+
+@media screen and (max-width: 376px){
+  .toggle-menu {
+    flex-direction: column;
+    &__item {
+      width: 100%;
+    }
+    &__bg {
+      width: 100%;
+    }
   }
 }
 </style>

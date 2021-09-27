@@ -132,4 +132,24 @@ export default defineComponent({
 .unselected {
   background-color: $clr-kappa;
 }
+
+@media screen and (max-width: 376px){
+  .packing-card {
+    max-width: 160px;
+    max-height: 295px;
+    &__name {
+      font-size: 12px;
+      line-height: 1.33;
+    }
+    &__price {
+      font-size: 16px;
+      line-height: 20px;
+    }
+    &__button {
+      width: 44px;
+      height: 44px
+    }
+  }
+
+}
 </style>

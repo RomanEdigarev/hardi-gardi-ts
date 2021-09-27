@@ -89,4 +89,15 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .sign-in {
+    margin: 0;
+    margin-top: 110px;
+    &__bg {
+      left: 0%;
+      top: -4%;
+      width: 395px;
+    }
+  }
+}
 </style>

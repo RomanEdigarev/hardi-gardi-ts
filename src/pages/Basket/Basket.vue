@@ -90,4 +90,15 @@ export default defineComponent({
 
   }
 }
+@media screen and (max-width: 376px) {
+  .basket {
+    &__body {
+      flex-direction: column;
+      &__checkout {
+        min-width:  100%;
+      }
+    }
+
+  }
+}
 </style>

@@ -50,4 +50,12 @@ export default defineComponent({
     right: 21px;
   }
 }
+@media screen and (max-width: 376px) {
+  .docs-card {
+    max-width: 163px;
+    padding: 15px;
+
+  }
+
+}
 </style>

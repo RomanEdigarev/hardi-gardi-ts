@@ -188,4 +188,21 @@ export default defineComponent({
     margin-bottom: 31px;
   }
 }
+
+@media screen and (max-width: 376px){
+  .ordering {
+    &__body {
+      flex-direction: column;
+      &__left {
+        margin-bottom: 30px;
+      }
+    }
+    .payment__toggle-menu {
+      width: 100%;
+      display: block;
+    }
+  }
+
+
+}
 </style>

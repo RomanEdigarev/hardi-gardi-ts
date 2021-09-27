@@ -123,4 +123,12 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+@media screen and (max-width: 376px) {
+  .goods-modal {
+    max-width: 339px;
+    padding: 40px 22px;
+    max-height: 95vh;
+  }
+
+}
 </style>

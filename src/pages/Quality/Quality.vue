@@ -562,6 +562,71 @@ export default defineComponent({
     // *** Footer END *** //
   }
 }
+
+@media screen and (max-width: 376px) {
+  .quality {
+    // *** Header *** //
+    &__header {
+      &__img-container {
+        width: 240px;
+        height: auto;
+        top: 17%;
+        left: 10%;
+      }
+    }
+    // *** Header END *** //
+
+    // *** Body *** //
+    &__body {
+      &__item {
+        flex-direction: column;
+        margin-bottom: 60px;
+        .quality__body__item__text-block {
+          margin-bottom: 30px;
+        }
+      }
+      &__item:first-child {
+        padding-left: 0;
+        .quality__body__item__img-container {
+          max-width: 339px;
+          max-height: 201px;
+        }
+
+      }
+
+      &__item:nth-child(2) {
+        flex-direction: column-reverse;
+      }
+
+      &__item:nth-child(3),
+      &__item:nth-child(4) {
+        padding-left: 0;
+        .quality__body__item__img-container {
+          max-width: 339px;
+          max-height: 201px;
+        }
+      }
+
+      &__item:nth-child(5) {
+        flex-direction: column-reverse;
+      }
+    }
+    // *** Body END *** //
+
+    // *** Footer *** //
+    &__footer {
+      &__docs {
+        min-width: 100vw;
+        margin-left: -18px;
+       padding: 52px 32px;
+        svg {
+          display: none !important;
+        }
+      }
+    }
+    // *** Footer END *** //
+  }
+}
 </style>
 <style lang="scss">
 .quality {
@@ -569,4 +634,6 @@ export default defineComponent({
     margin-bottom: 55px;
   }
 }
+
+
 </style>

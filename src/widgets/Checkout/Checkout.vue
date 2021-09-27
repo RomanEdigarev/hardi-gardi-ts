@@ -216,6 +216,11 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .checkout {
+    padding: 22px;
+  }
+}
 </style>
 <style lang="scss">
 // *** Footer  *** //

@@ -122,4 +122,33 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .footer-card {
+    min-width: 100vw;
+    margin-left: -18px;
+    padding: 52px 32px;
+    flex-direction: column;
+    &__title {
+      margin-bottom: 28px;
+      svg {
+        display: none;
+      }
+      /* or 121% */
+      span {
+        font-size: 28px;
+      }
+      svg {
+        top: -3%;
+        left: -8%;
+      }
+    }
+    &__text {
+      font-size: 16px;
+      line-height: 1.5;
+      svg {
+        display: none;
+      }
+    }
+  }
+}
 </style>

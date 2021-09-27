@@ -38,4 +38,11 @@ export default defineComponent({
     width: 100%;
   }
 }
+@media screen and (max-width: 376px){
+  .contacts {
+    grid-template-columns: 1fr;
+    row-gap: 26px;
+  }
+
+}
 </style>
