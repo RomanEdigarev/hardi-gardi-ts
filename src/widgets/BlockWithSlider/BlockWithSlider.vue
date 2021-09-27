@@ -35,11 +35,11 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import anime from "animejs";
-import { ImageProductCard } from "@/widgets";
 import { SliderPanel } from "@/features";
 import { Product } from "@/entities/Products/Product/model";
 import { getUserCity } from "@/services/api";
 import InfoProductCard from "@/widgets/Product/InfoProductCard/InfoProductCard.vue";
+import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCard.vue";
 
 export default defineComponent({
   name: "BlockWithSlider",

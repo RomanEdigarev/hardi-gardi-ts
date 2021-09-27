@@ -190,7 +190,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   .home {
     &__prolog-container {
       margin-top: 427px;

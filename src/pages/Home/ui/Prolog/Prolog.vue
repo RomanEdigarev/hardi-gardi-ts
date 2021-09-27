@@ -167,7 +167,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   .prolog {
     padding: 0;
     &__info {

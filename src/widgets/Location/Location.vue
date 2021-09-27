@@ -31,12 +31,10 @@
 </template>
 
 <script lang="ts">
-import { LocationIcon } from "../../shared/ui/icons";
-import Tooltip from "../../shared/ui/Tooltip/Tooltip.vue";
-import AlfaButton from "../../shared/ui/buttons/AlfaButton/AlfaButton.vue";
-import BetaButton from "../../shared/ui/buttons/BetaButton/BetaButton.vue";
-import { CloseIcon } from "../../shared/ui/icons";
+import {Tooltip} from "@/shared/ui";
+import { CloseIcon, LocationIcon } from "@/shared/ui/icons";
 import { defineComponent, ref } from "vue";
+import {AlfaButton, BetaButton} from "@/shared/ui/buttons";
 
 export default defineComponent({
   name: "Location",
