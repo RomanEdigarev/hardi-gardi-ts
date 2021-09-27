@@ -1,4 +1,7 @@
 // Alias Type //
+import { CatalogMenu } from "@/services/api/model/Menu";
+import { LayoutAPI } from "@/services/api/model/LayoutAPI";
+
 type HistoryId = string;
 type HistoryTitle = string;
 type HistorySubtitle = string;
@@ -7,7 +10,7 @@ type HistoryText = string;
 type HistoryColor = string;
 // Alias Type END //
 
-export type History = {
+type HistoryItem = {
   id: HistoryId;
   title: HistoryTitle;
   subtitle: HistorySubtitle;
@@ -15,3 +18,7 @@ export type History = {
   text: HistoryText;
   color: HistoryColor;
 };
+type HistoryData = {
+  items: HistoryItem[];
+};
+export type History = LayoutAPI<HistoryData>;

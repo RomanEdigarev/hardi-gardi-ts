@@ -26,7 +26,7 @@
       </div>
 
       <div class="app__footer">
-        <Footer />
+        <Footer :social="social" />
       </div>
 
       <img
@@ -93,6 +93,7 @@ export default defineComponent({
     return {
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
+      social: computed(() => store.getters["shop/getSocial"]),
       isMobile,
       ...useBurgerMenu(),
       ...useSearchModalPhone(),

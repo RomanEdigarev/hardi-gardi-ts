@@ -18,24 +18,34 @@
 
     <template v-slot:content>
       <div class="links">
-        <router-link to="history" class="link">Наша история</router-link>
-        <router-link to="philosophy" class="link">Философия</router-link>
-        <router-link to="quality" class="link"
-          >Продукция и качество</router-link
-        >
-        <router-link to="#" class="link">Сотрудничество</router-link>
-        <router-link to="contacts" class="link">Контакты</router-link>
+        <router-link v-for="link in links" :to="link.link" class="link">
+          {{ link.name }}
+        </router-link>
+        <!--        <router-link to="history" class="link">Наша история</router-link>-->
+        <!--        <router-link to="philosophy" class="link">Философия</router-link>-->
+        <!--        <router-link to="quality" class="link"-->
+        <!--          >Продукция и качество</router-link-->
+        <!--        >-->
+        <!--        <router-link to="#" class="link">Сотрудничество</router-link>-->
+        <!--        <router-link to="contacts" class="link">Контакты</router-link>-->
       </div>
     </template>
   </Tooltip>
 </template>
 <script lang="ts">
 import Tooltip from "@/shared/ui/Tooltip/Tooltip.vue";
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { MenuLink } from "@/entities/Shop/Menu/model";
 
 export default defineComponent({
   name: "NavigationButton",
   components: { Tooltip },
+  props: {
+    links: {
+      type: Object as PropType<MenuLink[]>,
+      required: true,
+    },
+  },
 });
 </script>
 

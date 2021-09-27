@@ -9,7 +9,7 @@ export { default as SlideArrowIcon } from "./SlideArrow/SlideArrowIcon.vue";
 export { default as CheckboxCaret } from "./Checkbox/CheckboxCaret.vue";
 export { default as ProfileIcon } from "./Profile/ProfileIcon.vue";
 export { default as SearchIcon } from "./Search/SearchIcon.vue";
-export { default as FacebookIcon } from "./Social/FacebookIcon.vue";
+export { default as FBIcon } from "./Social/FBIcon.vue";
 export { default as InstagramIcon } from "./Social/InstagramIcon.vue";
 export { default as TikTokIcon } from "./Social/TikTokIcon.vue";
 export { default as VKIcon } from "./Social/VKIcon.vue";

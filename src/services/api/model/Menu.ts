@@ -1,4 +1,6 @@
 // *** AliasType *** //
+import { LayoutAPI } from "@/services/api/model/LayoutAPI";
+
 type LinkName = string;
 type LinkPath = string;
 type Icon = string;
@@ -38,12 +40,9 @@ type MenuLink = {
   icon: Icon;
   items?: MenuLink[];
 };
-export type Menu = {
-  isSuccess: boolean;
-  message: string;
-  data: {
-    top: TopMenu;
-    catalog: CatalogMenu;
-    footer: FooterMenu;
-  };
+type MenuData = {
+  top: TopMenu;
+  catalog: CatalogMenu;
+  footer: FooterMenu;
 };
+export type Menu = LayoutAPI<MenuData>;

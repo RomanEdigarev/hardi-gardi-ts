@@ -15,21 +15,28 @@
     </div>
 
     <div class="subscription__social">
-      <Social />
+      <Social :social="social" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import FooterInput from "./ui/Input/Input.vue";
-import Social from "../../shared/ui/Social/Social.vue";
-import { defineComponent } from "vue";
+import Social from "@/shared/ui/Social/Social.vue";
+import { Social as SocialType } from "@/entities/Shop/Social/model";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "Subscription",
   components: {
     FooterInput,
     Social,
+  },
+  props: {
+    social: {
+      type: Object as PropType<SocialType>,
+      required: true,
+    },
   },
 });
 </script>

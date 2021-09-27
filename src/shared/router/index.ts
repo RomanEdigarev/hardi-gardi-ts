@@ -105,7 +105,7 @@ const routes = [
     component: Payment,
   },
   {
-    path: "/history",
+    path: "/about/history.html",
     name: "History",
     component: History,
     meta: {
@@ -118,7 +118,7 @@ const routes = [
     },
   },
   {
-    path: "/philosophy",
+    path: "/about/philosophy.html",
     name: "Philosophy",
     component: Philosophy,
     meta: {

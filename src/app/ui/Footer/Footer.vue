@@ -68,7 +68,9 @@
           </div>
         </div>
 
-        <div class="footer__subscription"><Subscription /></div>
+        <div class="footer__subscription">
+          <Subscription :social="social" />
+        </div>
       </div>
       <div class="footer__copyright">
         <Copyright />
@@ -80,13 +82,20 @@
 <script lang="ts">
 import { Subscription } from "@/features";
 import { Copyright } from "@/shared/ui";
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { useFooterCatalog, useFooterMenu } from "@/app/ui/Footer/lib";
+import { Social as SocialType } from "@/entities/Shop/Social/model";
 export default defineComponent({
   name: "Footer",
   components: {
     Subscription,
     Copyright,
+  },
+  props: {
+    social: {
+      type: Object as PropType<SocialType>,
+      required: true,
+    },
   },
   setup() {
     const footerCatalog = useFooterCatalog();

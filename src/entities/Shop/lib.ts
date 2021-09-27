@@ -23,3 +23,8 @@ export const getFooterMenu = (): FooterMenu => {
   const store = useStore();
   return store.getters["shop/getFooterMenu"];
 };
+
+export const getTooltipMenu = (): MenuLink[] => {
+  const store = useStore();
+  return store.getters["shop/getTooltipMenu"];
+};

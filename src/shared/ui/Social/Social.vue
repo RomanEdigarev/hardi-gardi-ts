@@ -2,11 +2,14 @@
   <div class="container">
     <div class="title">Присоединяйтесь</div>
     <div class="items">
-      <a href="#" class="item"><InstagramIcon /></a>
-      <a href="#" class="item"><YouTubeIcon /></a>
-      <a href="#" class="item"><VKIcon /></a>
-      <a href="#" class="item"><TikTokIcon /></a>
-      <a href="#" class="item"><FacebookIcon /></a>
+      <a v-for="item in social" :href="item.url" class="item">
+        <component :is="`${item.name}-icon`"></component>
+      </a>
+      <!--      <a href="#" class="item"><InstagramIcon /></a>-->
+      <!--      <a href="#" class="item"><YouTubeIcon /></a>-->
+      <!--      <a href="#" class="item"><VKIcon /></a>-->
+      <!--      <a href="#" class="item"><TikTokIcon /></a>-->
+      <!--      <a href="#" class="item"><FBIcon /></a>-->
     </div>
   </div>
 </template>
@@ -17,8 +20,10 @@ import {
   YouTubeIcon,
   VKIcon,
   TikTokIcon,
-  FacebookIcon,
+  FBIcon,
 } from "../icons";
+import { PropType } from "vue";
+import { Social } from "@/entities/Shop/Social/model";
 
 export default {
   name: "Social",
@@ -27,7 +32,13 @@ export default {
     YouTubeIcon,
     VKIcon,
     TikTokIcon,
-    FacebookIcon,
+    FBIcon,
+  },
+  props: {
+    social: {
+      type: Object as PropType<Social>,
+      required: true,
+    },
   },
 };
 </script>
@@ -50,7 +61,8 @@ export default {
 
 .items {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .item {

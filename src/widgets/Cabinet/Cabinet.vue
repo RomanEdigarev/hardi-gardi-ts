@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import Tooltip from "../../shared/ui/Tooltip/Tooltip.vue";
+import Tooltip from "@/shared/ui/Tooltip/Tooltip.vue";
 import CabinetTitle from "./ui/CabinetTitle/CabinetTitle.vue";
 import { CabinetLinks } from "./ui";
 

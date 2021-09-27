@@ -31,7 +31,7 @@
         </router-link>
       </nav>
       <div class="navigation__tooltip">
-        <NavigationButton />
+        <NavigationButton :links="tooltipLinks" />
       </div>
     </div>
     <div class="navigation__cabinet">
@@ -48,10 +48,11 @@
 <script lang="ts">
 import { NavigationButton } from "./ui";
 import { Location } from "@/widgets";
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { CatalogSubmenu } from "./ui";
 import { useTopMenu } from "@/widgets/Navigation/lib";
 import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle/CabinetTitle.vue";
+import { MenuLink } from "@/entities/Shop/Menu/model";
 
 export default defineComponent({
   name: "Navigation",
@@ -60,6 +61,12 @@ export default defineComponent({
     Location,
     CatalogSubmenu,
     CabinetTitle,
+  },
+  props: {
+    tooltipLinks: {
+      type: Object as PropType<MenuLink[]>,
+      required: true,
+    },
   },
   setup() {
     return {

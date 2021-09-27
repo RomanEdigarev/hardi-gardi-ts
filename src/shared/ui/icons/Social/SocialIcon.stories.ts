@@ -1,4 +1,4 @@
-import FacebookIcon from "./FacebookIcon.vue";
+import FacebookIcon from "./FBIcon.vue";
 import InstagramIcon from "./InstagramIcon.vue";
 import TikTokIcon from "./TikTokIcon.vue";
 import VKIcon from "./VKIcon.vue";

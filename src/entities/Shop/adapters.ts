@@ -3,11 +3,17 @@ import { CatalogMenu } from "@/services/api/model/Menu";
 import { Shop } from "./model";
 import { Section } from "./Catalog/model";
 import { Menu, MenuLink } from "./Menu/model";
+import { getHistoryAdapter } from "@/entities/Shop/History/adapters";
+import { Contacts } from "@/entities/Shop/Contacts/model";
+import { getContactsAdapter } from "@/entities/Shop/Contacts/adapters";
+import { Social } from "@/entities/Shop/Social/model";
+import { getSocialAdapter } from "@/entities/Shop/Social/adapters";
 
 export const getShopAdapter = async (): Promise<Shop> => {
   // Response API here //
   const responseMenu = await getMenuAPI();
   const responseTolltip = await getTooltipMenuAPI();
+  const responseHistory = await getHistoryAdapter();
   // Response API  //
 
   // Transformation API data here //
@@ -34,14 +40,17 @@ export const getShopAdapter = async (): Promise<Shop> => {
     },
     footer: responseMenu.data.footer,
   };
+  const contacts: Contacts = await getContactsAdapter();
+  const social: Social = await getSocialAdapter();
   // Transformation API data here //
 
   return {
     catalog: {
       sections,
     },
-    contacts: undefined,
+    contacts,
     menu,
-    history: undefined,
+    history: responseHistory,
+    social,
   };
 };

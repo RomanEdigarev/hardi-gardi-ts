@@ -9,7 +9,7 @@
         <div class="contacts__body__map-container">
           <img src="./assets/map.png" alt="" />
           <div class="contacts__body__map-container__info">
-            <Info />
+            <Info :contacts="contacts" />
           </div>
         </div>
       </div>
@@ -53,9 +53,10 @@
 import { defineComponent } from "vue";
 import { BreadCrumbs } from "@/widgets";
 import { PageTitle } from "@/shared/ui";
-import { Info } from "./ui";
 import { VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
+import { Info } from "./ui";
+import { useContacts } from "./lib";
 export default defineComponent({
   name: "Contacts",
   components: {
@@ -64,6 +65,11 @@ export default defineComponent({
     Info,
     VInput,
     AlfaButton,
+  },
+  setup() {
+    return {
+      ...useContacts(),
+    };
   },
 });
 </script>

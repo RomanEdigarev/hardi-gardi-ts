@@ -3,7 +3,10 @@ import { Shop } from "./model";
 import { Module } from "vuex";
 import { getShopAdapter } from "./adapters";
 import { Catalog } from "./Catalog/model";
+import { History } from "./History/model";
 import { FooterMenu, MenuLink, TopMenu } from "./Menu/model";
+import { Contacts } from "@/entities/Shop/Contacts/model";
+import { Social } from "@/entities/Shop/Social/model";
 
 export const shopModule: Module<Shop, State> = {
   state: (): Shop => {
@@ -12,6 +15,7 @@ export const shopModule: Module<Shop, State> = {
       contacts: undefined,
       menu: undefined,
       history: undefined,
+      social: undefined,
     };
   },
   getters: {
@@ -25,16 +29,26 @@ export const shopModule: Module<Shop, State> = {
     getFooterMenu: (state): FooterMenu => {
       return state.menu.footer;
     },
-    getTooltipMenu: (state) => {},
-    // getHistory: (state): History => {
-    //   // return state.history;
-    // },
+    getTooltipMenu: (state): MenuLink[] => {
+      return state.menu.top.tooltip;
+    },
+    getHistory: (state): History => {
+      return state.history;
+    },
+    getContacts: (state): Contacts => {
+      return state.contacts;
+    },
+    getSocial: (state): Social => {
+      return state.social;
+    },
   },
   mutations: {
     initShop: (state, payload: Shop) => {
       state.catalog = payload.catalog;
       state.contacts = payload.contacts;
       state.menu = payload.menu;
+      state.history = payload.history;
+      state.social = payload.social;
     },
   },
   actions: {

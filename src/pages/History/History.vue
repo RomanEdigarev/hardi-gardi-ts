@@ -29,13 +29,9 @@
                     fill="#F27F94"
                   /></svg
               ></template>
-              <template v-slot:subtitle> Первые шаги Харди Гарди </template>
+              <template v-slot:subtitle> {{ history[0].subtitle }} </template>
               <template v-slot:body>
-                Напечатав множество тиражей различных издательств детской
-                литературы, мы решаем создать свой бренд игрушек. Мы печатаем
-                первый пробный тираж игр-бродилок, пазлов и игр с бумагой.
-                Продумываем дальнейшую стратегию развития бренда и создаем
-                Instagram канал.
+                {{ history[0].text }}
               </template>
             </TextBlock>
           </div>
@@ -113,19 +109,11 @@
                   />
                 </svg>
               </template>
-              <template v-slot:subtitle> Первый бестселлер </template>
+              <template v-slot:subtitle> {{ history[1].subtitle }} </template>
               <template v-slot:body>
                 <p>
-                  Мы значительно расширяем ассортимент и выпускаем первый
-                  бестселлер Харди Гарди - это развивающие карточки
-                  «Рисуй-Пиши-Стирай». Затем мы создаем новую линейку игр, ныне
-                  визитную карточку бренда - магнитные игры.
+                  {{ history[1].text }}
                 </p>
-                <p>
-                  Для увеличения скорости и качества обработки заказов мы
-                  создаем свой интернет-магазин.
-                </p>
-                <p>Также создаем группу во ВКонтакте и Youtube канал.</p>
               </template>
             </TextBlock>
           </div>
@@ -151,13 +139,9 @@
                   />
                 </svg>
               </template>
-              <template v-slot:subtitle> Двигаемся вперед </template>
+              <template v-slot:subtitle> {{ history[2].subtitle }} </template>
               <template v-slot:body>
-                Продолжаем работать над расширением линейки пазлов и магнитных
-                игр. За год выпускаем более 20 новинок. В несколько раз
-                увеличиваем производство игр в сравнении с предыдущим годом.
-                Запускаем полный ребрендинг бренда и начинаем работать над новым
-                интернет магазином.
+                {{ history[2].text }}
               </template>
             </TextBlock>
           </div>
@@ -235,9 +219,11 @@ export default defineComponent({
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard },
   setup() {
     const store = useStore();
+    const history = computed(() => store.getters["shop/getHistory"]);
     const isMobile = computed(() => store.state.isMobile);
     return {
       isMobile,
+      history,
     };
   },
 });

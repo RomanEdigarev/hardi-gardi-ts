@@ -6,11 +6,11 @@ type HistoryIMG = string;
 type HistoryText = string;
 type HistoryColor = string;
 // Alias Type END //
-
-export type History = {
+type HistoryItem = {
   title: HistoryTitle;
   subtitle: HistorySubtitle;
   img: HistoryIMG;
   text: HistoryText;
   color: HistoryColor;
 };
+export type History = HistoryItem[];

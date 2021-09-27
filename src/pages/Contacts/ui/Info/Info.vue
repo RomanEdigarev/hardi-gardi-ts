@@ -8,34 +8,40 @@
           alt=""
         />
         <div class="info__body__item__title">
-          Санкт-Петербург, Беловодский переулок 5
+          {{ contacts.address }}
         </div>
       </div>
       <div class="info__body__item phone">
         <img class="info__body__item__icon" src="./assets/phone.svg" alt="" />
         <div>
-          <a class="info__body__item__title" href="tel:+7 (921) 961-14-41">
-            +7 (921) 961-14-41
+          <a class="info__body__item__title" :href="contacts.phone">
+            {{ contacts.phone }}
           </a>
           <div class="info__body__item__text">
-            <div>Пн-пт: с 10:00 до 20:00</div>
-            <div>Сб-вс: с 11:00 до 18:00</div>
+            <div>{{ contacts.openingHours }}</div>
           </div>
         </div>
       </div>
       <div class="info__body__item">
         <img class="info__body__item__icon" src="./assets/mail.svg" alt="" />
-        <div class="info__body__item__title">info@khardigardi.ru</div>
+        <div class="info__body__item__title">{{ contacts.mail }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { Contacts } from "@/entities/Shop/Contacts/model";
 
 export default defineComponent({
   name: "Info",
+  props: {
+    contacts: {
+      type: Object as PropType<Contacts>,
+      required: true,
+    },
+  },
 });
 </script>
 

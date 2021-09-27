@@ -6,7 +6,10 @@
           <Logo @click="$router.push('/')" />
         </div>
         <div class="header__navigation">
-          <Navigation @show-modal="setCurrentModal" />
+          <Navigation
+            :tooltip-links="tooltipLinks"
+            @show-modal="setCurrentModal"
+          />
         </div>
         <div class="header__phone">+7 921 961 14 41</div>
         <div class="header__cabinet">
@@ -65,12 +68,15 @@ export default defineComponent({
     const setCurrentModal = (currentModalName) => {
       currentModal.value = currentModalName;
     };
-    const isMobile = computed(() => useStore().state.isMobile);
+    const store = useStore();
+    const isMobile = computed(() => store.state.isMobile);
+    const tooltipLinks = computed(() => store.getters["shop/getTooltipMenu"]);
 
     return {
       currentModal,
       setCurrentModal,
       isMobile,
+      tooltipLinks,
     };
   },
 });
