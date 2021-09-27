@@ -7,14 +7,18 @@
 
     <!-- Product Info -->
     <div class="home-product-card__info-wrapper">
-      <!--      <InfoProductCard v-bind="product" :is-simple="isSimple" />-->
-      <InfoProductCardPhone v-bind="product" :is-simple="isSimple" />
+      <InfoProductCardPhone
+        v-if="isPhone"
+        v-bind="product"
+        :is-simple="isSimple"
+      />
+      <InfoProductCard v-else v-bind="product" :is-simple="isSimple" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import {
   InfoProductCard,
   ImageProductCard,
@@ -22,6 +26,7 @@ import {
 } from "@/widgets";
 import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Products/Product/lib";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -42,9 +47,11 @@ export default defineComponent({
   },
   setup() {
     const { product } = useProduct();
+    const isPhone = computed(() => useStore().state.isPhone);
 
     return {
       product,
+      isPhone,
     };
   },
 });

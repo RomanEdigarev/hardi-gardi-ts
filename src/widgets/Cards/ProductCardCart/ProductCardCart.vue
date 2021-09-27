@@ -189,10 +189,11 @@ export default defineComponent({
     &__product {
       &__img {
         max-width: 75px;
-        max-height:93px;
+        max-height: 93px;
       }
       &__title {
-        p, span {
+        p,
+        span {
           font-size: 12px;
           line-height: 16px;
         }
@@ -205,15 +206,49 @@ export default defineComponent({
       &__prev {
         width: 100%;
       }
-
     }
     &__count {
       grid-row: 3 / 4;
       div {
         padding-left: 100px;
-
       }
-
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .product-card.toModal {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    & > div:first-child {
+      grid-column: 1/3;
+    }
+    & > div:nth-child(2) {
+      grid-row: 2/3;
+      align-items: flex-start;
+      display: block;
+      padding-top: 6px;
+    }
+    div:nth-child(3) {
+      grid-column: 2/3;
+      padding: 0;
+      flex-direction: row;
+      span {
+        width: auto;
+      }
+      .product-card__price__current {
+        font-size: 16px;
+        line-height: 20px;
+      }
+      .product-card__price__prev {
+        font-size: 12px;
+        line-height: 1.33;
+        margin-right: 8px;
+      }
+    }
+    .product-card__product {
+      &__img {
+        margin-right: 14px;
+      }
     }
   }
 }

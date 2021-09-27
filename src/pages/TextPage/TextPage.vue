@@ -338,6 +338,29 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .text-page {
+    &__body {
+      &__list {
+        padding-left: 28px;
+      }
+      &__card-list {
+        padding: 39px 24px;
+        &__row__number {
+          margin-right: 16px;
+        }
+      }
+      &__text-block-img {
+        &__left {
+          margin-bottom: 46px;
+        }
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+    }
+  }
+}
 </style>
 <style lang="scss">
 .text-page {

@@ -13,7 +13,7 @@
         <Logo />
       </div>
       <div class="header-for-phone__body__ui">
-        <CabinetLinks />
+        <CabinetLinks @openSearchModalPhone="$emit('openSearchModalPhone')" />
       </div>
       <button
         class="header-for-phone__body__burger-btn"

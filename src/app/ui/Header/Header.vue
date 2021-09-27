@@ -12,7 +12,11 @@
         <div class="header__cabinet">
           <Cabinet @show-modal="setCurrentModal" />
         </div>
-        <button class="header__burger" @click="$emit('open-burger')">
+        <button
+          v-if="isMobile"
+          class="header__burger"
+          @click="$emit('open-burger')"
+        >
           <img src="./assets/burger.svg" alt="" />
         </button>
       </div>
@@ -39,10 +43,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import Logo from "./assets/Logo.vue";
 import { Navigation, Cabinet } from "@/widgets";
 import { HeaderModal, CatalogSubmenu, Search } from "./ui";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Header",
@@ -60,10 +65,12 @@ export default defineComponent({
     const setCurrentModal = (currentModalName) => {
       currentModal.value = currentModalName;
     };
+    const isMobile = computed(() => useStore().state.isMobile);
 
     return {
       currentModal,
       setCurrentModal,
+      isMobile,
     };
   },
 });

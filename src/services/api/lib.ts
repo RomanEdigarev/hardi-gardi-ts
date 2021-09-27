@@ -1,5 +1,5 @@
 import { apiInstance } from "./config";
-import { Menu, Product, History } from "./model";
+import { Menu, Product, History, TooltipMenu } from "./model";
 
 export const getUserCity = async () => {
   const response = await apiInstance.post("user/city/getFavoriteCities.php");
@@ -38,6 +38,21 @@ export const getProductAPI = async (id: number): Promise<Product> => {
 export const getHistoryAPI = async (): Promise<History> => {
   try {
     const { data, statusText } = await apiInstance.post("about/history.php");
+    if (statusText === "OK" && data.isSuccess) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getTooltipMenuAPI = async (): Promise<TooltipMenu> => {
+  try {
+    const { data, statusText } = await apiInstance.post(
+      "blocks/getReferMainpage.php"
+    );
     if (statusText === "OK" && data.isSuccess) {
       return data;
     } else {

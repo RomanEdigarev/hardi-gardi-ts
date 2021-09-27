@@ -5,7 +5,11 @@
     </template>
     <template v-else>
       <div class="app__header">
-        <HeaderForPhone v-if="isPhone" @open-burger="openBurger" />
+        <HeaderForPhone
+          v-if="isPhone"
+          @open-burger="openBurger"
+          @openSearchModalPhone="openSearchModal"
+        />
         <Header v-else @open-burger="openBurger" />
       </div>
 
@@ -38,6 +42,13 @@
           @click="closeBurger"
         ></div>
       </div>
+      <div
+        ref="searchModalPhone"
+        v-if="isMobile"
+        class="app__search-modal-phone"
+      >
+        <SearchModalPhone @close="closeSearchModal" />
+      </div>
     </template>
 
     <div class="modal-bg"></div>
@@ -51,10 +62,18 @@ import { computed, defineComponent, onMounted } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
-import { useBurgerMenu } from "./lib";
+import { useBurgerMenu, useSearchModalPhone } from "./lib";
+import { SearchModalPhone } from "@/app/ui/Header/ui";
 
 export default defineComponent({
-  components: { Header, Footer, ScrollUpPage, BurgerMenu, HeaderForPhone },
+  components: {
+    Header,
+    Footer,
+    ScrollUpPage,
+    BurgerMenu,
+    HeaderForPhone,
+    SearchModalPhone,
+  },
   name: "App",
   setup() {
     const store = useStore();
@@ -76,6 +95,7 @@ export default defineComponent({
       isPhone: computed(() => store.state.isPhone),
       isMobile,
       ...useBurgerMenu(),
+      ...useSearchModalPhone(),
     };
   },
 });
@@ -222,6 +242,13 @@ export default defineComponent({
     &__wrapper {
       padding: 0 18px;
       margin-bottom: 136px;
+    }
+    &__search-modal-phone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 6;
+      transform: translateY(100%);
     }
   }
 }

@@ -5,7 +5,7 @@ import { API_URL, TOKEN } from "@/shared/config";
 
 export const apiInstance = axios.create({
   baseURL: API_URL,
-  withCredentials: true,
+  // withCredentials: true,
   headers: {
     "X-Auth-Token": TOKEN,
   },

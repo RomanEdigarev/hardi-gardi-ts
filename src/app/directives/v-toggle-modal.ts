@@ -19,11 +19,12 @@ export const VToggleModal = {
     modal.classList.add("modal");
     let isOpenedModal: boolean = false;
     const modalBG: HTMLElement = document.querySelector(".modal-bg");
+    const isPhone = document.documentElement.offsetWidth <= 375;
 
     if (binding.value.modal !== "header-modal") {
       containerModalName = "modal";
       modal.style.top = "50%";
-      modal.style.left = "calc(50% + 100px)";
+      modal.style.left = `calc(50% + ${isPhone ? "0px" : "100px"})`;
       modal.style.transform = "translate(-50%, -50%)";
       modal.style.position = "fixed";
       modal.style.zIndex = "10";

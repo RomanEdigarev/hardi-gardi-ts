@@ -1,13 +1,13 @@
-import { getMenuAPI } from "@/services/api";
+import { getMenuAPI, getTooltipMenuAPI } from "@/services/api";
 import { CatalogMenu } from "@/services/api/model/Menu";
 import { Shop } from "./model";
 import { Section } from "./Catalog/model";
-import { Menu } from "./Menu/model";
+import { Menu, MenuLink } from "./Menu/model";
 
 export const getShopAdapter = async (): Promise<Shop> => {
   // Response API here //
-  const response = await getMenuAPI();
-
+  const responseMenu = await getMenuAPI();
+  const responseTolltip = await getTooltipMenuAPI();
   // Response API  //
 
   // Transformation API data here //
@@ -22,10 +22,17 @@ export const getShopAdapter = async (): Promise<Shop> => {
     });
   };
 
-  const sections: Section[] = getSections(response.data.catalog);
+  const sections: Section[] = getSections(responseMenu.data.catalog);
+  const tooltip: MenuLink[] = responseTolltip.data.items.map((item) => ({
+    link: item.url,
+    name: item.name,
+  }));
   const menu: Menu = {
-    top: response.data.top,
-    footer: response.data.footer,
+    top: {
+      main: responseMenu.data.top,
+      tooltip,
+    },
+    footer: responseMenu.data.footer,
   };
   // Transformation API data here //
 

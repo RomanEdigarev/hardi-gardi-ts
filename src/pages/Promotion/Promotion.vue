@@ -6,21 +6,33 @@
         <PageTitle text="Акции" />
       </div>
       <div class="promotion__body">
-        <div class="promotion__body__item"><PromotionSection is-simple /></div>
-        <div class="promotion__body__item"><PromotionSection is-simple /></div>
+        <div class="promotion__body__item">
+          <PromotionSection :products="[product, product]" />
+        </div>
+        <div class="promotion__body__item">
+          <PromotionSection :products="[product, product]" />
+        </div>
       </div>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, PromotionSection } from "@/widgets";
+import { useStore } from "@/services/vuex";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "Promotion",
   components: { PageTitle, BreadCrumbs, PromotionSection },
+  setup() {
+    const { product } = useProduct();
+    return {
+      product,
+    };
+  },
 });
 </script>
 

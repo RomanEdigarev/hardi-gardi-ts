@@ -8,7 +8,10 @@ export type MenuLink = {
   link: LinkPath;
 };
 
-export type TopMenu = MenuLink[];
+export type TopMenu = {
+  main: MenuLink[];
+  tooltip: MenuLink[];
+};
 export type FooterMenu = MenuLink[];
 export type Menu = {
   top: TopMenu;

@@ -3,8 +3,7 @@ import { Shop } from "./model";
 import { Module } from "vuex";
 import { getShopAdapter } from "./adapters";
 import { Catalog } from "./Catalog/model";
-import { FooterMenu, TopMenu } from "./Menu/model";
-import { History } from "./History/model";
+import { FooterMenu, MenuLink, TopMenu } from "./Menu/model";
 
 export const shopModule: Module<Shop, State> = {
   state: (): Shop => {
@@ -20,12 +19,13 @@ export const shopModule: Module<Shop, State> = {
     getCatalog: (state): Catalog => {
       return state.catalog;
     },
-    getTopMenu: (state): TopMenu => {
-      return state.menu.top;
+    getTopMenu: (state): MenuLink[] => {
+      return state.menu.top.main;
     },
     getFooterMenu: (state): FooterMenu => {
       return state.menu.footer;
     },
+    getTooltipMenu: (state) => {},
     // getHistory: (state): History => {
     //   // return state.history;
     // },

@@ -49,3 +49,31 @@ export const useBurgerMenu = () => {
     burgerBG,
   };
 };
+
+export const useSearchModalPhone = () => {
+  const searchModalPhone = ref(null);
+  const openSearchModal = () => {
+    anime.timeline().add({
+      targets: searchModalPhone.value,
+      translateY: ["100%", "0%"],
+      easing: "spring(1, 70, 13, 0)",
+    });
+  };
+
+  const closeSearchModal = () => {
+    anime.timeline().add(
+      {
+        targets: searchModalPhone.value,
+        translateY: ["0", "100%"],
+        easing: "spring(1, 70, 13, 0)",
+      },
+      100
+    );
+  };
+
+  return {
+    openSearchModal,
+    closeSearchModal,
+    searchModalPhone,
+  };
+};

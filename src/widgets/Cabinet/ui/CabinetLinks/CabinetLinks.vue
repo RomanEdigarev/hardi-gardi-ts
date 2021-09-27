@@ -1,9 +1,21 @@
 <template>
   <div class="cabinet-links">
     <!--    v-toggle-modal="{ modal: 'header-modal', name: 'search' }"-->
-    <span class="cabinet-links__link" @click="$emit('show-modal', 'search')"
-      ><SearchIcon
-    /></span>
+    <span
+      v-if="!isPhone"
+      v-toggle-modal="{ modal: 'header-modal', name: 'search' }"
+      class="cabinet-links__link"
+      @click="$emit('show-modal', 'search')"
+    >
+      <SearchIcon />
+    </span>
+    <span
+      v-else
+      class="cabinet-links__link"
+      @click="$emit('openSearchModalPhone')"
+    >
+      <SearchIcon />
+    </span>
     <a class="cabinet-links__link" href="/">
       <IconWithCount :count="4">
         <template v-slot:svg-icon>
@@ -23,7 +35,7 @@
 
 <script>
 import { FavoriteIcon, SearchIcon, ShopIcon } from "@/shared/ui/icons";
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { IconWithCount } from "@/features";
 
 export default defineComponent({
@@ -33,6 +45,13 @@ export default defineComponent({
     FavoriteIcon,
     ShopIcon,
     IconWithCount,
+  },
+  emits: ["openSearchModalPhone"],
+  setup() {
+    const isPhone = computed(() => document.documentElement.offsetWidth <= 375);
+    return {
+      isPhone,
+    };
   },
 });
 </script>
