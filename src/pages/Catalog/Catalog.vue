@@ -23,7 +23,7 @@
           <img src="./assets/mobile-filter-icon.svg" alt="" />
         </button>
         <div ref="filter" class="catalog__filter-container">
-          <CatalogFilter @hide-mobile-filter="hideFilterMobile" />
+          <CatalogFilter :sections="sections" @hide-mobile-filter="hideFilterMobile" @filter-section="setFilterSection"/>
           <div ref="filterBG" class="catalog__filter-container__bg"></div>
         </div>
         <div class="catalog__results">
@@ -55,7 +55,7 @@
               :key="product.id"
               class="catalog__results__item"
             >
-              <ProductCardCatalog :product="product" />
+              <ProductCardCatalog :product="product"/>
             </div>
           </div>
           <div class="catalog__results__footer">
@@ -87,6 +87,7 @@ import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
+import {FilterSection} from "@/entities/Products/Filter/model";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -123,6 +124,9 @@ export default defineComponent({
     const fetchProducts = () => {
       store.dispatch("products/addProductsByPage");
     };
+    const setFilterSection = (id: number, name: string) => {
+      store.commit('products/setFilter', {section: {id, name}})
+    }
 
     return {
       product,
@@ -134,7 +138,9 @@ export default defineComponent({
       products: computed<Product[]>(
         () => store.getters["products/getProductsOnCurrentPage"]
       ),
+      sections: computed<FilterSection[]>(() => store.getters['products/getSections']),
       fetchProducts,
+      setFilterSection,
     };
   },
 });

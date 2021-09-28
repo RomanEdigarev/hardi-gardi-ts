@@ -13,7 +13,7 @@
       <PromotionSection :products="[product, product]" />
     </section>
     <section class="home__sales-container">
-      <SectionSales />
+      <SectionSales :products="[product, product]"/>
     </section>
     <section class="home__sets-container">
       <SectionSets :products="[product, product]" />

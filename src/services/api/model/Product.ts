@@ -1,5 +1,6 @@
-import { Section } from "@/services/api/model/Section";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
+import { Section } from "@/entities/Shop/Catalog/model";
+import { SectionItem } from "@/services/api/model/Section";
 
 // *** Alias Types ***  //
 type ProductId = number;
@@ -54,7 +55,7 @@ type LinkProduct = {
   name: ProductName;
   url: ProductIsURL;
   img: ProductIsIMG;
-  section: Section;
+  section: SectionItem;
   price: Price;
   can_buy: boolean;
 };

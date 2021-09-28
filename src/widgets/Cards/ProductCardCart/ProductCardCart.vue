@@ -7,8 +7,8 @@
         alt=""
       />
       <div class="product-card__product__title">
-        <span>Артикул: 3900005</span>
-        <p>Магнитная игра «Удивительные обитатели морей и океанов»</p>
+        <span>Артикул: {{product.article}}</span>
+        <p>{{product.title}}</p>
       </div>
     </div>
     <div class="product-card__count">
@@ -16,18 +16,18 @@
         <span class="product-card__count__btn">
           <CounterButton :isPlus="false" />
         </span>
-        <span class="product-card__count__value"> 1 </span>
+        <span class="product-card__count__value"> {{count}} </span>
         <span class="product-card__count__btn">
           <CounterButton :isPlus="true" />
         </span>
       </div>
       <div v-else>
-        <span>1 шт</span>
+        <span>{{count}} шт</span>
       </div>
     </div>
     <div class="product-card__price">
-      <span class="product-card__price__prev">430 &#8381;</span>
-      <span class="product-card__price__current">400 &#8381;/шт</span>
+      <span class="product-card__price__prev">{{product.prevPrice}} &#8381;</span>
+      <span class="product-card__price__current">{{product.currentPrice}} &#8381;/шт</span>
     </div>
     <!--     v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"-->
     <div v-if="!toModal" class="product-card__del-btn">
@@ -44,9 +44,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent, PropType} from "vue";
 import { CounterButton, BetaButton } from "@/shared/ui/buttons";
 import { DeleteIcon, FavoriteIcon } from "@/shared/ui/icons";
+import {Product} from "@/entities/Products/Product/model";
 export default defineComponent({
   name: "ProductCard",
   components: { CounterButton, BetaButton, DeleteIcon, FavoriteIcon },
@@ -55,6 +56,14 @@ export default defineComponent({
       type: Boolean,
       defaults: false,
     },
+    product: {
+      type: Object as PropType<Product>,
+      required: true
+    },
+    count: {
+      type: Number,
+      required: true
+    }
   },
 });
 </script>

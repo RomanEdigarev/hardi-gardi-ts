@@ -38,11 +38,8 @@
           </div>
         </div>
         <div class="new-games__second-row">
-          <div class="new-games__second-row__item">
-            <ProductCardHome />
-          </div>
-          <div class="new-games__second-row__item">
-            <ProductCardHome />
+          <div v-for="product in products" class="new-games__second-row__item">
+            <ProductCardHome :product="product"/>
           </div>
         </div>
       </div>
@@ -57,13 +54,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent, PropType} from "vue";
 import { Card } from "@/shared/ui";
 import { InfoProductCard, ImageProductCard } from "@/widgets";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { ProductCardHome } from "@/widgets";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";
+import {Product} from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "SectionNewGames",
@@ -74,6 +72,12 @@ export default defineComponent({
     ProductCardHome,
     BetaButton,
     PlusIcon,
+  },
+  props: {
+    products: {
+      type: Object as PropType<Product[]>,
+      required: true
+    }
   },
   setup() {
     const { product } = useProduct();

@@ -2,21 +2,12 @@
   <div class="basket">
     <main class="page-main">
       <div class="page-main__header">
-        <PageTitle text="Корзина (2)" />
+        <PageTitle :text="`Корзина (${basketCount})`" />
       </div>
       <div class="basket__body">
         <div class="basket__body__products-list">
-          <div class="basket__body__products-list__item">
-            <ProductCardCart />
-          </div>
-          <div class="basket__body__products-list__item">
-            <ProductCardCart />
-          </div>
-          <div class="basket__body__products-list__item">
-            <ProductCardCart />
-          </div>
-          <div class="basket__body__products-list__item">
-            <ProductCardCart />
+          <div v-for="product in products" class="basket__body__products-list__item">
+            <ProductCardCart :product="product.product" :count="product.quantity"/>
           </div>
         </div>
         <div class="basket__body__checkout"><Checkout /></div>
@@ -32,10 +23,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent, onMounted} from "vue";
 import { DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
 import { Checkout, ProductCardCart } from "@/widgets";
+import {useStore} from "@/services/vuex";
+import {BasketItem} from "@/entities/Basket/model";
 export default defineComponent({
   name: "Basket",
   components: {
@@ -45,6 +38,13 @@ export default defineComponent({
     Package,
     ProductCardCart,
   },
+  setup() {
+    const store = useStore()
+    return {
+      products: computed<BasketItem[]>(() => store.getters['basket/getProducts']),
+      basketCount: computed<number>(() => store.getters['basket/getBasketCount'])
+    }
+  }
 });
 </script>
 

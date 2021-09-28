@@ -21,12 +21,13 @@ export type Characteristics = {
 };
 
 export type Product = {
-  id: number;
+  id: number | string;
   title: string;
   currentPrice: Price;
   prevPrice: Price;
   img: ImgPath;
-  isFavorite: boolean;
+  article?: string;
+  isFavorite?: boolean;
   description?: string;
   characteristics?: Characteristics;
   photos?: ProductPhoto[];

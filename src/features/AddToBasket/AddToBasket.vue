@@ -7,14 +7,24 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { ShopButton } from "@/shared/ui/buttons";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "AddToBasket",
   components: {
     ShopButton,
   },
-  setup() {
-    const addToBasket = () => console.log("add to basket");
+  props: {
+    productId: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props) {
+    const store = useStore()
+    const addToBasket = () => {
+      store.dispatch('basket/addToBasket', {id: props.productId})
+    };
     return {
       addToBasket,
     };

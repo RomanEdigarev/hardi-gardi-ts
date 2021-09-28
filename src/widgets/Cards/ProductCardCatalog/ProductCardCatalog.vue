@@ -39,7 +39,7 @@
       <AddToFavorite :is-favorite="false" />
     </div>
     <div class="catalog-product-card__shop-btn">
-      <AddToBasket />
+      <AddToBasket :product-id="product.id"/>
     </div>
   </div>
 </template>

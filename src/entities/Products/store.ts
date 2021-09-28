@@ -5,6 +5,7 @@ import { getProductAdapter } from "@/entities/Products/Product/adapters";
 import { Product } from "./Product/model";
 import { getProductsByPageAdapter } from "@/entities/Products/adapters";
 import { getSectionsAdapter } from "@/entities/Products/Filter/adapters";
+import { Filter } from "@/entities/Products/Filter/model";
 
 export const productsModule: Module<Products, State> = {
   state: () => {
@@ -37,6 +38,9 @@ export const productsModule: Module<Products, State> = {
       } else {
         state.page = payload;
       }
+    },
+    setFilter: (state, payload: Filter) => {
+      state.filter = { ...state.filter, ...payload };
     },
   },
   actions: {
@@ -72,6 +76,7 @@ export const productsModule: Module<Products, State> = {
         commit("toggleLoading", false);
       }
     },
+    getProductWithFilter: async () => {},
   },
   getters: {
     getCurrentProduct: (state) => state.currentProduct,
@@ -80,6 +85,7 @@ export const productsModule: Module<Products, State> = {
     },
     getIsLoadingProducts: (state) => state.isLoading,
     getSections: (state) => state.sections,
+    // getSectionById: (state, payload) => state.sections.filter(section => section.id === payload)
   },
   namespaced: true,
 };

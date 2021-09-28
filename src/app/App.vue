@@ -70,6 +70,7 @@ import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
+import {initBasket} from "@/entities/Basket/lib";
 
 export default defineComponent({
   components: {
@@ -86,12 +87,13 @@ export default defineComponent({
     const store = useStore();
     onMounted(async () => {
       if (!store.state.isInit) {
-        await initShop();
+        await initShop()
         store.commit(
           "setIsMobile",
           document.documentElement.clientWidth <= 768
         );
         store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
+        await store.dispatch('basket/initBasket')
       }
     });
 

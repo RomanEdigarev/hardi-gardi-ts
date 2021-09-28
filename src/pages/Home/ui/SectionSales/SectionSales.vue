@@ -30,17 +30,8 @@
         </div>
 
         <div v-else class="sales-section__items-container">
-          <div class="sales-section__item">
-            <ProductCardHome />
-          </div>
-          <div class="sales-section__item">
-            <ProductCardHome />
-          </div>
-          <div class="sales-section__item">
-            <ProductCardHome />
-          </div>
-          <div class="sales-section__item">
-            <ProductCardHome />
+          <div v-for="product in products" class="sales-section__item">
+            <ProductCardHome :product="product"/>
           </div>
         </div>
       </div>
@@ -54,11 +45,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent, PropType} from "vue";
 import { ProductCardHome, ProductCardHomePhone } from "@/widgets";
 import { PlusIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { useStore } from "@/services/vuex";
+import {Product} from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "SectionSales",
@@ -67,6 +59,12 @@ export default defineComponent({
     ProductCardHomePhone,
     BetaButton,
     PlusIcon,
+  },
+  props: {
+    products: {
+      type: Object as PropType<Product[]>,
+      required: true
+    },
   },
   setup() {
     const store = useStore();

@@ -8,7 +8,7 @@ type SectionLink = string;
 type SectionIMG = string;
 // *** Alias Types END ***  //
 
-type SectionItem = {
+export type SectionItem = {
   id: SectionID;
   code?: SectionCode;
   name: SectionName;

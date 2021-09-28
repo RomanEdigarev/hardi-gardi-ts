@@ -24,7 +24,7 @@
       </IconWithCount>
     </router-link>
     <router-link class="cabinet-links__link" id="shop" to="/basket">
-      <IconWithCount>
+      <IconWithCount :count="basketCount">
         <template v-slot:svg-icon>
           <ShopIcon />
         </template>
@@ -45,6 +45,12 @@ export default defineComponent({
     FavoriteIcon,
     ShopIcon,
     IconWithCount,
+  },
+  props: {
+    basketCount: {
+      type: Number,
+      default: 0
+    }
   },
   emits: ["openSearchModalPhone"],
   setup() {

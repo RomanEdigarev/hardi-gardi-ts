@@ -1,5 +1,5 @@
 // Alias Type //
-type Section = {
+export type FilterSection = {
   id: string;
   name: string;
 };
@@ -13,9 +13,9 @@ type FilterPrice = {
 // Alias Type END  //
 
 export type Filter = {
-  section: Section;
+  section?: FilterSection;
   tematics?: FilterTematics;
-  gender: FilterGender;
-  age: FilterAge;
-  price: FilterPrice;
+  gender?: FilterGender;
+  age?: FilterAge;
+  price?: FilterPrice;
 };

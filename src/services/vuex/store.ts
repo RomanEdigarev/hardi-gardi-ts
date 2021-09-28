@@ -4,6 +4,8 @@ import { Shop } from "@/entities/Shop/model";
 import { shopModule } from "@/entities/Shop/store";
 import { Products } from "@/entities/Products/model";
 import { productsModule } from "@/entities/Products/store";
+import { Basket } from "@/entities/Basket/model";
+import { basketsModule } from "@/entities/Basket/store";
 
 export type State = {
   loading: boolean;
@@ -12,6 +14,7 @@ export type State = {
   isPhone: boolean;
   shop?: Shop;
   products?: Products;
+  basket?: Basket;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -39,6 +42,7 @@ export const store = createStore<State>({
   modules: {
     shop: shopModule,
     products: productsModule,
+    basket: basketsModule,
   },
 });
 
