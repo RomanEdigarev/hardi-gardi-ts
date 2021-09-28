@@ -45,22 +45,26 @@
               @click="changePhoneView('cl-1')"
             />
           </div>
-          <div class="catalog__results__body" :class="phoneView">
-            <div class="catalog__results__item">
-              <ProductCardCatalog />
-            </div>
-            <div class="catalog__results__item">
-              <ProductCardCatalog />
-            </div>
-            <div class="catalog__results__item">
-              <ProductCardCatalog />
-            </div>
-            <div class="catalog__results__item">
-              <ProductCardCatalog />
+          <div
+            v-if="!isLoading || products.length > 0"
+            class="catalog__results__body"
+            :class="phoneView"
+          >
+            <div
+              v-for="product in products"
+              :key="product.id"
+              class="catalog__results__item"
+            >
+              <ProductCardCatalog :product="product" />
             </div>
           </div>
           <div class="catalog__results__footer">
-            <AlfaButton styling="secondary" text="Показать все" />
+            <AlfaButton
+              styling="secondary"
+              text="Показать все"
+              :is-pending="isLoading"
+              @click="fetchProducts"
+            />
           </div>
         </div>
       </div>
@@ -72,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
 import { CatalogFilter } from "./ui";
@@ -80,6 +84,9 @@ import { AlfaButton } from "@/shared/ui/buttons";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { Sorting } from "@/features";
 import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
+import { getProductByPage } from "@/entities/Products/lib";
+import { useStore } from "@/services/vuex";
+import { Product } from "@/entities/Products/Product/model";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -102,10 +109,19 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const { product } = useProduct();
     const phoneView = ref("cl-1");
     const changePhoneView = (viewType: string) => {
       phoneView.value = viewType;
+    };
+
+    onMounted(async () => {
+      await getProductByPage(1);
+    });
+
+    const fetchProducts = () => {
+      store.dispatch("products/addProductsByPage");
     };
 
     return {
@@ -114,6 +130,11 @@ export default defineComponent({
       ...defineTitle(props),
       phoneView,
       changePhoneView,
+      isLoading: computed(() => store.getters["products/getIsLoadingProducts"]),
+      products: computed<Product[]>(
+        () => store.getters["products/getProductsOnCurrentPage"]
+      ),
+      fetchProducts,
     };
   },
 });

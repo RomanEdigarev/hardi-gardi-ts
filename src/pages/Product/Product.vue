@@ -22,7 +22,7 @@
           <div class="product-page__body__description">
             <Description
               id="description"
-              title="Описнаие товара"
+              title="Описание товара"
               :is-close="false"
             >
               <template v-slot:content>

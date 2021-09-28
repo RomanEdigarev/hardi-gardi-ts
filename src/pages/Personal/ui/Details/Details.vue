@@ -41,7 +41,7 @@
     </div>
     <div class="details__footer">
       <div class="details__footer__btn">
-        <AlfaButton text="Повторить" />
+        <AlfaButton text="Повторить" @click="$router.push('/ordering')" />
       </div>
       <button v-if="!isPayment" class="details__footer__cancel">
         <svg

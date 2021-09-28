@@ -43,7 +43,11 @@
           <span>Оплата: </span><span>Картой</span>
         </div>
       </div>
-      <AlfaButton class="checkout__footer__btn" text="Оформить заказ" />
+      <AlfaButton
+        class="checkout__footer__btn"
+        text="Оформить заказ"
+        @click="$router.push(`${isOrdering ? '/payment' : '/ordering'}`)"
+      />
       <div v-if="isOrdering" class="checkout__footer__policy">
         Оформляя заказ, вы соглашаетесь с <span>договором оферты</span> и
         <span>политикой конфиденциальности</span>.
@@ -187,7 +191,6 @@ export default defineComponent({
     padding: 12px;
     &__header {
       margin-bottom: 24px;
-
     }
     &__body {
       padding-bottom: 0;
@@ -212,7 +215,6 @@ export default defineComponent({
           margin-bottom: 0;
         }
       }
-
     }
   }
 }

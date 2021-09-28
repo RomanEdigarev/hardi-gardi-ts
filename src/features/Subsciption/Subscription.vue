@@ -105,4 +105,19 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 376px) {
+  .subscription {
+    &__title {
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+    }
+    &__text {
+      display: none;
+    }
+    &__social {
+      width: 100%;
+    }
+  }
+}
 </style>

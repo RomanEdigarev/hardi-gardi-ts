@@ -20,11 +20,12 @@ export type Characteristics = {
 };
 
 export type Product = {
+  id: number;
   title: string;
   currentPrice: Price;
   prevPrice: Price;
-  description: string;
+  description?: string;
   img: ImgPath;
   isFavorite: boolean;
-  characteristics: Characteristics;
+  characteristics?: Characteristics;
 };

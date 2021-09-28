@@ -16,20 +16,20 @@
     >
       <SearchIcon />
     </span>
-    <a class="cabinet-links__link" href="/">
+    <router-link class="cabinet-links__link" id="favorite" to="/favorites">
       <IconWithCount :count="4">
         <template v-slot:svg-icon>
           <FavoriteIcon />
         </template>
       </IconWithCount>
-    </a>
-    <a class="cabinet-links__link" id="shop" href="/">
+    </router-link>
+    <router-link class="cabinet-links__link" id="shop" to="/basket">
       <IconWithCount>
         <template v-slot:svg-icon>
           <ShopIcon />
         </template>
       </IconWithCount>
-    </a>
+    </router-link>
   </div>
 </template>
 

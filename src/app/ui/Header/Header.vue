@@ -11,7 +11,9 @@
             @show-modal="setCurrentModal"
           />
         </div>
-        <div class="header__phone">+7 921 961 14 41</div>
+        <a class="header__phone" href="tel:+7 921 961 14 41">
+          +7 921 961 14 41
+        </a>
         <div class="header__cabinet">
           <Cabinet @show-modal="setCurrentModal" />
         </div>

@@ -21,7 +21,10 @@
     </div>
     <div class="order-info__footer">
       <div class="order-info__footer__btn">
-        <AlfaButton text="Продолжить покупки" />
+        <AlfaButton
+          text="Продолжить покупки"
+          @click="$router.push('/catalog')"
+        />
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import Copyright from "./Copyright.vue";
 
 export default {
-  title: "Footer/Copyright",
+  title: "ui/Copyright",
   component: Copyright,
   parameters: {
     backgrounds: {

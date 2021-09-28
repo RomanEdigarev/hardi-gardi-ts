@@ -4,6 +4,7 @@ import { getHistoryAPI } from "@/services/api";
 export const getHistoryAdapter = async (): Promise<History> => {
   // Response API here //
   const response = await getHistoryAPI();
+  // console.log(response);
   response.data.items;
   // Response API  //
 

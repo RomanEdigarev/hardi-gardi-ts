@@ -1,5 +1,9 @@
 <template>
-  <div class="cabinet-title__title" :class="{ isLogin: isLogin }">
+  <div
+    class="cabinet-title__title"
+    :class="{ isLogin: isLogin }"
+    @click="$router.push('/personal')"
+  >
     <Tooltip v-if="isLogin">
       <template v-slot:reference>
         <span class="cabinet-title__icon"><ProfileIcon /></span>

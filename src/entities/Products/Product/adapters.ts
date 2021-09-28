@@ -30,6 +30,7 @@ export const getProductAdapter = async (id: number): Promise<Product> => {
 
   // Transformation API data here //
   const product: Product = {
+    id: response.id,
     currentPrice: response.price.sum,
     prevPrice: response.price.oldSum,
     description: response.anonce,

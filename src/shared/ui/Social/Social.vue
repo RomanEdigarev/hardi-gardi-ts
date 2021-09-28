@@ -70,4 +70,19 @@ export default {
   width: 50px;
   height: 50px;
 }
+
+@media screen and (max-width: 376px) {
+  .container {
+    margin: 0 auto;
+  }
+  .title {
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+    max-width: none;
+  }
+  .items {
+    justify-content: center;
+  }
+}
 </style>

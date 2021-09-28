@@ -21,7 +21,7 @@
         <!-- Receiving -->
         <div class="ordering__body__left__item receiving">
           <div class="ordering__body__left__item__title">
-            2. Сопсоб получения
+            2. Способ получения
           </div>
           <div>
             <Obtaining />
@@ -189,7 +189,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: 376px) {
   .ordering {
     &__body {
       flex-direction: column;
@@ -202,7 +202,5 @@ export default defineComponent({
       display: block;
     }
   }
-
-
 }
 </style>

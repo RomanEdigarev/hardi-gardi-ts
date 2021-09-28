@@ -21,6 +21,9 @@
         <router-link v-for="link in links" :to="link.link" class="link">
           {{ link.name }}
         </router-link>
+        <router-link to="/quality" class="link">
+          Продукция и качество
+        </router-link>
         <!--        <router-link to="history" class="link">Наша история</router-link>-->
         <!--        <router-link to="philosophy" class="link">Философия</router-link>-->
         <!--        <router-link to="quality" class="link"-->

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Copyright",
@@ -45,6 +45,22 @@ export default defineComponent({
     justify-content: flex-end;
     span {
       line-height: 1.67;
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .copyright {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    * {
+      text-align: center;
+    }
+    & > div:first-child {
+      margin-bottom: 24px;
+    }
+    div {
+      justify-content: center;
     }
   }
 }

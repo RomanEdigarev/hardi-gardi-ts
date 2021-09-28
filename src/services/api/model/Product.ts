@@ -1,4 +1,5 @@
 import { Section } from "@/services/api/model/Section";
+import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 
 // *** Alias Types ***  //
 type ProductId = number;
@@ -58,12 +59,13 @@ type LinkProduct = {
   can_buy: boolean;
 };
 
-export type Product = {
+export type ProductItem = {
   id: ProductId;
   code: ProductCode;
   name: ProductName;
   anonce: ProductAnonce;
   describe: ProductDescribe;
+  img?: ProductIsIMG;
   video: ProductVideo;
   photos: Photo[];
   section: Section;
@@ -75,3 +77,9 @@ export type Product = {
   complectParts: LinkProduct[];
   complectWithProduct: [];
 };
+
+type ProductData = {
+  products: ProductItem[];
+};
+
+export type Products = LayoutAPI<ProductData>;

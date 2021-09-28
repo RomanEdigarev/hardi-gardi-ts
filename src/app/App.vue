@@ -26,7 +26,13 @@
       </div>
 
       <div class="app__footer">
-        <Footer :social="social" />
+        <FooterForPhone
+          v-if="isPhone"
+          :social="social"
+          :footer-menu="footerMenu"
+          :contacts="contacts"
+        />
+        <Footer v-else :social="social" />
       </div>
 
       <img
@@ -56,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { Header, Footer, HeaderForPhone } from "./ui";
+import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
 import { computed, defineComponent, onMounted } from "vue";
 import { useStore } from "@/services/vuex";
@@ -72,6 +78,7 @@ export default defineComponent({
     ScrollUpPage,
     BurgerMenu,
     HeaderForPhone,
+    FooterForPhone,
     SearchModalPhone,
   },
   name: "App",
@@ -94,6 +101,8 @@ export default defineComponent({
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
       social: computed(() => store.getters["shop/getSocial"]),
+      footerMenu: computed(() => store.getters["shop/getFooterMenu"]),
+      contacts: computed(() => store.getters["shop/getContacts"]),
       isMobile,
       ...useBurgerMenu(),
       ...useSearchModalPhone(),
@@ -201,6 +210,14 @@ export default defineComponent({
     }
   }
 
+  &__search-modal-phone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 6;
+    transform: translateY(100%);
+  }
+
   .modal-bg {
     width: 100vw;
     height: 100%;
@@ -243,13 +260,6 @@ export default defineComponent({
     &__wrapper {
       padding: 0 18px;
       margin-bottom: 136px;
-    }
-    &__search-modal-phone {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 6;
-      transform: translateY(100%);
     }
   }
 }

@@ -35,7 +35,7 @@
           </span>
         </div>
         <div class="about-product__body__add-container__btn">
-          <AlfaButton styling="secondary" text="В корзине"></AlfaButton>
+          <AlfaButton styling="primary" text="В корзину"></AlfaButton>
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">

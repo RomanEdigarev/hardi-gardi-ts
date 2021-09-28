@@ -2,6 +2,7 @@ import { Product } from "./model";
 
 export const useProduct = () => {
   const product: Product = {
+    id: 201,
     title: "Набор пазлов «Веселые Зверята»",
     currentPrice: "500",
     prevPrice: "400",

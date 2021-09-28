@@ -7,6 +7,7 @@ import { History } from "./History/model";
 import { FooterMenu, MenuLink, TopMenu } from "./Menu/model";
 import { Contacts } from "@/entities/Shop/Contacts/model";
 import { Social } from "@/entities/Shop/Social/model";
+import { FooterForPhone } from "@/app/ui";
 
 export const shopModule: Module<Shop, State> = {
   state: (): Shop => {

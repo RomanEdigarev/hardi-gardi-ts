@@ -5,22 +5,27 @@
         <div class="catalog-product-card">
           <!-- Product Image -->
           <div class="catalog-product-card__image-wrapper">
-            <img class="catalog-product-card__image" :src="img" :alt="title" />
+            <img
+              class="catalog-product-card__image"
+              :src="product.img"
+              :alt="product.title"
+              @click="$router.push(`/product/${product.id}`)"
+            />
           </div>
 
           <!-- Product Info -->
           <div class="catalog-product-card__info-wrapper">
             <div class="catalog-product-card__info">
-              <div class="catalog-product-card__title">{{ title }}</div>
+              <div class="catalog-product-card__title">{{ product.title }}</div>
               <div v-if="isCart" class="catalog-product-card__counter">
                 counter
               </div>
               <div class="catalog-product-card__price">
                 <div class="catalog-product-card__price__prev">
-                  {{ prevPrice }}&#8381;
+                  {{ product.prevPrice }}&#8381;
                 </div>
                 <div class="catalog-product-card__price__current">
-                  {{ currentPrice }} &#8381;/шт
+                  {{ product.currentPrice }} &#8381;/шт
                 </div>
               </div>
             </div>
@@ -41,10 +46,9 @@
 
 <script lang="ts">
 import { Card } from "@/shared/ui";
-import { useProduct } from "@/entities/Products/Product/lib";
-import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, PropType } from "vue";
 import { AddToBasket, AddToFavorite } from "@/features";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -54,6 +58,10 @@ export default defineComponent({
     Card,
   },
   props: {
+    product: {
+      type: Object as PropType<Product>,
+      required: true,
+    },
     isSearchResult: {
       type: Boolean,
       default: false,
@@ -64,10 +72,10 @@ export default defineComponent({
     },
   },
   setup() {
-    const { product } = useProduct();
-    return {
-      ...product,
-    };
+    // const { product } = useProduct();
+    // return {
+    //   ...product,
+    // };
   },
 });
 </script>
