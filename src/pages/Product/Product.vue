@@ -6,16 +6,21 @@
     <div v-if="currentProduct" class="product-page__body">
       <div class="product-page__body__left">
         <div class="product-page__body__left__slider">
-          <MainSlider @zoom="zoomSlider" :is-zoom="isZoomSlider" />
+          <MainSlider
+            @zoom="zoomSlider"
+            :is-zoom="isZoomSlider"
+            :photos="currentProduct.photos"
+          />
         </div>
       </div>
       <div class="product-page__body__right">
         <div class="product-page__body__about-container">
           <About
-            :is-sets="true"
+            :is-sets="currentProduct.isComplect"
             :title="currentProduct.title"
             :price-prev="currentProduct.prevPrice"
             :price-current="currentProduct.currentPrice"
+            :parts-products="currentProduct.parts"
           />
         </div>
         <div class="product-page__body__right-body">
@@ -29,20 +34,7 @@
                 <div ref="text" class="product-page__body__description__text">
                   {{ currentProduct.description }}
                 </div>
-                <div class="product-page__body__description__list">
-                  <!--                  <span>Цели игры</span>-->
-                  <!--                  <ul>-->
-                  <!--                    <li>познакомить ребенка с окружающим миром;</li>-->
-                  <!--                    <li>-->
-                  <!--                      воспитать интерес к природе, к различным профессиям;-->
-                  <!--                    </li>-->
-                  <!--                    <li>-->
-                  <!--                      развить у ребенка кругозор, воображение и логическое-->
-                  <!--                      мышление;-->
-                  <!--                    </li>-->
-                  <!--                    <li>пополнить словарный запас малыша.</li>-->
-                  <!--                  </ul>-->
-                </div>
+                <div class="product-page__body__description__list"></div>
               </template>
             </Description>
           </div>
@@ -81,11 +73,24 @@
           </div>
         </div>
         <div class="product-page__body__right-footer">
-          <div class="product-page__body__right-footer__slider">
-            <FooterSlider title="Похожие товары" />
+          <div
+            v-if="currentProduct.linkProducts"
+            class="product-page__body__right-footer__slider"
+          >
+            <FooterSlider
+              title="Похожие товары"
+              :products="currentProduct.linkProducts"
+            />
           </div>
-          <div class="product-page__body__right-footer__slider">
-            <FooterSlider title="Наборы с этой игрой" :with-home-cards="true" />
+          <div
+            v-if="currentProduct.linkProducts"
+            class="product-page__body__right-footer__slider"
+          >
+            <FooterSlider
+              title="Наборы с этой игрой"
+              :with-home-cards="true"
+              :products="currentProduct.linkProducts"
+            />
           </div>
         </div>
       </div>

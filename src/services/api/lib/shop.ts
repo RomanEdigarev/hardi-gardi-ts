@@ -24,10 +24,10 @@ export const getMenuAPI = async (): Promise<Menu> => {
 
 export const getProductAPI = async (id: number): Promise<ProductItem> => {
   try {
-    const { data, statusText } = await apiInstance.post(
+    const { data, status } = await apiInstance.post(
       `catalog/item.php?id=${id}`
     );
-    if (statusText === "OK" && data.isSuccess) {
+    if (status === 200 && data.isSuccess) {
       return data.data;
     } else {
       throw new Error(data.message);

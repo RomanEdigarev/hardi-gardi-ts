@@ -4,6 +4,7 @@ import { Products, ProductsPage } from "./model";
 import { getProductAdapter } from "@/entities/Products/Product/adapters";
 import { Product } from "./Product/model";
 import { getProductsByPageAdapter } from "@/entities/Products/adapters";
+import { getSectionsAdapter } from "@/entities/Products/Filter/adapters";
 
 export const productsModule: Module<Products, State> = {
   state: () => {
@@ -15,9 +16,14 @@ export const productsModule: Module<Products, State> = {
         value: 1,
         products: [],
       },
+      filter: {},
+      sections: [],
     };
   },
   mutations: {
+    initSections: (state, payload) => {
+      state.sections = payload;
+    },
     setCurrentProduct: (state, payload: Product) => {
       state.currentProduct = payload;
     },
@@ -34,6 +40,14 @@ export const productsModule: Module<Products, State> = {
     },
   },
   actions: {
+    initSections: async ({ commit, rootState }) => {
+      if (rootState.isInit) {
+        commit("toggleLoading", true);
+        const sections = await getSectionsAdapter();
+        commit("initSections", sections);
+        commit("toggleLoading", false);
+      }
+    },
     setCurrentProduct: async ({ commit, rootState }, id: number) => {
       if (rootState.isInit) {
         commit("toggleLoading", true);
@@ -65,6 +79,7 @@ export const productsModule: Module<Products, State> = {
       return state.page.products;
     },
     getIsLoadingProducts: (state) => state.isLoading,
+    getSections: (state) => state.sections,
   },
   namespaced: true,
 };

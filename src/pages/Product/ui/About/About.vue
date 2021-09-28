@@ -39,7 +39,7 @@
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">
-        <SetSlider />
+        <SetSlider :products="partsProducts" />
       </div>
     </div>
     <div class="about-product__footer">
@@ -102,10 +102,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { AddToFavorite } from "@/features";
 import { CounterButton, AlfaButton } from "@/shared/ui/buttons";
 import SetSlider from "../SetSlider/SetSlider.vue";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "About",
@@ -125,6 +126,9 @@ export default defineComponent({
     priceCurrent: {
       type: String,
       required: true,
+    },
+    partsProducts: {
+      type: Object as PropType<Product[]>,
     },
   },
 });

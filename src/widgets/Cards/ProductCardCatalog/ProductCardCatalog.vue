@@ -71,12 +71,6 @@ export default defineComponent({
       default: false,
     },
   },
-  setup() {
-    // const { product } = useProduct();
-    // return {
-    //   ...product,
-    // };
-  },
 });
 </script>
 

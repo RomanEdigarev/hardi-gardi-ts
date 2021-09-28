@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import {
   InfoProductCard,
   ImageProductCard,
@@ -27,6 +27,7 @@ import {
 import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { useStore } from "@/services/vuex";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -44,13 +45,15 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    product: {
+      type: Object as PropType<Product>,
+      required: true,
+    },
   },
   setup() {
-    const { product } = useProduct();
     const isPhone = computed(() => useStore().state.isPhone);
 
     return {
-      product,
       isPhone,
     };
   },

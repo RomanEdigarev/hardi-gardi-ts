@@ -12,56 +12,11 @@
         </div>
         <div class="set-slider__body__slider__items">
           <Splide :options="options">
-            <SplideSlide>
+            <SplideSlide v-for="product in products">
               <div class="set-slider__body__item">
                 <img
                   class="set-slider__body__item__img"
-                  src="./assets/slide_0.jpg"
-                  alt=""
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="set-slider__body__item">
-                <img
-                  class="set-slider__body__item__img"
-                  src="./assets/slide_1.jpg"
-                  alt=""
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="set-slider__body__item">
-                <img
-                  class="set-slider__body__item__img"
-                  src="./assets/slide_2.jpg"
-                  alt=""
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="set-slider__body__item">
-                <img
-                  class="set-slider__body__item__img"
-                  src="./assets/slide_2.jpg"
-                  alt=""
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="set-slider__body__item">
-                <img
-                  class="set-slider__body__item__img"
-                  src="./assets/slide_2.jpg"
-                  alt=""
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="set-slider__body__item">
-                <img
-                  class="set-slider__body__item__img"
-                  src="./assets/slide_2.jpg"
+                  :src="product.img"
                   alt=""
                 />
               </div>
@@ -92,10 +47,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
+import { Product } from "@/entities/Products/Product/model";
 export default defineComponent({
   name: "SetSlider",
   components: {
@@ -103,6 +59,12 @@ export default defineComponent({
     SplideSlide,
     BetaButton,
     SlideArrowIcon,
+  },
+  props: {
+    products: {
+      type: Object as PropType<Product[]>,
+      required: true,
+    },
   },
   setup() {
     const options = {

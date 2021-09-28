@@ -17,29 +17,9 @@
     </div>
     <div class="footer-slider__body">
       <Splide v-if="withHomeCards" :options="getOptionsForSplide()">
-        <SplideSlide>
+        <SplideSlide v-for="product in products">
           <div class="footer-slider__body__item">
-            <ProductCardHome />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardHome />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardHome />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardHome />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardHome />
+            <ProductCardHome :product="product" />
           </div>
         </SplideSlide>
         <template v-slot:controls>
@@ -56,29 +36,9 @@
         </template>
       </Splide>
       <Splide v-else :options="getOptionsForSplide()">
-        <SplideSlide>
+        <SplideSlide v-for="product in products">
           <div class="footer-slider__body__item">
-            <ProductCardCatalog />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardCatalog />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardCatalog />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardCatalog />
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="footer-slider__body__item">
-            <ProductCardCatalog />
+            <ProductCardCatalog :product="product" />
           </div>
         </SplideSlide>
         <template v-slot:controls>
@@ -99,12 +59,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, PropType, ref } from "vue";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ProductCardCatalog, ProductCardHome } from "@/widgets";
 import { useStore } from "@/services/vuex";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "FooterSlider",
@@ -125,6 +86,10 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false,
+    },
+    products: {
+      type: Object as PropType<Product[]>,
+      required: true,
     },
   },
   setup(props) {

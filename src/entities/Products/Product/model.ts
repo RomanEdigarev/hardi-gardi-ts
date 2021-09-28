@@ -8,6 +8,7 @@ type Materials = string;
 type Size = string;
 type Weight = string;
 type Gender = string;
+export type ProductPhoto = string;
 
 export type Characteristics = {
   article: Article;
@@ -24,8 +25,12 @@ export type Product = {
   title: string;
   currentPrice: Price;
   prevPrice: Price;
-  description?: string;
   img: ImgPath;
   isFavorite: boolean;
+  description?: string;
   characteristics?: Characteristics;
+  photos?: ProductPhoto[];
+  linkProducts?: Product[];
+  isComplect?: boolean;
+  parts?: Product[];
 };

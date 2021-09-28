@@ -37,7 +37,29 @@ export const getProductAdapter = async (id: number): Promise<Product> => {
     img: response.photos[0].src,
     isFavorite: false,
     title: response.name,
+    photos: response.photos.map((photo) => photo.src),
     characteristics,
+    linkProducts: response.linkProducts.map((linkProduct) => {
+      return {
+        id: linkProduct.id,
+        title: linkProduct.name,
+        prevPrice: linkProduct.price.sum,
+        currentPrice: linkProduct.price.oldSum,
+        img: linkProduct.img,
+        isFavorite: false,
+      };
+    }),
+    parts: response.complectParts.map((partProduct) => {
+      return {
+        id: partProduct.id,
+        title: partProduct.name,
+        prevPrice: partProduct.price.sum,
+        currentPrice: partProduct.price.oldSum,
+        img: partProduct.img,
+        isFavorite: false,
+      };
+    }),
+    isComplect: response.isComplect,
   };
   // Transformation API data here //
 

@@ -13,28 +13,10 @@
         </div>
         <div class="main-slider__body__thumbnails__items">
           <Splide ref="secondarySplide" :options="secondaryOptions">
-            <SplideSlide>
+            <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
-                  src="./assets/thumbnail_0.jpg"
-                  alt=""
-                  class="main-slider__body__thumbnails__item__img"
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="main-slider__body__thumbnails__item">
-                <img
-                  src="./assets/thumbnail_1.jpg"
-                  alt=""
-                  class="main-slider__body__thumbnails__item__img"
-                />
-              </div>
-            </SplideSlide>
-            <SplideSlide>
-              <div class="main-slider__body__thumbnails__item">
-                <img
-                  src="./assets/thumbnail_2.jpg"
+                  :src="photo"
                   alt=""
                   class="main-slider__body__thumbnails__item__img"
                 />
@@ -72,23 +54,9 @@
           :options="primaryOptions"
           @splide:click="$emit('zoom')"
         >
-          <SplideSlide>
+          <SplideSlide v-for="photo in photos">
             <img
-              src="./assets/thumbnail_0.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_1.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_2.jpg"
+              :src="photo"
               alt=""
               class="main-slider__body__current-slide__img"
             />
@@ -119,11 +87,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onUpdated, ref } from "vue";
+import { computed, defineComponent, onUpdated, PropType, ref } from "vue";
 import { BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon, SlideArrowIcon } from "@/shared/ui/icons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { getPrimaryOptions, useMainSlider } from "./lib";
+import { ProductPhoto } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "MainSlider",
@@ -140,6 +109,10 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false,
+    },
+    photos: {
+      type: Object as PropType<ProductPhoto[]>,
+      required: true,
     },
   },
   setup(props, { emit }) {

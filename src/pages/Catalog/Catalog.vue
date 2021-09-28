@@ -61,7 +61,7 @@
           <div class="catalog__results__footer">
             <AlfaButton
               styling="secondary"
-              text="Показать все"
+              text="Показать еще"
               :is-pending="isLoading"
               @click="fetchProducts"
             />
@@ -84,7 +84,7 @@ import { AlfaButton } from "@/shared/ui/buttons";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { Sorting } from "@/features";
 import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
-import { getProductByPage } from "@/entities/Products/lib";
+import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
 const { product } = useProduct();
@@ -117,7 +117,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      await getProductByPage(1);
+      await initCatalog();
     });
 
     const fetchProducts = () => {

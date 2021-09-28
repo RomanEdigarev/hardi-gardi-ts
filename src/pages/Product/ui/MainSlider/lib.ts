@@ -52,7 +52,7 @@ export const getPrimaryOptions = (isZoom) => {
     gap: "1rem",
     pagination: false,
     width: isZoom ? getZoomWidth() : getWidthForOptions(),
-    heightRatio: isZoom ? 1.25 : 0,
+    heightRatio: isZoom ? 1.25 : 1.25,
   };
 };
 
