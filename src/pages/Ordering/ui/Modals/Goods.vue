@@ -5,9 +5,14 @@
       <div class="goods-modal__close-btn"></div>
     </div>
     <div class="goods-modal__body">
-      <div class="goods-modal__body__item"><ProductCardCart to-modal /></div>
-      <div class="goods-modal__body__item"><ProductCardCart to-modal /></div>
-      <div class="goods-modal__body__item"><ProductCardCart to-modal /></div>
+      <div v-for="product in products" class="goods-modal__body__item">
+        <ProductCardCart
+          to-modal
+          :product="product.product"
+          :count="product.quantity"
+          :position-id="product.id"
+        />
+      </div>
       <div class="goods-modal__body__item packing">
         <div class="goods-modal__body__item__icon packing__icon">
           <PlusIcon />
@@ -34,13 +39,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { ProductCardCart } from "@/widgets";
 import { PlusIcon } from "@/shared/ui/icons";
 import { AlfaButton } from "@/shared/ui/buttons";
+import { BasketItem } from "@/entities/Basket/model";
 export default defineComponent({
   name: "Modal",
   components: { ProductCardCart, PlusIcon, AlfaButton },
+  props: {
+    products: {
+      type: Object as PropType<BasketItem[]>,
+      required: true,
+    },
+  },
 });
 </script>
 
@@ -129,6 +141,5 @@ export default defineComponent({
     padding: 40px 22px;
     max-height: 95vh;
   }
-
 }
 </style>

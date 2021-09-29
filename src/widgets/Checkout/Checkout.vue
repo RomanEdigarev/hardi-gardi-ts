@@ -8,7 +8,7 @@
     <div class="checkout__body">
       <div class="checkout__body__title">
         <span> Итого </span>
-        <span> {{ price }} &#8381; </span>
+        <span> {{ basket.sumTotal }} &#8381; </span>
       </div>
       <div class="checkout__body__subtitle">
         При заказе <span>от 2 000 ₽</span> доставка до пункта СДЭК —
@@ -17,7 +17,7 @@
       <div class="checkout__body__list">
         <div class="checkout__body__list__row">
           <div class="checkout__body__list__goods">
-            <span>Товары (4)</span>
+            <span>Товары ({{ basketCount }})</span>
             <div
               v-if="isOrdering"
               class="checkout__body__list__goods__link"
@@ -26,11 +26,11 @@
               Подробнее
             </div>
           </div>
-          <span>1 560 &#8381;</span>
+          <span>{{ basket.sumTotal }} &#8381;</span>
         </div>
         <div class="checkout__body__list__row">
           <span>Скидка</span>
-          <span>1 560 &#8381;</span>
+          <span>{{ basket.sumDiscount }} &#8381;</span>
         </div>
       </div>
     </div>
@@ -46,7 +46,9 @@
       <AlfaButton
         class="checkout__footer__btn"
         text="Оформить заказ"
-        @click="$router.push(`${isOrdering ? '/payment' : '/ordering'}`)"
+        @click="
+          $emit('checkout', isOrdering ? '/payment' : '/ordering', promoCode)
+        "
       />
       <div v-if="isOrdering" class="checkout__footer__policy">
         Оформляя заказ, вы соглашаетесь с <span>договором оферты</span> и
@@ -57,8 +59,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import { AlfaButton } from "@/shared/ui/buttons";
+import { Basket } from "@/entities/Basket/model";
+import { useRouter } from "vue-router";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "Checkout",
   components: {
@@ -74,11 +79,16 @@ export default defineComponent({
       default: false,
     },
   },
-  setup() {
+  setup(props) {
     const promoCode = ref("");
-
+    const router = useRouter();
+    const store = useStore();
     return {
       promoCode,
+      basket: computed<Basket>(() => store.getters["basket/getBasket"]),
+      basketCount: computed<number>(
+        () => store.getters["basket/getBasketCount"]
+      ),
     };
   },
 });

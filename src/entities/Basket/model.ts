@@ -8,6 +8,7 @@ export type AddToBasketData = {
 export type BasketItem = {
   product: Product;
   quantity: number;
+  positionID: string | number;
 };
 export type Basket = {
   products: BasketItem[];

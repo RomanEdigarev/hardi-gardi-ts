@@ -6,11 +6,22 @@
       </div>
       <div class="basket__body">
         <div class="basket__body__products-list">
-          <div v-for="product in products" class="basket__body__products-list__item">
-            <ProductCardCart :product="product.product" :count="product.quantity"/>
+          <div
+            v-for="product in products"
+            class="basket__body__products-list__item"
+          >
+            <ProductCardCart
+              :product="product.product"
+              :count="product.quantity"
+              :position-id="product.positionID"
+              @plus-position="plusPosition"
+              @minus-position="minusPosition"
+            />
           </div>
         </div>
-        <div class="basket__body__checkout"><Checkout /></div>
+        <div class="basket__body__checkout">
+          <Checkout @checkout="checkout" />
+        </div>
       </div>
       <div class="basket__footer">
         <Package />
@@ -23,12 +34,13 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted} from "vue";
+import { computed, defineComponent } from "vue";
 import { DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
 import { Checkout, ProductCardCart } from "@/widgets";
-import {useStore} from "@/services/vuex";
-import {BasketItem} from "@/entities/Basket/model";
+import { useStore } from "@/services/vuex";
+import { Basket, BasketItem } from "@/entities/Basket/model";
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Basket",
   components: {
@@ -39,12 +51,41 @@ export default defineComponent({
     ProductCardCart,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
+    const router = useRouter();
+    const products = computed<BasketItem[]>(
+      () => store.getters["basket/getProducts"]
+    );
+    const plusPosition = (positionID) => {
+      const position = store.getters["basket/getPosition"](positionID);
+      store.dispatch("basket/changeQuantity", {
+        id: positionID,
+        quantity: position.quantity + 1,
+      });
+    };
+    const minusPosition = (positionID) => {
+      const position = store.getters["basket/getPosition"](positionID);
+      store.dispatch("basket/changeQuantity", {
+        id: positionID,
+        quantity: position.quantity - 1,
+      });
+    };
+    const checkout = (link, promoCode?) => {
+      promoCode && store.dispatch("basket/addBasketCoupon", promoCode);
+      router.push(link);
+    };
+
     return {
-      products: computed<BasketItem[]>(() => store.getters['basket/getProducts']),
-      basketCount: computed<number>(() => store.getters['basket/getBasketCount'])
-    }
-  }
+      products,
+      basketCount: computed<number>(
+        () => store.getters["basket/getBasketCount"]
+      ),
+      basket: computed<Basket>(() => store.getters["basket/getBasket"]),
+      plusPosition,
+      minusPosition,
+      checkout,
+    };
+  },
 });
 </script>
 
@@ -84,10 +125,9 @@ export default defineComponent({
     &__body {
       &__checkout {
         width: 232px;
-        min-width:  232px;
+        min-width: 232px;
       }
     }
-
   }
 }
 @media screen and (max-width: 376px) {
@@ -95,10 +135,9 @@ export default defineComponent({
     &__body {
       flex-direction: column;
       &__checkout {
-        min-width:  100%;
+        min-width: 100%;
       }
     }
-
   }
 }
 </style>

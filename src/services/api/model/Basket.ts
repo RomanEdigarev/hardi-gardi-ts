@@ -7,7 +7,7 @@ type BasketProduct = {
   img: string;
   article: string;
 };
-type BasketItem = {
+export type BasketItem = {
   currency: string;
   id: string;
   isAvailable: boolean;

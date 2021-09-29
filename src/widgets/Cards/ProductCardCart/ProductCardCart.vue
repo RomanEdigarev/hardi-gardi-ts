@@ -7,27 +7,37 @@
         alt=""
       />
       <div class="product-card__product__title">
-        <span>Артикул: {{product.article}}</span>
-        <p>{{product.title}}</p>
+        <span>Артикул: {{ product.article }}</span>
+        <p>{{ product.title }}</p>
       </div>
     </div>
     <div class="product-card__count">
       <div v-if="!toModal">
         <span class="product-card__count__btn">
-          <CounterButton :isPlus="false" />
+          <CounterButton
+            :isPlus="false"
+            @click="$emit('minus-position', positionId)"
+          />
         </span>
-        <span class="product-card__count__value"> {{count}} </span>
+        <span class="product-card__count__value"> {{ count }} </span>
         <span class="product-card__count__btn">
-          <CounterButton :isPlus="true" />
+          <CounterButton
+            :isPlus="true"
+            @click="$emit('plus-position', positionId)"
+          />
         </span>
       </div>
       <div v-else>
-        <span>{{count}} шт</span>
+        <span>{{ count }} шт</span>
       </div>
     </div>
     <div class="product-card__price">
-      <span class="product-card__price__prev">{{product.prevPrice}} &#8381;</span>
-      <span class="product-card__price__current">{{product.currentPrice}} &#8381;/шт</span>
+      <span class="product-card__price__prev"
+        >{{ product.prevPrice }} &#8381;</span
+      >
+      <span class="product-card__price__current"
+        >{{ product.currentPrice }} &#8381;/шт</span
+      >
     </div>
     <!--     v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"-->
     <div v-if="!toModal" class="product-card__del-btn">
@@ -44,10 +54,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue";
+import { defineComponent, PropType } from "vue";
 import { CounterButton, BetaButton } from "@/shared/ui/buttons";
 import { DeleteIcon, FavoriteIcon } from "@/shared/ui/icons";
-import {Product} from "@/entities/Products/Product/model";
+import { Product } from "@/entities/Products/Product/model";
 export default defineComponent({
   name: "ProductCard",
   components: { CounterButton, BetaButton, DeleteIcon, FavoriteIcon },
@@ -58,12 +68,16 @@ export default defineComponent({
     },
     product: {
       type: Object as PropType<Product>,
-      required: true
+      required: true,
     },
     count: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
+    positionId: {
+      type: Number || String,
+      required: false,
+    },
   },
 });
 </script>

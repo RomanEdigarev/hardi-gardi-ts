@@ -64,16 +64,20 @@
         <Checkout is-ordering />
       </div>
     </div>
-    <div class="ordering__modal-container"><Goods /></div>
+    <div class="ordering__modal-container">
+      <Goods :products="basket.products" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
 import { Contacts, Goods } from "./ui";
 import { Checkbox } from "@/shared/ui/inputs";
+import { Basket } from "@/entities/Basket/model";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Ordering",
@@ -87,9 +91,11 @@ export default defineComponent({
     Goods,
   },
   setup() {
+    const store = useStore();
     const paymentItems = ["Картой на сайте", "При получении"];
     return {
       paymentItems,
+      basket: computed<Basket>(() => store.getters["basket/getBasket"]),
     };
   },
 });
