@@ -3,9 +3,16 @@
     <!--    v-toggle-modal="{ modal: 'header-modal', name: 'search' }"-->
     <span
       v-if="!isPhone"
-      v-toggle-modal="{ modal: 'header-modal', name: 'search' }"
       class="cabinet-links__link"
       @click="$emit('show-modal', 'search')"
+    >
+      <SearchIcon />
+    </span>
+    <span
+        v-else
+        v-toggle-modal="{ modal: 'header-modal', name: 'search' }"
+        class="cabinet-links__link"
+        @click="$emit('show-modal', 'search')"
     >
       <SearchIcon />
     </span>

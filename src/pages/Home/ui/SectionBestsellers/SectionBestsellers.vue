@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import {computed, defineComponent, PropType, watch, watchEffect} from "vue";
 import { BlockWithSlider, BlockWithSliderPhone } from "@/widgets";
 import { Product } from "@/entities/Products/Product/model";
 import { useStore } from "@/services/vuex";
@@ -69,10 +69,15 @@ export default defineComponent({
       required: true,
     },
   },
+
   setup() {
     const store = useStore();
+    const isPhone= computed(() => store.getters.getIsPhone)
+    // watchEffect(() => {
+    //   console.log(store.getters.getIsPhone)
+    // })
     return {
-      isPhone: computed(() => store.state.isPhone),
+      isPhone
     };
   },
 });

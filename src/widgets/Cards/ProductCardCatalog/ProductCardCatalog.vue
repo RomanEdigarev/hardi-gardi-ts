@@ -242,6 +242,13 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .catalog-product-card {
+    &__image {
+      max-height: 235px;
+    }
+  }
+}
 @media screen and (max-width: 376px) {
   .catalog-product-card {
     padding: 10px;

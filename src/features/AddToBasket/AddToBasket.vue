@@ -29,11 +29,19 @@ export default defineComponent({
     height: 60px;
   }
 }
+@media screen and (max-width: 768px) {
+  .add-to-basket {
+    &__shop-btn-container {
+      width: 52px;
+      height: 52px;
+    }
+  }
+}
 @media screen and (max-width: 376px) {
   .add-to-basket {
     &__shop-btn-container {
-      width: 40px;
-      height: 40px;
+      width: 100%;
+      height:100%;
     }
   }
 }

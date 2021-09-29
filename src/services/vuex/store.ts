@@ -36,6 +36,9 @@ export const store = createStore<State>({
       state.isPhone = payload;
     },
   },
+  getters: {
+    getIsPhone: (state) => state.isPhone,
+  },
   modules: {
     shop: shopModule,
     products: productsModule,

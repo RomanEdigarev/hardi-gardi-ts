@@ -225,4 +225,16 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .block-with-slider {
+    &__image-card-container {
+      min-width: auto;
+    }
+    :deep .product-card-info {
+      width: auto;
+    }
+  }
+
+
+}
 </style>

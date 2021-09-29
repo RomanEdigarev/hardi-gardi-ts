@@ -39,11 +39,19 @@ export default defineComponent({
     height: 60px;
   }
 }
+@media screen and (max-width: 768px) {
+  .add-to-favorite {
+    &__favorite-btn-container {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
 @media screen and (max-width: 376px) {
   .add-to-favorite {
     &__favorite-btn-container {
-      width: 40px;
-      height: 40px;
+      width: 100%;
+      height: 100%;
     }
   }
 }

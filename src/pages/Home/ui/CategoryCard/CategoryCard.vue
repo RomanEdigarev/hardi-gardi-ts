@@ -152,7 +152,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   .category-card {
     width: 100%;
     height: 100%;

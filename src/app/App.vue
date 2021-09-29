@@ -58,7 +58,7 @@
 <script lang="ts">
 import { Header, Footer, HeaderForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onMounted } from "vue";
+import {computed, defineComponent, onMounted, watch} from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
@@ -87,6 +87,21 @@ export default defineComponent({
         store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
       }
     });
+
+    window.addEventListener('resize', () => {
+      console.log('resize')
+      if (document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425 )  {
+        store.commit("setIsPhone", false);
+        store.commit("setIsMobile", true);
+      }
+      else if (document.documentElement.clientWidth <= 425) {
+        store.commit("setIsPhone", true);
+        store.commit("setIsMobile", false);
+      } else {
+        store.commit("setIsMobile", false);
+        store.commit("setIsPhone", false);
+      }
+    })
 
     const isMobile = computed(() => store.state.isMobile);
 

@@ -218,7 +218,13 @@ export default defineComponent({
 
     &__results {
       &__body {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        //grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fill, 220px);
+        grid-auto-rows: 388px;
+        row-gap: 30px;
+      }
+      &__item {
+        padding: 0;
       }
     }
     &__bg {
@@ -276,6 +282,7 @@ export default defineComponent({
         grid-template-columns: 160px 160px;
         row-gap: 19px;
         justify-content: space-between;
+        grid-auto-rows: 326px;
       }
 
       &__body.cl-1 {
@@ -288,16 +295,76 @@ export default defineComponent({
             max-width: 135px;
             justify-content: space-between;
           }
+          &__title {
+            font-size: 12px;
+            line-height: 1.33;
+            margin-bottom: 0;
+          }
+          &__price__prev {
+            font-size: 12px;
+            line-height: 1.33;
+          }
+          &__favorite-btn {
+            width: 32px;
+            height: 32px;
+            top:10px;
+            right: 10px;
+          }
+          &__shop-btn {
+            width: 44px;
+            height: 44px ;
+            right: 10px;
+            bottom: 10px;
+          }
+          &__image-wrapper {
+            max-width: 112px;
+          }
         }
       }
 
       &__item {
         padding: 0;
       }
+      &__footer {
+        :deep & > button > span {
+          font-weight: $bold;
+          font-size: 16px;
+          line-height: 1.75;
+        }
+      }
     }
     &__filter-container {
       max-width: 100vh;
     }
+  }
+
+  .catalog {
+    &__results {
+      &__body.cl-2 {
+        :deep .catalog-product-card {
+          &__title {
+            font-size: 12px;
+            line-height: 1.33;
+            margin-bottom: 0;
+          }
+          &__price__prev {
+            font-size: 12px;
+            line-height: 1.33;
+          }
+          &__info {
+            justify-content: space-between;
+          }
+          &__favorite-btn {
+            width: 32px;
+            height: 32px;
+            top:10px;
+            right: 10px;
+          }
+        }
+
+      }
+    }
+
   }
 }
 </style>
