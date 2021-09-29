@@ -1,12 +1,24 @@
 <template>
   <div class="add-to-favorite__favorite-btn-container">
-    <FavoriteButton :isActive="isFavorite" @click="toggleToFavorite" />
+    <FavoriteButton
+      v-if="isPending"
+      :isActive="isFavorite"
+      @click="toggleFavorite"
+      :is-pending="true"
+    />
+    <FavoriteButton
+      v-else
+      :isActive="isFavorite"
+      @click="toggleFavorite"
+      :is-pending="false"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { FavoriteButton } from "@/shared/ui/buttons";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "AddToFavorite",
@@ -14,19 +26,35 @@ export default defineComponent({
     FavoriteButton,
   },
   props: {
-    isFavorite: {
-      type: Boolean,
-      default: false,
+    isFavorite: {},
+    productId: {
+      type: String || Number,
       required: true,
     },
   },
-  setup() {
-    const toggleToFavorite = () => {
+  setup(props) {
+    const store = useStore();
+    const isPending = ref(false);
+    const isFavorite = computed(() =>
+      store.getters["favorites/getIsFavoriteByProductId"](props.productId)
+    );
+
+    const toggleFavorite = async () => {
       console.log("toggle favorite");
+      isPending.value = true;
+      await store.dispatch(
+        `favorites/${
+          isFavorite.value ? "removeFromFavorites" : "addToFavorite"
+        }`,
+        props.productId
+      );
+      isPending.value = false;
     };
 
     return {
-      toggleToFavorite,
+      toggleFavorite,
+      isFavorite,
+      isPending,
     };
   },
 });

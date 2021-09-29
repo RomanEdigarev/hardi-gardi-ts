@@ -3,7 +3,7 @@
     <main class="page-main">
       <div class="page-main__header">
         <div class="page-main__title-container">
-          <PageTitle :text="`Избранное (${4})`" />
+          <PageTitle :text="`Избранное (${totalCount})`" />
         </div>
       </div>
       <div class="favorites__header">
@@ -23,20 +23,8 @@
       </div>
 
       <div class="favorites__body" :class="phoneView">
-        <div class="favorites__body__item">
-          <ProductCardCatalog />
-        </div>
-        <div class="favorites__body__item">
-          <ProductCardCatalog />
-        </div>
-        <div class="favorites__body__item">
-          <ProductCardCatalog />
-        </div>
-        <div class="favorites__body__item">
-          <ProductCardCatalog />
-        </div>
-        <div class="favorites__body__item">
-          <ProductCardCatalog />
+        <div v-for="product in products" class="favorites__body__item">
+          <ProductCardCatalog :product="product" />
         </div>
       </div>
     </main>
@@ -44,21 +32,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { Sorting } from "@/features";
 import { ProductCardCatalog } from "@/widgets";
+import { useStore } from "@/services/vuex";
+import { Product } from "@/entities/Products/Product/model";
 export default defineComponent({
   name: "Favorites",
   components: { PageTitle, Sorting, ProductCardCatalog },
   setup() {
+    const store = useStore();
     const phoneView = ref("cl-1");
     const changePhoneView = (viewType: string) => {
       phoneView.value = viewType;
     };
+
     return {
       phoneView,
       changePhoneView,
+      products: computed<Product[]>(
+        () => store.getters["favorites/getFavorites"]
+      ),
+      totalCount: computed<number>(
+        () => store.getters["favorites/getFavoritesTotalCount"]
+      ),
     };
   },
 });

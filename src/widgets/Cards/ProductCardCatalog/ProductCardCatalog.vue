@@ -36,10 +36,10 @@
 
     <!-- buttons -->
     <div class="catalog-product-card__favorite-btn">
-      <AddToFavorite :is-favorite="false" />
+      <AddToFavorite :product-id="product.id" />
     </div>
     <div class="catalog-product-card__shop-btn">
-      <AddToBasket :product-id="product.id"/>
+      <AddToBasket :product-id="product.id" />
     </div>
   </div>
 </template>

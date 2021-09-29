@@ -8,7 +8,10 @@ export const initShop = async (): Promise<Shop> => {
   const store = useStore();
   await getApiInstance();
   store.commit("setIsToken", true);
+  await store.dispatch("basket/initBasket");
+  await store.dispatch("favorites/initFavorites");
   await store.dispatch("shop/initShop");
+
   return store.state.shop;
 };
 

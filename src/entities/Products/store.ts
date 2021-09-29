@@ -11,7 +11,6 @@ export const productsModule: Module<Products, State> = {
   state: () => {
     return {
       currentProduct: undefined,
-      favorites: undefined,
       isLoading: true,
       page: {
         value: 1,

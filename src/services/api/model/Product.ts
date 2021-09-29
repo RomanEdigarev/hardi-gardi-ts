@@ -49,7 +49,7 @@ type Seo = {
   description: string;
 };
 
-type LinkProduct = {
+export type LinkProduct = {
   id: ProductId;
   code: ProductCode;
   name: ProductName;

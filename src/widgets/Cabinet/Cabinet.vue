@@ -4,7 +4,10 @@
       <CabinetTitle />
     </div>
     <div class="cabinet__links">
-      <CabinetLinks :basket-count="basketCount"/>
+      <CabinetLinks
+        :basket-count="basketCount"
+        :favorites-count="favoritesCount"
+      />
     </div>
   </div>
 </template>
@@ -14,7 +17,7 @@ import { computed, defineComponent } from "vue";
 import Tooltip from "@/shared/ui/Tooltip/Tooltip.vue";
 import CabinetTitle from "./ui/CabinetTitle/CabinetTitle.vue";
 import { CabinetLinks } from "./ui";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Cabinet",
@@ -33,14 +36,17 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const store = useStore()
+    const store = useStore();
     const text = computed(() => {
       return props.isLogin ? props.name : "Личный кабинет";
     });
 
     return {
       text,
-      basketCount: computed(() => store.getters['basket/getBasketCount'])
+      basketCount: computed(() => store.getters["basket/getBasketCount"]),
+      favoritesCount: computed(
+        () => store.getters["favorites/getFavoritesTotalCount"]
+      ),
     };
   },
 });

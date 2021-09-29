@@ -9,7 +9,6 @@ export type ProductsPage = {
 
 export type Products = {
   currentProduct: Product;
-  favorites: Product[];
   isLoading: boolean;
   page: ProductsPage;
   filter: Filter | {};

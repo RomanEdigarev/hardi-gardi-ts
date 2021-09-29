@@ -91,12 +91,12 @@ export default defineComponent({
     onMounted(async () => {
       if (!store.state.isInit) {
         await initShop();
+
         store.commit(
           "setIsMobile",
           document.documentElement.clientWidth <= 768
         );
         store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
-        await store.dispatch("basket/initBasket");
       }
     });
 

@@ -17,7 +17,7 @@
       <SearchIcon />
     </span>
     <router-link class="cabinet-links__link" id="favorite" to="/favorites">
-      <IconWithCount :count="4">
+      <IconWithCount :count="favoritesCount">
         <template v-slot:svg-icon>
           <FavoriteIcon />
         </template>
@@ -49,8 +49,12 @@ export default defineComponent({
   props: {
     basketCount: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    favoritesCount: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["openSearchModalPhone"],
   setup() {
