@@ -35,11 +35,11 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import anime from "animejs";
-import { ImageProductCard } from "@/widgets";
 import { SliderPanel } from "@/features";
 import { Product } from "@/entities/Products/Product/model";
 import { getUserCity } from "@/services/api";
 import InfoProductCard from "@/widgets/Product/InfoProductCard/InfoProductCard.vue";
+import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCard.vue";
 
 export default defineComponent({
   name: "BlockWithSlider",
@@ -149,6 +149,80 @@ export default defineComponent({
 
   &__slider-panel {
     width: 267px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .block-with-slider {
+    height: 500px;
+    position: relative;
+    &__content-container {
+      flex-direction: column;
+      position: static;
+      margin-left: -75px;
+    }
+    &__info-card-container {
+      width: auto;
+      height: auto;
+      position: static;
+    }
+    &__info-card {
+      max-width: 450px;
+    }
+    &__section-title-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -140%);
+    }
+    &__section-title {
+      font-weight: 600;
+      font-size: 36px;
+      line-height: 44px;
+      text-align: center;
+      &__bg-container {
+        top: -12px;
+        left: -6%;
+        width: 396px;
+        :deep svg {
+          width: 100% !important;
+          height: 100% !important;
+        }
+      }
+    }
+    &__image-card-container {
+      min-width: 345px;
+      max-height: 431px;
+    }
+    &__slider-panel {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    :deep .product-card-info {
+      width: 450px;
+      &__content {
+        padding: 34px;
+      }
+      &__title {
+        max-width: 250px;
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 11px;
+      }
+      &__price {
+        margin-bottom: 32px;
+      }
+      &__description {
+        max-width: 250px;
+        margin-bottom: 26px;
+        font-size: 16px;
+        line-height: 1.5;
+        max-height: 72px;
+        overflow: hidden;
+        /* or 150% */
+      }
+    }
   }
 }
 </style>

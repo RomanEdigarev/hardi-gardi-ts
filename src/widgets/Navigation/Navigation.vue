@@ -47,9 +47,9 @@
 
 <script lang="ts">
 import { NavigationButton } from "./ui";
-import { Location } from "@/widgets";
 import { defineComponent } from "vue";
 import { CatalogSubmenu } from "./ui";
+import Location from "../Location/Location.vue";
 import { useTopMenu } from "@/widgets/Navigation/lib";
 import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle/CabinetTitle.vue";
 

@@ -171,7 +171,7 @@ export default defineComponent({
     &__first-row {
       display: grid;
       grid-template-columns: 375px 1fr;
-      grid-template-rows: 375px 390px;
+      grid-template-rows: 442px 390px;
       height: auto;
       div:nth-child(3) {
         width: 100%;

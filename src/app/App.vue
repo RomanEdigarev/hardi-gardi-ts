@@ -199,6 +199,11 @@ export default defineComponent({
       left: 0;
     }
   }
+  &__search-modal-phone {
+    position: fixed;
+    z-index: 6;
+    transform: translateY(100%);
+  }
 
   .modal-bg {
     width: 100vw;
@@ -215,7 +220,20 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (min-width: 1367px) and (max-width: 1919px) {
+  .app {
+    &__wrapper {
+      padding: 0 10vw;
+    }
+    &__container {
+      max-width: none;
+      min-width: 80vw;
+    }
+    &__scroll-btn-container {
+      right: 10vw;
+    }
+  }
+}
 @media screen and (max-width: 1366px) {
   .app {
     &__wrapper {
@@ -223,7 +241,16 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (min-width: 769px) and (max-width: 1365px) {
+  .app {
+    &__wrapper {
+      padding: 0 4vw;
+    }
+    &__scroll-btn-container {
+      right: 4vw;
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .app {
     overflow-x: hidden;
@@ -233,6 +260,9 @@ export default defineComponent({
     }
     &__footer-bg {
       height: 1157px;
+    }
+    &__scroll-btn-container {
+      right: 4vw;
     }
   }
 }

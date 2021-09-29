@@ -194,10 +194,29 @@ export default defineComponent({
   display: block;
   font-size: 14px;
 }
+
+@media screen and (min-width: 1367px) and (max-width: 1919px) {
+  .footer {
+    &__wrapper {
+      padding: 0 10vw;
+    }
+    &__container {
+      max-width: none;
+      min-width: 80vw;
+    }
+  }
+}
 @media screen and (max-width: 1366px) {
   .footer {
     &__wrapper {
       padding: 0 86px;
+    }
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1365px) {
+  .footer {
+    &__wrapper {
+      padding: 0 4vw;
     }
   }
 }

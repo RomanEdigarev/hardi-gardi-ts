@@ -133,6 +133,18 @@ export default defineComponent({
   }
 }
 
+@media screen and (min-width: 1367px) and (max-width: 1919px) {
+  .header {
+    &__wrapper {
+      padding: 0 10vw;
+    }
+    &__container {
+      max-width: none;
+      min-width: 80vw;
+    }
+  }
+}
+
 @media screen and (max-width: 1366px) {
   .header {
     &__wrapper {
@@ -143,7 +155,16 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (min-width: 769px) and (max-width: 1365px) {
+  .header {
+    &__wrapper {
+      padding: 0 4vw;
+    }
+    &__navigation {
+      flex: 0.85;
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .header {
     &__wrapper {
