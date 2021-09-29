@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <template v-if="loading">
+    <template v-if="loading || !isToken">
       <h1>{{ "LOADING" }}</h1>
     </template>
     <template v-else>
@@ -64,13 +64,14 @@
 <script lang="ts">
 import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onBeforeMount, onMounted } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
-import {initBasket} from "@/entities/Basket/lib";
+import { initBasket } from "@/entities/Basket/lib";
+import { getApiInstance } from "@/services/api/config";
 
 export default defineComponent({
   components: {
@@ -85,15 +86,17 @@ export default defineComponent({
   name: "App",
   setup() {
     const store = useStore();
+    const isToken = computed(() => store.getters["getIsToken"]);
+    onBeforeMount(async () => {});
     onMounted(async () => {
       if (!store.state.isInit) {
-        await initShop()
+        await initShop();
         store.commit(
           "setIsMobile",
           document.documentElement.clientWidth <= 768
         );
         store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
-        await store.dispatch('basket/initBasket')
+        await store.dispatch("basket/initBasket");
       }
     });
 
@@ -105,6 +108,7 @@ export default defineComponent({
       social: computed(() => store.getters["shop/getSocial"]),
       footerMenu: computed(() => store.getters["shop/getFooterMenu"]),
       contacts: computed(() => store.getters["shop/getContacts"]),
+      isToken,
       isMobile,
       ...useBurgerMenu(),
       ...useSearchModalPhone(),

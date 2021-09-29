@@ -5,7 +5,7 @@ export const addToBasketAPI = async (
   basketData: AddToBasketData
 ): Promise<Basket> => {
   try {
-    const { data, status } = await apiInstance.post(
+    const { data, status } = await apiInstance().post(
       `user/basket/add.php?id=${basketData.id}&quality=${basketData.quantity}`
     );
     if (status === 200 && data.isSuccess) {
@@ -20,7 +20,7 @@ export const addToBasketAPI = async (
 
 export const getBasketAPI = async (): Promise<Basket> => {
   try {
-    const { data, status } = await apiInstance.post(`user/basket/get.php`);
+    const { data, status } = await apiInstance().post(`user/basket/get.php`);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -35,8 +35,10 @@ export const changeBasketPositionAPI = async (
   positionID,
   quantity: number
 ): Promise<Basket> => {
+  debugger;
+  console.log("position ID = ", positionID);
   try {
-    const { data, status } = await apiInstance.post(
+    const { data, status } = await apiInstance().post(
       `user/basket/modify.php?id=${positionID}&quantity=${quantity}`
     );
     if (status === 200 && data.isSuccess) {
@@ -51,7 +53,7 @@ export const changeBasketPositionAPI = async (
 
 export const addBasketCouponAPI = async (code: string): Promise<Basket> => {
   try {
-    const { data, status } = await apiInstance.post(
+    const { data, status } = await apiInstance().post(
       `user/basket/coupon.php?coupon=${code}&action=add`
     );
     if (status === 200 && data.isSuccess) {

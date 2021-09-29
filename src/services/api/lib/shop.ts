@@ -4,14 +4,14 @@ import { Contacts } from "@/services/api/model/Contacts";
 import { Social } from "@/services/api/model/Social";
 
 export const getUserCity = async () => {
-  const response = await apiInstance.post("user/city/getFavoriteCities.php");
+  const response = await apiInstance().post("user/city/getFavoriteCities.php");
   console.log(response);
   return response;
 };
 
 export const getMenuAPI = async (): Promise<Menu> => {
   try {
-    const { data, status } = await apiInstance.post("blocks/getMenu.php");
+    const { data, status } = await apiInstance().post("blocks/getMenu.php");
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -24,7 +24,7 @@ export const getMenuAPI = async (): Promise<Menu> => {
 
 export const getProductAPI = async (id: number): Promise<ProductItem> => {
   try {
-    const { data, status } = await apiInstance.post(
+    const { data, status } = await apiInstance().post(
       `catalog/item.php?id=${id}`
     );
     if (status === 200 && data.isSuccess) {
@@ -39,8 +39,8 @@ export const getProductAPI = async (id: number): Promise<ProductItem> => {
 
 export const getHistoryAPI = async (): Promise<History> => {
   try {
-    const { data, status } = await apiInstance.post("about/history.php");
-    console.log(await apiInstance.post("about/history.php"));
+    const { data, status } = await apiInstance().post("about/history.php");
+    console.log(await apiInstance().post("about/history.php"));
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -53,7 +53,7 @@ export const getHistoryAPI = async (): Promise<History> => {
 
 export const getTooltipMenuAPI = async (): Promise<TooltipMenu> => {
   try {
-    const { data, status } = await apiInstance.post(
+    const { data, status } = await apiInstance().post(
       "blocks/getReferMainpage.php"
     );
     if (status === 200 && data.isSuccess) {
@@ -68,7 +68,7 @@ export const getTooltipMenuAPI = async (): Promise<TooltipMenu> => {
 
 export const getContactsAPI = async (): Promise<Contacts> => {
   try {
-    const { data, status } = await apiInstance.post("blocks/getContacts.php");
+    const { data, status } = await apiInstance().post("blocks/getContacts.php");
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -81,7 +81,9 @@ export const getContactsAPI = async (): Promise<Contacts> => {
 
 export const getSocialAPI = async (): Promise<Social> => {
   try {
-    const { data, status } = await apiInstance.post("blocks/getSocialNets.php");
+    const { data, status } = await apiInstance().post(
+      "blocks/getSocialNets.php"
+    );
     if (status === 200 && data.isSuccess) {
       return data;
     } else {

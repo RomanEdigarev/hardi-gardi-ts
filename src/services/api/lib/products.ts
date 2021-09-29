@@ -4,7 +4,7 @@ import { Filter } from "@/services/api/model/Filter";
 
 export const getProductsByPageAPI = async (page: number): Promise<Products> => {
   try {
-    const { data, status } = await apiInstance.post(`catalog/list.php`);
+    const { data, status } = await apiInstance().post(`catalog/list.php`);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -16,7 +16,7 @@ export const getProductsByPageAPI = async (page: number): Promise<Products> => {
 };
 export const getFilterFieldsAPI = async (): Promise<Filter> => {
   try {
-    const { data, status } = await apiInstance.post(`catalog/filter.php`);
+    const { data, status } = await apiInstance().post(`catalog/filter.php`);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
@@ -29,7 +29,7 @@ export const getFilterFieldsAPI = async (): Promise<Filter> => {
 
 export const getSectionsAPI = async (): Promise<Sections> => {
   try {
-    const { data, status } = await apiInstance.post(`catalog/sections.php`);
+    const { data, status } = await apiInstance().post(`catalog/sections.php`);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {

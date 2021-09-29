@@ -10,6 +10,7 @@ import { basketsModule } from "@/entities/Basket/store";
 export type State = {
   loading: boolean;
   isInit: boolean;
+  isToken: boolean;
   isMobile: boolean;
   isPhone: boolean;
   shop?: Shop;
@@ -24,6 +25,7 @@ export const store = createStore<State>({
     isInit: false,
     isMobile: false,
     isPhone: false,
+    isToken: false,
   },
   mutations: {
     init: (state, payload) => {
@@ -35,9 +37,15 @@ export const store = createStore<State>({
     setIsMobile: (state, payload: boolean) => {
       state.isMobile = payload;
     },
+    setIsToken: (state, payload: boolean) => {
+      state.isToken = payload;
+    },
     setIsPhone: (state, payload: boolean) => {
       state.isPhone = payload;
     },
+  },
+  getters: {
+    getIsToken: (state) => state.isToken,
   },
   modules: {
     shop: shopModule,
