@@ -141,7 +141,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 1367px) and (max-width: 1919px) {
+@media screen and (min-width: 1368px) and (max-width: 1919px) {
   .header {
     &__wrapper {
       padding: 0 10vw;
@@ -153,7 +153,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1367px) {
   .header {
     &__wrapper {
       padding: 0 86px;

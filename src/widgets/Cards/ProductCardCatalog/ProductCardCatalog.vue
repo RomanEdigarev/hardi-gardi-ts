@@ -249,6 +249,12 @@ export default defineComponent({
     &__image {
       max-height: 235px;
     }
+    &__title {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
 }
 @media screen and (max-width: 376px) {
@@ -259,7 +265,7 @@ export default defineComponent({
     }
     &__title {
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
