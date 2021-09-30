@@ -82,9 +82,9 @@ export default defineComponent({
         await initShop();
         store.commit(
           "setIsMobile",
-          document.documentElement.clientWidth <= 768
+            document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425
         );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
+        store.commit("setIsPhone", document.documentElement.clientWidth <= 425);
       }
     });
 

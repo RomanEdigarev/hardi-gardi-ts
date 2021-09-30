@@ -38,6 +38,7 @@ export const store = createStore<State>({
   },
   getters: {
     getIsPhone: (state) => state.isPhone,
+    getIsMobile: (state) => state.isMobile,
   },
   modules: {
     shop: shopModule,
