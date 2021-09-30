@@ -269,6 +269,24 @@ export default defineComponent({
     &__body {
       &__add-container__btn {
         width: 182px;
+        :deep button > span {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 28px
+        }
+      }
+      &__text {
+        margin-bottom: 37px;
+      }
+      &__price-container {
+        &__price-current {
+          font-size: 22px;
+          line-height: 1.09;
+        }
+        &__price-prev {
+          font-size: 18px;
+          line-height: 22px;
+        }
       }
     }
     &__footer__item {

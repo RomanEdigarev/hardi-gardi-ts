@@ -80,6 +80,29 @@ export default defineComponent({
   flex-direction: row-reverse;
 }
 
+@media screen and (max-width: 768px) {
+  .home-product-card {
+    :deep .product-card-info {
+      &__title {
+        font-size: 20px;
+        line-height: 24px;
+        max-width: 289px;
+        margin-bottom: 44px;
+      }
+      &__price {
+        margin-bottom: 41px;
+      }
+      &__description {
+        overflow: hidden;
+        max-width: 319px;
+        max-height: 72px;
+      }
+      &__link {
+        display: none;
+      }
+    }
+  }
+}
 @media screen and (max-width: 376px) {
   .home-product-card {
     &__image-wrapper {
@@ -90,8 +113,6 @@ export default defineComponent({
     &__info-wrapper {
       max-width: 180px;
       max-height: 230px;
-    }
-    :deep .product-card-info {
     }
   }
 }

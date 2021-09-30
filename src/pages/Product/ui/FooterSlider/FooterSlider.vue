@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="footer-slider__body">
-      <Splide v-if="withHomeCards" :options="getOptionsForSplide()">
+      <Splide ref="slider" v-if="withHomeCards" :options="options">
         <SplideSlide v-for="product in products">
           <div class="footer-slider__body__item">
             <ProductCardHome :product="product" />
@@ -35,7 +35,7 @@
           </div>
         </template>
       </Splide>
-      <Splide v-else :options="getOptionsForSplide()">
+      <Splide ref="slider" v-else :options="options">
         <SplideSlide v-for="product in products">
           <div class="footer-slider__body__item">
             <ProductCardCatalog :product="product" />
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref } from "vue";
+import {computed, defineComponent, onMounted, PropType, onUpdated, ref} from "vue";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
@@ -94,7 +94,10 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const getOptionsForSplide = () => {
+    const isMobile = computed(() => store.getters['getIsMobile'])
+    const isPhone = computed(() => store.getters['getIsPhone'])
+    const slider = ref(null)
+    const options = computed(() => {
       if (props.withHomeCards) {
         return {
           type: "loop",
@@ -106,13 +109,16 @@ export default defineComponent({
       } else {
         return {
           type: "loop",
-          perPage: store.state.isMobile ? 2 : 3,
+          perPage: isMobile.value ? (isPhone.value? 2: 3) : 2,
           perMove: 1,
-          gap: "30px",
+          gap: "20px",
           pagination: false,
         };
       }
-    };
+    })
+    onUpdated(() => {
+      slider.value.splide.refresh();
+    })
 
     const nextSlideBtn = ref<HTMLElement>(null);
     const prevSlideBtn = ref<HTMLElement>(null);
@@ -128,7 +134,10 @@ export default defineComponent({
       prevSlideBtn,
       goToNextSlide,
       goToPrevSlide,
-      getOptionsForSplide,
+      options,
+      isMobile,
+      isPhone,
+      slider
     };
   },
 });
@@ -144,39 +153,109 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     margin-bottom: 27px;
+
     &__title {
       font-style: normal;
       font-weight: bold;
       font-size: 24px;
       line-height: 1.25;
     }
+
     &__btn-container {
       display: flex;
       width: 102px;
       justify-content: space-between;
     }
+
     &__btn {
       width: 46px;
       height: 46px;
     }
+
     &__btn:nth-child(2) {
       transform: scale(-1, 1);
     }
   }
+
   // *** Header END *** //
 
   // *** Body *** //
   &__body {
   }
+
   // *** Body END *** //
 
   .splide__arrow {
     display: none;
   }
+}
 
   @media screen and (max-width: 768px) {
     .footer-slider {
+      &__header {
+        &__title {
+          font-size: 21px;
+          line-height: 26px;
+        }
+        &__btn-container {
+          width: 92px;
+        }
+        &__btn {
+          width: 40px;
+          height: 40px;
+        }
+      }
     }
+    :deep .catalog-product-card {
+      max-height: 388px;
+      &__title {
+        font-size: 12px;
+        line-height: 1.33;
+      }
+      &__shop-btn {
+        display: block;
+        width: 52px;
+        height: 52px;
+      }
+    }
+    :deep .product-card-info-phone__add-to-shop-btn {
+      width: 44px;
+      height: 44px;
+    }
+    }
+
+
+@media screen and (max-width: 376px){
+  .footer-slider {
+    &__header {
+      &__title {
+        font-size: 18px;
+        line-height: 1.22;
+      }
+      &__btn-container {
+        width: 92px;
+      }
+      &__btn {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  :deep .catalog-product-card {
+    max-height: 326px;
+    &__title {
+      font-size: 12px;
+      line-height: 1.33;
+    }
+    &__shop-btn {
+      display: block;
+      width: 44px;
+      height: 44px;
+    }
+  }
+  :deep .product-card-info-phone__add-to-shop-btn {
+    width: 44px;
+    height: 44px;
   }
 }
 </style>

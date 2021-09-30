@@ -140,6 +140,10 @@ export default defineComponent({
       top: 26px;
       right: 27px;
     }
+    &__title {
+      font-size: 16px;
+      line-height: 1.12;
+    }
   }
 }
 </style>

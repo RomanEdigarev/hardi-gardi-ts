@@ -133,6 +133,13 @@ export default defineComponent({
     line-height: 1.6;
   }
 
+  &__link {
+    font-size: 15px;
+    line-height: 18px;
+    color: #d23c50;
+    cursor: pointer;
+  }
+
   &__favorite-btn-container,
   &__shop-btn-container {
     position: absolute;
@@ -152,6 +159,9 @@ export default defineComponent({
   .product-card-info__title {
     font-size: 36px;
   }
+  .product-card-info__link {
+    display: none;
+  }
   .product-card-info__price__prev {
     display: none;
   }
@@ -168,6 +178,13 @@ export default defineComponent({
   .product-card-info {
     &__content {
       padding: 48px 36px;
+    }
+  }
+  .isSimple {
+    .product-card-info__title {
+      font-size: 28px;
+      line-height: 1.29;
+      max-width: 205px;
     }
   }
 }

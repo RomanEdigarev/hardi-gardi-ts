@@ -91,5 +91,28 @@ export default defineComponent({
       margin-top: -26px;
     }
   }
+
+  :deep .product-card-info {
+    &__description {
+      max-height: 72px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    &__price {
+      &__current {
+        font-size: 22px;
+        line-height: 24px;
+      }
+      &__prev {
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
+  }
+
 }
 </style>

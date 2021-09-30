@@ -137,6 +137,13 @@ export default defineComponent({
   }
 
   &__favorite-btn {
+    & > div {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__favorite-btn {
     top: 10px;
     right: 10px;
   }

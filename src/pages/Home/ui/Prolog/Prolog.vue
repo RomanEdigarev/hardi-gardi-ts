@@ -159,6 +159,7 @@ export default defineComponent({
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 30px;
+      margin-bottom: 40px;
     }
     &__card {
       height: 301px;

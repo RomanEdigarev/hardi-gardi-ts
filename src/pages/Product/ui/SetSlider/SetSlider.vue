@@ -47,11 +47,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { Product } from "@/entities/Products/Product/model";
+import {computed, defineComponent, ref} from "vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
-import { Product } from "@/entities/Products/Product/model";
+import {useStore} from "@/services/vuex";
 export default defineComponent({
   name: "SetSlider",
   components: {
@@ -67,14 +68,19 @@ export default defineComponent({
     },
   },
   setup() {
-    const options = {
-      type: "loop",
-      perPage: 3,
-      perMove: 3,
-      gap: 15,
-      width: "378px",
-      rewind: true,
-    };
+    const store = useStore()
+    const isPhone = computed(() => store.getters['getIsPhone'])
+    const options = computed(() => {
+      return {
+        type: "loop",
+        perPage: 3,
+        perMove: 3,
+        gap: 15,
+        width: isPhone.value ? '273px':"378px",
+        rewind: true,
+      }
+    })
+
 
     const nextSlideBtn = ref<HTMLElement>(null);
     const prevSlideBtn = ref<HTMLElement>(null);
@@ -145,6 +151,15 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen  and (max-width: 376px){
+  .set-slider {
+    &__body__item {
+      width: 80px;
+      height: 100px;
+    }
+  }
+
+}
 </style>
 <style lang="scss">
 .set-slider {
@@ -175,4 +190,5 @@ export default defineComponent({
 
   // *** Splide END *** //
 }
+
 </style>

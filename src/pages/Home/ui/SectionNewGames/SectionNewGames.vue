@@ -175,7 +175,7 @@ export default defineComponent({
     &__first-row {
       display: grid;
       grid-template-columns: 375px 1fr;
-      grid-template-rows: 375px 390px;
+      grid-template-rows: 442px 390px;
       height: auto;
       div:nth-child(3) {
         width: 100%;
@@ -193,8 +193,22 @@ export default defineComponent({
     }
   }
 }
-
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 769px) and (max-width: 1365px) {
+  .new-games {
+    &__second-row {
+      height: auto;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &__item {
+        max-width: 90%;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 426px) {
   .new-games {
     &__first-row {
       grid-template-columns: 170px 170px;
@@ -212,6 +226,11 @@ export default defineComponent({
       max-width: 200px;
       font-size: 28px;
       line-height: 34px;
+    }
+
+    :deep .product-card-info__title {
+      font-size: 22px;
+      line-height: 28px;
     }
   }
 }

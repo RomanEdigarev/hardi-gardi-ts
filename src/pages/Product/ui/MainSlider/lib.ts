@@ -1,41 +1,46 @@
 import { computed, onMounted, onUpdated, ref } from "vue";
 import { useStore } from "@/services/vuex";
 
-const getSecondaryOptions = () => {
-  const store = useStore();
-  const isMobile = store.state.isMobile;
-  const isPhone = store.state.isPhone;
+const getSecondaryOptions = (status?: string, width?: string) => {
+  const isMobile = status === "isMobile";
+  const isPhone = status === "isPhone";
 
   console.log(isMobile);
   const getWidthForOptions = () => {
-    if (store.state.isPhone) {
+    if (isPhone) {
       return "273px";
-    } else if (store.state.isMobile) {
+    } else if (isMobile) {
       return "480px";
     } else {
       return "auto";
     }
   };
-  return {
+  const options = {
     type: "loop",
-    perPage: isPhone ? 4 : 5,
+    perPage: isPhone && width ? 5 : 4,
     perMove: 1,
     pagination: false,
     rewind: true,
     isNavigation: true,
-    focus: "center",
-    direction: isMobile ? "ltr" : "ttb",
-    height: isMobile ? "auto" : "480px",
-    width: getWidthForOptions(),
+    // focus: "center",
+    padding: {
+      // left: "100px",
+      right: "0",
+    },
+    direction: isMobile || isPhone ? "ltr" : "ttb",
+    height: isMobile || isPhone ? "auto" : "480px",
+    width: width || getWidthForOptions(),
   };
+  return options;
 };
 
-export const getPrimaryOptions = (isZoom) => {
-  const store = useStore();
+export const getPrimaryOptions = (status?: string, isZoom?: boolean) => {
+  const isMobile = status === "isMobile";
+  const isPhone = status === "isPhone";
   const getWidthForOptions = () => {
-    if (store.state.isPhone) {
+    if (isPhone) {
       return "273px";
-    } else if (store.state.isMobile) {
+    } else if (isMobile) {
       return "590px";
     } else {
       return "684px";
@@ -43,9 +48,9 @@ export const getPrimaryOptions = (isZoom) => {
   };
 
   const getZoomWidth = () => {
-    return store.state.isPhone ? "20px" : "35.625vw";
+    return isPhone ? "95%" : "35.625vw";
   };
-  return {
+  const options = {
     type: "loop",
     perPage: 1,
     perMove: 1,
@@ -54,10 +59,10 @@ export const getPrimaryOptions = (isZoom) => {
     width: isZoom ? getZoomWidth() : getWidthForOptions(),
     heightRatio: isZoom ? 1.25 : 1.25,
   };
+  return options;
 };
 
 export const useMainSlider = (isZoom) => {
-  console.log("useMainSLider");
   const secondaryOptions = getSecondaryOptions();
   const primaryOptions = getPrimaryOptions(isZoom);
   const secondarySplide = ref(null);
@@ -72,6 +77,12 @@ export const useMainSlider = (isZoom) => {
     prevSlideBtn.value.click();
   };
 
+  onUpdated(() => {
+    console.log("updated");
+    primarySplide.value?.sync(secondarySplide.value.splide);
+    primarySplide.value.splide.refresh();
+  });
+
   onMounted(() => {
     primarySplide.value?.sync(secondarySplide.value.splide);
   });
@@ -82,7 +93,8 @@ export const useMainSlider = (isZoom) => {
     goToNextSlide,
     goToPrevSlide,
     secondaryOptions,
-    primaryOptions,
+    getPrimaryOptions,
+    getSecondaryOptions,
     secondarySplide,
     primarySplide,
   };

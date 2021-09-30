@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import {ref, computed, defineComponent} from "vue";
+import { ref, computed, defineComponent } from "vue";
 import anime from "animejs";
 
 export default defineComponent({
@@ -96,6 +96,7 @@ export default defineComponent({
     border-radius: 16px;
     box-shadow: 0 12px 25px rgba(10, 26, 49, 0.12);
     transform: translateY(100%);
+    z-index: 10;
   }
 
   &__arrow {

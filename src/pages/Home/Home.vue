@@ -181,9 +181,13 @@ export default defineComponent({
   .home {
     &__prolog-container {
       height: auto;
+      margin-bottom: 236px;
     }
     &__new-games-container {
       margin-bottom: 241px;
+    }
+    &__sales-container {
+      margin-bottom: 233px;
     }
     &__category-cards-container {
       gap: 30px;

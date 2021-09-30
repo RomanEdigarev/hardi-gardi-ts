@@ -64,7 +64,11 @@
 <script lang="ts">
 import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
+<<<<<<< HEAD
 import { computed, defineComponent, onBeforeMount, onMounted } from "vue";
+=======
+import {computed, defineComponent, onMounted, watch} from "vue";
+>>>>>>> 375px
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
@@ -94,11 +98,26 @@ export default defineComponent({
 
         store.commit(
           "setIsMobile",
-          document.documentElement.clientWidth <= 768
+            document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425
         );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 375);
+        store.commit("setIsPhone", document.documentElement.clientWidth <= 425);
       }
     });
+
+    window.addEventListener('resize', () => {
+      console.log('resize')
+      if (document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425 )  {
+        store.commit("setIsPhone", false);
+        store.commit("setIsMobile", true);
+      }
+      else if (document.documentElement.clientWidth <= 425) {
+        store.commit("setIsPhone", true);
+        store.commit("setIsMobile", false);
+      } else {
+        store.commit("setIsMobile", false);
+        store.commit("setIsPhone", false);
+      }
+    })
 
     const isMobile = computed(() => store.state.isMobile);
 
@@ -215,6 +234,11 @@ export default defineComponent({
       left: 0;
     }
   }
+  &__search-modal-phone {
+    position: fixed;
+    z-index: 6;
+    transform: translateY(100%);
+  }
 
   &__search-modal-phone {
     position: fixed;
@@ -239,7 +263,20 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (min-width: 1367px) and (max-width: 1919px) {
+  .app {
+    &__wrapper {
+      padding: 0 10vw;
+    }
+    &__container {
+      max-width: none;
+      min-width: 80vw;
+    }
+    &__scroll-btn-container {
+      right: 10vw;
+    }
+  }
+}
 @media screen and (max-width: 1366px) {
   .app {
     &__wrapper {
@@ -247,7 +284,16 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (min-width: 769px) and (max-width: 1365px) {
+  .app {
+    &__wrapper {
+      padding: 0 4vw;
+    }
+    &__scroll-btn-container {
+      right: 4vw;
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .app {
     overflow-x: hidden;
@@ -257,6 +303,9 @@ export default defineComponent({
     }
     &__footer-bg {
       height: 1157px;
+    }
+    &__scroll-btn-container {
+      right: 4vw;
     }
   }
 }
