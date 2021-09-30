@@ -118,6 +118,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const { product } = useProduct();
+
     return {
       product,
       isPhone: computed(() => store.state.isPhone),
