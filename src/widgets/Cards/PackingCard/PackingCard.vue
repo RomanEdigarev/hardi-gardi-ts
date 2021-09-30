@@ -137,6 +137,9 @@ export default defineComponent({
   .packing-card {
     max-width: 160px;
     max-height: 295px;
+    &__content {
+      padding: 10px;
+    }
     &__name {
       font-size: 12px;
       line-height: 1.33;

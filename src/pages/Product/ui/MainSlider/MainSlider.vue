@@ -528,6 +528,7 @@ export default defineComponent({
   .main-slider.zoom {
     .main-slider__body {
       padding: 0;
+      margin-top: 10vh;
       &__current-slide {
         height: auto;
       }

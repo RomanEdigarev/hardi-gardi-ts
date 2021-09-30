@@ -1,7 +1,7 @@
 <template>
   <div class="package">
-    <div class="package__header">
-      <div class="package__header__title" @click="toggleBody">
+    <div class="package__header" @click="toggleBody">
+      <div class="package__header__title" >
         Доступна подарочная упаковка
       </div>
       <div class="package__header__icon">
@@ -54,7 +54,7 @@ export default defineComponent({
   },
   setup() {
     const packageBody = ref<HTMLElement>(null);
-    let isOpen = true;
+    let isOpen = false;
     const closeBody = () => {
       anime({
         targets: packageBody.value,
@@ -138,6 +138,17 @@ export default defineComponent({
     }
   }
   // *** Body END *** //
+}
+
+@media screen and (max-width: 376px){
+  .package {
+    &__body {
+      justify-content: space-between;
+      &__item {
+        margin-right: 0;
+      }
+    }
+  }
 }
 
 </style>

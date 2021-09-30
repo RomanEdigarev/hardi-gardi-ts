@@ -239,6 +239,16 @@ export default defineComponent({
   }
 }
 @media screen and (max-width: 376px) {
+  .product-card {
+    &__del-btn {
+      top:18px;
+      right:18px;
+    }
+    &__fav-btn {
+      bottom: 18px;
+      right: 26px;
+    }
+  }
   .product-card.toModal {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;

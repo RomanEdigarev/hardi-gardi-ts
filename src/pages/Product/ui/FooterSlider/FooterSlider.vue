@@ -243,6 +243,9 @@ export default defineComponent({
   }
   :deep .catalog-product-card {
     max-height: 326px;
+    &__image-wrapper {
+      max-height: 175px;
+    }
     &__title {
       font-size: 12px;
       line-height: 1.33;

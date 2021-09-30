@@ -2,7 +2,7 @@
   <div class="basket">
     <main class="page-main">
       <div class="page-main__header">
-        <PageTitle :text="`Корзина (${basketCount})`" />
+        <PageTitle text="Корзина (2)" />
       </div>
       <div class="basket__body">
         <div class="basket__body__products-list">
@@ -22,9 +22,13 @@
         <div class="basket__body__checkout">
           <Checkout @checkout="checkout" />
         </div>
+        <div v-if="!isPhone" class="basket__body__checkout"><Checkout /></div>
       </div>
       <div class="basket__footer">
-        <Package />
+        <div class="basket__footer__package">
+          <Package />
+        </div>
+        <div v-if="isPhone" class="basket__footer__checkout"><Checkout /></div>
       </div>
     </main>
     <div ref="deleteModal" class="basket__delete-modal-container">
@@ -84,6 +88,7 @@ export default defineComponent({
       plusPosition,
       minusPosition,
       checkout,
+      isPhone: computed(() => store.getters['getIsPhone'])
     };
   },
 });
@@ -125,9 +130,10 @@ export default defineComponent({
     &__body {
       &__checkout {
         width: 232px;
-        min-width: 232px;
+        min-width:  232px;
       }
     }
+
   }
 }
 @media screen and (max-width: 376px) {
@@ -135,9 +141,15 @@ export default defineComponent({
     &__body {
       flex-direction: column;
       &__checkout {
-        min-width: 100%;
+        min-width:  100%;
       }
     }
+    &__footer {
+      &__package {
+        margin-bottom: 22px;
+      }
+    }
+
   }
 }
 </style>
