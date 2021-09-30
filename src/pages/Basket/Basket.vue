@@ -19,16 +19,15 @@
             />
           </div>
         </div>
-        <div class="basket__body__checkout">
+        <div v-if="!isPhone" class="basket__body__checkout">
           <Checkout @checkout="checkout" />
         </div>
-        <div v-if="!isPhone" class="basket__body__checkout"><Checkout /></div>
       </div>
       <div class="basket__footer">
         <div class="basket__footer__package">
           <Package />
         </div>
-        <div v-if="isPhone" class="basket__footer__checkout"><Checkout /></div>
+        <div v-if="isPhone" class="basket__footer__checkout"><Checkout  @checkout="checkout"/></div>
       </div>
     </main>
     <div ref="deleteModal" class="basket__delete-modal-container">
