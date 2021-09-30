@@ -108,6 +108,10 @@ export default defineComponent({
     font-size: 20px;
     font-weight: $bold;
     margin-bottom: 65px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__price {
@@ -131,6 +135,10 @@ export default defineComponent({
 
   &__description {
     line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__link {

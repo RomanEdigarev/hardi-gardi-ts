@@ -257,12 +257,24 @@ export default defineComponent({
     &__info {
       padding: 6px;
     }
+    &__title {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     &__price {
       margin-bottom: 0;
       &__current {
         font-size: 16px;
         line-height: 20px;
       }
+    }
+    &__shop-btn {
+      width: 44px;
+      height: 44px;
+      right: 10px;
+      bottom: 10px;
     }
   }
 }
