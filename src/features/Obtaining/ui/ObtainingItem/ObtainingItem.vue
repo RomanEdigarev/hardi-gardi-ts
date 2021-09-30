@@ -1,7 +1,7 @@
 <template>
   <div class="obtaining-item">
     <div class="obtaining-item__radio">
-      <RadioInput :text="title" :name="name" :id="id" @toggle="toggle" />
+      <RadioInput :text="title" :name="name" :id="id" @toggle="toggle"  :value="name"/>
     </div>
     <div class="obtaining-item__body" :class="{ 'is-open': isOpen }">
       <slot name="content"></slot>
@@ -50,17 +50,30 @@ export default defineComponent({
   &__radio {
     margin-bottom: 22px;
   }
+
   &__body {
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     max-height: 0;
   }
+
   &__body.is-open {
     max-height: 1000px;
   }
+
   // *** Radio END *** //
 
   // *** Body *** //
   // *** Body END *** //
 }
+@media screen and (max-width: 376px) {
+.obtaining-item {
+  &__radio {
+    background: #ECF0F8;
+    border-radius: 16px;
+    padding: 3px 0px;
+    margin-bottom: 0;
+  }
+}
+  }
 </style>

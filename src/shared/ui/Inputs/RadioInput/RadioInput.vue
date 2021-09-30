@@ -6,7 +6,7 @@
       :id="id"
       :name="name"
       :value="value"
-      @change="handleChange"
+      @change="toggle"
     />
     <label :for="id">{{ text }}</label>
   </div>
@@ -42,8 +42,13 @@ export default defineComponent({
       type: "radio",
     });
 
+    const toggle = (e) => {
+      emit('toggle', props.id)
+      handleChange(e)
+    };
+
     return {
-      handleChange,
+      toggle,
     };
   },
 });

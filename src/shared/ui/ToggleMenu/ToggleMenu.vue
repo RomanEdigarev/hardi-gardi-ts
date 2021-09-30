@@ -86,9 +86,11 @@ export default defineComponent({
     flex-direction: column;
     &__item {
       width: 100%;
+      padding: 16px 0px;
     }
     &__bg {
       width: 100%;
+      height: 60px;
     }
   }
 }

@@ -117,4 +117,24 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
+@media screen and (max-width: 376px){
+  .self {
+    &__body {
+      margin-top: 14px;
+      &__btn {
+        width: 100%;
+        margin-top: 22px;
+        position: static;
+        :deep button > span {
+          font-weight: 600;
+          font-size: 15px;
+          line-height: 28px;
+        }
+      }
+    }
+    &__footer {
+      margin-bottom: 26px;
+    }
+  }
+}
 </style>

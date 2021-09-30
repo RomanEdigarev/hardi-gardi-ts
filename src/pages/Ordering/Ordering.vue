@@ -197,10 +197,19 @@ export default defineComponent({
 
 @media screen and (max-width: 376px) {
   .ordering {
+    &__header {
+      margin-bottom: 36px;
+    }
     &__body {
       flex-direction: column;
       &__left {
         margin-bottom: 30px;
+        &__item {
+          padding-bottom: 36px;
+        }
+        &__item__title {
+          margin-bottom: 26px;
+        }
       }
     }
     .payment__toggle-menu {

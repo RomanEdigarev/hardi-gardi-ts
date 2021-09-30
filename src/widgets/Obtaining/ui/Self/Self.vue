@@ -40,4 +40,16 @@ export default defineComponent({
     margin-bottom: 10px;
   }
 }
+@media screen and (max-width: 376px){
+  .obtaining-self {
+    padding: 14px;
+    background: #FFFFFF;
+    border: 1px solid #D9DCE2;
+    box-sizing: border-box;
+    border-radius: 16px;
+    div:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
 </style>

@@ -98,6 +98,18 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen and (max-width: 376px){
+  .obtaining {
+    &__header {
+      &__input {
+        padding: 16px 57px;
+      }
+    }
+
+
+  }
+
+}
 </style>
 
 <style lang="scss">
