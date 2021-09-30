@@ -64,18 +64,12 @@
 <script lang="ts">
 import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
 import { ScrollUpPage } from "@/features";
-<<<<<<< HEAD
 import { computed, defineComponent, onBeforeMount, onMounted } from "vue";
-=======
-import {computed, defineComponent, onMounted, watch} from "vue";
->>>>>>> 375px
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
-import { initBasket } from "@/entities/Basket/lib";
-import { getApiInstance } from "@/services/api/config";
 
 export default defineComponent({
   components: {

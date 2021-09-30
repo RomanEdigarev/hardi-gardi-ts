@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { Product } from "@/entities/Products/Product/model";
-import {computed, defineComponent, ref} from "vue";
+import {computed, defineComponent, PropType, ref} from "vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";

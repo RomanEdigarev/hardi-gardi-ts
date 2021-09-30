@@ -283,6 +283,7 @@ import { CloseIcon, SlideArrowIcon } from "@/shared/ui/icons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { getPrimaryOptions, useMainSlider } from "./lib";
 import { ProductPhoto } from "@/entities/Products/Product/model";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "MainSlider",
