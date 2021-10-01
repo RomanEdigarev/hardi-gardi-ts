@@ -117,7 +117,7 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .self {
     &__body {
       margin-top: 14px;

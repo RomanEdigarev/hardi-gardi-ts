@@ -32,6 +32,12 @@ export default defineComponent({
         grid-row: 1/3;
         &__title {
           max-width: 205px;
+          p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
         }
       }
       &__count {
@@ -62,7 +68,7 @@ export default defineComponent({
   }
 
 }
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .history {
     :deep .product-card.toModal, :deep .product-card {
       grid-template-rows: 1fr 0fr;

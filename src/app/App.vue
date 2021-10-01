@@ -92,19 +92,19 @@ export default defineComponent({
 
         store.commit(
           "setIsMobile",
-            document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425
+            document.documentElement.clientWidth <= 1300 && document.documentElement.clientWidth >= 736
         );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 425);
+        store.commit("setIsPhone", document.documentElement.clientWidth <= 735);
       }
     });
 
     window.addEventListener('resize', () => {
       console.log('resize')
-      if (document.documentElement.clientWidth <= 768 && document.documentElement.clientWidth >= 425 )  {
+      if (document.documentElement.clientWidth <= 1300 && document.documentElement.clientWidth >= 736 )  {
         store.commit("setIsPhone", false);
         store.commit("setIsMobile", true);
       }
-      else if (document.documentElement.clientWidth <= 425) {
+      else if (document.documentElement.clientWidth <= 735) {
         store.commit("setIsPhone", true);
         store.commit("setIsMobile", false);
       } else {
@@ -289,7 +289,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3){
   .app {
     overflow-x: hidden;
     &__wrapper {
@@ -305,11 +305,17 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .app {
     &__wrapper {
       padding: 0 18px;
       margin-bottom: 136px;
+    }
+    &__footer-bg {
+      height: 1157px;
+    }
+    &__scroll-btn-container {
+      right: 4vw;
     }
   }
 }

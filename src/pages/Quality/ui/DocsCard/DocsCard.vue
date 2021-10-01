@@ -50,7 +50,7 @@ export default defineComponent({
     right: 21px;
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .docs-card {
     max-width: 163px;
     padding: 15px;

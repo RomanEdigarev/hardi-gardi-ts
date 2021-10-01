@@ -39,7 +39,7 @@ export default defineComponent({
     height: 60px;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .add-to-basket {
     &__shop-btn-container {
       width: 52px;
@@ -47,7 +47,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .add-to-basket {
     &__shop-btn-container {
       width: 100%;

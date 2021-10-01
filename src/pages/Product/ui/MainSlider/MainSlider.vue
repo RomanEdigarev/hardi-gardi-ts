@@ -419,35 +419,6 @@ export default defineComponent({
     border: 2px solid $clr-zeta;
   }
   // *** Splide END *** //
-
-  @media screen and (max-width: 768px) {
-    .main-slider {
-      &__body {
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-        &__current-slide {
-          margin-bottom: 30px;
-        }
-
-        &__thumbnails {
-          height: auto;
-          flex-direction: row;
-          width: 600px;
-          margin-right: 0;
-          &__item {
-            margin: 0 auto;
-          }
-          &__down-btn {
-            transform: rotate(-180deg);
-          }
-          &__up-btn {
-            transform: rotate(0deg);
-          }
-        }
-      }
-    }
-  }
 }
 .main-slider.zoom {
   background-color: white;
@@ -482,8 +453,35 @@ export default defineComponent({
     z-index: 25;
   }
 }
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+  .main-slider {
+    &__body {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      &__current-slide {
+        margin-bottom: 30px;
+      }
 
-@media screen and (max-width: 768px) {
+      &__thumbnails {
+        height: auto;
+        flex-direction: row;
+        width: 600px;
+        margin-right: 0;
+        &__item {
+          margin: 0 auto;
+        }
+        &__down-btn {
+          transform: rotate(-180deg);
+        }
+        &__up-btn {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .main-slider.zoom {
     overflow-y: scroll;
     .main-slider__body {
@@ -499,13 +497,17 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .main-slider {
     &__body {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
       &__current-slide {
         width: 100%;
         text-align: center;
         height: auto;
+        margin-bottom: 30px;
         & > div {
           margin: 0 auto;
         }
@@ -514,6 +516,8 @@ export default defineComponent({
         width: 100%;
         margin-right: 0;
         justify-content: center;
+        height: auto;
+        flex-direction: row;
         &__item {
           max-width: 56px;
           max-height: 56px;
@@ -526,10 +530,24 @@ export default defineComponent({
     }
   }
   .main-slider.zoom {
+    background-color: white;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    overflow-y: scroll;
     .main-slider__body {
       padding: 0;
       margin-top: 10vh;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto;
       &__current-slide {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: auto;
       }
       &__thumbnails {

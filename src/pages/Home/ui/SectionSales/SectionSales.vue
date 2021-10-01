@@ -134,8 +134,12 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .sales-section {
+    &__items-container {
+      grid-template-columns: auto;
+      justify-content: center;
+    }
     &__title-container {
       &__bg-container {
         width: 276px;

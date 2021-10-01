@@ -201,7 +201,7 @@ export default defineComponent({
   padding: 0;
   border: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .product-card {
     display: grid;
     width: 100%;
@@ -238,8 +238,40 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .product-card {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 18px 22px;
+    max-width: 470px;
+    &__product {
+      &__img {
+        max-width: 75px;
+        max-height: 93px;
+      }
+      &__title {
+        p,
+        span {
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+    }
+    &__price {
+      padding-left: 100px;
+      grid-row: 2 / 3;
+      margin-bottom: 16px;
+      &__prev {
+        width: 100%;
+      }
+    }
+    &__count {
+      grid-row: 3 / 4;
+      div {
+        padding-left: 100px;
+      }
+    }
     &__del-btn {
       top:18px;
       right:18px;

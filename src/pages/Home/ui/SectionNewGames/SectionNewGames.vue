@@ -170,7 +170,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .new-games {
     &__first-row {
       display: grid;
@@ -193,26 +193,33 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 769px) and (max-width: 1365px) {
-  .new-games {
-    &__second-row {
-      height: auto;
-      width: 100%;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      &__item {
-        max-width: 90%;
-        margin-bottom: 30px;
-      }
-    }
-  }
-}
-@media screen and (max-width: 426px) {
+//@media screen and (min-width: 769px) and (max-width: 1365px) {
+//  .new-games {
+//    &__second-row {
+//      height: auto;
+//      width: 100%;
+//      flex-direction: column;
+//      justify-content: center;
+//      align-items: center;
+//      &__item {
+//        max-width: 90%;
+//        margin-bottom: 30px;
+//      }
+//    }
+//  }
+//}
+@media screen and (min-width: 320px) and (max-width: 736px) {
   .new-games {
     &__first-row {
+      display: grid;
+      justify-content: center;
       grid-template-columns: 170px 170px;
       grid-template-rows: 216px 184px;
+      height: auto;
+      &__image-card-container {
+        grid-column: 1/3;
+        width: auto;
+      }
     }
     &__second-row {
       display: none;

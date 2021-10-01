@@ -196,7 +196,7 @@ export default defineComponent({
   }
   // *** Footer END *** //
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .checkout {
     padding: 12px;
     &__header {
@@ -228,7 +228,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .checkout {
     padding: 22px;
   }
@@ -245,7 +245,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .checkout__footer {
     &__btn {
       span {

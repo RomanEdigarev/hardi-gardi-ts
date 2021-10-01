@@ -86,8 +86,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 .sets-section {
 }
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .sets-section {
+    & > div {
+      margin: 0 auto;
+    }
     :deep .block-with-slider-phone__header__title {
       max-width: 250px;
     }

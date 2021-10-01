@@ -83,4 +83,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bestsellers {
+  & > div {
+    margin: 0 auto;
+  }
+}
+</style>

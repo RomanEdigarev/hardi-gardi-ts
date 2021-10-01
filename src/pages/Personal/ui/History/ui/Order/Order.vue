@@ -41,13 +41,13 @@
         <Details />
       </div>
       <div class="order__footer__item">
-        <ProductCardCart to-modal />
+        <ProductCardCart to-modal :product="product" :count="2"/>
       </div>
       <div class="order__footer__item">
-        <ProductCardCart to-modal />
+        <ProductCardCart to-modal :product="product" :count="2"/>
       </div>
       <div class="order__footer__item">
-        <ProductCardCart to-modal />
+        <ProductCardCart to-modal :product="product" :count="2"/>
       </div>
     </div>
   </div>
@@ -58,6 +58,7 @@ import { defineComponent, ref } from "vue";
 import { ProductCardCart } from "@/widgets";
 import anime from "animejs";
 import Details from "@/pages/Personal/ui/Details/Details.vue";
+import {useProduct} from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "Order",
@@ -68,6 +69,7 @@ export default defineComponent({
   setup() {
     const isOpen = ref(false);
     const footer = ref<HTMLElement>(null);
+    const {product} = useProduct()
     const animation = (isOpen) => {
       if (isOpen) {
         anime
@@ -100,6 +102,7 @@ export default defineComponent({
       isOpen,
       footer,
       toggle,
+      product
     };
   },
 });
@@ -218,13 +221,13 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .order {
     max-width: 430px;
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .order {
     max-width: 310px;
 

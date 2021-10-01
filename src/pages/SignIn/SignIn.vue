@@ -75,7 +75,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .sign-in {
     margin-top: 95px;
     margin-left: 399px;
@@ -89,7 +89,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .sign-in {
     margin: 0;
     margin-top: 110px;

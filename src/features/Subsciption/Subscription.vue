@@ -80,7 +80,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .subscription {
     flex-direction: column;
     align-items: flex-start;
@@ -105,8 +105,23 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .subscription {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    &__content {
+      flex-direction: column;
+      width: 100%;
+    }
+    &__info {
+      width: 100%;
+    }
+    &__input {
+      width: 100%;
+      flex: 1;
+      margin-bottom: 75px;
+    }
     &__title {
       font-size: 16px;
       line-height: 20px;

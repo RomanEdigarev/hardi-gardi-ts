@@ -144,7 +144,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .prolog {
     &__text {
       max-width: 514px;
@@ -168,10 +168,14 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .prolog {
     padding: 0;
     &__info {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: 60px;
       padding: 0;
     }
     &__title {
@@ -182,6 +186,7 @@ export default defineComponent({
       }
     }
     &__cards {
+      display: grid;
       grid-template-columns: 160px 160px;
       grid-template-rows: 219px;
       gap: 20px;

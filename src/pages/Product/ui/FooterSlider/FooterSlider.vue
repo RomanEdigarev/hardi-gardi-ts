@@ -190,7 +190,7 @@ export default defineComponent({
   }
 }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
     .footer-slider {
       &__header {
         &__title {
@@ -208,6 +208,7 @@ export default defineComponent({
     }
     :deep .catalog-product-card {
       max-height: 388px;
+      max-width: 220px;
       &__title {
         font-size: 12px;
         line-height: 1.33;
@@ -225,7 +226,7 @@ export default defineComponent({
     }
 
 
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .footer-slider {
     &__header {
       &__title {
@@ -240,10 +241,19 @@ export default defineComponent({
         height: 40px;
       }
     }
+    &__body__item {
+      & > div {
+        margin: 0 auto;
+        justify-content: center;
+      }
+    }
   }
   :deep .catalog-product-card {
     max-height: 326px;
     &__image-wrapper {
+      max-height: 175px;
+    }
+    &__image {
       max-height: 175px;
     }
     &__title {

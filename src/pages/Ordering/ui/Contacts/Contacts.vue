@@ -38,7 +38,7 @@ export default defineComponent({
     width: 100%;
   }
 }
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .contacts {
     grid-template-columns: 1fr;
     row-gap: 26px;

@@ -12,8 +12,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {computed, defineComponent, ref} from "vue";
 import anime from "animejs";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "ToggleMenu",
@@ -25,13 +26,14 @@ export default defineComponent({
   },
   setup() {
     // const items = ["Самовывоз", "Курьер", "Почта России"];
+    const store = useStore()
     const currentItemIndex = ref(0);
     const bg = ref<HTMLElement>(null);
-    const isPhone = document.documentElement.offsetWidth <= 375
+    const isPhone = computed(() => store.getters['getIsPhone'])
     const animation = () => {
       anime({
         targets: bg.value,
-        [isPhone ? 'translateY' : 'translateX']: `${currentItemIndex.value * 100}%`,
+        [isPhone.value ? 'translateY' : 'translateX']: `${currentItemIndex.value * 100}%`,
         easing: "spring(1, 60, 11, 0)",
       });
     };
@@ -81,7 +83,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px){
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
   .toggle-menu {
     flex-direction: column;
     &__item {

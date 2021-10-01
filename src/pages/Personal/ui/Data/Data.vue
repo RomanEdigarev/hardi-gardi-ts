@@ -116,7 +116,7 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .data {
     max-width: 410px;
     .grid {

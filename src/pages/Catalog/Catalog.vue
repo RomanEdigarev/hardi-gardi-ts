@@ -203,7 +203,7 @@ export default defineComponent({
   // *** Results END *** //
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
     &__content {
       grid-template-columns: 1fr;
@@ -263,9 +263,11 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
     &__content {
+      grid-template-columns: 1fr;
+      position: relative;
       padding: 0;
       margin-bottom: 80px;
       &__mobile-filter-btn {
@@ -361,7 +363,29 @@ export default defineComponent({
       }
     }
     &__filter-container {
+      background-color: white;
       max-width: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      min-height: 100vh;
+      transform: translateX(-100%);
+      div:first-child {
+        position: relative;
+        z-index: 4;
+      }
+      &__bg {
+        background-color: #51628e;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200vw;
+        height: 100vh;
+        opacity: 0;
+        display: none;
+        z-index: 2;
+      }
     }
   }
 

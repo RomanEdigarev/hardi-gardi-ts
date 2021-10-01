@@ -37,6 +37,7 @@
 import { FavoriteIcon, SearchIcon, ShopIcon } from "@/shared/ui/icons";
 import { computed, defineComponent } from "vue";
 import { IconWithCount } from "@/features";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "CabinetLinks",
@@ -58,9 +59,9 @@ export default defineComponent({
   },
   emits: ["openSearchModalPhone"],
   setup() {
-    const isPhone = computed(() => document.documentElement.offsetWidth <= 375);
+    const store = useStore()
     return {
-      isPhone,
+      isPhone: computed(() => store.getters['getIsPhone']),
     };
   },
 });
@@ -71,7 +72,8 @@ export default defineComponent({
   position: relative;
   z-index: 1;
   display: flex;
-  gap: 18px;
+  //gap: 18px;
+
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -80,8 +82,10 @@ export default defineComponent({
     width: 27px;
     height: 27px;
     cursor: pointer;
+    margin-right: 18px;
   }
   &__link[id="shop"] {
+    margin-right: 0;
     transform: translateX(6px);
   }
 }

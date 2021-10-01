@@ -151,7 +151,7 @@ export default defineComponent({
     width: 267px;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
   .block-with-slider {
     height: 500px;
     position: relative;
