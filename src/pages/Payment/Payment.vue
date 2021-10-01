@@ -42,9 +42,9 @@
         </div>
         <div class="payment__body__item order-list">
           <div class="payment__body__item__title">Состав заказа</div>
-          <div class="order-list__item"><ProductCardCart to-modal /></div>
-          <div class="order-list__item"><ProductCardCart to-modal /></div>
-          <div class="order-list__item"><ProductCardCart to-modal /></div>
+          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
+          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
+          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
         </div>
       </div>
     </main>
@@ -57,12 +57,15 @@ import { PageTitle } from "@/shared/ui";
 import { ProductCardCart } from "@/widgets";
 import { OrderInfo } from "./ui";
 import { useStore } from "@/services/vuex";
+import {useProduct} from "@/entities/Products/Product/lib";
 export default defineComponent({
   name: "Payment",
   components: { PageTitle, ProductCardCart, OrderInfo },
   setup() {
+    const {product} = useProduct()
     const store = useStore();
     return {
+      product,
       isPhone: computed(() => store.getters["getIsPhone"]),
     };
   },
@@ -135,6 +138,21 @@ export default defineComponent({
       margin-bottom: 25px;
     }
   }
+  :deep .product-card {
+    grid-template-rows: 1fr 0fr;
+
+    &__product {
+      &__title {
+        max-width: 344px;
+        p {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width: 1367px){
   .payment {
@@ -159,6 +177,13 @@ export default defineComponent({
         grid-column: 1/3;
         &__title {
           max-width: 80%;
+          p {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
         }
       }
       &__price {
@@ -166,7 +191,7 @@ export default defineComponent({
         grid-column: 2/3;
         padding: 0;
         flex-direction: row;
-        margin-top: -42px;
+        margin-top: -38px;
         &__prev {
           margin-right: 13px;
         }
@@ -181,7 +206,7 @@ export default defineComponent({
         align-items: flex-start;
         display: block;
         padding-top: 6px;
-        margin-top: -42px;
+        margin-top: -38px;
       }
     }
   }
