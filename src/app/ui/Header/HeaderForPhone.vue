@@ -10,10 +10,14 @@
     </div>
     <div class="header-for-phone__body">
       <div class="header-for-phone__body__logo">
-        <Logo />
+        <Logo @click="$router.push('/')" />
       </div>
       <div class="header-for-phone__body__ui">
-        <CabinetLinks @openSearchModalPhone="$emit('openSearchModalPhone')" />
+        <CabinetLinks
+          @openSearchModalPhone="$emit('openSearchModalPhone')"
+          :basket-count="basketCount"
+          :favorites-count="favoritesCount"
+        />
       </div>
       <button
         class="header-for-phone__body__burger-btn"
@@ -26,14 +30,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { Location } from "@/widgets";
 import Logo from "@/app/ui/Header/assets/Logo.vue";
 import { CabinetLinks, CabinetTitle } from "@/widgets/Cabinet/ui";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "HeaderForPhone",
   components: { Location, CabinetTitle, Logo, CabinetLinks },
+  setup() {
+    const store = useStore();
+    return {
+      basketCount: computed(() => store.getters["basket/getBasketCount"]),
+      favoritesCount: computed(
+        () => store.getters["favorites/getFavoritesTotalCount"]
+      ),
+    };
+  },
 });
 </script>
 

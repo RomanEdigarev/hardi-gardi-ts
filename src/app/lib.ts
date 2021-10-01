@@ -11,6 +11,7 @@ export const useBurgerMenu = () => {
         targets: burger.value,
         translateY: ["100%", "0%"],
         easing: "spring(1, 70, 13, 0)",
+        complete: () => (document.documentElement.style.overflow = "hidden"),
       })
       .add(
         {
@@ -37,6 +38,7 @@ export const useBurgerMenu = () => {
           targets: burger.value,
           translateY: ["0", "100%"],
           easing: "spring(1, 70, 13, 0)",
+          complete: () => (document.documentElement.style.overflow = "visible"),
         },
         100
       );

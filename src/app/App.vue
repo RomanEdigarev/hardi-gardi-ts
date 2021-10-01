@@ -40,7 +40,7 @@
         :src="require('/public/images/footer-bg.svg')"
         alt=""
       />
-      <div ref="burger" v-if="isMobile" class="app__burger-menu">
+      <div ref="burger" v-if="isMobile || isPhone" class="app__burger-menu">
         <BurgerMenu />
         <div
           ref="burgerBG"
@@ -213,6 +213,7 @@ export default defineComponent({
     z-index: 6;
     bottom: -90px;
     transform: translateY(100%);
+    overflow-y: scroll;
     & > div:first-child {
       position: relative;
       z-index: 8;
