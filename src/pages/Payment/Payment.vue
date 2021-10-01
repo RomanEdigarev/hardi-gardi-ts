@@ -24,14 +24,17 @@
           <div class="payment__body__item__title">Способ получения</div>
           <p>
             <span class="payment__body__item__subtitle">Доставка: Курьер</span>
-            <span class="payment__body__item__subtitle"
-              >Сроки доставки: 4 дня</span
-            >
+            <span v-if="!isPhone" class="payment__body__item__subtitle">
+              Сроки доставки: 4 дня
+            </span>
           </p>
           <div class="payment__body__item__text">Курьером: СДЭК</div>
           <div class="payment__body__item__text">
             г. Санкт-Петербург, проспект Энгельса д,96 кв.93
           </div>
+          <span v-if="isPhone" class="payment__body__item__subtitle">
+              Сроки доставки: 4 дня
+            </span>
         </div>
         <div class="payment__body__item pay">
           <div class="payment__body__item__title">Способ оплаты</div>
@@ -49,13 +52,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { ProductCardCart } from "@/widgets";
 import { OrderInfo } from "./ui";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "Payment",
   components: { PageTitle, ProductCardCart, OrderInfo },
+  setup() {
+    const store = useStore();
+    return {
+      isPhone: computed(() => store.getters["getIsPhone"]),
+    };
+  },
 });
 </script>
 
@@ -123,6 +133,102 @@ export default defineComponent({
       padding-bottom: 19px;
       border-bottom: 1px solid $clr-kappa;
       margin-bottom: 25px;
+    }
+  }
+}
+@media screen and (max-width: 1367px){
+  .payment {
+    :deep .order-list__item {
+      max-width: 714px;
+    }
+  }
+}
+@media screen and (max-width: 769px) {
+  .payment {
+    &__body {
+      &__item {
+        max-width: 470px;
+        padding-bottom: 38px;
+        margin-bottom: 34px;
+      }
+    }
+    :deep .product-card.toModal,
+    :deep .product-card {
+      grid-template-rows: 1fr 0fr;
+      &__product {
+        grid-column: 1/3;
+        &__title {
+          max-width: 80%;
+        }
+      }
+      &__price {
+        margin-bottom: 0;
+        grid-column: 2/3;
+        padding: 0;
+        flex-direction: row;
+        margin-top: -42px;
+        &__prev {
+          margin-right: 13px;
+        }
+        span {
+          width: auto;
+          flex-shrink: 0;
+        }
+      }
+      &__count {
+        height: auto;
+        grid-row: 2/3;
+        align-items: flex-start;
+        display: block;
+        padding-top: 6px;
+        margin-top: -42px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .payment {
+    &__header {
+      margin-bottom: 36px;
+    }
+    &__body {
+      &__info {
+        margin-bottom: 36px;
+      }
+      &__item {
+        padding-bottom: 36px;
+        &__title {
+          font-size: 20px;
+          line-height: 1.2;
+          margin-bottom: 18px;
+        }
+        &__subtitle {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        &__text {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        p {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 0;
+        }
+      }
+    }
+    :deep .product-card.toModal,
+    :deep .product-card {
+      grid-template-rows: 1fr 0fr;
+      &__price {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      &__count {
+        padding-top: 0;
+        margin-top: 0;
+        height: auto;
+      }
     }
   }
 }

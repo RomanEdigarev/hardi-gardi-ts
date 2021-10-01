@@ -84,8 +84,53 @@ export default defineComponent({
   }
   // *** Body END *** //
   // *** Footer  *** //
-  &__ {
-  }
   // *** Footer END *** //
+}
+@media screen and (max-width: 769px){
+  .order-info {
+    padding: 24px 12px;
+    max-width: 232px;
+    &__header {
+      &__title {
+        font-size: 22px;
+        line-height: 27px;
+      }
+    }
+    &__body {
+      margin-bottom: 12px;
+      &__text {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      &__list {
+        margin-bottom: 10px;
+        &__item {
+          span {
+            margin-bottom: 4px;
+            font-size: 14px;
+            line-height: 1.71;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 376px) {
+  .order-info {
+    padding: 26px 22px;
+    max-width: none;
+    &__header {
+      &__title {
+        font-size: 22px;
+        line-height: 1.09;
+        margin-bottom: 8px;
+      }
+    }
+    &__body {
+      margin-bottom: 26px;
+
+
+    }
+  }
 }
 </style>
