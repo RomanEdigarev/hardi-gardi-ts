@@ -177,7 +177,14 @@ export default defineComponent({
   }
   // *** Other END *** //
 }
-
+@media screen and (min-width: 769px) and (max-width: 1365px){
+ .details {
+   max-width: 32vw;
+   &__footer__btn {
+     width: 100%;
+   }
+ }
+}
 @media screen and (max-width: 768px) {
   .details {
     max-width: 220px;

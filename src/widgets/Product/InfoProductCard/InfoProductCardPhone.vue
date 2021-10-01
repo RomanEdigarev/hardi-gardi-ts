@@ -86,7 +86,7 @@ export default defineComponent({
   border-radius: 25px;
   padding: 42px 18px;
   background: #fceef4;
-  color: #606060;
+  color: $clr-phi;
   position: relative;
 
   // *** Header *** //
@@ -119,13 +119,13 @@ export default defineComponent({
         font-size: 14px;
         line-height: 1.29;
         text-decoration: line-through;
-        color: #606060;
+        color: $clr-phi;
       }
       &__current {
         font-weight: $bold;
         font-size: 16px;
         line-height: 1.12;
-        color: #d23c50;
+        color: $clr-zeta;
       }
     }
   }

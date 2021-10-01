@@ -128,7 +128,7 @@ export default defineComponent({
         margin-right: 10px;
       }
       span {
-        color: #d23c50;
+        color: $clr-zeta;
       }
     }
   }

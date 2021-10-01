@@ -134,7 +134,7 @@ export default defineComponent({
 
   &__line {
     width: 40px;
-    border-bottom: 3px solid #606060;
+    border-bottom: 3px solid $clr-phi;
     position: absolute;
     top: 16px;
     left: 50%;

@@ -141,7 +141,7 @@ export default defineComponent({
   padding: 22px 24px;
   font-size: 16px;
   font-weight: 400;
-  color: #606060;
+  color: $clr-phi;
   border: 2px solid #d9dce2;
   border-radius: 16px;
   transition: border, padding 0.3s ease-in-out;
@@ -163,7 +163,7 @@ export default defineComponent({
     padding-bottom: 11px;
 
     &::placeholder {
-      color: #606060;
+      color: $clr-phi;
     }
   }
 }
@@ -188,7 +188,7 @@ export default defineComponent({
   }
 
   :deep path {
-    stroke: #606060;
+    stroke: $clr-phi;
   }
 }
 

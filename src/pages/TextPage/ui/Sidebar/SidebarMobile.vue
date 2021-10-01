@@ -68,7 +68,7 @@ export default defineComponent({
     line-height: 2;
     display: flex;
     align-items: center;
-    color: #606060;
+    color: $clr-phi;
   }
   &__arrow {
     position: absolute;

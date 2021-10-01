@@ -129,7 +129,7 @@ export default defineComponent({
         span {
           font-size: 15px;
           line-height: 1.87;
-          color: $brickRed;
+          color: $clr-zeta;
         }
       }
     }
@@ -150,7 +150,7 @@ export default defineComponent({
       font-weight: $semi-bold;
       font-size: 16px;
       line-height: 1.75;
-      color: $brickRed;
+      color: $clr-zeta;
     }
   }
   // *** Footer END *** //

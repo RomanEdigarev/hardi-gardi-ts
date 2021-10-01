@@ -132,7 +132,7 @@ export default defineComponent({
           height: 100%;
           max-height: 46px;
           max-width: 46px;
-          background: #d23c50;
+          background: $clr-zeta;
           border-radius: 17px;
           display: flex;
           justify-content: center;
@@ -256,7 +256,7 @@ export default defineComponent({
           height: 24px;
           border-radius: 10px;
           button {
-            background: #d23c50;
+            background: $clr-zeta;
             border-radius: 10px;
           }
           svg {

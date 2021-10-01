@@ -237,7 +237,7 @@ export default defineComponent({
       span {
         font-size: 14px;
         line-height: 21px;
-        color: #d23c50;
+        color: $clr-zeta;
       }
       svg {
         margin-right: 21px;

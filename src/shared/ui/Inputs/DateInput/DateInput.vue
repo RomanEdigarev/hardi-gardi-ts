@@ -84,8 +84,8 @@ export default defineComponent({
       width: 100%;
       height: 100%;
       --vdp-heading-size: auto;
-      --vdp-selected-bg-color: #d23c50;
-      --vdp-hover-bg-color: #d23c50;
+      --vdp-selected-bg-color: $clr-zeta;
+      --vdp-hover-bg-color: $clr-zeta;
     }
 
     &__input_wrapper {

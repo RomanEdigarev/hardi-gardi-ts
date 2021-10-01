@@ -144,7 +144,7 @@ export default defineComponent({
   &__link {
     font-size: 15px;
     line-height: 18px;
-    color: #d23c50;
+    color: $clr-zeta;
     cursor: pointer;
   }
 

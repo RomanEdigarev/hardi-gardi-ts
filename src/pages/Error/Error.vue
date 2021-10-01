@@ -49,7 +49,7 @@ export default defineComponent({
       font-weight: bold;
       font-size: 28px;
       line-height: 34px;
-      color: #d23c50;
+      color: $clr-zeta;
       margin-bottom: 38px;
     }
     &__btn {
