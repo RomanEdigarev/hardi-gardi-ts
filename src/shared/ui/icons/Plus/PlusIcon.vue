@@ -8,17 +8,17 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M21.5215 2V42"
+      d="M21.5215 1.59985V41.5999"
       stroke="#D23C50"
-      stroke-width="7"
+      stroke-width="3"
       stroke-miterlimit="10"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
-      d="M2 21.5215H42"
+      d="M2 21.1213H42"
       stroke="#D23C50"
-      stroke-width="7"
+      stroke-width="3"
       stroke-miterlimit="10"
       stroke-linecap="round"
       stroke-linejoin="round"

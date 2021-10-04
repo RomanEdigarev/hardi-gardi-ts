@@ -7,7 +7,7 @@
           <div class="catalog-product-card__image-wrapper">
             <img
               class="catalog-product-card__image"
-              :src="product.img"
+              :src="productTest.img"
               :alt="product.title"
               @click="$router.push(`/product/${product.id}`)"
             />
@@ -49,6 +49,7 @@ import { Card } from "@/shared/ui";
 import { defineComponent, onMounted, PropType } from "vue";
 import { AddToBasket, AddToFavorite } from "@/features";
 import { Product } from "@/entities/Products/Product/model";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -70,6 +71,12 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+  },
+  setup() {
+    const { product: productTest } = useProduct();
+    return {
+      productTest,
+    };
   },
 });
 </script>
@@ -97,6 +104,7 @@ export default defineComponent({
   }
 
   &__image {
+    max-height: 305px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -112,16 +120,21 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     display: flex;
+    padding: 0 8px 8px 8px;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   &__title {
     font-weight: $bold;
-    margin-bottom: 32px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__price {
-    margin-bottom: 27px;
+    justify-self: flex-end;
 
     &__prev {
       font-weight: $bold;
@@ -146,8 +159,12 @@ export default defineComponent({
   }
 
   &__favorite-btn {
-    //width: 36px;
-    //height: 36px;
+    & > div {
+      width: 100%;
+      height: 100%;
+    }
+    width: 36px;
+    height: 36px;
   }
 
   &__favorite-btn {
@@ -244,7 +261,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog-product-card {
     &__image {
       max-height: 235px;
@@ -257,7 +275,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog-product-card {
     padding: 10px;
     &__info {

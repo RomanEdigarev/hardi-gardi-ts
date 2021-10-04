@@ -31,10 +31,10 @@
 </template>
 
 <script lang="ts">
-import {Tooltip} from "@/shared/ui";
+import { Tooltip } from "@/shared/ui";
 import { CloseIcon, LocationIcon } from "@/shared/ui/icons";
 import { defineComponent, ref } from "vue";
-import {AlfaButton, BetaButton} from "@/shared/ui/buttons";
+import { AlfaButton, BetaButton } from "@/shared/ui/buttons";
 
 export default defineComponent({
   name: "Location",
@@ -134,11 +134,14 @@ export default defineComponent({
   &__button {
     width: 182px;
     height: 52px;
+    :deep span {
+      font-size: 15px;
+    }
   }
 
   &__close-button {
     position: absolute;
-    width: 11px;
+    width: 28px;
     height: 11px;
     top: 0;
     right: 0;

@@ -4,15 +4,14 @@
       <input class="input" type="email" placeholder="E-mail" />
       <button class="button">Отправить</button>
     </form>
-    <span class="info"
-      >Нажимая «Отправить» вы соглашаетесь на обработку персональных
-      данных</span
-    >
+    <span class="info">
+      Нажимая «Отправить» вы соглашаетесь на обработку персональных данных
+    </span>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Input",
@@ -61,6 +60,7 @@ export default defineComponent({
 .info {
   position: absolute;
   font-size: 12px;
+  line-height: 15px;
   color: $clr-eta;
   bottom: -16px;
   transform: translateY(100%);

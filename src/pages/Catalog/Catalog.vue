@@ -23,7 +23,11 @@
           <img src="./assets/mobile-filter-icon.svg" alt="" />
         </button>
         <div ref="filter" class="catalog__filter-container">
-          <CatalogFilter :sections="sections" @hide-mobile-filter="hideFilterMobile" @filter-section="setFilterSection"/>
+          <CatalogFilter
+            :sections="sections"
+            @hide-mobile-filter="hideFilterMobile"
+            @filter-section="setFilterSection"
+          />
           <div ref="filterBG" class="catalog__filter-container__bg"></div>
         </div>
         <div class="catalog__results">
@@ -55,7 +59,7 @@
               :key="product.id"
               class="catalog__results__item"
             >
-              <ProductCardCatalog :product="product"/>
+              <ProductCardCatalog :product="product" />
             </div>
           </div>
           <div class="catalog__results__footer">
@@ -87,7 +91,7 @@ import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
-import {FilterSection} from "@/entities/Products/Filter/model";
+import { FilterSection } from "@/entities/Products/Filter/model";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -125,8 +129,8 @@ export default defineComponent({
       store.dispatch("products/addProductsByPage");
     };
     const setFilterSection = (id: number, name: string) => {
-      store.commit('products/setFilter', {section: {id, name}})
-    }
+      store.commit("products/setFilter", { section: { id, name } });
+    };
 
     return {
       product,
@@ -138,7 +142,9 @@ export default defineComponent({
       products: computed<Product[]>(
         () => store.getters["products/getProductsOnCurrentPage"]
       ),
-      sections: computed<FilterSection[]>(() => store.getters['products/getSections']),
+      sections: computed<FilterSection[]>(
+        () => store.getters["products/getSections"]
+      ),
       fetchProducts,
       setFilterSection,
     };
@@ -187,6 +193,7 @@ export default defineComponent({
       display: grid;
       width: 100%;
       grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+      grid-auto-rows: 492px;
       justify-content: space-between;
     }
 
@@ -197,13 +204,20 @@ export default defineComponent({
 
     &__footer {
       margin-top: 20px;
+      padding: 0 10px;
+      :deep .btn {
+        span {
+          font-size: 16px;
+        }
+      }
     }
   }
 
   // *** Results END *** //
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
     &__content {
       grid-template-columns: 1fr;
@@ -263,7 +277,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
     &__content {
       grid-template-columns: 1fr;
@@ -336,12 +351,12 @@ export default defineComponent({
           &__favorite-btn {
             width: 32px;
             height: 32px;
-            top:10px;
+            top: 10px;
             right: 10px;
           }
           &__shop-btn {
             width: 44px;
-            height: 44px ;
+            height: 44px;
             right: 10px;
             bottom: 10px;
           }
@@ -408,14 +423,12 @@ export default defineComponent({
           &__favorite-btn {
             width: 32px;
             height: 32px;
-            top:10px;
+            top: 10px;
             right: 10px;
           }
         }
-
       }
     }
-
   }
 }
 </style>

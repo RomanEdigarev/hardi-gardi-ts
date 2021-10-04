@@ -124,7 +124,7 @@ export default defineComponent({
     font-weight: normal;
     font-size: 15px;
     line-height: 1.6;
-    margin-bottom: 26px;
+    //margin-bottom: 26px;
   }
   &__list {
     li {
@@ -133,7 +133,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .product-description {
     padding: 27px;
     &__toggle-btn {

@@ -26,7 +26,11 @@
             />
           </svg>
         </span>
-        <router-link v-for="menuItem in topMenu" :to="menuItem.link">
+        <router-link
+          class="navigation__link"
+          v-for="menuItem in topMenu"
+          :to="menuItem.link"
+        >
           {{ menuItem.name }}
         </router-link>
       </nav>
@@ -47,7 +51,7 @@
 
 <script lang="ts">
 import { NavigationButton } from "./ui";
-import {defineComponent, PropType} from "vue";
+import { defineComponent, PropType } from "vue";
 import { CatalogSubmenu } from "./ui";
 import Location from "../Location/Location.vue";
 import { useTopMenu } from "@/widgets/Navigation/lib";
@@ -133,6 +137,7 @@ export default defineComponent({
   }
 
   &__link {
+    font-size: 18px;
     transition: text-shadow 0.2s ease-in-out;
     white-space: nowrap;
     cursor: pointer;
@@ -150,6 +155,7 @@ export default defineComponent({
   }
 
   .with-submenu {
+    text-shadow: 0 0 1px $clr-phi;
     &:hover {
       color: $clr-zeta;
       text-shadow: 0 0 1px $clr-zeta;
@@ -160,11 +166,13 @@ export default defineComponent({
   }
 
   &__tooltip {
+    padding-top: 2px;
     flex: 0.2;
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .navigation {
     &__container {
       display: none;

@@ -13,7 +13,7 @@
       <PromotionSection :products="[product, product]" />
     </section>
     <section class="home__sales-container">
-      <SectionSales :products="[product, product]"/>
+      <SectionSales :products="[product, product, product, product]" />
     </section>
     <section class="home__sets-container">
       <SectionSets :products="[product, product]" />
@@ -57,7 +57,7 @@
         </CategoryCard>
       </div>
       <div class="home__category-cards-container__card-container">
-        <CategoryCard title="Продукция и качество" bg-color="#FFE2A0">
+        <CategoryCard :title="`Продукция \nи качество`" bg-color="#FFE2A0">
           <template v-slot:svg-container>
             <svg
               width="189"
@@ -178,7 +178,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .home {
     &__prolog-container {
       height: auto;
@@ -195,7 +196,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .home {
     &__prolog-container {
       height: auto;

@@ -11,7 +11,7 @@
       <span>
         Дизайн сайта — Terminaldesign, CAKE.RU
         <br />
-        Разработка сайта — CAKE.RU
+        Разработка сайта — <a href="https://cake.ru/">CAKE.RU</a>
       </span>
     </div>
   </div>
@@ -48,7 +48,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .copyright {
     flex-direction: column;
     justify-content: center;

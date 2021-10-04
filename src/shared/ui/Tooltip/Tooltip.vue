@@ -35,7 +35,9 @@ export default defineComponent({
     const isOpen = ref(false);
     const translateX = computed(() => {
       if (props.offset) {
-        return `transform: translateY(100%) translateX(-${50 - +props.offset}%)`;
+        return `transform: translateY(100%) translateX(-${
+          50 - +props.offset
+        }%)`;
       } else {
         return `transform: translateY(100%) translateX(-50%)`;
       }
@@ -104,7 +106,7 @@ export default defineComponent({
     left: 50%;
     bottom: -3px;
     transform: translateX(-8px);
-    z-index: 1;
+    z-index: 11;
     width: 0;
     height: 0;
   }

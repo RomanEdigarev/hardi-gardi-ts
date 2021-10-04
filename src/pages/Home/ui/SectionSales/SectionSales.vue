@@ -4,7 +4,8 @@
       <div class="sales-section__content">
         <div class="sales-section__title-container">
           <span class="sales-section__title title">
-            Скидки на любимые игры
+            Скидки<br />
+            на любимые игры
           </span>
           <div class="sales-section__title-container__bg-container">
             <svg
@@ -31,7 +32,7 @@
 
         <div v-else class="sales-section__items-container">
           <div v-for="product in products" class="sales-section__item">
-            <ProductCardHome :product="product"/>
+            <ProductCardHome :product="product" />
           </div>
         </div>
       </div>
@@ -45,12 +46,12 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, PropType} from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import { ProductCardHome, ProductCardHomePhone } from "@/widgets";
 import { PlusIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { useStore } from "@/services/vuex";
-import {Product} from "@/entities/Products/Product/model";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "SectionSales",
@@ -63,7 +64,7 @@ export default defineComponent({
   props: {
     products: {
       type: Object as PropType<Product[]>,
-      required: true
+      required: true,
     },
   },
   setup() {
@@ -98,8 +99,9 @@ export default defineComponent({
     &__bg-container {
       position: absolute;
       top: -12px;
-      left: 0;
+      left: 6%;
       z-index: -1;
+      width: 414px;
     }
   }
 
@@ -107,6 +109,7 @@ export default defineComponent({
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+    grid-auto-rows: 390px;
     column-gap: 30px;
     row-gap: 40px;
   }
@@ -134,7 +137,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .sales-section {
     &__items-container {
       grid-template-columns: auto;

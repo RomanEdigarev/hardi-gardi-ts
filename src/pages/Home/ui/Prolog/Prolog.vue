@@ -85,7 +85,7 @@ export default defineComponent({
   &__info {
     display: flex;
     justify-content: space-between;
-    padding: 0 9%;
+    padding: 0 7%;
     align-items: center;
   }
 
@@ -95,7 +95,7 @@ export default defineComponent({
   }
 
   &__text {
-    flex: 0.4;
+    flex: 0.45;
     color: $clr-phi;
     p {
       line-height: 1.5;
@@ -144,7 +144,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .prolog {
     &__text {
       max-width: 514px;
@@ -168,7 +169,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .prolog {
     padding: 0;
     &__info {

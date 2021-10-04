@@ -189,6 +189,11 @@ export default defineComponent({
       align-items: center;
       &__btn {
         width: 224px;
+        :deep .btn {
+          span {
+            font-size: 16px;
+          }
+        }
       }
       &__count {
         height: 44px;
@@ -258,7 +263,8 @@ export default defineComponent({
 
   // *** Footer END *** //
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .about-product {
     &__header {
     }
@@ -272,7 +278,7 @@ export default defineComponent({
         :deep button > span {
           font-weight: 600;
           font-size: 16px;
-          line-height: 28px
+          line-height: 28px;
         }
       }
       &__text {

@@ -132,7 +132,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-columns: 1.6fr 0.5fr 1fr;
     justify-content: space-between;
   }
 
@@ -180,6 +180,7 @@ export default defineComponent({
 }
 
 .catalog {
+  max-width: 466px;
   max-height: 280px;
   margin-bottom: 48px;
   .footer__item__links {
@@ -192,7 +193,6 @@ export default defineComponent({
   font-size: 22px;
   margin-top: 12px;
   font-weight: $bold;
-  color: $clr-alpha-zeta;
 }
 
 .working {
@@ -230,7 +230,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .footer {
     &__wrapper {
       padding: 0 24px;

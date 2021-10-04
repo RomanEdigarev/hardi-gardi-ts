@@ -11,13 +11,15 @@
 
             <div class="product-card-info__price">
               <div class="product-card-info__price__prev">
-                {{ prevPrice }}&#8381;
+                <span> выгода </span>
+                <span>{{ prevPrice }}&#8381;</span>
               </div>
               <div class="product-card-info__price__current">
                 {{ currentPrice }} &#8381;/шт
               </div>
             </div>
             <div class="product-card-info__description">{{ description }}</div>
+            <div class="product-card-info__link alfa-link">Подробнее</div>
           </div>
         </template>
       </Card>
@@ -101,13 +103,14 @@ export default defineComponent({
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 48px 36px;
+    padding: 34px 66px;
   }
 
   &__title {
     font-size: 20px;
+    max-width: 95%;
     font-weight: $bold;
-    margin-bottom: 65px;
+    margin-bottom: 43px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -118,18 +121,27 @@ export default defineComponent({
     display: flex;
     align-items: center;
     margin-bottom: 27px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 
     &__prev {
-      font-size: 20px;
-      font-weight: $bold;
-      margin-right: 17px;
-      text-decoration: line-through;
+      span {
+        font-size: 20px;
+        font-weight: $bold;
+        align-self: flex-end;
+        padding-bottom: 2px;
+      }
+
+      span:first-child {
+        text-decoration: none;
+      }
     }
 
     &__current {
       font-size: 28px;
       font-weight: $bold;
       color: $clr-zeta;
+      margin-right: 34px;
     }
   }
 
@@ -139,6 +151,7 @@ export default defineComponent({
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: 15px;
   }
 
   &__link {
@@ -166,6 +179,9 @@ export default defineComponent({
 .isSimple {
   .product-card-info__title {
     font-size: 36px;
+    -webkit-line-clamp: 5;
+    margin-bottom: 42px;
+    max-width: none;
   }
   .product-card-info__link {
     display: none;
@@ -179,10 +195,12 @@ export default defineComponent({
 
   .product-card-info__content {
     justify-content: center;
+    padding: 86px 52px;
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .product-card-info {
     &__content {
       padding: 48px 36px;
@@ -196,7 +214,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .product-card-info {
     max-width: 339px;
     max-height: 258px;

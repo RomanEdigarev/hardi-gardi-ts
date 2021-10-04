@@ -7,9 +7,9 @@
           :style="{ backgroundColor: bgColor }"
         >
           <div class="category-card__title-container">
-            <span class="category-card__title" :style="{ color: titleColor }">{{
-              title
-            }}</span>
+            <span class="category-card__title" :style="{ color: titleColor }">
+              {{ title }}
+            </span>
           </div>
 
           <div ref="svgContainer" class="category-card__svg-container">
@@ -106,7 +106,7 @@ export default defineComponent({
   }
 
   &__title-container {
-    max-width: 180px;
+    max-width: 68%;
   }
 
   &__svg-container {
@@ -125,6 +125,7 @@ export default defineComponent({
     font-weight: $semi-bold;
     font-size: 28px;
     line-height: 1.2;
+    white-space: break-spaces;
   }
 
   &__plus-btn {
@@ -133,7 +134,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .category-card {
     width: 220px;
     &__svg-container {
@@ -152,7 +154,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .category-card {
     width: 100%;
     height: 100%;

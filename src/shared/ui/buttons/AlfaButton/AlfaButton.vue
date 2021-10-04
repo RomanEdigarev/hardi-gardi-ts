@@ -30,6 +30,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .btn {
+  height: 100%;
   width: 100%;
   padding: 20px 0;
   position: relative;
@@ -136,7 +137,8 @@ export default defineComponent({
     border-top-color: $clr-zeta;
   }
 }
-@media screen and (min-width: 375px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 375px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .btn {
     padding: 13px 0;
     font-size: 15px;
