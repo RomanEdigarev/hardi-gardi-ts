@@ -194,7 +194,10 @@ export default defineComponent({
         font-weight: normal;
         font-size: 15px;
         line-height: 1.6;
-        margin-bottom: 26px;
+        //margin-bottom: 26px;
+        p {
+          margin-bottom: 0;
+        }
       }
       &__list {
         li {
@@ -226,7 +229,8 @@ export default defineComponent({
 
   // *** Body END *** //
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .product-page {
     &__body {
       grid-template-columns: 100%;
@@ -237,7 +241,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .product-page {
     &__body {
       grid-template-columns: 100%;

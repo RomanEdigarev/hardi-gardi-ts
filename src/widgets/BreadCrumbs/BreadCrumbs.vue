@@ -60,6 +60,9 @@ export default defineComponent({
     &:hover {
       color: $clr-zeta;
     }
+    span {
+      font-size: 13px;
+    }
     svg {
       margin: 0 10px;
     }

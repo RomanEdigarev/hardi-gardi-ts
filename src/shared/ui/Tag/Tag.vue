@@ -54,6 +54,7 @@ export default defineComponent({
     white-space: nowrap;
     width: 100%;
     margin-right: 15px;
+    font-size: 13px;
   }
 
   &__delete-btn {

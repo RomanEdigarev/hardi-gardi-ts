@@ -3,7 +3,7 @@
     <BlockWithSlider
       v-if="!isPhone"
       :products="products"
-      title="Наши Бестселлеры"
+      :title="`Наши \n\r Бестселлеры`"
     >
       <template v-slot:image-bg-container>
         <svg
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, PropType, watch, watchEffect} from "vue";
+import { computed, defineComponent, PropType, watch, watchEffect } from "vue";
 import { BlockWithSlider, BlockWithSliderPhone } from "@/widgets";
 import { Product } from "@/entities/Products/Product/model";
 import { useStore } from "@/services/vuex";
@@ -72,12 +72,12 @@ export default defineComponent({
 
   setup() {
     const store = useStore();
-    const isPhone= computed(() => store.getters.getIsPhone)
+    const isPhone = computed(() => store.getters.getIsPhone);
     // watchEffect(() => {
     //   console.log(store.getters.getIsPhone)
     // })
     return {
-      isPhone
+      isPhone,
     };
   },
 });
@@ -87,6 +87,9 @@ export default defineComponent({
 .bestsellers {
   & > div {
     margin: 0 auto;
+  }
+  :deep .block-with-slider__section-title__bg-container {
+    left: -24%;
   }
 }
 </style>

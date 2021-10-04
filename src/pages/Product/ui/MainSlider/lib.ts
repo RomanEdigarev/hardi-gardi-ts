@@ -1,11 +1,9 @@
-import { computed, onMounted, onUpdated, ref } from "vue";
-import { useStore } from "@/services/vuex";
+import { onMounted, onUpdated, ref } from "vue";
 
 const getSecondaryOptions = (status?: string, width?: string) => {
   const isMobile = status === "isMobile";
   const isPhone = status === "isPhone";
 
-  console.log(isMobile);
   const getWidthForOptions = () => {
     if (isPhone) {
       return "273px";
@@ -16,8 +14,8 @@ const getSecondaryOptions = (status?: string, width?: string) => {
     }
   };
   const options = {
-    type: "loop",
-    perPage: isPhone && width ? 5 : 4,
+    type: "slide",
+    perPage: isPhone && width ? 4 : 5,
     perMove: 1,
     pagination: false,
     rewind: true,
@@ -27,6 +25,7 @@ const getSecondaryOptions = (status?: string, width?: string) => {
       // left: "100px",
       right: "0",
     },
+    gap: "16px",
     direction: isMobile || isPhone ? "ltr" : "ttb",
     height: isMobile || isPhone ? "auto" : "480px",
     width: width || getWidthForOptions(),

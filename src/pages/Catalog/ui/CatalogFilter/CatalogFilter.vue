@@ -47,8 +47,15 @@
           </svg>
         </div>
         <div class="catalog-filter__item__body subtitles-container">
-          <div v-for="section in sections" class="catalog-filter__item__subtitle" @click="$emit('filter-section', section.id, section.name)">
-            <span>{{section.name}}</span>
+          <div class="catalog-filter__item__subtitle">
+            <span>Все категории</span>
+          </div>
+          <div
+            v-for="section in sections"
+            class="catalog-filter__item__subtitle"
+            @click="$emit('filter-section', section.id, section.name)"
+          >
+            <span>{{ section.name }}</span>
           </div>
         </div>
       </div>
@@ -108,7 +115,7 @@
         </div>
         <div class="catalog-filter__item__body tags-container">
           <Tag
-            text="для деовчек"
+            text="для девочек"
             @delete-tag="() => console.log('delete tag')"
           />
           <Tag
@@ -185,10 +192,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue";
+import { defineComponent, PropType } from "vue";
 import { RangeSlider, Tag } from "@/shared/ui";
 import { AlfaButton } from "@/shared/ui/buttons";
-import {FilterSection} from "@/entities/Products/Filter/model";
+import { FilterSection } from "@/entities/Products/Filter/model";
 
 export default defineComponent({
   name: "CatalogFilter",
@@ -199,9 +206,9 @@ export default defineComponent({
   },
   props: {
     sections: {
-      type:  Object as PropType<FilterSection[]>,
-      required: true
-    }
+      type: Object as PropType<FilterSection[]>,
+      required: true,
+    },
   },
   emits: ["hide-mobile-filter", "filter-section"],
   setup() {
@@ -246,7 +253,8 @@ export default defineComponent({
   }
 
   .categories {
-    margin-bottom: 154px;
+    margin-bottom: 22px;
+    transition: margin-bottom 0.3s ease-in-out;
   }
 
   .subject,
@@ -327,13 +335,17 @@ export default defineComponent({
   &__item.active {
     padding-bottom: 22px;
     .catalog-filter__item__body {
-      max-height: 200px;
+      max-height: 1000px;
     }
     .catalog-filter__item__title-container {
       svg {
         transform: rotate(0);
       }
     }
+  }
+  .categories.active {
+    padding-bottom: 0px;
+    margin-bottom: 154px;
   }
 
   // *** Item END *** //
@@ -342,11 +354,19 @@ export default defineComponent({
   &__footer {
     &__btn-container {
       margin-bottom: 12px;
+      :deep .btn {
+        padding: 14px;
+        span {
+          font-size: 16px;
+          font-weight: $bold;
+        }
+      }
     }
   }
   // *** Footer END *** //
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog-filter {
     background-color: white;
     min-height: 100vh;
@@ -359,7 +379,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .catalog-filter {
     padding: 0 18px;
     overflow-y: scroll;

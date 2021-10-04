@@ -33,7 +33,8 @@
         <div class="promotion-section__info-container">
           <div v-if="!isSimple" class="promotion-section__title-container">
             <span class="promotion-section__title title">
-              Акции ХардиГарди
+              Акции<br />
+              ХардиГарди
             </span>
             <div class="promotion-section__title-container__bg-container">
               <svg
@@ -149,7 +150,7 @@ export default defineComponent({
     &__bg-container {
       position: absolute;
       top: -15px;
-      left: 0;
+      left: -34%;
       z-index: -1;
     }
   }
@@ -218,7 +219,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .promotion-section {
     &__image {
       width: 345px;
@@ -256,7 +258,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .promotion-section {
     &__content-container > div {
       margin: 0 auto;

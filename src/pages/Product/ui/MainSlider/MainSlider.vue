@@ -12,7 +12,13 @@
           </BetaButton>
         </div>
         <div class="main-slider__body__thumbnails__items">
-          <Splide v-if="(isZoom && isPhone)" ref="secondarySplide" :options="getSecondaryOptions('isPhone',(isZoom && isPhone) ? '339px' : null)">
+          <Splide
+            v-if="isZoom && isPhone"
+            ref="secondarySplide"
+            :options="
+              getSecondaryOptions('isPhone', isZoom && isPhone ? '339px' : null)
+            "
+          >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
@@ -35,7 +41,11 @@
               </div>
             </template>
           </Splide>
-          <Splide v-else-if="isPhone" ref="secondarySplide" :options="getSecondaryOptions('isPhone')">
+          <Splide
+            v-else-if="isPhone"
+            ref="secondarySplide"
+            :options="getSecondaryOptions('isPhone')"
+          >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
@@ -58,7 +68,11 @@
               </div>
             </template>
           </Splide>
-          <Splide v-else-if="isMobile" ref="secondarySplide" :options="getSecondaryOptions('isMobile')">
+          <Splide
+            v-else-if="isMobile"
+            ref="secondarySplide"
+            :options="getSecondaryOptions('isMobile')"
+          >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
@@ -81,7 +95,12 @@
               </div>
             </template>
           </Splide>
-          <Splide v-else ref="secondarySplide" :options="getSecondaryOptions()">
+          <Splide
+            v-else
+            ref="secondarySplide"
+            :options="getSecondaryOptions()"
+            @splide:moved="test"
+          >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
@@ -119,7 +138,7 @@
       <!-- Current Slide -->
       <div class="main-slider__body__current-slide">
         <Splide
-            v-if="(isZoom && (isPhone || isMobile))"
+          v-if="isZoom && (isPhone || isMobile)"
           ref="primarySplide"
           :options="getPrimaryOptions('isPhone', isZoom)"
           @splide:click="$emit('zoom')"
@@ -145,121 +164,121 @@
           </template>
         </Splide>
         <Splide
-            v-else-if="isPhone"
-            ref="primarySplide"
-            :options="getPrimaryOptions('isPhone')"
-            @splide:click="$emit('zoom')"
+          v-else-if="isPhone"
+          ref="primarySplide"
+          :options="getPrimaryOptions('isPhone')"
+          @splide:click="$emit('zoom')"
         >
           <SplideSlide>
             <img
-                src="./assets/thumbnail_0.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_0.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_1.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_1.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_2.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_2.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
             <div class="splide__arrows">
               <button
-                  ref="prevSlideBtn"
-                  class="splide__arrow splide__arrow--prev test"
+                ref="prevSlideBtn"
+                class="splide__arrow splide__arrow--prev test"
               ></button>
               <button
-                  ref="nextSlideBtn"
-                  class="splide__arrow splide__arrow--next"
+                ref="nextSlideBtn"
+                class="splide__arrow splide__arrow--next"
               ></button>
             </div>
           </template>
         </Splide>
         <Splide
-            v-else-if="isMobile"
-            ref="primarySplide"
-            :options="getPrimaryOptions('isMobile')"
-            @splide:click="$emit('zoom')"
+          v-else-if="isMobile"
+          ref="primarySplide"
+          :options="getPrimaryOptions('isMobile')"
+          @splide:click="$emit('zoom')"
         >
           <SplideSlide>
             <img
-                src="./assets/thumbnail_0.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_0.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_1.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_1.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_2.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_2.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
             <div class="splide__arrows">
               <button
-                  ref="prevSlideBtn"
-                  class="splide__arrow splide__arrow--prev test"
+                ref="prevSlideBtn"
+                class="splide__arrow splide__arrow--prev test"
               ></button>
               <button
-                  ref="nextSlideBtn"
-                  class="splide__arrow splide__arrow--next"
+                ref="nextSlideBtn"
+                class="splide__arrow splide__arrow--next"
               ></button>
             </div>
           </template>
         </Splide>
         <Splide
-            v-else
-            ref="primarySplide"
-            :options="getPrimaryOptions()"
-            @splide:click="$emit('zoom')"
+          v-else
+          ref="primarySplide"
+          :options="getPrimaryOptions()"
+          @splide:click="$emit('zoom')"
         >
           <SplideSlide>
             <img
-                src="./assets/thumbnail_0.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_0.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_1.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_1.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <SplideSlide>
             <img
-                src="./assets/thumbnail_2.jpg"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              src="./assets/thumbnail_2.jpg"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
             <div class="splide__arrows">
               <button
-                  ref="prevSlideBtn"
-                  class="splide__arrow splide__arrow--prev test"
+                ref="prevSlideBtn"
+                class="splide__arrow splide__arrow--prev test"
               ></button>
               <button
-                  ref="nextSlideBtn"
-                  class="splide__arrow splide__arrow--next"
+                ref="nextSlideBtn"
+                class="splide__arrow splide__arrow--next"
               ></button>
             </div>
           </template>
@@ -283,7 +302,7 @@ import { CloseIcon, SlideArrowIcon } from "@/shared/ui/icons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { getPrimaryOptions, useMainSlider } from "./lib";
 import { ProductPhoto } from "@/entities/Products/Product/model";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "MainSlider",
@@ -308,10 +327,13 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const slider = useMainSlider(props.isZoom);
-    const store = useStore()
+    const store = useStore();
+
+    const test = (value) => {
+      console.log(value);
+    };
 
     onUpdated(() => {
-
       document.documentElement.style.overflow = props.isZoom
         ? "hidden"
         : "visible";
@@ -319,8 +341,9 @@ export default defineComponent({
     });
     return {
       ...slider,
-      isPhone: computed(() => store.getters['getIsPhone']),
-      isMobile: computed(() => store.getters['getIsMobile'])
+      isPhone: computed(() => store.getters["getIsPhone"]),
+      isMobile: computed(() => store.getters["getIsMobile"]),
+      test,
     };
   },
 });
@@ -344,6 +367,7 @@ export default defineComponent({
       margin-right: 22px;
       width: 80px;
       height: 600px;
+      padding: 20px 0;
       &__items {
       }
       &__item {
@@ -453,7 +477,8 @@ export default defineComponent({
     z-index: 25;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .main-slider {
     &__body {
       flex-direction: column-reverse;
@@ -481,7 +506,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .main-slider.zoom {
     overflow-y: scroll;
     .main-slider__body {
@@ -497,7 +523,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .main-slider {
     &__body {
       flex-direction: column-reverse;
@@ -523,7 +550,8 @@ export default defineComponent({
           max-height: 56px;
           margin: 0 auto;
         }
-        &__up-btn, &__down-btn {
+        &__up-btn,
+        &__down-btn {
           display: none;
         }
       }
@@ -558,7 +586,8 @@ export default defineComponent({
         &__items {
           margin: 0 auto;
         }
-        &__up-btn, &__down-btn {
+        &__up-btn,
+        &__down-btn {
           display: none;
         }
       }

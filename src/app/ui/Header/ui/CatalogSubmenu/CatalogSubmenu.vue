@@ -90,7 +90,7 @@ export default defineComponent({
   &__link-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    //align-items: center;
     margin-bottom: 42px;
   }
 
@@ -122,6 +122,13 @@ export default defineComponent({
       flex-direction: column;
       align-items: flex-start;
     }
+    &__column:last-child {
+      .catalog-submenu__item:last-child {
+        .catalog-submenu__link-container:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
     & > div:first-child {
       width: 100%;
       align-items: flex-start;
@@ -141,6 +148,9 @@ export default defineComponent({
 
   &__sublink {
     margin-bottom: 16px;
+    :deep .alfa-link {
+      font-size: 18px;
+    }
   }
 }
 </style>

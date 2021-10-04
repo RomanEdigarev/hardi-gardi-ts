@@ -59,7 +59,14 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, PropType, onUpdated, ref} from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  PropType,
+  onUpdated,
+  ref,
+} from "vue";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
@@ -94,9 +101,9 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const isMobile = computed(() => store.getters['getIsMobile'])
-    const isPhone = computed(() => store.getters['getIsPhone'])
-    const slider = ref(null)
+    const isMobile = computed(() => store.getters["getIsMobile"]);
+    const isPhone = computed(() => store.getters["getIsPhone"]);
+    const slider = ref(null);
     const options = computed(() => {
       if (props.withHomeCards) {
         return {
@@ -109,16 +116,16 @@ export default defineComponent({
       } else {
         return {
           type: "loop",
-          perPage: isMobile.value ? (isPhone.value? 2: 3) : 2,
+          perPage: isMobile.value ? (isPhone.value ? 2 : 3) : 2,
           perMove: 1,
           gap: "20px",
           pagination: false,
         };
       }
-    })
+    });
     onUpdated(() => {
       slider.value.splide.refresh();
-    })
+    });
 
     const nextSlideBtn = ref<HTMLElement>(null);
     const prevSlideBtn = ref<HTMLElement>(null);
@@ -137,7 +144,7 @@ export default defineComponent({
       options,
       isMobile,
       isPhone,
-      slider
+      slider,
     };
   },
 });
@@ -181,6 +188,9 @@ export default defineComponent({
 
   // *** Body *** //
   &__body {
+    &__item {
+      height: 472px;
+    }
   }
 
   // *** Body END *** //
@@ -190,43 +200,44 @@ export default defineComponent({
   }
 }
 
-  @media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
-    .footer-slider {
-      &__header {
-        &__title {
-          font-size: 21px;
-          line-height: 26px;
-        }
-        &__btn-container {
-          width: 92px;
-        }
-        &__btn {
-          width: 40px;
-          height: 40px;
-        }
-      }
-    }
-    :deep .catalog-product-card {
-      max-height: 388px;
-      max-width: 220px;
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .footer-slider {
+    &__header {
       &__title {
-        font-size: 12px;
-        line-height: 1.33;
+        font-size: 21px;
+        line-height: 26px;
       }
-      &__shop-btn {
-        display: block;
-        width: 52px;
-        height: 52px;
+      &__btn-container {
+        width: 92px;
+      }
+      &__btn {
+        width: 40px;
+        height: 40px;
       }
     }
-    :deep .product-card-info-phone__add-to-shop-btn {
-      width: 44px;
-      height: 44px;
+  }
+  :deep .catalog-product-card {
+    max-height: 388px;
+    max-width: 220px;
+    &__title {
+      font-size: 12px;
+      line-height: 1.33;
     }
+    &__shop-btn {
+      display: block;
+      width: 52px;
+      height: 52px;
     }
+  }
+  :deep .product-card-info-phone__add-to-shop-btn {
+    width: 44px;
+    height: 44px;
+  }
+}
 
-
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .footer-slider {
     &__header {
       &__title {

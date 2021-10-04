@@ -134,10 +134,11 @@ export default defineComponent({
   &__section-title {
     display: inline-block;
     text-align: center;
+    white-space: break-spaces;
 
     &__bg-container {
       position: absolute;
-      top: -25px;
+      top: -18px;
       left: 0;
       z-index: -1;
     }
@@ -151,7 +152,8 @@ export default defineComponent({
     width: 267px;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .block-with-slider {
     height: 500px;
     position: relative;
@@ -234,7 +236,5 @@ export default defineComponent({
       width: auto;
     }
   }
-
-
 }
 </style>

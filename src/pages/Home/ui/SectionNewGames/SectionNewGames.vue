@@ -39,7 +39,7 @@
         </div>
         <div class="new-games__second-row">
           <div v-for="product in products" class="new-games__second-row__item">
-            <ProductCardHome :product="product"/>
+            <ProductCardHome :product="product" />
           </div>
         </div>
       </div>
@@ -54,14 +54,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue";
+import { defineComponent, PropType } from "vue";
 import { Card } from "@/shared/ui";
 import { InfoProductCard, ImageProductCard } from "@/widgets";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { ProductCardHome } from "@/widgets";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";
-import {Product} from "@/entities/Products/Product/model";
+import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
   name: "SectionNewGames",
@@ -76,8 +76,8 @@ export default defineComponent({
   props: {
     products: {
       type: Object as PropType<Product[]>,
-      required: true
-    }
+      required: true,
+    },
   },
   setup() {
     const { product } = useProduct();
@@ -109,6 +109,7 @@ export default defineComponent({
       top: 20px;
       left: 0;
       z-index: -1;
+      width: 364px;
     }
   }
 
@@ -170,7 +171,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .new-games {
     &__first-row {
       display: grid;

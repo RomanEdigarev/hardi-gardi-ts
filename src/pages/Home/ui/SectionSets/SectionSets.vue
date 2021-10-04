@@ -85,8 +85,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .sets-section {
+  :deep .block-with-slider__image-card-container__bg-container {
+    top: -38px;
+  }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .sets-section {
     & > div {
       margin: 0 auto;
