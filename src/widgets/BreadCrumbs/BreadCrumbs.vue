@@ -30,18 +30,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  onUpdated,
+  PropType,
+  ref,
+  watch,
+} from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   name: "BreadCrumbs",
-  setup() {
+  props: {
+    items: {
+      type: Array,
+    },
+  },
+  setup(props) {
     const route = useRoute();
-    let breadcrumbs = route.meta.breadcrumb;
-
-    watch(route, (newRoute) => {
-      breadcrumbs = newRoute.meta.breadcrumb;
+    let breadcrumbs = computed(() => {
+      if (props.items) {
+        return [...route.meta.breadcrumb, ...(props.items as [])];
+      } else {
+        return [...route.meta.breadcrumb];
+      }
     });
+
+    // watch(route, (newRoute) => {
+    //   breadcrumbs = newRoute.meta.breadcrumb;
+    // });
 
     return {
       breadcrumbs,

@@ -1,4 +1,6 @@
 // Alias type
+import { Section } from "@/entities/Shop/Catalog/model";
+
 type Price = string | number;
 type ImgPath = string;
 type Article = string | number;
@@ -34,4 +36,5 @@ export type Product = {
   linkProducts?: Product[];
   isComplect?: boolean;
   parts?: Product[];
+  section?: Section;
 };

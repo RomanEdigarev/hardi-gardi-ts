@@ -78,7 +78,7 @@ export default defineComponent({
   transition: opacity, border, background-color 0.3s ease-in-out;
 
   &:disabled {
-    opacity: 50%;
+    opacity: 0.5;
     cursor: default;
   }
 }
@@ -140,15 +140,15 @@ export default defineComponent({
 
 // This small actions
 .beta-gamma-btn {
-  opacity: 50%;
+  opacity: 0.5;
 
   &:hover,
   &:active {
-    opacity: 100%;
+    opacity: 1;
   }
 
   &:focus {
-    opacity: 50%;
+    opacity: 0.5;
   }
 }
 
@@ -196,7 +196,7 @@ export default defineComponent({
   }
 
   &:disabled {
-    opacity: 50%;
+    opacity: 0.5;
     &:hover {
       background-color: $clr-alpha-delta;
     }

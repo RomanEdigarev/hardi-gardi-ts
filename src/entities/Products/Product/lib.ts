@@ -15,6 +15,11 @@ export const useProduct = () => {
     }/images/product-card.jpg`,
     isFavorite: false,
     characteristics: undefined,
+    photos: [
+      require("/src/pages/Product/ui/MainSlider/assets/thumbnail_0.jpg"),
+      require("/src/pages/Product/ui/MainSlider/assets/thumbnail_1.jpg"),
+      require("/src/pages/Product/ui/MainSlider/assets/thumbnail_2.jpg"),
+    ],
   };
 
   return {

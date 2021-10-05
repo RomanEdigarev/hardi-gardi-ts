@@ -60,6 +60,7 @@ export const getProductAdapter = async (id: number): Promise<Product> => {
       };
     }),
     isComplect: response.isComplect,
+    section: response.section,
   };
   // Transformation API data here //
 

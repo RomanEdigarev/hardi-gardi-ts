@@ -136,7 +136,7 @@ export default defineComponent({
 }
 
 .input:disabled ~ .checkbox {
-  opacity: 50%;
+  opacity: 0.5;
   cursor: default;
 
   &:hover {
