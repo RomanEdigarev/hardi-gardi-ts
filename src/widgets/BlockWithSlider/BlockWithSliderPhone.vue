@@ -54,7 +54,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .block-with-slider-phone {
-  width: 339px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,8 +82,9 @@ export default defineComponent({
   }
   &__body {
     &__image-slider {
-      width: 250px;
-      height: 312px;
+      width: 64%;
+      height: auto;
+      margin: 0 auto;
     }
   }
   &__footer {
@@ -93,6 +94,8 @@ export default defineComponent({
   }
 
   :deep .product-card-info {
+    width: 100%;
+    max-width: none;
     &__description {
       max-height: 72px;
       overflow: hidden;
@@ -113,6 +116,5 @@ export default defineComponent({
       }
     }
   }
-
 }
 </style>

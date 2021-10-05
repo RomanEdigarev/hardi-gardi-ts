@@ -215,9 +215,9 @@ export default defineComponent({
     &__first-row {
       display: grid;
       justify-content: center;
-      grid-template-columns: 170px 170px;
-      grid-template-rows: 216px 184px;
-      height: auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 216px 52%;
+      //height: auto;
       &__image-card-container {
         grid-column: 1/3;
         width: auto;
