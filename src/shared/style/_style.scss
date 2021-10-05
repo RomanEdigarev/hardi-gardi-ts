@@ -9,6 +9,9 @@ div, span, button, p, input {
   line-height: 1;
   outline: none;
   font-size: $mainFZ;
+  @media screen and (max-width: 768px){
+    font-size: $mobileFZ;
+  }
 }
 
 a {
@@ -99,7 +102,7 @@ button {
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 769px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3){
   .page-main {
     padding-top: 30px;
     &__header {
@@ -108,7 +111,7 @@ button {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 768px), (-webkit-min-device-pixel-ratio: 3) {
   .page-main {
     padding-top: 16px;
     &__header {

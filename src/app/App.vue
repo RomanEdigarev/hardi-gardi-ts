@@ -92,26 +92,28 @@ export default defineComponent({
 
         store.commit(
           "setIsMobile",
-            document.documentElement.clientWidth <= 1300 && document.documentElement.clientWidth >= 736
+          document.documentElement.clientWidth <= 1360 &&
+            document.documentElement.clientWidth >= 736
         );
         store.commit("setIsPhone", document.documentElement.clientWidth <= 735);
       }
     });
 
-    window.addEventListener('resize', () => {
-      console.log('resize')
-      if (document.documentElement.clientWidth <= 1300 && document.documentElement.clientWidth >= 736 )  {
+    window.addEventListener("resize", () => {
+      if (
+        document.documentElement.clientWidth <= 1360 &&
+        document.documentElement.clientWidth >= 736
+      ) {
         store.commit("setIsPhone", false);
         store.commit("setIsMobile", true);
-      }
-      else if (document.documentElement.clientWidth <= 735) {
+      } else if (document.documentElement.clientWidth <= 735) {
         store.commit("setIsPhone", true);
         store.commit("setIsMobile", false);
       } else {
         store.commit("setIsMobile", false);
         store.commit("setIsPhone", false);
       }
-    })
+    });
 
     const isMobile = computed(() => store.state.isMobile);
 
@@ -261,11 +263,12 @@ export default defineComponent({
 @media screen and (min-width: 1368px) and (max-width: 1919px) {
   .app {
     &__wrapper {
-      padding: 0 10vw;
+      padding: 0 6vw;
     }
     &__container {
-      max-width: none;
-      min-width: 80vw;
+      //max-width: none;
+      //min-width: 1194px;
+      width: 1194px;
     }
     &__scroll-btn-container {
       right: 10vw;
@@ -287,9 +290,13 @@ export default defineComponent({
     &__scroll-btn-container {
       right: 4vw;
     }
+    &__container {
+      width: 720px;
+    }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .app {
     overflow-x: hidden;
     &__wrapper {
@@ -305,7 +312,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .app {
     &__wrapper {
       padding: 0 18px;
