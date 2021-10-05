@@ -40,7 +40,7 @@ export default defineComponent({
     display: inline-block;
     font-family: Montserrat;
     font-weight: $medium;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   &:focus {

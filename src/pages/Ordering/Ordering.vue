@@ -1,7 +1,9 @@
 <template>
   <div class="ordering">
     <div class="ordering__header">
-      <div class="ordering__header__breadcrumbs">Вернуиться к корзине</div>
+      <router-link to="/basket" class="ordering__header__breadcrumbs">
+        Вернуться к корзине
+      </router-link>
       <div class="ordering__header__title">
         <PageTitle text="Оформление заказа" />
       </div>
@@ -193,9 +195,19 @@ export default defineComponent({
     padding: 0;
     margin-bottom: 31px;
   }
+
+  :deep .checkout {
+    &__body__subtitle {
+      display: none;
+    }
+    #delivery {
+      display: flex;
+    }
+  }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .ordering {
     &__header {
       margin-bottom: 36px;
