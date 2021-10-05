@@ -1,7 +1,7 @@
 <template>
   <div class="product-page">
     <div class="product-page__header">
-      <BreadCrumbs />
+      <BreadCrumbs :items="breadcrumbs" />
     </div>
     <div v-if="currentProduct" class="product-page__body">
       <div class="product-page__body__left">
@@ -102,6 +102,7 @@
 import {
   computed,
   defineComponent,
+  onBeforeMount,
   onMounted,
   onUpdated,
   PropType,
@@ -112,6 +113,8 @@ import { About, Description, FooterSlider, MainSlider, SetSlider } from "./ui";
 import { getCurrentProduct } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
+import { useRoute } from "vue-router";
+import { useProduct } from "@/entities/Products/Product/lib";
 
 export default defineComponent({
   name: "Product",
@@ -132,28 +135,41 @@ export default defineComponent({
     const isZoomSlider = ref(false);
     const zoomSlider = () => {
       isZoomSlider.value = !isZoomSlider.value;
-      console.log(isZoomSlider.value);
     };
     const store = useStore();
     let currentProduct = ref<Product>(null);
     const isLoading = computed(() => store.state.products.isLoading);
+    let breadcrumbs = ref(null);
 
     const text = ref<HTMLElement>(null);
 
     onMounted(async () => {
       currentProduct.value = await getCurrentProduct(props.productId as string);
+      breadcrumbs.value = [
+        {
+          name: currentProduct.value.section.name,
+          link: "/catalog",
+        },
+        {
+          name: currentProduct.value.title,
+          link: `/product/${currentProduct.value.id}`,
+        },
+      ];
     });
 
     onUpdated(() => {
       text.value.innerHTML = currentProduct.value.description;
     });
 
+    const { product } = useProduct();
     return {
       isZoomSlider,
       zoomSlider,
       isLoading,
       currentProduct,
       text,
+      breadcrumbs,
+      product,
     };
   },
 });

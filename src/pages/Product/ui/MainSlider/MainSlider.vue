@@ -3,16 +3,18 @@
     <div class="main-slider__body">
       <!-- thumbnails -->
       <div class="main-slider__body__thumbnails">
-        <div
-          class="main-slider__body__thumbnails__up-btn"
-          @click="goToNextSlide"
-        >
-          <BetaButton styling="beta-zeta-btn">
+        <div class="main-slider__body__thumbnails__up-btn">
+          <BetaButton
+            styling="beta-zeta-btn"
+            :is-disabled="isFirstSlide"
+            @click="goToPrevSlide"
+          >
             <SlideArrowIcon />
           </BetaButton>
         </div>
         <div class="main-slider__body__thumbnails__items">
           <Splide
+            @splide:moved="splideMoved"
             v-if="isZoom && isPhone"
             ref="secondarySplide"
             :options="
@@ -42,6 +44,7 @@
             </template>
           </Splide>
           <Splide
+            @splide:moved="splideMoved"
             v-else-if="isPhone"
             ref="secondarySplide"
             :options="getSecondaryOptions('isPhone')"
@@ -69,6 +72,7 @@
             </template>
           </Splide>
           <Splide
+            @splide:moved="splideMoved"
             v-else-if="isMobile"
             ref="secondarySplide"
             :options="getSecondaryOptions('isMobile')"
@@ -96,10 +100,10 @@
             </template>
           </Splide>
           <Splide
+            @splide:moved="splideMoved"
             v-else
             ref="secondarySplide"
             :options="getSecondaryOptions()"
-            @splide:moved="test"
           >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
@@ -124,11 +128,12 @@
             </template>
           </Splide>
         </div>
-        <div
-          class="main-slider__body__thumbnails__down-btn"
-          @click="goToPrevSlide"
-        >
-          <BetaButton styling="beta-zeta-btn">
+        <div class="main-slider__body__thumbnails__down-btn">
+          <BetaButton
+            styling="beta-zeta-btn"
+            @click="goToNextSlide"
+            :is-disabled="isLastSlide"
+          >
             <SlideArrowIcon />
           </BetaButton>
         </div>
@@ -234,7 +239,7 @@
             <div class="splide__arrows">
               <button
                 ref="prevSlideBtn"
-                class="splide__arrow splide__arrow--prev test"
+                class="splide__arrow splide__arrow--prev"
               ></button>
               <button
                 ref="nextSlideBtn"
@@ -249,27 +254,14 @@
           :options="getPrimaryOptions()"
           @splide:click="$emit('zoom')"
         >
-          <SplideSlide>
+          <SplideSlide v-for="photo in photos">
             <img
-              src="./assets/thumbnail_0.jpg"
+              :src="photo"
               alt=""
               class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_1.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_2.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
+
           <template v-slot:controls>
             <div class="splide__arrows">
               <button
@@ -325,13 +317,11 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     const slider = useMainSlider(props.isZoom);
     const store = useStore();
-
-    const test = (value) => {
-      console.log(value);
-    };
+    const isFirstSlide = ref(true);
+    const isLastSlide = ref(false);
 
     onUpdated(() => {
       document.documentElement.style.overflow = props.isZoom
@@ -339,11 +329,27 @@ export default defineComponent({
         : "visible";
       slider.primarySplide.value.splide.refresh();
     });
+
+    const splideMoved = (value) => {
+      if (value.index === 0) {
+        isFirstSlide.value = true;
+        isLastSlide.value = false;
+      } else if (value.index === value.length - 1) {
+        isFirstSlide.value = false;
+        isLastSlide.value = true;
+      } else {
+        isFirstSlide.value = false;
+        isLastSlide.value = false;
+      }
+    };
+
     return {
       ...slider,
       isPhone: computed(() => store.getters["getIsPhone"]),
       isMobile: computed(() => store.getters["getIsMobile"]),
-      test,
+      isFirstSlide,
+      isLastSlide,
+      splideMoved,
     };
   },
 });

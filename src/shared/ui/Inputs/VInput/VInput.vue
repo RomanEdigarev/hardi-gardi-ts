@@ -170,7 +170,7 @@ export default defineComponent({
 
 .input:focus ~ .close-btn,
 .input:focus ~ .label {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .close-btn {
@@ -184,7 +184,7 @@ export default defineComponent({
   transition: opacity 0.3s ease-in-out;
 
   :deep button {
-    opacity: 100%;
+    opacity: 1;
   }
 
   :deep path {
@@ -195,7 +195,7 @@ export default defineComponent({
 .focused,
 .dirty {
   .label {
-    opacity: 100%;
+    opacity: 1;
   }
   .input {
     padding-top: 33px;
@@ -242,7 +242,7 @@ export default defineComponent({
 }
 
 .container.disabled {
-  opacity: 50%;
+  opacity: 0.5;
   .input {
     border: none;
   }

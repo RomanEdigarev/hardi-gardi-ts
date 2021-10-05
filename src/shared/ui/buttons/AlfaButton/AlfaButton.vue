@@ -32,7 +32,7 @@ export default defineComponent({
 .btn {
   height: 100%;
   width: 100%;
-  padding: 20px 0;
+  padding: 14px 0;
   position: relative;
   border-radius: 16px;
   transition: background-color 0.3s ease-in-out;
@@ -68,7 +68,7 @@ export default defineComponent({
 
   &:disabled {
     cursor: default;
-    opacity: 50%;
+    opacity: 0.5;
     &:hover {
       background-color: $clr-zeta;
     }
@@ -98,7 +98,7 @@ export default defineComponent({
 
   &:disabled {
     cursor: default;
-    opacity: 50%;
+    opacity: 0.5;
     &:hover {
       background-color: $clr-tau;
     }
@@ -126,7 +126,7 @@ export default defineComponent({
   }
 
   &:disabled {
-    opacity: 50%;
+    opacity: 0.5;
     cursor: default;
     &:hover {
       color: $clr-zeta;

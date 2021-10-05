@@ -18,7 +18,7 @@ const getSecondaryOptions = (status?: string, width?: string) => {
     perPage: isPhone && width ? 4 : 5,
     perMove: 1,
     pagination: false,
-    rewind: true,
+    rewind: false,
     isNavigation: true,
     // focus: "center",
     padding: {
@@ -77,8 +77,6 @@ export const useMainSlider = (isZoom) => {
   };
 
   onUpdated(() => {
-    console.log("updated");
-    primarySplide.value?.sync(secondarySplide.value.splide);
     primarySplide.value.splide.refresh();
   });
 

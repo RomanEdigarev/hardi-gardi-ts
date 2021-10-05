@@ -25,7 +25,7 @@
 <script lang="ts">
 import Multiselect from "@vueform/multiselect";
 import { CheckboxCaret } from "../../icons";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "select",
@@ -177,7 +177,7 @@ export default defineComponent({
 }
 
 .disabled {
-  opacity: 50%;
+  opacity: 0.5;
   .multiselect-input {
     cursor: default;
     &:hover {
