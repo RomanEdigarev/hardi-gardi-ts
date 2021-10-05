@@ -6,6 +6,8 @@ $phoneFontFamily: 'Roboto', sans-serif;
 
 // Font sizes
 $mainFZ: 18px;
+$mobileFZ: 15px;
+$phoneFZ: 12px;
 
 
 // Font weights
@@ -15,3 +17,7 @@ $regular: 400;
 $medium: 500;
 $semi-bold: 600;
 $bold: 700;
+
+@media screen and (max-width: 768px){
+  $mainFZ: 15px
+}

@@ -209,6 +209,10 @@ export default defineComponent({
     &__wrapper {
       padding: 0 10vw;
     }
+    &__content-container {
+      width: 1194px;
+      margin: 0 auto;
+    }
     &__container {
       max-width: none;
       min-width: 80vw;
@@ -222,15 +226,16 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 769px) and (max-width: 1365px) {
-  .footer {
-    &__wrapper {
-      padding: 0 4vw;
-    }
-  }
-}
 
-@media screen and (min-width: 738px) and (max-width: 1364px),
+//@media screen and (min-width: 769px) and (max-width: 1365px) {
+//  .footer {
+//    &__wrapper {
+//      padding: 0 4vw;
+//    }
+//  }
+//}
+
+@media screen and (min-width: 769px) and (max-width: 1364px),
   (-webkit-min-device-pixel-ratio: 3) {
   .footer {
     &__wrapper {
@@ -240,6 +245,8 @@ export default defineComponent({
     &__content-container {
       grid-template-columns: 400px 1fr;
       row-gap: 41px;
+      width: 720px;
+      margin: 0 auto;
     }
 
     &__subscription {
