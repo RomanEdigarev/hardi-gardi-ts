@@ -326,7 +326,7 @@ export default defineComponent({
   (-webkit-min-device-pixel-ratio: 3) {
   .app {
     &__wrapper {
-      padding: 0 18px;
+      //padding: 0 18px;
       margin-bottom: 136px;
     }
     &__footer-bg {
