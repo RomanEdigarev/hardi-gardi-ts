@@ -32,15 +32,21 @@
           <span>Скидка</span>
           <span>{{ basket.sumDiscount }} &#8381;</span>
         </div>
+        <div class="checkout__body__list__row" id="delivery">
+          <span>Доставка</span>
+          <span>0 &#8381;</span>
+        </div>
       </div>
     </div>
     <div class="checkout__footer">
       <div v-if="isOrdering" class="checkout__footer__info">
         <div class="checkout__footer__info__row">
-          <span>Доставка: </span><span>Курьер</span>
+          <span>Доставка:</span>
+          <span> Курьер</span>
         </div>
         <div class="checkout__footer__info__row">
-          <span>Оплата: </span><span>Картой</span>
+          <span>Оплата: </span>
+          <span> Картой</span>
         </div>
       </div>
       <AlfaButton
@@ -178,6 +184,12 @@ export default defineComponent({
       margin-bottom: 26px;
       &__row {
         margin-bottom: 8px;
+        span {
+          font-size: 15px;
+        }
+        span:first-child {
+          font-weight: $semi-bold;
+        }
         span:nth-child(2) {
           font-weight: $semi-bold;
           font-size: 15px;
@@ -187,16 +199,23 @@ export default defineComponent({
       }
     }
     &__policy {
+      font-size: 13px;
+      line-height: 18px;
       margin-top: 16px;
       span {
+        font-size: 13px;
         cursor: pointer;
         font-weight: $semi-bold;
       }
     }
   }
   // *** Footer END *** //
+  #delivery {
+    display: none;
+  }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .checkout {
     padding: 12px;
     &__header {
@@ -228,7 +247,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .checkout {
     padding: 22px;
   }
@@ -245,7 +265,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1364px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .checkout__footer {
     &__btn {
       span {

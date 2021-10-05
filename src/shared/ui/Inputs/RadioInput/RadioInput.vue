@@ -43,8 +43,8 @@ export default defineComponent({
     });
 
     const toggle = (e) => {
-      emit('toggle', props.id)
-      handleChange(e)
+      emit("toggle", props.id);
+      handleChange(e);
     };
 
     return {
@@ -62,8 +62,9 @@ export default defineComponent({
     border-radius: 16px;
     display: flex;
     align-items: center;
-    padding: 16px 0 16px 69px;
+    padding: 18px 0 18px 69px;
     cursor: pointer;
+    font-size: 16px;
     //margin-bottom: 10px;
     &:after {
       content: "";
