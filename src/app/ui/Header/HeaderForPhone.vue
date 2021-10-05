@@ -76,12 +76,16 @@ export default defineComponent({
       margin-left: 38px;
     }
     &__logo {
-      width: 70px;
+      flex: 1;
+      svg {
+        width: 70px;
+      }
     }
     &__burger-btn {
-      width: 28px;
+      text-align: end;
+      flex: 0.2;
       img {
-        width: 100%;
+        width: 28px;
       }
     }
   }

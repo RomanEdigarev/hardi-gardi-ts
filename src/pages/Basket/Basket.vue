@@ -27,7 +27,9 @@
         <div class="basket__footer__package">
           <Package />
         </div>
-        <div v-if="isPhone" class="basket__footer__checkout"><Checkout  @checkout="checkout"/></div>
+        <div v-if="isPhone" class="basket__footer__checkout">
+          <Checkout @checkout="checkout" />
+        </div>
       </div>
     </main>
     <div ref="deleteModal" class="basket__delete-modal-container">
@@ -87,7 +89,7 @@ export default defineComponent({
       plusPosition,
       minusPosition,
       checkout,
-      isPhone: computed(() => store.getters['getIsPhone'])
+      isPhone: computed(() => store.getters["getIsPhone"]),
     };
   },
 });
@@ -124,23 +126,24 @@ export default defineComponent({
     display: none;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1200px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .basket {
     &__body {
       &__checkout {
         width: 232px;
-        min-width:  232px;
+        min-width: 232px;
       }
     }
-
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .basket {
     &__body {
       flex-direction: column;
       &__checkout {
-        min-width:  100%;
+        min-width: 100%;
       }
     }
     &__footer {
@@ -148,7 +151,6 @@ export default defineComponent({
         margin-bottom: 22px;
       }
     }
-
   }
 }
 </style>

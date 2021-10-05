@@ -9,7 +9,7 @@ div, span, button, p, input {
   line-height: 1;
   outline: none;
   font-size: $mainFZ;
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 1200px){
     font-size: $mobileFZ;
   }
 }
@@ -102,7 +102,7 @@ button {
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 769px) and (max-width: 1200px), (-webkit-min-device-pixel-ratio: 3){
   .page-main {
     padding-top: 30px;
     &__header {

@@ -156,27 +156,19 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 1367px) {
+@media screen and (max-width: 1368px) {
   .header {
     &__wrapper {
-      padding: 0 86px;
+      padding: 0 0;
     }
-    &__header-modal__content {
-      padding: 0px 18.3vw;
+    &__container {
+      max-width: 1191px;
+      width: 95%;
+      margin: 0 auto;
     }
   }
 }
-//@media screen and (min-width: 769px) and (max-width: 1365px) {
-//  .header {
-//    &__wrapper {
-//      padding: 0 4vw;
-//    }
-//    &__navigation {
-//      flex: 0.85;
-//    }
-//  }
-//}
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 735px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .header {
     &__wrapper {

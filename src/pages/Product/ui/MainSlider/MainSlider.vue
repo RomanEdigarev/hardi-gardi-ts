@@ -483,7 +483,7 @@ export default defineComponent({
     z-index: 25;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .main-slider {
     &__body {
@@ -512,7 +512,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .main-slider.zoom {
     overflow-y: scroll;

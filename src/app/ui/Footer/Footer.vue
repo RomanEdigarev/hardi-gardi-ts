@@ -227,15 +227,21 @@ export default defineComponent({
   }
 }
 
-//@media screen and (min-width: 769px) and (max-width: 1365px) {
-//  .footer {
-//    &__wrapper {
-//      padding: 0 4vw;
-//    }
-//  }
-//}
+@media screen and (max-width: 1368px) {
+  .footer {
+    &__wrapper {
+      padding: 0 0;
+    }
+    &__content-container,
+    &__copyright {
+      max-width: 1191px;
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
+}
 
-@media screen and (min-width: 769px) and (max-width: 1364px),
+@media screen and (min-width: 769px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .footer {
     &__wrapper {

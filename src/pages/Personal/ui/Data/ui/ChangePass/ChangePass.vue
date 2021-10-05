@@ -134,7 +134,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1200px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .change-pass {
     &__body {
       grid-template-columns: 1fr;

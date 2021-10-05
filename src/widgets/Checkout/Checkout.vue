@@ -214,7 +214,7 @@ export default defineComponent({
     display: none;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .checkout {
     padding: 12px;
@@ -265,7 +265,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .checkout__footer {
     &__btn {

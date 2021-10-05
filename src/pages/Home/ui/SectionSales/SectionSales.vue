@@ -143,6 +143,7 @@ export default defineComponent({
     &__items-container {
       grid-template-columns: auto;
       justify-content: center;
+      grid-auto-rows: auto;
     }
     &__title-container {
       &__bg-container {
