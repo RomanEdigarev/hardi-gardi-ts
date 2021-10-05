@@ -144,7 +144,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .prolog {
     &__text {
@@ -189,8 +189,8 @@ export default defineComponent({
     }
     &__cards {
       display: grid;
-      grid-template-columns: 160px 160px;
-      grid-template-rows: 219px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-auto-rows: minmax(219px, 1fr);
       gap: 20px;
       margin-bottom: 20px;
     }

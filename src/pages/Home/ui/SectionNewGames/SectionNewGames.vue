@@ -195,7 +195,7 @@ export default defineComponent({
     }
   }
 }
-//@media screen and (min-width: 769px) and (max-width: 1365px) {
+//@media screen and (min-width: 769px) and (max-width: 1200px) {
 //  .new-games {
 //    &__second-row {
 //      height: auto;
@@ -210,7 +210,7 @@ export default defineComponent({
 //    }
 //  }
 //}
-@media screen and (min-width: 320px) and (max-width: 736px) {
+@media screen and (min-width: 320px) and (max-width: 738px) {
   .new-games {
     &__first-row {
       display: grid;

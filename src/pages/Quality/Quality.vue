@@ -468,7 +468,8 @@ export default defineComponent({
 
   // *** Other END *** //
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1200px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .quality {
     // *** Header *** //
     &__header {
@@ -563,7 +564,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .quality {
     // *** Header *** //
     &__header {
@@ -591,7 +593,6 @@ export default defineComponent({
           max-width: 339px;
           max-height: 201px;
         }
-
       }
 
       &__item:nth-child(2) {
@@ -618,7 +619,7 @@ export default defineComponent({
       &__docs {
         min-width: 100vw;
         margin-left: -18px;
-       padding: 52px 32px;
+        padding: 52px 32px;
         svg {
           display: none !important;
         }
@@ -634,6 +635,4 @@ export default defineComponent({
     margin-bottom: 55px;
   }
 }
-
-
 </style>

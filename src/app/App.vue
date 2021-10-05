@@ -100,6 +100,7 @@ export default defineComponent({
     });
 
     window.addEventListener("resize", () => {
+      console.log("resize");
       if (
         document.documentElement.clientWidth <= 1360 &&
         document.documentElement.clientWidth >= 736
@@ -260,7 +261,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 1368px) and (max-width: 1919px) {
+@media screen and (min-width: 1250px) and (max-width: 1919px) {
   .app {
     &__wrapper {
       padding: 0 6vw;
@@ -275,17 +276,26 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 1367px) {
+@media screen and (max-width: 1368px) {
   .app {
     &__wrapper {
-      padding: 0 86px;
+      padding: 0 0;
+    }
+    &__scroll-btn-container {
+      bottom: 18vw;
+      right: 7vw;
+    }
+    &__container {
+      max-width: 1191px;
+      width: 95%;
+      margin: 0 auto;
     }
   }
 }
-@media screen and (min-width: 769px) and (max-width: 1365px) {
+@media screen and (min-width: 769px) and (max-width: 1200px) {
   .app {
     &__wrapper {
-      padding: 0 4vw;
+      padding: 0 0;
     }
     &__scroll-btn-container {
       right: 4vw;
@@ -295,12 +305,12 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px),
+@media screen and (min-width: 450px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .app {
     overflow-x: hidden;
     &__wrapper {
-      padding: 0 24px;
+      //padding: 0 24px;
       margin-bottom: 136px;
     }
     &__footer-bg {

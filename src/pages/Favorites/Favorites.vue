@@ -95,7 +95,8 @@ export default defineComponent({
   // *** Body END *** //
 }
 
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1200px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .favorites {
     &__body {
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -103,7 +104,8 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .favorites {
     &__header {
       &__change-phone-view {

@@ -100,7 +100,8 @@ export default defineComponent({
     background-color: $clr-alpha-beta;
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1364px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 738px) and (max-width: 1200px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .range-slider {
     width: 100%;
     max-width: 351px;
