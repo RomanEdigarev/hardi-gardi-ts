@@ -98,7 +98,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 737px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .prolog-card {
     &__title {
       font-size: 16px;
