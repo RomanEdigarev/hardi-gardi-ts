@@ -116,7 +116,7 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     const { product } = useProduct();
-    const phoneView = ref("cl-1");
+    const phoneView = ref("cl-2");
     const changePhoneView = (viewType: string) => {
       phoneView.value = viewType;
     };
@@ -277,7 +277,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px),
+@media screen and (min-width: 320px) and (max-width: 737px),
   (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
     &__content {
@@ -323,20 +323,27 @@ export default defineComponent({
         }
       }
       &__body {
-        grid-template-columns: 160px 160px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         row-gap: 19px;
+        gap: 10px;
         justify-content: space-between;
-        grid-auto-rows: 326px;
+        grid-auto-rows: auto;
       }
 
       &__body.cl-1 {
+        .catalog__results__item {
+          width: 80vw;
+          max-width: 460px;
+        }
+
+        justify-items: center;
         grid-template-columns: 1fr;
         grid-auto-rows: 160px;
         :deep .catalog-product-card {
           flex-direction: row;
           &__info {
             padding-left: 16px;
-            max-width: 135px;
+            max-width: 86%;
             justify-content: space-between;
           }
           &__title {
@@ -426,6 +433,23 @@ export default defineComponent({
             top: 10px;
             right: 10px;
           }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .catalog {
+    &__results {
+      &__body {
+        grid-template-columns: 160px 160px;
+        row-gap: 19px;
+        justify-content: space-between;
+        grid-auto-rows: 326px;
+      }
+      &__body.cl-1 {
+        .catalog__results__item {
+          width: 100%;
         }
       }
     }
