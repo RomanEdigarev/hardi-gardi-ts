@@ -41,7 +41,7 @@
         alt=""
       />
       <div ref="burger" v-if="isMobile || isPhone" class="app__burger-menu">
-        <BurgerMenu />
+        <BurgerMenu @close-burger-menu="closeBurger" />
         <div
           ref="burgerBG"
           class="app__burger-menu__bg"

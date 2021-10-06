@@ -10,6 +10,7 @@
             <router-link
               to="/catalog"
               class="catalog-submenu__link-text alfa-link"
+              @click="$emit('close-burger-menu')"
             >
               Весь каталог
             </router-link>
@@ -28,6 +29,7 @@
                 <router-link
                   :to="linkItem.link.toLowerCase()"
                   class="catalog-submenu__link-text alfa-link"
+                  @click="$emit('close-burger-menu')"
                 >
                   {{ linkItem.name }}
                 </router-link>
@@ -40,6 +42,7 @@
                   v-for="sublinkItem in linkItem.sections"
                   :to="sublinkItem.link.toLowerCase()"
                   class="catalog-submenu__sublink alfa-link"
+                  @click="$emit('close-burger-menu')"
                 >
                   {{ sublinkItem.name }}
                 </router-link>
@@ -58,6 +61,7 @@ import { useCatalogSubmenu } from "./lib";
 
 export default defineComponent({
   name: "CatalogSubmenu",
+  emits: ["close-burger-menu"],
   setup() {
     const { result } = useCatalogSubmenu();
     console.log(result);

@@ -1,6 +1,12 @@
 <template>
   <div class="burger-menu">
-    <div class="burger-menu__line"></div>
+    <div
+      class="burger-menu__line-container"
+      @click="$emit('close-burger-menu')"
+    >
+      <div class="burger-menu__line"></div>
+    </div>
+
     <div class="burger-menu__body">
       <div class="burger-menu__body__links">
         <div
@@ -25,10 +31,32 @@
             />
           </svg>
         </div>
-        <div class="burger-menu__body__links__link">Акции</div>
-        <div class="burger-menu__body__links__link">Доаствка и оплата</div>
-        <div class="burger-menu__body__links__link">Контакты</div>
-        <div class="burger-menu__body__links__link">
+        <router-link
+          to="/actions"
+          class="burger-menu__body__links__link"
+          @click="$emit('close-burger-menu')"
+        >
+          <span>Акции</span>
+        </router-link>
+        <router-link
+          to="/delivery"
+          class="burger-menu__body__links__link"
+          @click="$emit('close-burger-menu')"
+        >
+          <span>Доаствка и оплата</span>
+        </router-link>
+        <router-link
+          to="/contacts"
+          class="burger-menu__body__links__link"
+          @click="$emit('close-burger-menu')"
+        >
+          <span>Контакты</span>
+        </router-link>
+        <router-link
+          to="/about"
+          class="burger-menu__body__links__link"
+          @click="$emit('close-burger-menu')"
+        >
           <span>О компании</span>
           <svg
             width="8"
@@ -46,7 +74,7 @@
               stroke-linejoin="round"
             />
           </svg>
-        </div>
+        </router-link>
         <div class="burger-menu__body__links__link">
           <span>Помощь</span>
           <svg
@@ -89,7 +117,10 @@
         <span>{{ currenSubmenu.name }}</span>
       </div>
       <div>
-        <component is="catalog-submenu"></component>
+        <component
+          @close-burger-menu="$emit('close-burger-menu')"
+          is="catalog-submenu"
+        ></component>
       </div>
     </div>
     <div class="burger-menu__footer">
@@ -113,6 +144,7 @@ import { useBurgerSubmenu } from "./lib";
 export default defineComponent({
   name: "BurgerMenu",
   components: { CatalogSubmenu },
+  emits: ["close-burger-menu"],
   setup() {
     return {
       ...useBurgerSubmenu(),
@@ -132,14 +164,21 @@ export default defineComponent({
   color: $clr-phi;
   position: relative;
 
-  &__line {
-    width: 40px;
-    border-bottom: 3px solid $clr-phi;
+  &__line-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     position: absolute;
     top: 16px;
     left: 50%;
-    border-radius: 50%;
     transform: translateX(-50%);
+    height: 20px;
+    align-items: center;
+  }
+
+  &__line {
+    width: 40px;
+    border-bottom: 3px solid $clr-phi;
   }
 
   // *** Body *** //
