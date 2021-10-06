@@ -210,7 +210,7 @@ export default defineComponent({
     .product-card-info__title {
       font-size: 28px;
       line-height: 1.29;
-      max-width: 205px;
+      //max-width: 205px;
     }
   }
 }
@@ -240,9 +240,12 @@ export default defineComponent({
     }
   }
   .isSimple {
+    .product-card-info__content {
+      padding: 16px;
+    }
     .product-card-info__title {
-      font-size: 22px;
       line-height: 1.27;
+      -webkit-line-clamp: 3;
     }
     .product-card-info__price {
       &__current {

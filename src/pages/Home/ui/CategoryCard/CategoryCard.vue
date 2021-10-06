@@ -159,15 +159,19 @@ export default defineComponent({
   .category-card {
     width: 100%;
     height: 100%;
+    &__title {
+      font-size: 22px;
+    }
     &__content {
       padding: 22px;
     }
     &__svg-container {
+      width: 38%;
       left: 70%;
       :deep svg {
-        width: 168px;
+        width: 100%;
         height: 100%;
-        max-height: 101px;
+        //max-height: 101px;
       }
     }
   }

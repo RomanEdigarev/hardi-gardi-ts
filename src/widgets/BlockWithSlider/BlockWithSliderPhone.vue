@@ -95,7 +95,12 @@ export default defineComponent({
 
   :deep .product-card-info {
     width: 100%;
+    height: 62vw;
     max-width: none;
+    max-height: 300px;
+    &__content {
+      padding: 7vw;
+    }
     &__description {
       max-height: 72px;
       overflow: hidden;
@@ -113,6 +118,28 @@ export default defineComponent({
       &__prev {
         font-size: 16px;
         line-height: 18px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .block-with-slider-phone {
+    &__body__image-slider {
+      width: 250px;
+    }
+    :deep .product-card-info {
+      height: 258px;
+      &__image {
+        width: 250px;
+      }
+      &__content {
+        padding: 26px;
+        justify-content: space-between;
+      }
+      &__favorite-btn-container,
+      &__shop-btn-container {
+        width: 44px;
+        display: block;
       }
     }
   }

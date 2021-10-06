@@ -241,7 +241,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1200px),
+@media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .footer {
     &__wrapper {

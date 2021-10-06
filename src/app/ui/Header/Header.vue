@@ -166,6 +166,9 @@ export default defineComponent({
       width: 95%;
       margin: 0 auto;
     }
+    &__header-modal__content {
+      padding: 0 18.5vw;
+    }
   }
 }
 @media screen and (min-width: 735px) and (max-width: 1200px),

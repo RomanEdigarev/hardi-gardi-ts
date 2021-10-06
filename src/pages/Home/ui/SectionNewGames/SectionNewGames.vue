@@ -3,7 +3,7 @@
     <div class="new-games__content-container">
       <div class="new-games__content">
         <div class="new-games__title-container">
-          <span class="new-games__title title">Новые игры для тебя</span>
+          <span class="new-games__title title">Новые игры <br />для тебя</span>
           <div class="new-games__title-container__bg-image">
             <svg
               viewBox="0 0 365 106"
@@ -174,6 +174,9 @@ export default defineComponent({
 @media screen and (min-width: 738px) and (max-width: 1364px),
   (-webkit-min-device-pixel-ratio: 3) {
   .new-games {
+    &__title-continer__bg-image {
+      top: 12%;
+    }
     &__first-row {
       display: grid;
       grid-template-columns: 375px 1fr;
@@ -216,8 +219,8 @@ export default defineComponent({
       display: grid;
       justify-content: center;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 216px 52%;
-      //height: auto;
+      grid-template-rows: 1fr 48vw;
+      height: auto;
       &__image-card-container {
         grid-column: 1/3;
         width: auto;
@@ -236,10 +239,54 @@ export default defineComponent({
       font-size: 28px;
       line-height: 34px;
     }
+    &__plus-btn {
+      width: 52px;
+      height: 52px;
+    }
 
-    :deep .product-card-info__title {
-      font-size: 22px;
-      line-height: 28px;
+    :deep .product-card-info {
+      height: 100%;
+      max-height: none;
+      &__content {
+        padding: 4vw;
+        justify-content: space-between;
+      }
+      &__title {
+        font-size: 4vw;
+        line-height: 1.27;
+        margin-bottom: 0;
+      }
+      &__price {
+        div {
+          font-size: 5vw;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .new-games {
+    &__first-row {
+      height: auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 216px 184px;
+    }
+    &__content {
+      padding: 16px;
+      justify-content: space-between;
+    }
+    &__price {
+      div {
+        font-size: 16px;
+      }
+    }
+    :deep .product-card-info {
+      &__content {
+        padding: 16px;
+      }
+      &__price div {
+        font-size: 16px;
+      }
     }
   }
 }
