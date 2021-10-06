@@ -91,4 +91,11 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+@media screen and (max-width: 375px) {
+  .header-for-phone {
+    &__body__logo {
+      flex: 0.6;
+    }
+  }
+}
 </style>

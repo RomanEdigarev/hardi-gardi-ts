@@ -222,6 +222,7 @@ export default defineComponent({
 @media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .promotion-section {
+    height: auto;
     &__image {
       width: 345px;
       height: 431px;
@@ -233,7 +234,12 @@ export default defineComponent({
       top: 0;
       transform: translate(-50%, -135%);
       &__bg-container {
-        left: -40px;
+        left: -26%;
+        width: 51.7vw;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
     &__info {
@@ -261,6 +267,7 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .promotion-section {
+    height: auto;
     &__content-container > div {
       margin: 0 auto;
     }

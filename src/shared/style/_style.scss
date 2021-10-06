@@ -119,6 +119,13 @@ button {
     }
   }
   .title {
+    font-size: 4.69vw;
+    line-height: 1.21;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 375px){
+  .title {
     font-size: 28px;
     line-height: 1.21;
     text-align: center;

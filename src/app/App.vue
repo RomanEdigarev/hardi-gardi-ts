@@ -314,6 +314,7 @@ export default defineComponent({
       margin-bottom: 136px;
     }
     &__footer-bg {
+      max-height: 90vh;
       height: 1157px;
     }
     &__scroll-btn-container {
@@ -330,10 +331,22 @@ export default defineComponent({
       margin-bottom: 136px;
     }
     &__footer-bg {
+      max-height: 100vh;
       height: 1157px;
     }
     &__scroll-btn-container {
       right: 4vw;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .app {
+    &__container {
+      width: 339px;
+    }
+    &__footer-bg {
+      max-height: 111vh;
+      height: 1192px;
     }
   }
 }

@@ -144,12 +144,20 @@ export default defineComponent({
       grid-template-columns: auto;
       justify-content: center;
       grid-auto-rows: auto;
+      row-gap: 18px;
     }
     &__title-container {
       &__bg-container {
         width: 276px;
         left: 10%;
       }
+    }
+    &__title {
+      font-size: 28px;
+    }
+    &__plus-btn-container {
+      width: 52px;
+      height: 52px;
     }
   }
 }

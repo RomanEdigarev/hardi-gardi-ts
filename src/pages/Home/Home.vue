@@ -185,6 +185,12 @@ export default defineComponent({
       height: auto;
       margin-bottom: 236px;
     }
+    &__promotion-container {
+      height: auto;
+    }
+    &__bestsellers-container {
+      height: auto;
+    }
     &__new-games-container {
       margin-bottom: 241px;
     }
@@ -213,19 +219,33 @@ export default defineComponent({
     &__sales-container {
       margin-bottom: 51px;
     }
+    &__bestsellers-container {
+      height: auto;
+    }
+    &__promotion-container {
+      height: auto;
+    }
 
     &__category-cards-container {
       display: grid;
       width: 100%;
       height: auto;
       grid-template-columns: 1fr;
-      grid-auto-rows: 158px;
+      grid-auto-rows: 40vw;
       gap: 18px;
       margin-bottom: 88px;
 
       &__card-container {
         max-width: 100%;
       }
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .home {
+    &__category-cards-container {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 158px;
     }
   }
 }

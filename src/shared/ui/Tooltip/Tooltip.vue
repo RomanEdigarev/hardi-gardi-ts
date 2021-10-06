@@ -43,8 +43,16 @@ export default defineComponent({
       }
     });
 
+    const documentListener = (e: Event) => {
+      if (!(e.target as HTMLElement).closest(".tooltip")) {
+        isOpen.value = !isOpen.value;
+        document.removeEventListener("click", documentListener, false);
+      }
+    };
+
     const open = () => {
       isOpen.value = !isOpen.value;
+      document.addEventListener("click", documentListener);
     };
 
     return {

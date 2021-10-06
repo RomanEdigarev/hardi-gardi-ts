@@ -41,15 +41,43 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home-product-card-phone {
   width: 100%;
-  max-width: 339px;
-  max-height: 230px;
+  max-width: 100%;
+  max-height: none;
   display: flex;
   &__left {
-    max-width: 159px;
+    max-width: 46.9%;
+  }
+  &__right {
+    max-width: 53.1%;
   }
 
-  &__right {
-    max-width: 180px;
+  :deep .product-card-info-phone {
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    padding-left: 5vw;
+
+    &__header__title {
+      font-size: 3vw;
+    }
+    &__body {
+      &__text {
+        font-size: 2vw;
+      }
+    }
+    &__footer__price {
+      div {
+        font-size: 3vw;
+      }
+    }
+    &__add-to-shop-btn {
+      width: 44px;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .home-product-card-phone {
+    max-height: 230px;
   }
 }
 </style>

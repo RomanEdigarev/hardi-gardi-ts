@@ -189,13 +189,17 @@ export default defineComponent({
     }
     &__cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       grid-auto-rows: minmax(219px, 1fr);
       gap: 20px;
       margin-bottom: 20px;
     }
     &__card {
       height: 100%;
+    }
+    &__button {
+      width: 52px;
+      height: 52px;
     }
   }
 }
