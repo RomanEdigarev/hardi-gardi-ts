@@ -93,9 +93,9 @@ export default defineComponent({
         store.commit(
           "setIsMobile",
           document.documentElement.clientWidth <= 1360 &&
-            document.documentElement.clientWidth >= 736
+            document.documentElement.clientWidth > 737
         );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 735);
+        store.commit("setIsPhone", document.documentElement.clientWidth <= 737);
       }
     });
 
@@ -103,11 +103,11 @@ export default defineComponent({
       console.log("resize");
       if (
         document.documentElement.clientWidth <= 1360 &&
-        document.documentElement.clientWidth >= 736
+        document.documentElement.clientWidth > 737
       ) {
         store.commit("setIsPhone", false);
         store.commit("setIsMobile", true);
-      } else if (document.documentElement.clientWidth <= 735) {
+      } else if (document.documentElement.clientWidth <= 737) {
         store.commit("setIsPhone", true);
         store.commit("setIsMobile", false);
       } else {

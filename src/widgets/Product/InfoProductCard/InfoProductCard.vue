@@ -214,11 +214,9 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px),
+@media screen and (min-width: 320px) and (max-width: 737px),
   (-webkit-min-device-pixel-ratio: 3) {
   .product-card-info {
-    max-width: 339px;
-    max-height: 258px;
     &__content {
       padding: 26px;
     }
