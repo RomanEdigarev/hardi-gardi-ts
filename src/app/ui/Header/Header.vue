@@ -136,6 +136,10 @@ export default defineComponent({
     display: none;
   }
 
+  &__burger {
+    display: none;
+  }
+
   &__header-modal__content {
     width: 100%;
     padding: 0 27.5vw;
@@ -183,6 +187,9 @@ export default defineComponent({
     }
     &__phone {
       display: none;
+    }
+    &__burger {
+      display: block;
     }
   }
 }

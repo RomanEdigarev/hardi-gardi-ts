@@ -154,6 +154,8 @@ export default defineComponent({
 @import "~@splidejs/splide/dist/css/themes/splide-default.min.css";
 .footer-slider {
   color: $clr-phi;
+  margin: 0 auto;
+  max-width: 68vw;
   // *** Header *** //
   &__header {
     display: flex;
@@ -216,10 +218,13 @@ export default defineComponent({
         height: 40px;
       }
     }
+    &__body__item {
+      height: 38vw;
+    }
   }
   :deep .catalog-product-card {
-    max-height: 388px;
-    max-width: 220px;
+    //max-height: 388px;
+    //max-width: 220px;
     &__title {
       font-size: 12px;
       line-height: 1.33;
@@ -229,13 +234,30 @@ export default defineComponent({
       width: 52px;
       height: 52px;
     }
+    &__price__prev {
+      font-size: 1.4vw;
+    }
+    &__price__current {
+      font-size: 1.8vw;
+    }
   }
   :deep .product-card-info-phone__add-to-shop-btn {
     width: 44px;
     height: 44px;
   }
 }
-
+@media screen and (max-width: 768px) {
+  .footer-slider {
+    max-width: none;
+    &__body__item {
+      min-height: 388px;
+    }
+    :deep .catalog-product-card {
+      max-width: none;
+      min-width: 220px;
+    }
+  }
+}
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .footer-slider {
@@ -253,33 +275,41 @@ export default defineComponent({
       }
     }
     &__body__item {
+      max-height: 86vw;
       & > div {
         margin: 0 auto;
         justify-content: center;
       }
     }
-  }
-  :deep .catalog-product-card {
-    max-height: 326px;
-    &__image-wrapper {
-      max-height: 175px;
+    :deep .catalog-product-card {
+      min-width: 42vw;
+      &__title {
+        font-size: 12px;
+        line-height: 1.33;
+      }
+      &__shop-btn {
+        display: block;
+        width: 44px;
+        height: 44px;
+      }
     }
-    &__image {
-      max-height: 175px;
-    }
-    &__title {
-      font-size: 12px;
-      line-height: 1.33;
-    }
-    &__shop-btn {
-      display: block;
+    :deep .product-card-info-phone__add-to-shop-btn {
       width: 44px;
       height: 44px;
     }
   }
-  :deep .product-card-info-phone__add-to-shop-btn {
-    width: 44px;
-    height: 44px;
+}
+
+@media screen and (max-width: 375px) {
+  .footer-slider {
+    &__body__item {
+      min-height: auto;
+    }
+
+    :deep .catalog-product-card {
+      height: 326px;
+      width: 160px;
+    }
   }
 }
 </style>

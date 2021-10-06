@@ -39,7 +39,7 @@
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">
-        <SetSlider :products="partsProducts" />
+        <!--        <SetSlider :products="partsProducts" />-->
       </div>
     </div>
     <div class="about-product__footer">
@@ -222,11 +222,12 @@ export default defineComponent({
 
   // *** Footer *** //
   &__footer {
-    width: 100%;
+    //width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     &__item {
       width: 118px;
+      margin-right: 12px;
       height: 98px;
       position: relative;
       display: flex;
@@ -263,9 +264,23 @@ export default defineComponent({
 
   // *** Footer END *** //
 }
+
+//@media screen and (min-width: 737px) and (max-width: 1360px),
+//  (-webkit-min-device-pixel-ratio: 3) {
+//  .about-product {
+//    width: 80vw;
+//    //max-width: 480px;
+//    min-width: 340px;
+//    margin: 0 auto;
+//  }
+//}
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .about-product {
+    width: 80vw;
+    max-width: 480px;
+    min-width: 340px;
+    margin: 0 auto;
     &__header {
     }
     &__title {
@@ -306,6 +321,12 @@ export default defineComponent({
         font-size: 14px;
       }
     }
+  }
+}
+@media screen and (max-width: 375px) {
+  .about-product {
+    width: 100%;
+    max-width: none;
   }
 }
 </style>

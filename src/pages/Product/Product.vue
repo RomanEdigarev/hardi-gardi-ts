@@ -9,7 +9,7 @@
           <MainSlider
             @zoom="zoomSlider"
             :is-zoom="isZoomSlider"
-            :photos="currentProduct.photos"
+            :photos="product.photos"
           />
         </div>
       </div>
@@ -144,6 +144,7 @@ export default defineComponent({
     const text = ref<HTMLElement>(null);
 
     onMounted(async () => {
+      console.log("mounted product");
       currentProduct.value = await getCurrentProduct(props.productId as string);
       breadcrumbs.value = [
         {
@@ -158,6 +159,7 @@ export default defineComponent({
     });
 
     onUpdated(() => {
+      console.log("updated product");
       text.value.innerHTML = currentProduct.value.description;
     });
 
@@ -245,9 +247,11 @@ export default defineComponent({
 
   // *** Body END *** //
 }
-@media screen and (min-width: 738px) and (max-width: 1200px),
+@media screen and (min-width: 738px) and (max-width: 1360px),
   (-webkit-min-device-pixel-ratio: 3) {
   .product-page {
+    margin: 0 auto;
+    //max-width: 78vw;
     &__body {
       grid-template-columns: 100%;
       &__left {

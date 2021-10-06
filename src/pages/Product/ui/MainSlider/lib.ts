@@ -15,7 +15,7 @@ const getSecondaryOptions = (status?: string, width?: string) => {
   };
   const options = {
     type: "slide",
-    perPage: isPhone && width ? 4 : 5,
+    perPage: isPhone && width ? 4 : "auto",
     perMove: 1,
     pagination: false,
     rewind: false,
@@ -28,7 +28,8 @@ const getSecondaryOptions = (status?: string, width?: string) => {
     gap: "16px",
     direction: isMobile || isPhone ? "ltr" : "ttb",
     height: isMobile || isPhone ? "auto" : "480px",
-    width: width || getWidthForOptions(),
+    // width: width || getWidthForOptions(),
+    width: "300px",
   };
   return options;
 };
