@@ -176,7 +176,14 @@ export default defineComponent({
       let price = [];
       price[0] = str[0] + "=" + arr[0];
       price[1] = str[1] + "=" + arr[1];
-      emit("set-price", price);
+      store.commit("products/addCurrentFilter", {
+        name: str[0],
+        value: arr[0],
+      });
+      store.commit("products/addCurrentFilter", {
+        name: str[1],
+        value: arr[1],
+      });
     };
 
     const setSectionFilter = (value) => {

@@ -125,6 +125,9 @@ export default defineComponent({
       await initCatalog();
     });
 
+    const applyFilter = async () => {
+      await store.dispatch("products/setProductsByPage", 1);
+    };
     const fetchProducts = () => {
       store.dispatch("products/addProductsByPage");
     };
@@ -136,10 +139,7 @@ export default defineComponent({
     };
     const resetFilters = () => {
       store.commit("products/resetCurrentFilters");
-    };
-
-    const applyFilter = async () => {
-      await store.dispatch("products/setProductsByPage", 1);
+      applyFilter();
     };
 
     const setPrice = (price: []) => {

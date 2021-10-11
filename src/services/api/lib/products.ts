@@ -11,8 +11,7 @@ export const getProductsByPageAPI = async (
   if (filters.length === 0) {
     requestString = "catalog/list.php";
   } else {
-    const arr = filters.map((filterStr) => filterStr + "=Y");
-    requestString = "catalog/list.php?" + arr.join("&");
+    requestString = "catalog/list.php?set_filter=y&" + filters.join("&");
   }
 
   try {

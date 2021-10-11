@@ -69,15 +69,15 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const { result } = useCatalogSubmenu();
+    const resetFilter = async () => {
+      await store.dispatch("products/setProductsByPage", 1);
+    };
     const setFilter = async (sectionId) => {
+      store.commit("products/resetCurrentFilters");
       store.commit("products/addCurrentFilter", {
         name: "section",
         value: sectionId,
       });
-      await store.dispatch("products/setProductsByPage", 1);
-    };
-    const resetFilter = async () => {
-      store.commit("products/resetCurrentFilters");
       await store.dispatch("products/setProductsByPage", 1);
     };
 
