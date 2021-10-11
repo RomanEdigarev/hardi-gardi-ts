@@ -40,6 +40,7 @@
     "style-loader": "^2.0.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "~4.1.5",
+    "v-smooth-scroll": "^2.0.0-beta.1",
     "vue-loader": "16.2.0",
     "vue-slider-component": "^4.0.0-beta.4",
     "vue3-datepicker": "^0.2.5",

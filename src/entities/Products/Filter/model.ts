@@ -1,21 +1,28 @@
-// Alias Type //
-export type FilterSection = {
+type FilterValuesPrice = {
+  min: {
+    name: "arrFilter_P1_MIN";
+    value: number;
+  };
+  max: {
+    name: "arrFilter_P1_MAX";
+    value: number;
+  };
+};
+export type FilterValue = {
+  name: string;
+  value: string;
+  isChecked: boolean;
+  isDisabled: boolean;
+  label: string;
+  img: string;
+};
+
+// export type FilterValues = FilterValue | FilterValuesPrice;
+type FilterItem = {
   id: string;
   name: string;
+  code: string;
+  values: FilterValue[] | FilterValuesPrice;
 };
-type FilterTematics = string;
-type FilterGender = "male" | "female";
-type FilterAge = string;
-type FilterPrice = {
-  max: number;
-  min: number;
-};
-// Alias Type END  //
 
-export type Filter = {
-  section?: FilterSection;
-  tematics?: FilterTematics;
-  gender?: FilterGender;
-  age?: FilterAge;
-  price?: FilterPrice;
-};
+export type Filters = FilterItem[];

@@ -23,7 +23,7 @@
         </svg>
         <span>Назад в каталог</span>
       </div>
-      <div class="catalog-filter__item active categories">
+      <div class="catalog-filter__item active">
         <div
           class="catalog-filter__item__title-container"
           @click="setActiveClass"
@@ -46,25 +46,29 @@
             />
           </svg>
         </div>
-        <div class="catalog-filter__item__body subtitles-container">
-          <div class="catalog-filter__item__subtitle">
-            <span>Все категории</span>
-          </div>
+        <div class="catalog-filter__item__body">
           <div
             v-for="section in sections"
             class="catalog-filter__item__subtitle"
-            @click="$emit('filter-section', section.id, section.name)"
+            :class="{
+              current: currentFilters.section === section.id,
+            }"
+            @click="setSectionFilter(section.id)"
           >
             <span>{{ section.name }}</span>
           </div>
         </div>
       </div>
-      <div class="catalog-filter__item active subject">
+      <div
+        v-for="filterItem in filters"
+        class="catalog-filter__item active"
+        :class="filterItem.code"
+      >
         <div
           class="catalog-filter__item__title-container"
           @click="setActiveClass"
         >
-          <span class="catalog-filter__item__title">Тематика</span>
+          <span class="catalog-filter__item__title">{{ filterItem.name }}</span>
           <svg
             width="11"
             height="7"
@@ -82,121 +86,73 @@
             />
           </svg>
         </div>
-        <div class="catalog-filter__item__body tags-container">
-          <Tag text="Динозавры" @delete-tag="() => console.log('delete tag')" />
-          <Tag
-            text="Домашние животные"
-            @delete-tag="() => console.log('delete tag')"
-          />
-        </div>
-      </div>
-      <div class="catalog-filter__item active gender">
-        <div
-          class="catalog-filter__item__title-container"
-          @click="setActiveClass"
-        >
-          <span class="catalog-filter__item__title">Пол</span>
-          <svg
-            width="11"
-            height="7"
-            viewBox="0 0 11 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <div>
+          <template
+            v-if="
+              filterItem.code === 'section' || filterItem.code === 'MATERIAL'
+            "
           >
-            <path
-              d="M9.46191 1.96146L5.46191 5.96146L1.46191 1.96146"
-              stroke="#606060"
-              stroke-width="2"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="catalog-filter__item__body tags-container">
-          <Tag
-            text="для девочек"
-            @delete-tag="() => console.log('delete tag')"
-          />
-          <Tag
-            text="для мальчиков"
-            @delete-tag="() => console.log('delete tag')"
-          />
-        </div>
-      </div>
-      <div class="catalog-filter__item active age">
-        <div
-          class="catalog-filter__item__title-container"
-          @click="setActiveClass"
-        >
-          <span class="catalog-filter__item__title">Возраст</span>
-          <svg
-            width="11"
-            height="7"
-            viewBox="0 0 11 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.46191 1.96146L5.46191 5.96146L1.46191 1.96146"
-              stroke="#606060"
-              stroke-width="2"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="catalog-filter__item__body tags-container">
-          <Tag text="1+ лет" @delete-tag="() => console.log('delete tag')" />
-          <Tag text="3+ лет" @delete-tag="() => console.log('delete tag')" />
-        </div>
-      </div>
-      <div class="catalog-filter__item active price">
-        <div
-          class="catalog-filter__item__title-container"
-          @click="setActiveClass"
-        >
-          <span class="catalog-filter__item__title">Цена</span>
-          <svg
-            width="11"
-            height="7"
-            viewBox="0 0 11 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.46191 1.96146L5.46191 5.96146L1.46191 1.96146"
-              stroke="#606060"
-              stroke-width="2"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="catalog-filter__item__body range-slider-container">
-          <RangeSlider />
+            <div class="catalog-filter__item__body">
+              <div
+                class="catalog-filter__item__subtitle"
+                :class="{
+                  current: Object.keys(currentFilters).includes(value.name),
+                }"
+                v-for="value in filterItem.values"
+                @click="$emit('set-filter', value.name)"
+              >
+                <span>{{ value.label }}</span>
+              </div>
+            </div>
+          </template>
+          <template v-else-if="filterItem.code === 'BASE'">
+            <div class="catalog-filter__item__body range-slider-container">
+              <RangeSlider
+                @set-price="
+                  setPrice($event, [
+                    filterItem.values.min.name,
+                    filterItem.values.max.name,
+                  ])
+                "
+              />
+            </div>
+          </template>
+          <template v-else>
+            <div class="catalog-filter__item__body tags-container">
+              <Tag
+                v-for="value in filterItem.values"
+                :text="value.label"
+                :active="Object.keys(currentFilters).includes(value.name)"
+                @delete-tag="$emit('remove-filter', value.name)"
+                @click="$emit('set-filter', value.name)"
+              />
+            </div>
+          </template>
         </div>
       </div>
     </div>
     <div class="catalog-filter__footer">
       <div class="catalog-filter__footer__btn-container">
-        <AlfaButton text="Показать (29)" />
+        <AlfaButton text="Показать" @click="$emit('apply-filter')" />
       </div>
       <div class="catalog-filter__footer__btn-container">
-        <AlfaButton styling="secondary" text="Сбросить" />
+        <AlfaButton
+          styling="secondary"
+          text="Сбросить"
+          @click="$emit('reset-filters')"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent } from "vue";
 import { RangeSlider, Tag } from "@/shared/ui";
 import { AlfaButton } from "@/shared/ui/buttons";
-import { FilterSection } from "@/entities/Products/Filter/model";
-
+import { useStore } from "@/services/vuex";
+import { Filters } from "@/entities/Products/Filter/model";
+import { Section } from "@/entities/Shop/Catalog/model";
 export default defineComponent({
   name: "CatalogFilter",
   components: {
@@ -204,14 +160,29 @@ export default defineComponent({
     RangeSlider,
     AlfaButton,
   },
-  props: {
-    sections: {
-      type: Object as PropType<FilterSection[]>,
-      required: true,
-    },
-  },
-  emits: ["hide-mobile-filter", "filter-section"],
-  setup() {
+  emits: ["hide-mobile-filter", "filter-section", "set-price"],
+  setup(_, { emit }) {
+    const store = useStore();
+    const sections = computed<Section[]>(
+      () => store.getters["products/getSections"]
+    );
+    const filters = computed<Filters>(
+      () => store.getters["products/getFilters"]
+    );
+    const currentFilters = computed<string[]>(
+      () => store.getters["products/getCurrentFilters"]
+    );
+    const setPrice = (arr, str) => {
+      let price = [];
+      price[0] = str[0] + "=" + arr[0];
+      price[1] = str[1] + "=" + arr[1];
+      emit("set-price", price);
+    };
+
+    const setSectionFilter = (value) => {
+      store.commit("products/addCurrentFilter", { name: "section", value });
+    };
+
     const setActiveClass = (e) => {
       const item: HTMLElement = e.currentTarget.closest(
         ".catalog-filter__item"
@@ -225,6 +196,11 @@ export default defineComponent({
 
     return {
       setActiveClass,
+      sections,
+      filters,
+      currentFilters,
+      setPrice,
+      setSectionFilter,
     };
   },
 });
@@ -297,6 +273,12 @@ export default defineComponent({
       cursor: pointer;
       transition: color 0.3s ease-in-out;
       &:hover {
+        color: $clr-zeta;
+      }
+    }
+
+    &__subtitle.current {
+      span {
         color: $clr-zeta;
       }
     }

@@ -1,44 +1,45 @@
-// Alias Type //
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 
-type FilterName = string;
-type FilterLabel = string;
-type FilterIMG = string;
-type FilterID = number;
-// Alias Type END //
-
-type FilterValue = {
-  name: FilterName;
-  value: string;
-  isChecked: boolean;
-  isDisabled: boolean;
-  label: FilterLabel;
-  img: FilterIMG;
+type Form = {
+  url: string;
+  setFilter: string;
+  clearFilter: string;
+  hidden: [];
 };
 enum FilterCode {
   "section",
-  "AGE",
-  "MATERIAL",
-  "SKU_GENDER",
-  "ATT_BRAND",
-  "BASE",
+  MATERIAL,
+  AGE,
+  SKU_GENDER,
+  ATT_BRAND,
+  BASE,
 }
 
-type FilterItem = {
-  id: FilterID;
-  code: keyof typeof FilterCode;
-  name: FilterName;
-  values: FilterValue[];
+type FilterValuesPrice = {
+  min: {
+    name: "arrFilter_P1_MIN";
+    value: number;
+  };
+  max: {
+    name: "arrFilter_P1_MAX";
+    value: number;
+  };
+};
+type FilterValue = {
+  name: string;
+  value: string;
+  isChecked: boolean;
+  isDisabled: boolean;
+  label: string;
+  img: string;
 };
 
-export type FilterData = {
-  form: {
-    url: string;
-    setFilter: string;
-    clearFilter: string;
-    hidden: [];
-  };
-  items: FilterItem[];
-  elementCount: 90;
+type FilterItem = {
+  id: string;
+  code: keyof typeof FilterCode;
+  name: string;
+  type: string;
+  values: FilterValue[] | FilterValuesPrice;
 };
-export type Filter = LayoutAPI<FilterData>;
+
+export type Filters = LayoutAPI<{ form: Form; items: FilterItem[] }>;

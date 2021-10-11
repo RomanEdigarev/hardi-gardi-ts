@@ -1,16 +1,21 @@
 import { Product } from "./Product/model";
-import { Filter } from "@/entities/Products/Filter/model";
 import { Section } from "@/entities/Shop/Catalog/model";
+import { Filters } from "@/entities/Products/Filter/model";
 
 export type ProductsPage = {
   value: number;
   products: Product[];
 };
 
+export type CurrentFilter = {
+  [key: string]: string | number;
+};
+
 export type Products = {
   currentProduct: Product;
   isLoading: boolean;
   page: ProductsPage;
-  filter: Filter | {};
+  filters: Filters;
+  currentFilter: CurrentFilter;
   sections: Section[];
 };

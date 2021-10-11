@@ -23,6 +23,7 @@ export const getShopAdapter = async (): Promise<Shop> => {
         name: item.name,
         icon: item.icon,
         link: item.link,
+        id: item.id,
         sections: item.items.length > 1 ? getSections(item.items) : [],
       };
     });

@@ -61,27 +61,25 @@ export const useMobileFilter = () => {
   };
 };
 export const defineTitle = (props) => {
-  const catalog = getCatalog();
-
-  // Define Title //
-  const searchSectionByParams = (link: string, items: Section[]): Section => {
-    const result = items.find((item) => {
-      return item.link.includes(link);
-    });
-    return result;
-  };
-  const section = searchSectionByParams(
-    props.section as string,
-    catalog.sections
-  );
-  const subsection = searchSectionByParams(
-    props.subsection as string,
-    section.sections
-  );
-  const title = subsection?.name || section.name;
-  // Define Title END //
-
-  return {
-    title,
-  };
+  // const catalog = getCatalog();
+  //
+  // // Define Title //
+  // const searchSectionByParams = (link: string, items: Section[]): Section => {
+  //   const result = items.find((item) => {
+  //     return item.link.includes(link);
+  //   });
+  //   return result;
+  // };
+  // const section = searchSectionByParams(
+  //   props.section as string,
+  //   catalog.sections
+  // );
+  // const subsection = searchSectionByParams(
+  //   props.subsection as string,
+  //   section.sections
+  // );
+  // const title = subsection?.name || section.name;
+  // // Define Title END //
+  //
+  return {};
 };

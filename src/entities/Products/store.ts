@@ -4,8 +4,12 @@ import { Products, ProductsPage } from "./model";
 import { getProductAdapter } from "@/entities/Products/Product/adapters";
 import { Product } from "./Product/model";
 import { getProductsByPageAdapter } from "@/entities/Products/adapters";
-import { getSectionsAdapter } from "@/entities/Products/Filter/adapters";
-import { Filter } from "@/entities/Products/Filter/model";
+import {
+  getFiltersAdapter,
+  getSectionsAdapter,
+} from "@/entities/Products/Filter/adapters";
+import { Filters } from "@/entities/Products/Filter/model";
+import { Section } from "@/entities/Shop/Catalog/model";
 
 export const productsModule: Module<Products, State> = {
   state: () => {
@@ -16,8 +20,9 @@ export const productsModule: Module<Products, State> = {
         value: 1,
         products: [],
       },
-      filter: {},
+      filters: undefined,
       sections: [],
+      currentFilter: {},
     };
   },
   mutations: {
@@ -31,16 +36,36 @@ export const productsModule: Module<Products, State> = {
       state.isLoading = payload;
     },
     setProductsByPage: (state, payload: ProductsPage) => {
-      if (state.page) {
+      if (payload.value > 1) {
         state.page.value = payload.value;
         state.page.products = [...state.page.products, ...payload.products];
       } else {
         state.page = payload;
       }
     },
-    setFilter: (state, payload: Filter) => {
-      state.filter = { ...state.filter, ...payload };
+    setFilters: (state, payload: Filters) => {
+      state.filters = payload;
     },
+    setSections: (state, payload: Section[]) => {
+      state.sections = payload;
+    },
+    addCurrentFilter: (
+      state,
+      payload: { name: string; value: string | number }
+    ) => {
+      state.currentFilter = {
+        ...state.currentFilter,
+        [payload.name]: payload.value,
+      };
+    },
+    removeCurrentFilter: (state, payload: string) => {
+      const {
+        [payload]: removeFilterKey,
+        ...newCurrentFilter
+      } = state.currentFilter;
+      state.currentFilter = newCurrentFilter;
+    },
+    resetCurrentFilters: (state) => (state.currentFilter = {}),
   },
   actions: {
     initSections: async ({ commit, rootState }) => {
@@ -51,6 +76,13 @@ export const productsModule: Module<Products, State> = {
         commit("toggleLoading", false);
       }
     },
+    initFilters: async ({ commit, rootState }) => {
+      commit("toggleLoading", true);
+      const { filters, sections } = await getFiltersAdapter();
+      commit("setFilters", filters);
+      commit("setSections", sections);
+      commit("toggleLoading", false);
+    },
     setCurrentProduct: async ({ commit, rootState }, id: number) => {
       if (rootState.isInit) {
         commit("toggleLoading", true);
@@ -59,10 +91,13 @@ export const productsModule: Module<Products, State> = {
         commit("toggleLoading", false);
       }
     },
-    setProductsByPage: async ({ commit, rootState }, page: number) => {
+    setProductsByPage: async ({ commit, rootState, state }, page: number) => {
       if (rootState.isInit) {
         commit("toggleLoading", true);
-        const products = await getProductsByPageAdapter(page);
+        const products = await getProductsByPageAdapter(
+          page,
+          state.currentFilter
+        );
         commit("setProductsByPage", { value: page, products });
         commit("toggleLoading", false);
       }
@@ -84,7 +119,8 @@ export const productsModule: Module<Products, State> = {
     },
     getIsLoadingProducts: (state) => state.isLoading,
     getSections: (state) => state.sections,
-    // getSectionById: (state, payload) => state.sections.filter(section => section.id === payload)
+    getFilters: (state) => state.filters,
+    getCurrentFilters: (state) => state.currentFilter,
   },
   namespaced: true,
 };

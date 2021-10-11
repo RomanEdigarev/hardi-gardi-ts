@@ -11,7 +11,7 @@
           <BreadCrumbs />
         </div>
         <div class="page-main__title-container">
-          <PageTitle :text="title" />
+          <PageTitle text="Весь каталог" />
         </div>
       </div>
 
@@ -24,9 +24,13 @@
         </button>
         <div ref="filter" class="catalog__filter-container">
           <CatalogFilter
-            :sections="sections"
+            v-if="filters"
             @hide-mobile-filter="hideFilterMobile"
-            @filter-section="setFilterSection"
+            @set-filter="setFilter"
+            @remove-filter="removeFilter"
+            @reset-filters="resetFilters"
+            @apply-filter="applyFilter"
+            @set-price="setPrice"
           />
           <div ref="filterBG" class="catalog__filter-container__bg"></div>
         </div>
@@ -91,7 +95,6 @@ import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
-import { FilterSection } from "@/entities/Products/Filter/model";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -106,9 +109,6 @@ export default defineComponent({
     PromotionSection,
   },
   props: {
-    section: {
-      type: String,
-    },
     subsection: {
       type: String,
     },
@@ -128,9 +128,27 @@ export default defineComponent({
     const fetchProducts = () => {
       store.dispatch("products/addProductsByPage");
     };
-    const setFilterSection = (id: number, name: string) => {
-      store.commit("products/setFilter", { section: { id, name } });
+    const setFilter = (name: string) => {
+      store.commit("products/addCurrentFilter", { name });
     };
+    const removeFilter = (name: string) => {
+      store.commit("products/removeCurrentFilter", name);
+    };
+    const resetFilters = () => {
+      store.commit("products/resetCurrentFilters");
+    };
+
+    const applyFilter = async () => {
+      await store.dispatch("products/setProductsByPage", 1);
+    };
+
+    const setPrice = (price: []) => {
+      price.forEach((string) =>
+        store.commit("products/addCurrentFilter", string)
+      );
+    };
+
+    const filters = computed(() => store.getters["products/getFilters"]);
 
     return {
       product,
@@ -142,11 +160,13 @@ export default defineComponent({
       products: computed<Product[]>(
         () => store.getters["products/getProductsOnCurrentPage"]
       ),
-      sections: computed<FilterSection[]>(
-        () => store.getters["products/getSections"]
-      ),
       fetchProducts,
-      setFilterSection,
+      setFilter,
+      removeFilter,
+      resetFilters,
+      applyFilter,
+      setPrice,
+      filters,
     };
   },
 });

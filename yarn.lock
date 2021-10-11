@@ -12783,6 +12783,11 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-smooth-scroll@^2.0.0-beta.1:
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/v-smooth-scroll/-/v-smooth-scroll-2.0.0-beta.1.tgz#a68f4e46cc0c3c7671024f7ae945b94d3bf4675a"
+  integrity sha512-GRGsfw8MYNDb5kkIfWHJUyC6VjG9xgalkC2cSlD/oDsKmIhzxEC1zYGke77S8EicGVQw0bCqLItGmt9HWMOuwg==
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"

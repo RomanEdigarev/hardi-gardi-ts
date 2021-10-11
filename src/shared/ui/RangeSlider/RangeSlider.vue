@@ -1,5 +1,5 @@
 <template>
-  <div class="range-slider">
+  <div class="range-slider" @mouseleave="$emit('set-price', arr)">
     <input
       class="range-slider__input"
       v-model="arr[0]"

@@ -39,6 +39,7 @@ type MenuLink = {
   link: LinkPath;
   icon: Icon;
   items?: MenuLink[];
+  id?: string;
 };
 type MenuData = {
   top: TopMenu;

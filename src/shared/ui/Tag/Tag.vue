@@ -1,10 +1,10 @@
 <template>
-  <div class="tag">
+  <div class="tag" :class="{ active: active }">
     <span class="tag__text">
       {{ text }}
     </span>
     <div class="tag__delete-btn">
-      <BetaButton @click="$emit('delete-tag')" styling="beta-gamma-btn">
+      <BetaButton @click.stop="$emit('delete-tag')" styling="beta-gamma-btn">
         <CloseIcon />
       </BetaButton>
     </div>
@@ -29,6 +29,10 @@ export default defineComponent({
       required: true,
       default: "tag-text",
     },
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
@@ -48,6 +52,7 @@ export default defineComponent({
   color: $clr-phi;
   border: 1px solid $clr-upsilon;
   border-radius: 15px;
+  cursor: pointer;
 
   &__text {
     display: block;
@@ -76,6 +81,14 @@ export default defineComponent({
     .tag__delete-btn {
       opacity: 1;
     }
+  }
+}
+.tag.active {
+  color: $clr-tau;
+  border-color: $clr-zeta;
+  background-color: $clr-zeta;
+  .tag__delete-btn {
+    opacity: 1;
   }
 }
 </style>

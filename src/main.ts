@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import VueSmoothScroll from "v-smooth-scroll";
 import router from "./shared/router";
 import { App } from "@/app";
 import { directives } from "@/app/directives";
@@ -9,4 +10,12 @@ directives.forEach((directive) => {
   app.directive(directive.name, directive);
 });
 
-app.use(store, key).use(router).mount("#app");
+app
+
+  .use(store, key)
+  .use(router)
+  .use(VueSmoothScroll, {
+    duration: 10000,
+    updateHistory: false,
+  })
+  .mount("#app");

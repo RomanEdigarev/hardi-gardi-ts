@@ -19,7 +19,10 @@
         <div v-for="column in result" class="catalog-submenu__content__column">
           <div v-for="linkItem in column" class="catalog-submenu__item">
             <div class="catalog-submenu__link-container">
-              <div class="catalog-submenu__link">
+              <div
+                class="catalog-submenu__link"
+                @click="setFilter(linkItem.id)"
+              >
                 <div class="catalog-submenu__link-icon-container">
                   <img
                     :src="require('/public/images/static-icons/1.svg')"
@@ -58,15 +61,25 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useCatalogSubmenu } from "./lib";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "CatalogSubmenu",
   emits: ["close-burger-menu"],
   setup() {
+    const store = useStore();
     const { result } = useCatalogSubmenu();
-    console.log(result);
+    const setFilter = async (sectionId) => {
+      store.commit("products/addCurrentFilter", {
+        name: "section",
+        value: sectionId,
+      });
+      await store.dispatch("products/setProductsByPage", 1);
+    };
+
     return {
       result,
+      setFilter,
     };
   },
 });

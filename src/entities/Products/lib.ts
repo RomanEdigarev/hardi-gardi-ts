@@ -18,6 +18,6 @@ export const getSections = async () => {
 };
 export const initCatalog = async () => {
   const store = useStore();
-  await store.dispatch("products/initSections");
+  await store.dispatch("products/initFilters");
   await store.dispatch("products/setProductsByPage", 1);
 };

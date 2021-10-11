@@ -1,12 +1,22 @@
 import { Product } from "@/entities/Products/Product/model";
 import { getHistoryAPI } from "@/services/api";
 import { getProductsByPageAPI } from "@/services/api/lib/products";
+import { CurrentFilter } from "@/entities/Products/model";
 
 export const getProductsByPageAdapter = async (
-  page: number
+  page: number,
+  currentFilter: CurrentFilter = {}
 ): Promise<Product[]> => {
+  const filters: string[] = Object.entries(currentFilter).map(
+    ([key, value]) => {
+      if (key === "section") {
+        return `section[${value}]`;
+      }
+      return `${key}=${value ? value : "Y"}`;
+    }
+  );
   // Response API here //
-  const response = await getProductsByPageAPI(page);
+  const response = await getProductsByPageAPI(page, filters);
   // Response API  //
   // Transformation API data here //
   const products: Product[] = response.data.products.map((product) => {
