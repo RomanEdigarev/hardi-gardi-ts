@@ -7,7 +7,7 @@
           <div class="catalog-product-card__image-wrapper">
             <img
               class="catalog-product-card__image"
-              :src="productTest.img"
+              :src="product.img"
               :alt="product.title"
               @click="$router.push(`/product/${product.id}`)"
             />

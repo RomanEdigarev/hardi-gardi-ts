@@ -70,6 +70,7 @@ export default defineComponent({
     const store = useStore();
     const { result } = useCatalogSubmenu();
     const resetFilter = async () => {
+      store.commit("products/resetCurrentFilters");
       await store.dispatch("products/setProductsByPage", 1);
     };
     const setFilter = async (sectionId) => {
