@@ -3,7 +3,7 @@
     <div class="catalog-submenu__content-container">
       <div class="catalog-submenu__content">
         <div class="catalog-submenu__link-container">
-          <div class="catalog-submenu__link">
+          <div class="catalog-submenu__link" @click="resetFilter">
             <div class="catalog-submenu__link-icon-container">
               <img :src="require('/public/images/static-icons/1.svg')" alt="" />
             </div>
@@ -76,10 +76,15 @@ export default defineComponent({
       });
       await store.dispatch("products/setProductsByPage", 1);
     };
+    const resetFilter = async () => {
+      store.commit("products/resetCurrentFilters");
+      await store.dispatch("products/setProductsByPage", 1);
+    };
 
     return {
       result,
       setFilter,
+      resetFilter,
     };
   },
 });
