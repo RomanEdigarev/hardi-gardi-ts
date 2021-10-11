@@ -77,11 +77,7 @@
     </section>
   </div>
 
-  <img
-    class="app__header-bg"
-    :src="require('/public/images/header-bg.svg')"
-    alt=""
-  />
+  <div class="app__header-bg"><HomeAnimationBG /></div>
   <img
     class="app__header-image"
     :src="require('/public/images/header-image.png')"
@@ -99,6 +95,7 @@ import {
   SectionSales,
   SectionSets,
   CategoryCard,
+  HomeAnimationBG,
 } from "./ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { PromotionSection } from "@/widgets";
@@ -114,6 +111,7 @@ export default defineComponent({
     SectionSales,
     SectionSets,
     CategoryCard,
+    HomeAnimationBG,
   },
   setup() {
     const store = useStore();
