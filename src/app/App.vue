@@ -186,10 +186,11 @@ export default defineComponent({
   }
 
   &__header-bg {
-    top: 0;
+    top: 100px;
     left: 0;
     height: 821px;
     z-index: 0;
+    overflow: hidden;
   }
 
   &__footer-bg {
