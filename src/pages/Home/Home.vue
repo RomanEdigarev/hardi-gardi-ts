@@ -77,12 +77,14 @@
     </section>
   </div>
 
-  <div class="app__header-bg"><HomeAnimationBG /></div>
-  <img
-    class="app__header-image"
-    :src="require('/public/images/header-image.png')"
-    alt=""
-  />
+  <div class="app__header-bg">
+    <HomeAnimationBG />
+  </div>
+  <!--  <img-->
+  <!--    class="app__header-image"-->
+  <!--    :src="require('/public/images/header-image.png')"-->
+  <!--    alt=""-->
+  <!--  />-->
 </template>
 
 <script lang="ts">
@@ -127,6 +129,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .home {
+  position: relative;
+  z-index: 4;
   &__prolog-container {
     width: 100%;
     height: 816px;

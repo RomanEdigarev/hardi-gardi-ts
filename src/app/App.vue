@@ -189,6 +189,7 @@ export default defineComponent({
     top: 0;
     left: 0;
     height: 821px;
+    z-index: 0;
   }
 
   &__footer-bg {
