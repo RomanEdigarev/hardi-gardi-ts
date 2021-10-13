@@ -1,81 +1,39 @@
 import anime from "animejs";
 
-export const useShapeAnimation = (target) => {
+export const useShapeBounceAnimation = (target) => {
   return anime({
     autoplay: false,
     targets: target,
-    rotate: "-8deg",
-    translateY: "1%",
-    scale: "1.08",
+    keyframes: [
+      { rotate: "0deg", scale: "1" },
+      { rotate: "4deg", scale: "1.02" },
+      { rotate: "-1deg", scale: "1.08" },
+    ],
+    translateY: ["-50%", "-50%"],
+    translateX: ["-50%", "-50%"],
+
     loop: true,
-    delay: 2500,
+    delay: 1500,
+    duration: 600,
     direction: "alternate",
-    // easing: "spring(1, 80, 10, 10)",
-    easing: "easeInOutElastic(1, .8)",
+    easing: "linear",
   });
 };
 
-const newTimeLine = anime.timeline({});
-
-// const toggleVideo = () => {
-//   shapeAnimation.pause();
-//
-//   newTimeLine
-//     .add({
-//       autoplay: true,
-//       targets: shapeForth.value,
-//       width: {
-//         value: "100%",
-//         duration: 700,
-//       },
-//       left: "0",
-//       top: "100px",
-//       maskImage: "none",
-//       ["-webkit-mask-size"]: {
-//         value: "1000%",
-//         duration: 700,
-//       },
-//       ["-webkit-mask-position"]: {
-//         value: "77% 27%",
-//         duration: 200,
-//       },
-//       height: {
-//         value: "70vh",
-//         duration: 700,
-//       },
-//       easing: "linear",
-//     })
-//     .add(
-//       {
-//         targets: videoContainerShapeForth.value,
-//         backgroundColor: ["#5F73AA", "#fff"],
-//         // opacity: [0, 1],
-//         duration: 700,
-//       },
-//       100
-//     )
-//     .add(
-//       {
-//         targets: videoShapeForth.value,
-//         left: "-89%",
-//         top: "-44%",
-//         translateX: "50%",
-//         width: ["100%", "140%"],
-//         height: ["100%", "140%"],
-//         duration: 100,
-//         complete: (anim) => {
-//           videoShapeForth.value.style.opacity = "1";
-//         },
-//       },
-//       0
-//     );
-// };
-//
-// const reverseAnimation = () => {
-//   console.log("reverse");
-//   // newTimeLine.reverse();
-//   newTimeLine.restart();
-// };
+export const useShapeRotateAnimation = (target) => {
+  return anime({
+    autoplay: false,
+    targets: target,
+    rotate: "10deg",
+    translateY: ["-50%", "-50%"],
+    translateX: ["-50%", "-50%"],
+    keyframes: [{ rotate: "6deg" }, { rotate: "-6deg" }, { rotate: "0deg" }],
+    loop: true,
+    delay: 600,
+    direction: "alternate",
+    easing: "spring(1, 80, 10, 0)",
+  });
+};
 
 export const starAnimation = (targets) => {
   return anime({
@@ -93,17 +51,22 @@ export const starAnimation = (targets) => {
       value: ["71%", "340%"],
       duration: 400,
     },
-    left: ["69%", "50%"],
+    left: ["63%", "50%"],
     top: ["16%", "50%"],
-    duration: 400,
+    zIndex: [0, 1],
+    duration: 600,
+    begin: (anim) => {
+      anim.animatables[0].target.style.zIndex = "1";
+    },
     complete: (anim) => {
       if (anim.direction === "normal") {
         anim.direction = "reverse";
       } else {
         anim.direction = "normal";
+        anim.animatables[0].target.style.zIndex = "0";
       }
     },
-    easing: "linear",
+    easing: "easeInOutCubic",
   });
 };
 
@@ -111,6 +74,8 @@ export const charAnimation = (targets) => {
   return anime({
     autoplay: false,
     targets,
+    left: ["25%", "50%"],
+    top: ["10%", "25%"],
     width: {
       value: ["100%"],
       duration: 300,
@@ -123,22 +88,24 @@ export const charAnimation = (targets) => {
       value: ["71%", "340%"],
       duration: 400,
     },
-    // 98% ​30
     ["-webkit-mask-position"]: {
       value: ["95% 30%"],
       duration: 400,
     },
-    left: ["25%", "50%"],
-    top: ["10%", "25%"],
-    duration: 400,
+    zIndex: [0, 1],
+    duration: 600,
+    begin: (anim) => {
+      anim.animatables[0].target.style.zIndex = "1";
+    },
     complete: (anim) => {
       if (anim.direction === "normal") {
         anim.direction = "reverse";
       } else {
         anim.direction = "normal";
+        anim.animatables[0].target.style.zIndex = "0";
       }
     },
-    easing: "linear",
+    easing: "easeInOutCubic",
   });
 };
 
@@ -147,11 +114,11 @@ export const gammaAnimation = (targets) => {
     autoplay: false,
     targets,
     width: {
-      value: ["100%"],
+      value: ["12%", "100%"],
       duration: 300,
     },
     height: {
-      value: ["100%"],
+      value: ["12%", "100%"],
       duration: 300,
     },
     ["-webkit-mask-size"]: {
@@ -162,16 +129,21 @@ export const gammaAnimation = (targets) => {
       value: ["95% 34%"],
       duration: 400,
     },
-    left: ["78%", "50%"],
+    left: ["76%", "50%"],
     top: ["34%", "25%"],
-    duration: 400,
+    zIndex: [0, 1],
+    duration: 600,
+    begin: (anim) => {
+      anim.animatables[0].target.style.zIndex = "1";
+    },
     complete: (anim) => {
       if (anim.direction === "normal") {
         anim.direction = "reverse";
       } else {
         anim.direction = "normal";
+        anim.animatables[0].target.style.zIndex = "0";
       }
     },
-    easing: "linear",
+    easing: "easeInOutCubic",
   });
 };
