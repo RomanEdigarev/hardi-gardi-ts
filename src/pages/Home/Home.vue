@@ -80,11 +80,7 @@
   <div class="app__header-bg">
     <HomeAnimationBG />
   </div>
-  <!--  <img-->
-  <!--    class="app__header-image"-->
-  <!--    :src="require('/public/images/header-image.png')"-->
-  <!--    alt=""-->
-  <!--  />-->
+
 </template>
 
 <script lang="ts">
@@ -134,7 +130,8 @@ export default defineComponent({
   &__prolog-container {
     width: 100%;
     height: 816px;
-    margin-top: 757px;
+    //margin-top: 757px;
+    margin-top: 58vh;
     margin-bottom: 114px;
   }
 
@@ -186,6 +183,8 @@ export default defineComponent({
     &__prolog-container {
       height: auto;
       margin-bottom: 236px;
+      margin-top: 68vh;
+
     }
     &__promotion-container {
       height: auto;

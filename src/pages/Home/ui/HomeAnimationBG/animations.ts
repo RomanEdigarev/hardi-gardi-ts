@@ -76,3 +76,102 @@ const newTimeLine = anime.timeline({});
 //   // newTimeLine.reverse();
 //   newTimeLine.restart();
 // };
+
+export const starAnimation = (targets) => {
+  return anime({
+    autoplay: false,
+    targets,
+    width: {
+      value: ["100%"],
+      duration: 300,
+    },
+    height: {
+      value: ["100%"],
+      duration: 300,
+    },
+    ["-webkit-mask-size"]: {
+      value: ["71%", "340%"],
+      duration: 400,
+    },
+    left: ["69%", "50%"],
+    top: ["16%", "50%"],
+    duration: 400,
+    complete: (anim) => {
+      if (anim.direction === "normal") {
+        anim.direction = "reverse";
+      } else {
+        anim.direction = "normal";
+      }
+    },
+    easing: "linear",
+  });
+};
+
+export const charAnimation = (targets) => {
+  return anime({
+    autoplay: false,
+    targets,
+    width: {
+      value: ["100%"],
+      duration: 300,
+    },
+    height: {
+      value: ["100%"],
+      duration: 300,
+    },
+    ["-webkit-mask-size"]: {
+      value: ["71%", "340%"],
+      duration: 400,
+    },
+    // 98% ​30
+    ["-webkit-mask-position"]: {
+      value: ["95% 30%"],
+      duration: 400,
+    },
+    left: ["25%", "50%"],
+    top: ["10%", "25%"],
+    duration: 400,
+    complete: (anim) => {
+      if (anim.direction === "normal") {
+        anim.direction = "reverse";
+      } else {
+        anim.direction = "normal";
+      }
+    },
+    easing: "linear",
+  });
+};
+
+export const gammaAnimation = (targets) => {
+  return anime({
+    autoplay: false,
+    targets,
+    width: {
+      value: ["100%"],
+      duration: 300,
+    },
+    height: {
+      value: ["100%"],
+      duration: 300,
+    },
+    ["-webkit-mask-size"]: {
+      value: ["71%", "340%"],
+      duration: 400,
+    },
+    ["-webkit-mask-position"]: {
+      value: ["95% 34%"],
+      duration: 400,
+    },
+    left: ["78%", "50%"],
+    top: ["34%", "25%"],
+    duration: 400,
+    complete: (anim) => {
+      if (anim.direction === "normal") {
+        anim.direction = "reverse";
+      } else {
+        anim.direction = "normal";
+      }
+    },
+    easing: "linear",
+  });
+};
