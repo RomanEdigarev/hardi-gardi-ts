@@ -32,13 +32,13 @@
         class="prolog__card"
         :key="card.title"
       >
-        <PrologCard :color="card.color" :title="card.title">
-          <template v-slot:image>
-            <img
-              :src="require(`/public/images/cards/${index}-card.svg`)"
-              :alt="`${index}-card`"
-            />
-          </template>
+        <PrologCard section-id="5" :color="card.color" :title="card.title">
+<!--          <template v-slot:image>-->
+<!--            <img-->
+<!--              :src="require(`/public/images/cards/${index}-card.svg`)"-->
+<!--              :alt="`${index}-card`"-->
+<!--            />-->
+<!--          </template>-->
         </PrologCard>
       </div>
     </div>
