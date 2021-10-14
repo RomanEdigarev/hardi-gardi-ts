@@ -4,18 +4,9 @@ const getSecondaryOptions = (status?: string, width?: string) => {
   const isMobile = status === "isMobile";
   const isPhone = status === "isPhone";
 
-  const getWidthForOptions = () => {
-    if (isPhone) {
-      return "273px";
-    } else if (isMobile) {
-      return "480px";
-    } else {
-      return "auto";
-    }
-  };
   const options = {
     type: "slide",
-    perPage: isPhone && width ? 4 : "auto",
+    perPage: isPhone || isMobile || width ? 4 : 5,
     perMove: 1,
     pagination: false,
     rewind: false,
@@ -29,7 +20,7 @@ const getSecondaryOptions = (status?: string, width?: string) => {
     direction: isMobile || isPhone ? "ltr" : "ttb",
     height: isMobile || isPhone ? "auto" : "480px",
     // width: width || getWidthForOptions(),
-    width: "300px",
+    width: width || "300px",
   };
   return options;
 };
@@ -51,7 +42,7 @@ export const getPrimaryOptions = (status?: string, isZoom?: boolean) => {
     return isPhone ? "95%" : "35.625vw";
   };
   const options = {
-    type: "loop",
+    type: "slide",
     perPage: 1,
     perMove: 1,
     gap: "1rem",

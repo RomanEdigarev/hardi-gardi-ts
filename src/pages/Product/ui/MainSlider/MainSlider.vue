@@ -75,7 +75,7 @@
             @splide:moved="splideMoved"
             v-else-if="isMobile"
             ref="secondarySplide"
-            :options="getSecondaryOptions('isMobile')"
+            :options="getSecondaryOptions('isMobile', '374px')"
           >
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
@@ -174,25 +174,11 @@
           :options="getPrimaryOptions('isPhone')"
           @splide:click="$emit('zoom')"
         >
-          <SplideSlide>
+          <SplideSlide v-for="photo in photos">
             <img
-              src="./assets/thumbnail_0.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_1.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_2.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
+                :src="photo"
+                alt=""
+                class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
@@ -214,25 +200,11 @@
           :options="getPrimaryOptions('isMobile')"
           @splide:click="$emit('zoom')"
         >
-          <SplideSlide>
+          <SplideSlide v-for="photo in photos">
             <img
-              src="./assets/thumbnail_0.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_1.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="./assets/thumbnail_2.jpg"
-              alt=""
-              class="main-slider__body__current-slide__img"
+                :src="photo"
+                alt=""
+                class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
@@ -254,12 +226,27 @@
           :options="getPrimaryOptions()"
           @splide:click="$emit('zoom')"
         >
-          <SplideSlide v-for="photo in photos">
-            <img
-              :src="photo"
-              alt=""
-              class="main-slider__body__current-slide__img"
-            />
+          <SplideSlide v-for="(photo, index) in photos">
+            <template v-if="index === 0">
+              <img
+                  :src="photo"
+                  alt=""
+                  class="main-slider__body__current-slide__img"
+              />
+              <img
+                  :src="photos[index + 1]"
+                  alt=""
+                  class="main-slider__body__current-slide__img"
+              />
+            </template>
+            <template v-else>
+              <img
+                  :src="photo"
+                  alt=""
+                  class="main-slider__body__current-slide__img"
+              />
+            </template>
+
           </SplideSlide>
 
           <template v-slot:controls>
@@ -324,7 +311,6 @@ export default defineComponent({
     const isLastSlide = ref(false);
 
     onUpdated(() => {
-      console.log("updated");
       document.documentElement.style.overflow = props.isZoom
         ? "hidden"
         : "visible";
@@ -440,9 +426,28 @@ export default defineComponent({
   }
 
   // *** Splide *** //
+  &__body__current-slide {
+    :deep .splide__slide:first-child{
+      //position: relative;
+      img {
+        position: absolute;
+        top:0;
+        left:0;
+
+      }
+      img:first-child {
+        z-index: 1;
+        transition: opacity 0.3s ease-in-out;
+      }
+      img:first-child:hover {
+        opacity: 0;
+      }
+    }
+  }
   .splide__arrow {
     display: none;
   }
+
   .splide__slide.is-active {
     border-color: transparent !important;
   }

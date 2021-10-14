@@ -9,7 +9,7 @@
           <MainSlider
             @zoom="zoomSlider"
             :is-zoom="isZoomSlider"
-            :photos="product.photos"
+            :photos="currentProduct.photos"
           />
         </div>
       </div>
