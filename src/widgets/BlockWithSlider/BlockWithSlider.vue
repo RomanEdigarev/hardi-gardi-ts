@@ -1,6 +1,6 @@
 <template>
   <div class="block-with-slider">
-    <div class="block-with-slider__image-card-container">
+    <div ref="imageCard" class="block-with-slider__image-card-container">
       <ImageProductCard
         :title="currentProduct.title"
         :img-path="currentProduct.img"
@@ -25,7 +25,11 @@
           />
         </div>
         <div class="block-with-slider__slider-panel">
-          <SliderPanel @next-slide="nextProduct" :count="5" />
+          <SliderPanel
+            @next-slide="nextProduct"
+            @prev-slide="prevProduct"
+            :count="products.length"
+          />
         </div>
       </div>
     </div>
@@ -33,13 +37,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
-import anime from "animejs";
+import { computed, defineComponent,PropType, ref } from "vue";
 import { SliderPanel } from "@/features";
 import { Product } from "@/entities/Products/Product/model";
-import { getUserCity } from "@/services/api";
 import InfoProductCard from "@/widgets/Product/InfoProductCard/InfoProductCard.vue";
 import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCard.vue";
+import { useAnimation } from "./animations";
 
 export default defineComponent({
   name: "BlockWithSlider",
@@ -56,27 +59,39 @@ export default defineComponent({
   },
   setup({ products }) {
     const infoProduct = ref<InstanceType<typeof InfoProductCard>>();
-    const currentProduct = ref<Product>(products[0]);
+    const imageCard = ref<HTMLElement>(null);
+    const infoContent = computed<HTMLElement>(() => {
+      return infoProduct.value.$refs.content as HTMLElement;
+    });
+    const currentSlide = ref(0);
+    let slideNumber = 0;
+    const currentProduct = computed<Product>(
+      () => products[currentSlide.value]
+    );
+    const setNewSlide = () => {
+      currentSlide.value = slideNumber;
+    };
+    const animation = computed(() => {
+      return useAnimation(infoContent.value, imageCard.value, setNewSlide);
+    });
 
-    const nextProduct = (e) => {
-      getUserCity().then((response) => {
-        console.log(response);
-      });
-      const infoContent: HTMLElement = infoProduct?.value.$refs
-        .content as HTMLElement;
-      anime({
-        targets: infoContent,
-        opacity: [1, 0.5],
-        translateY: [0, 20],
-        duration: 300,
-        easing: "linear",
-      });
+    const nextProduct = () => {
+      slideNumber++;
+      animation.value.play();
+    };
+
+    const prevProduct = () => {
+      slideNumber--;
+      animation.value.play();
     };
 
     return {
       nextProduct,
       infoProduct,
       currentProduct,
+      currentSlide,
+      prevProduct,
+      imageCard,
     };
   },
 });
@@ -146,10 +161,21 @@ export default defineComponent({
 
   &__info-card {
     margin-bottom: 40px;
+    width: 100%;
+    min-height: 300px;
   }
 
   &__slider-panel {
     width: 267px;
+  }
+
+  :deep .product-card-info {
+    &__content {
+      justify-content: space-between;
+      div {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 @media screen and (min-width: 736px) and (max-width: 1200px),

@@ -4,7 +4,9 @@
       <Prolog />
     </section>
     <section class="home__bestsellers-container">
-      <SectionBestsellers :products="[product, product]" />
+      <template v-if="testProducts.length > 0">
+        <SectionBestsellers :products="testProducts" />
+      </template>
     </section>
     <section class="home__new-games-container">
       <SectionNewGames :products="[product, product]" />
@@ -84,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 
 import {
   Prolog,
@@ -95,7 +97,7 @@ import {
   CategoryCard,
   HomeAnimationBG,
 } from "./ui";
-import { useProduct } from "@/entities/Products/Product/lib";
+import {asyncUseProduct, useProduct} from "@/entities/Products/Product/lib";
 import { PromotionSection } from "@/widgets";
 import { useStore } from "@/services/vuex";
 
@@ -114,10 +116,17 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const { product } = useProduct();
+    const testProducts = ref([])
+
+    onMounted(async () => {
+      testProducts.value.push(await asyncUseProduct(201))
+      testProducts.value.push(await asyncUseProduct(193))
+    })
 
     return {
       product,
       isPhone: computed(() => store.state.isPhone),
+      testProducts
     };
   },
 });
