@@ -216,6 +216,7 @@ export default defineComponent({
     mask-position: 50% -350px;
     background-color: transparent;
     z-index: 2;
+    overflow: hidden;
   }
   video {
     opacity: 0;
