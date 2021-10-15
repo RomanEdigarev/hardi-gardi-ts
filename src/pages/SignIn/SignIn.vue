@@ -2,13 +2,11 @@
   <div class="sign-in">
     <div class="sign-in__header">
       <div class="sign-in__header__title">
-        <PageTitle text="Восстановление пароля" />
+        <PageTitle :text="title" />
       </div>
     </div>
     <div class="sign-in__body">
-      <!--      <Login />-->
-      <!--      <Registration />-->
-      <NewPassword />
+      <component :is="step"></component>
     </div>
     <div class="sign-in__bg">
       <img src="./assets/bg.svg" alt="" />
@@ -20,9 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { Login, NewPassword, RecoveryPassModal, Registration } from "./ui";
 import { PageTitle } from "@/shared/ui";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "SignIn",
@@ -32,6 +31,23 @@ export default defineComponent({
     Registration,
     NewPassword,
     RecoveryPassModal,
+  },
+  setup() {
+    const titles = {
+      login: "Войти",
+      registration: "Регистрация",
+      "new-password": "Восстановление пароля",
+    };
+    const route = useRoute();
+    const step = computed(() => route.params.step);
+    const title = computed(() => {
+      return titles[step.value as string];
+    });
+
+    return {
+      step,
+      title,
+    };
   },
 });
 </script>

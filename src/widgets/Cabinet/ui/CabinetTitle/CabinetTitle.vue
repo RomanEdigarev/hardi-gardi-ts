@@ -1,10 +1,10 @@
 <template>
   <div
     class="cabinet-title__title"
-    :class="{ isLogin: isLogin }"
-    @click="$router.push('/personal')"
+    :class="{ isLogin: isAuth }"
+    @click="$router.push(`${isAuth ? '/personal' : '/sign-in/login'}`)"
   >
-    <Tooltip v-if="isLogin">
+    <Tooltip v-if="isAuth">
       <template v-slot:reference>
         <span class="cabinet-title__icon"><ProfileIcon /></span>
       </template>
@@ -35,7 +35,7 @@ export default {
     Tooltip,
   },
   props: {
-    isLogin: {
+    isAuth: {
       type: Boolean,
       default: false,
     },
@@ -45,7 +45,7 @@ export default {
   },
   setup(props) {
     const text = computed(() => {
-      return props.isLogin ? props.name : "Личный кабинет";
+      return props.isAuth ? props.name : "Личный кабинет";
     });
 
     return {

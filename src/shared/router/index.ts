@@ -192,7 +192,7 @@ const routes = [
     component: Error,
   },
   {
-    path: "/sign-in",
+    path: "/sign-in/:step",
     name: "SignIn",
     component: SignIn,
   },

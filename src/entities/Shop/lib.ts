@@ -10,6 +10,7 @@ export const initShop = async (): Promise<Shop> => {
   store.commit("setIsToken", true);
   await store.dispatch("basket/initBasket");
   await store.dispatch("favorites/initFavorites");
+  await store.dispatch("user/fetchUserAuthInfo");
   await store.dispatch("shop/initShop");
 
   return store.state.shop;

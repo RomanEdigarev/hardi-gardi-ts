@@ -34,7 +34,11 @@
           <AlfaButton text="Войти" />
         </div>
         <div class="login__body__btns__item">
-          <AlfaButton text="Регистрация" styling="secondary" />
+          <AlfaButton
+            text="Регистрация"
+            styling="secondary"
+            @click="$router.push('/sign-in/registration')"
+          />
         </div>
       </div>
     </div>

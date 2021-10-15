@@ -85,7 +85,6 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const isToken = computed(() => store.getters["getIsToken"]);
-    onBeforeMount(async () => {});
     onMounted(async () => {
       if (!store.state.isInit) {
         await initShop();
@@ -100,7 +99,6 @@ export default defineComponent({
     });
 
     window.addEventListener("resize", () => {
-      console.log("resize");
       if (
         document.documentElement.clientWidth <= 1360 &&
         document.documentElement.clientWidth > 737

@@ -37,7 +37,7 @@
             placeholder="Подтверждение пароля"
             label-text="Подтверждение пароля"
             name="confirm-password"
-            :validation="isPassword"
+            :validation="schema.fields.password"
           />
         </div>
       </div>
@@ -48,7 +48,9 @@
         </div>
         <div class="registration__body__btns__item">
           Есть аккаунт?
-          <span class="alfa-link">Войти</span>
+          <span class="alfa-link" @click="$router.push('/sign-in/login')">
+            Войти
+          </span>
         </div>
       </div>
     </div>
@@ -67,6 +69,8 @@ import { defineComponent } from "vue";
 import { Checkbox, VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import * as yup from "yup";
+import { SchemaOf } from "yup";
+import ObjectSchema from "yup/lib/object";
 
 export default defineComponent({
   name: "Registration",
@@ -78,12 +82,19 @@ export default defineComponent({
       .required("Обязательное поле")
       .email("Неверный формат");
 
+    const schema = yup.object({
+      isFirstName: yup.string().required("Обязательное поле"),
+      password: yup.string().required("Обязательное поле"),
+    });
+    console.log(schema.fields);
+
     const isPassword = yup.string().required("Обязательное поле");
 
     return {
       isFirstName,
       isPassword,
       isEmail,
+      schema,
     };
   },
 });
