@@ -2,7 +2,7 @@
   <div class="personal">
     <main class="page-main">
       <div class="page-main__header">
-        <PageTitle text="Здравствуйте, Ангелина!" />
+        <PageTitle :text="`Здравствуйте, ${user.name}!`" />
       </div>
       <div class="personal__footer">
         <Details />
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="personal__body">
-        <component :is="items[currentItemNumber].name"></component>
+        <component :is="items[currentItemNumber].name" :user="user"></component>
       </div>
       <div v-if="isPhone" class="personal__log-out">
         <span>Выйти</span>
@@ -75,12 +75,16 @@ export default defineComponent({
       },
     ];
     const currentItemNumber = ref(0);
+    const user = computed(() => {
+      return store.state.user;
+    });
 
     return {
       currentItemNumber,
       items,
       isMobile,
       isPhone: computed(() => store.getters["getIsPhone"]),
+      user,
     };
   },
 });

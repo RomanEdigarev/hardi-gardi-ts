@@ -7,6 +7,7 @@
           placeholder="Email"
           id="email"
           type="email"
+          :value="user.email"
           :validation="isEmail"
         />
       </div>
@@ -16,6 +17,7 @@
             name="firstName"
             placeholder="Имя"
             id="firstName"
+            :value="user.name"
             type="text"
             :validation="isFirstName"
           />
@@ -25,6 +27,7 @@
             name="lastName"
             placeholder="Фамилия"
             id="lastName"
+            :value="user.lastName"
             type="text"
             :validation="isFirstName"
           />
@@ -34,12 +37,13 @@
             name="phone"
             placeholder="Телефон"
             id="phone"
+            :value="user.phone"
             type="phone"
             :validation="isPhone"
           />
         </div>
         <div class="data__body__item">
-          <DateInput name="userDate" />
+          <DateInput name="userDate" :value="'2016-01-01'" />
         </div>
       </div>
       <div class="data__body__item">
@@ -54,14 +58,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { DateInput, VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import { ChangeChild, ChangePass } from "./ui";
+import { User } from "@/entities/User/model";
 
 export default defineComponent({
   name: "data",
   components: { VInput, ChangePass, ChangeChild, DateInput },
+  props: {
+    user: {
+      type: Object as PropType<User>,
+      required: true,
+    },
+  },
   setup() {
     const isFirstName = yup.string().required("Обязательное поле");
     const isEmail = yup

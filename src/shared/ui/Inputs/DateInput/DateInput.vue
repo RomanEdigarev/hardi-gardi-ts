@@ -8,6 +8,7 @@
       inputFormat="dd.MM.yyyy"
     />
     <img class="date-input__icon" src="./assets/icon.svg" alt="calendar" />
+    {{ picked }}
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Datepicker from "vue3-datepicker";
 import { ref, watch } from "vue";
 import { ru } from "date-fns/locale";
 import format from "date-fns/format";
+import parse from "date-fns/parse";
 import { useField } from "vee-validate";
 
 export default defineComponent({
@@ -27,9 +29,14 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    value: {
+      type: String,
+    },
   },
   setup(props) {
-    const picked = ref<Date>(new Date());
+    const picked = ref<Date>(
+      new Date(parse(props.value as string, "dd.MM.yyyy", new Date()))
+    );
     const date = ref(null);
     const { handleChange } = useField("date");
     onMounted(() => {
