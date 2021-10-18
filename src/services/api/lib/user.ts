@@ -1,6 +1,11 @@
 import { AddToBasketData, Basket } from "@/services/api/model/Basket";
 import { apiInstance } from "@/services/api/config";
-import { UserInfo } from "@/services/api/model/User";
+import {
+  UserInfo,
+  UserProfile,
+  UserProfileParamsData,
+  UserProfileSession,
+} from "@/services/api/model/User";
 
 export const getUserAuthInfoAPI = async (): Promise<UserInfo> => {
   try {
@@ -15,19 +20,85 @@ export const getUserAuthInfoAPI = async (): Promise<UserInfo> => {
   }
 };
 
-export const registrationUserAPI = async (
-  name: string,
-  email: string,
-  password: string
-): Promise<UserInfo> => {
+export const registrationUserAPI = async ({
+  name,
+  email,
+  password,
+}): Promise<UserInfo> => {
   try {
     const { data, status } = await apiInstance().post(
       `user/auth/registration.php?name=${name}&email=${email}&password=${password}`
     );
+    if (status === 200) {
+      return data;
+    } else {
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const loginUserAPI = async ({
+  email,
+  password,
+  remember,
+}): Promise<UserInfo> => {
+  try {
+    const { data, status } = await apiInstance().post(
+      `user/auth/login.php?login=${email}&password=${password}&remember=${remember}`
+    );
+    if (status === 200) {
+      return data;
+    } else {
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const logoutUserAPI = async (): Promise<boolean> => {
+  try {
+    const { data, status } = await apiInstance().post(`user/auth/logout.php`);
+    if (status === 200 && data.isSuccess) {
+      return data.isSuccess;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getUserProfileAPI = async (): Promise<UserProfile> => {
+  try {
+    const { data, status } = await apiInstance().post(`user/auth/profile.php`);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
-      throw new Error(data.message);
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const setUserProfileAPI = async (
+  sessionId: UserProfileSession,
+  params: UserProfileParamsData
+): Promise<UserProfile> => {
+  const strArr = Object.entries(params).map(([key, value]) => {
+    return `${key}=${value}`;
+  });
+  const queryStr = strArr.join("&");
+  try {
+    const { data, status } = await apiInstance().post(
+      `user/auth/profile.php?save=y&sessid=${sessionId}&${queryStr}`
+    );
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      return data.message;
     }
   } catch (e) {
     console.log(e);

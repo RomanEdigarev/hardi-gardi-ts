@@ -14,7 +14,7 @@
           <a class="tooltip-content__link" href="">История заказов</a>
           <a class="tooltip-content__link" href="">Персональные данные</a>
           <a class="tooltip-content__link" href="">Уведомления</a>
-          <a class="tooltip-content__link-out" href="">Выйти</a>
+          <span class="tooltip-content__link-out" @click="logout">Выйти</span>
         </div>
       </template>
     </Tooltip>
@@ -26,7 +26,9 @@
 <script>
 import { ProfileIcon } from "../../../../shared/ui/icons";
 import Tooltip from "../../../../shared/ui/Tooltip/Tooltip";
-import { computed } from "vue";
+import { computed, getCurrentInstance } from "vue";
+import { useStore } from "@/services/vuex";
+import { initShop } from "@/entities/Shop/lib";
 
 export default {
   name: "CabinetTitle",
@@ -43,13 +45,21 @@ export default {
       type: String,
     },
   },
-  setup(props) {
+  setup(props, context) {
+    const store = useStore();
     const text = computed(() => {
       return props.isAuth ? props.name : "Личный кабинет";
     });
 
+    const logout = async () => {
+      await store.dispatch("user/fetchLogoutUser");
+      localStorage.removeItem("token");
+      await initShop(store);
+    };
+
     return {
       text,
+      logout,
     };
   },
 };
@@ -85,6 +95,7 @@ export default {
     display: inline-block;
     width: 14px;
     margin-right: 8px;
+    cursor: pointer;
   }
 
   .isLogin {
@@ -113,6 +124,7 @@ export default {
     &__link {
       padding: 6px 0;
       transition: color 0.3s ease-in-out;
+      cursor: pointer;
       &:hover {
         color: $clr-alpha-epsilon;
       }

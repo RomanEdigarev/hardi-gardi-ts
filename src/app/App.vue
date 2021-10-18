@@ -87,7 +87,7 @@ export default defineComponent({
     const isToken = computed(() => store.getters["getIsToken"]);
     onMounted(async () => {
       if (!store.state.isInit) {
-        await initShop();
+        await initShop(store);
 
         store.commit(
           "setIsMobile",

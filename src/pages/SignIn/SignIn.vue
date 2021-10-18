@@ -6,6 +6,7 @@
       </div>
     </div>
     <div class="sign-in__body">
+      <span v-if="error">{{ error }}</span>
       <component :is="step"></component>
     </div>
     <div class="sign-in__bg">
@@ -18,10 +19,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, watch, watchEffect } from "vue";
 import { Login, NewPassword, RecoveryPassModal, Registration } from "./ui";
 import { PageTitle } from "@/shared/ui";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "SignIn",
@@ -33,6 +35,15 @@ export default defineComponent({
     RecoveryPassModal,
   },
   setup() {
+    const store = useStore();
+    const router = useRouter();
+    const error = computed(() => store.getters["user/getUserError"]);
+    const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
+    watchEffect(() => {
+      if (isAuth.value.isAuth === true) {
+        router.push("/personal");
+      }
+    });
     const titles = {
       login: "Войти",
       registration: "Регистрация",
@@ -47,6 +58,7 @@ export default defineComponent({
     return {
       step,
       title,
+      error,
     };
   },
 });

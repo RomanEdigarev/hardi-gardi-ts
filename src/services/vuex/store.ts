@@ -63,6 +63,6 @@ export const store = createStore<State>({
   },
 });
 
-export const useStore = () => {
-  return baseUseStore(key);
+export const useStore = (customKey = key) => {
+  return baseUseStore(customKey);
 };

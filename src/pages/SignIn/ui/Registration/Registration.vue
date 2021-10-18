@@ -7,8 +7,7 @@
             type="text"
             placeholder="Имя"
             label-text="Имя"
-            name="first-name"
-            :validation="isFirstName"
+            name="firstName"
           />
         </div>
         <div class="registration__body__inputs__item">
@@ -17,7 +16,6 @@
             placeholder="Email"
             label-text="Email"
             name="email"
-            :validation="isEmail"
           />
         </div>
       </div>
@@ -28,7 +26,6 @@
             placeholder="Пароль"
             label-text="Пароль"
             name="password"
-            :validation="isPassword"
           />
         </div>
         <div class="registration__body__inputs__item">
@@ -36,15 +33,18 @@
             type="password"
             placeholder="Подтверждение пароля"
             label-text="Подтверждение пароля"
-            name="confirm-password"
-            :validation="schema.fields.password"
+            name="confirmPassword"
           />
         </div>
       </div>
 
       <div class="registration__body__btns">
         <div class="registration__body__btns__item">
-          <AlfaButton text="Зарегистрироваться" />
+          <AlfaButton
+            text="Зарегистрироваться"
+            @click="onSubmit"
+            :is-disabled="isLoading"
+          />
         </div>
         <div class="registration__body__btns__item">
           Есть аккаунт?
@@ -65,36 +65,67 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, watch } from "vue";
 import { Checkbox, VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import * as yup from "yup";
-import { SchemaOf } from "yup";
-import ObjectSchema from "yup/lib/object";
+import { useForm } from "vee-validate";
+import { UserRegistrationData } from "@/entities/User/model";
+import { useStore } from "@/services/vuex";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Registration",
   components: { VInput, Checkbox, AlfaButton },
   setup() {
-    const isFirstName = yup.string().required("Обязательное поле");
-    const isEmail = yup
-      .string()
-      .required("Обязательное поле")
-      .email("Неверный формат");
+    const store = useStore();
+    const router = useRouter();
+    const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
+
+    watch(isAuth, () => {
+      debugger;
+      if (isAuth.value.isAuth === true) {
+        router.push("/personal");
+      }
+    });
 
     const schema = yup.object({
-      isFirstName: yup.string().required("Обязательное поле"),
-      password: yup.string().required("Обязательное поле"),
+      firstName: yup.string().required("Обязательное поле"),
+      email: yup
+        .string()
+        .required("Обязательное поле")
+        .email("Неверный формат"),
+      password: yup
+        .string()
+        .required("Обязательное поле")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+          "Восемь символов, заглавная буква, строчная буква, цифра"
+        ),
+      confirmPassword: yup
+        .string()
+        .required("Обязательное поле")
+        .oneOf([yup.ref("password"), null], "Пароли не совпадают"),
     });
-    console.log(schema.fields);
 
-    const isPassword = yup.string().required("Обязательное поле");
+    const { handleSubmit, isSubmitting } = useForm({
+      validationSchema: schema,
+    });
+
+    const onSubmit = handleSubmit(async (values) => {
+      const userData: UserRegistrationData = {
+        name: values.firstName,
+        email: values.email,
+        password: values.password,
+      };
+      await store.dispatch("user/fetchRegistrationUser", userData);
+    });
 
     return {
-      isFirstName,
-      isPassword,
-      isEmail,
       schema,
+      onSubmit,
+      isSubmitting,
+      isLoading: computed(() => store.getters["user/getUserIsLoading"]),
     };
   },
 });

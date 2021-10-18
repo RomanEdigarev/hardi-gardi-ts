@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="[styling]" :disabled="isPending">
+  <button class="btn" :class="[styling]" :disabled="isPending || isDisabled">
     <span v-if="isPending" class="spinner" />
     <span v-else-if="text">{{ text }}</span>
     <slot v-else />
@@ -17,6 +17,10 @@ export default defineComponent({
       default: () => "primary",
     },
     isPending: {
+      type: Boolean,
+      default: () => false,
+    },
+    isDisabled: {
       type: Boolean,
       default: () => false,
     },
