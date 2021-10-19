@@ -1,5 +1,6 @@
 import {
   User,
+  UserChild,
   UserErrorMessage,
   UserProfileDataModel,
   UserRegistrationData,
@@ -12,8 +13,11 @@ import {
   logoutUserAPI,
   registrationUserAPI,
   setUserProfileAPI,
+  setUserChildAPI,
+  removeUserChildAPI,
 } from "@/services/api/lib/user";
 import {
+  UserChildrenData,
   UserProfileData,
   UserProfileParamsData,
 } from "@/services/api/model/User";
@@ -26,7 +30,7 @@ export const getUserAuthInfoAdapter = async (): Promise<User> => {
   if (userProfileData) {
     profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
-      childs: [],
+      childs: userProfileData.childs,
       error: "",
       isLoading: false,
       lastName: userProfileData.profile.LAST_NAME,
@@ -146,7 +150,6 @@ export const setUserProfileDataAdapter = async (
   user: User,
   profileData: UserProfileDataModel
 ) => {
-  debugger;
   const params: UserProfileParamsData = {
     EMAIL: user.email,
     LAST_NAME: profileData.lastName,
@@ -160,4 +163,40 @@ export const setUserProfileDataAdapter = async (
   const response = await setUserProfileAPI(profileData.sessionId, params);
   // Response API  //
   return response;
+};
+
+export const setUserChildAdapter = async (child: UserChild[]) => {
+  const children: UserChildrenData[] = child.map((child) => {
+    return {
+      id: "",
+      name: child.name,
+      birthday: child.birth,
+      gender: child.gender,
+    };
+  });
+  // Response API here //
+  const response = await setUserChildAPI(children);
+  // Response API  //
+
+  return response.data;
+};
+
+export const removeUserChildAdapter = async (
+  childId: string
+): Promise<UserChild[]> => {
+  const { data } = await removeUserChildAPI(childId);
+  let userChilds: UserChild[] = [];
+  debugger;
+  if (data.length > 0) {
+    userChilds = data.map((child) => {
+      return {
+        name: child.name,
+        id: child.id,
+        birth: child.birthday,
+        gender: child.gender,
+      };
+    });
+  }
+
+  return userChilds;
 };

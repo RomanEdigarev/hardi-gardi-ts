@@ -9,6 +9,8 @@ type UserPhone = string;
 type UserBirth = string;
 type UserNewPassword = string;
 type UserEmail = string;
+type UserId = string;
+type UserGender = "male" | "female";
 export type UserProfileSession = string;
 
 // Alias type END //
@@ -26,8 +28,15 @@ export type UserProfileParamsData = {
   [key in keyof typeof UserProfileParams]: string;
 };
 
+export type UserChildrenData = {
+  id: UserId;
+  name: UserName;
+  birthday: UserBirth;
+  gender: UserGender;
+};
+
 export type UserProfileData = {
-  childs: [];
+  childs: UserChildrenData[] | [];
   profile: {
     EMAIL: UserEmail;
     LAST_NAME: UserLastName;
@@ -48,3 +57,4 @@ type UserInfoData = {
 
 export type UserInfo = LayoutAPI<UserInfoData>;
 export type UserProfile = LayoutAPI<UserProfileData>;
+export type UserChildren = LayoutAPI<UserChildrenData[]>;

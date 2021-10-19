@@ -13,6 +13,8 @@ import {
   loginUserAdapter,
   logoutUserAdapter,
   registrationUserAdapter,
+  removeUserChildAdapter,
+  setUserChildAdapter,
   setUserProfileDataAdapter,
 } from "@/entities/User/adapters";
 
@@ -45,6 +47,12 @@ export const userModule: Module<User, State> = {
       state.isAuth = false;
       state.email = "";
       state.name = "";
+    },
+    setUserChilds: (state, payload: UserChild[]) => {
+      state.childs = payload;
+    },
+    removeUserChild: (state, payload) => {
+      state.childs = state.childs.filter((child) => child.id !== payload);
     },
   },
   actions: {
@@ -93,14 +101,27 @@ export const userModule: Module<User, State> = {
       commit("toggleLoading");
     },
     fetchSetProfileUser: async (
-      { commit, state },
+      { commit, state, dispatch },
       payload: UserProfileDataModel
     ) => {
       commit("toggleLoading");
-      const response = setUserProfileDataAdapter(state, {
+      const response = await setUserProfileDataAdapter(state, {
         ...state,
         ...payload,
       });
+      await dispatch("fetchSetUserChild");
+      commit("toggleLoading");
+    },
+    fetchSetUserChild: async ({ commit, state }) => {
+      commit("toggleLoading");
+      const response = await setUserChildAdapter(state.childs);
+      commit("toggleLoading");
+    },
+    fetchRemoveUserChild: async ({ commit }, payload: string) => {
+      commit("toggleLoading");
+      commit("removeUserChild", payload);
+      const userChildren = await removeUserChildAdapter(payload);
+      commit("setUserChilds", userChildren);
       commit("toggleLoading");
     },
   },
@@ -108,6 +129,7 @@ export const userModule: Module<User, State> = {
     getUserAuthInfo: (state) => state,
     getUserIsLoading: (state) => state.isLoading,
     getUserError: (state) => state.error,
+    getUserChilds: (state) => state.childs,
   },
   namespaced: true,
 };

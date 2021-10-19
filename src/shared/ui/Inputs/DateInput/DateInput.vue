@@ -38,12 +38,12 @@ export default defineComponent({
       : new Date();
     const picked = ref<Date>(parseDate);
     const date = ref(null);
-    const { handleChange } = useField("date");
+    const { handleChange } = useField(props.name as string);
     onMounted(() => {
-      (date.value.inputRef as HTMLInputElement).setAttribute(
-        props.name as string,
-        "date"
-      );
+      // (date.value.inputRef as HTMLInputElement).setAttribute(
+      //   props.name as string,
+      //   "date"
+      // );
     });
 
     watch(picked, () => {

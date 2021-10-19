@@ -1,11 +1,21 @@
 import { AddToBasketData, Basket } from "@/services/api/model/Basket";
 import { apiInstance } from "@/services/api/config";
 import {
+  UserChildren,
+  UserChildrenData,
   UserInfo,
   UserProfile,
   UserProfileParamsData,
   UserProfileSession,
 } from "@/services/api/model/User";
+
+const getStrQueryFromObject = (object) => {
+  const arr = [];
+  Object.entries(object).map(([key, value]) => {
+    arr.push(`${key}=${value}`);
+  });
+  return arr.join("&");
+};
 
 export const getUserAuthInfoAPI = async (): Promise<UserInfo> => {
   try {
@@ -94,6 +104,56 @@ export const setUserProfileAPI = async (
   try {
     const { data, status } = await apiInstance().post(
       `user/auth/profile.php?save=y&sessid=${sessionId}&${queryStr}`
+    );
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getUserChildsAPI = async (): Promise<UserChildren> => {
+  try {
+    const { data, status } = await apiInstance().post(`user/childs/get.php`);
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const setUserChildAPI = async (child: UserChildrenData[]) => {
+  const arrStr = child
+    .map((child) => {
+      return getStrQueryFromObject(child);
+    })
+    .join("&");
+  try {
+    const { data, status } = await apiInstance().post(
+      `user/childs/save.php?${arrStr}`
+    );
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      return data.message;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const removeUserChildAPI = async (
+  childId: string
+): Promise<UserChildren> => {
+  try {
+    const { data, status } = await apiInstance().post(
+      `user/childs/delete.php?id=${childId}`
     );
     if (status === 200 && data.isSuccess) {
       return data;

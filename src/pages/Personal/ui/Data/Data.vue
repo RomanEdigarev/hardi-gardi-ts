@@ -50,7 +50,11 @@
         <ChangePass />
       </div>
       <div class="data__body__item">
-        <ChangeChild />
+        <ChangeChild
+          :childs="childs"
+          @set-childs="setChilds"
+          @remove-child="removeChild"
+        />
       </div>
     </div>
     <div class="data__footer">
@@ -62,16 +66,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType, reactive, ref } from "vue";
 import { DateInput, VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import { ChangeChild, ChangePass } from "./ui";
-import {
-  User,
-  UserChild,
-  UserProfileDataModel,
-  UserSessionId,
-} from "@/entities/User/model";
+import { User, UserProfileDataModel } from "@/entities/User/model";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { useForm } from "vee-validate";
 import { useStore } from "@/services/vuex";
@@ -87,8 +86,15 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const phoneRegExp = /(^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$)|(^\s*$)/;
+    const childs = computed(() => store.getters["user/getUserChilds"]);
+    const setChilds = (childs) => {
+      store.commit("user/setUserChilds", childs);
+    };
+    const removeChild = (childId) => {
+      store.dispatch("user/fetchRemoveUserChild", childId);
+    };
 
+    const phoneRegExp = /(^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$)|(^\s*$)/;
     const schema = yup.object({
       firstName: yup.string().required("Обязательное поле"),
       lastName: yup.string(),
@@ -123,13 +129,15 @@ export default defineComponent({
         phone: values.phone,
       };
       values.date && (profile.birth = values.date);
-      console.log(values);
       await store.dispatch("user/fetchSetProfileUser", profile);
     });
 
     return {
       onSubmit,
       schema,
+      setChilds,
+      removeChild,
+      childs,
     };
   },
 });
