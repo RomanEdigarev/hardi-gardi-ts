@@ -1,6 +1,7 @@
 import {
   User,
   UserErrorMessage,
+  UserProfileDataModel,
   UserRegistrationData,
   UserSessionId,
 } from "./model";
@@ -21,6 +22,21 @@ export const getUserAuthInfoAdapter = async (): Promise<User> => {
   // Response API here //
   const { data: userData } = await getUserAuthInfoAPI();
   const { data: userProfileData } = await getUserProfileAPI();
+  let profile = {};
+  if (userProfileData) {
+    profile = {
+      birth: userProfileData.profile.PERSONAL_BIRTHDAY,
+      childs: [],
+      error: "",
+      isLoading: false,
+      lastName: userProfileData.profile.LAST_NAME,
+      newPassword: userProfileData.profile.NEW_PASSWORD,
+      phone: userProfileData.profile.PERSONAL_PHONE,
+      secondName: userProfileData.profile.SECOND_NAME,
+      sessionId: userProfileData.sessid,
+    };
+  }
+
   // Response API  //
 
   // Transformation API data here //
@@ -30,15 +46,7 @@ export const getUserAuthInfoAdapter = async (): Promise<User> => {
     isAuth: userData.isAuth,
     name: userData.name,
     email: userData.email,
-    birth: userProfileData.profile.PERSONAL_BIRTHDAY,
-    childs: [],
-    error: "",
-    isLoading: false,
-    lastName: userProfileData.profile.LAST_NAME,
-    newPassword: userProfileData.profile.NEW_PASSWORD,
-    phone: userProfileData.profile.PERSONAL_PHONE,
-    secondName: userProfileData.profile.SECOND_NAME,
-    sessionId: userProfileData.sessid,
+    ...profile,
   };
 };
 
@@ -55,12 +63,9 @@ export const registrationUserAdapter = async ({
   });
   const { data: userProfileData } = await getUserProfileAPI();
   // Response API  //
-
-  if (userData && isSuccess) {
-    return {
-      isAuth: userData.isAuth,
-      name: userData.name,
-      email: userData.email,
+  let profile = {};
+  if (userProfileData) {
+    profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
       childs: [],
       error: "",
@@ -70,6 +75,15 @@ export const registrationUserAdapter = async ({
       phone: userProfileData.profile.PERSONAL_PHONE,
       secondName: userProfileData.profile.SECOND_NAME,
       sessionId: userProfileData.sessid,
+    };
+  }
+
+  if (userData && isSuccess) {
+    return {
+      isAuth: userData.isAuth,
+      name: userData.name,
+      email: userData.email,
+      ...profile,
     };
   } else {
     return message;
@@ -92,13 +106,9 @@ export const loginUserAdapter = async ({
   // Response API  //
 
   // Transformation API data here //
-
-  // Transformation API data here //
-  if (userData && userData.isSuccess) {
-    return {
-      isAuth: userData.data.isAuth,
-      name: userData.data.name,
-      email: userData.data.email,
+  let profile = {};
+  if (userProfileData) {
+    profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
       childs: [],
       error: "",
@@ -108,6 +118,16 @@ export const loginUserAdapter = async ({
       phone: userProfileData.profile.PERSONAL_PHONE,
       secondName: userProfileData.profile.SECOND_NAME,
       sessionId: userProfileData.sessid,
+    };
+  }
+  // Transformation API data here //
+
+  if (userData && userData.isSuccess) {
+    return {
+      isAuth: userData.data.isAuth,
+      name: userData.data.name,
+      email: userData.data.email,
+      ...profile,
     };
   } else {
     return userData.message;
@@ -123,20 +143,21 @@ export const logoutUserAdapter = async (): Promise<boolean> => {
 };
 
 export const setUserProfileDataAdapter = async (
-  profileData: User,
-  sessionId: UserSessionId
+  user: User,
+  profileData: UserProfileDataModel
 ) => {
+  debugger;
   const params: UserProfileParamsData = {
-    EMAIL: profileData.email,
+    EMAIL: user.email,
     LAST_NAME: profileData.lastName,
-    NAME: profileData.name,
+    NAME: profileData.firstName,
     NEW_PASSWORD: profileData.newPassword,
     PERSONAL_BIRTHDAY: profileData.birth,
     PERSONAL_PHONE: profileData.phone,
     SECOND_NAME: profileData.secondName,
   };
   // Response API here //
-  const response = await setUserProfileAPI(sessionId, params);
+  const response = await setUserProfileAPI(profileData.sessionId, params);
   // Response API  //
   return response;
 };
