@@ -5,15 +5,15 @@
       class="toggle-menu__item"
       :class="{ current: currentItemIndex === index }"
       v-for="(item, index) in items"
-      @click="setCurrentItemIndex(index)"
+      @click="setCurrentItemIndex(item.key)"
     >
-      {{ item }}
+      {{ item.value }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, PropType, ref } from "vue";
+import {computed, defineComponent, onMounted, onUpdated, PropType, ref, watch} from "vue";
 import anime from "animejs";
 import { useStore } from "@/services/vuex";
 
@@ -21,14 +21,20 @@ export default defineComponent({
   name: "ToggleMenu",
   props: {
     items: {
-      type: Object as PropType<string[]>,
+      type: Array as PropType<{key: string, value: string}[]> ,
       required: true,
     },
+    currentItemKey: {
+      type: String,
+      required: true,
+    }
   },
-  setup(props) {
+  setup(props, {emit}) {
     // const items = ["Самовывоз", "Курьер", "Почта России"];
     const store = useStore();
-    const currentItemIndex = ref(0);
+    const currentItemIndex = computed(() => {
+      return props.currentItemKey
+    });
     const bg = ref<HTMLElement>(null);
     const toggleMenu = ref<HTMLElement>(null);
     let bgWidth = null;
@@ -39,20 +45,41 @@ export default defineComponent({
       bgHeight =
         toggleMenu.value.offsetHeight / (props.items as []).length + "px";
       bg.value.style.width = bgWidth;
+      // setCurrentItemIndex( currentItemKey)
     });
     const isPhone = computed(() => store.getters["getIsPhone"]);
-    const animation = () => {
-      anime({
+    const animation = computed(() => {
+      const index = (props.items as {key: string, value: string}[]).findIndex(item => {
+          const result = item.key === props.currentItemKey
+          return result
+        })
+      return anime({
         targets: bg.value,
         [isPhone.value ? "translateY" : "translateX"]: `${
-          currentItemIndex.value * 100
+            index * 100
         }%`,
         easing: "spring(1, 60, 11, 0)",
       });
-    };
-    const setCurrentItemIndex = (index) => {
-      currentItemIndex.value = index;
-      animation();
+    });
+    watch(props, () => {
+      console.log(props.currentItemKey)
+      animation.value.play()
+
+    })
+    onUpdated(() => {
+      // const index = (items as {key: string, value: string}[]).findIndex(item => {
+      //   const result = item.key === currentItemKey
+      //   return result
+      // })
+      // console.log('updated')
+      // console.log(index)
+      // animation.value.play();
+    })
+    const setCurrentItemIndex = (itemKey) => {
+      // currentItemIndex.value = index;
+      emit('set-current-item', itemKey)
+
+
     };
     return {
       currentItemIndex,

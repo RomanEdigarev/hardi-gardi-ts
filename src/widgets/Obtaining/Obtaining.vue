@@ -15,7 +15,7 @@
     </div>
     <div class="obtaining__body">
       <div class="obtaining__body__toggle">
-        <ToggleMenu :items="items" />
+        <ToggleMenu :items="items" :current-item-key="currentItemKey" @set-current-item="setCurrentItem"/>
       </div>
       <div class="obtaining__body__content">
         <div class="obtaining__body__content__item">
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent, onUpdated, ref} from "vue";
 import { SearchIcon, CloseIcon } from "@/shared/ui/icons";
 import { Self } from "./ui";
 import { ToggleMenu } from "@/shared/ui";
@@ -36,10 +36,31 @@ export default defineComponent({
   name: "Obtaining",
   components: { SearchIcon, CloseIcon, Self, ToggleMenu },
   setup() {
-    const items = ["Самовывоз", "Курьер", "Почта России"];
+    // const items = ["Самовывоз", "Курьер", "Почта России"];
+    const obtainingTypes = {
+      'self': 'Самовывоз',
+      'courier' : "Курьер",
+      'post': "Почта России"
+    }
+    const currentItemKey = ref<keyof typeof obtainingTypes>('post')
+
+    const items = computed(() => {
+      return Object.entries(obtainingTypes).map(([key, value]) => {
+        return {
+          key,
+          value
+        }
+      })
+    })
+
+    const setCurrentItem = (itemKey) => {
+      currentItemKey.value = itemKey
+    }
 
     return {
       items,
+      setCurrentItem,
+      currentItemKey
     };
   },
 });

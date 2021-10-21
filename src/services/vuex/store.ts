@@ -7,7 +7,9 @@ import { productsModule } from "@/entities/Products/store";
 import { Basket } from "@/entities/Basket/model";
 import { basketsModule } from "@/entities/Basket/store";
 import { favoritesModule } from "@/entities/Favorites/store";
+import { orderModule } from "@/entities/Order/store";
 import { Favorites } from "@/entities/Favorites/model";
+import { Order } from "@/entities/Order/model";
 
 export type State = {
   loading: boolean;
@@ -19,6 +21,7 @@ export type State = {
   products?: Products;
   basket?: Basket;
   favorites?: Favorites;
+  order?: Order;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -57,6 +60,7 @@ export const store = createStore<State>({
     products: productsModule,
     basket: basketsModule,
     favorites: favoritesModule,
+    order: orderModule,
   },
 });
 
