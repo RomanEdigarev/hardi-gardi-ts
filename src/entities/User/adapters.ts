@@ -4,7 +4,6 @@ import {
   UserErrorMessage,
   UserProfileDataModel,
   UserRegistrationData,
-  UserSessionId,
 } from "./model";
 import {
   getUserProfileAPI,
@@ -22,6 +21,17 @@ import {
   UserProfileParamsData,
 } from "@/services/api/model/User";
 
+const transformChilds = (childs: UserChildrenData[]): UserChild[] => {
+  return childs.map((child) => {
+    return {
+      name: child.name,
+      id: child.id,
+      gender: child.gender,
+      birth: child.birthday,
+    };
+  });
+};
+
 export const getUserAuthInfoAdapter = async (): Promise<User> => {
   // Response API here //
   const { data: userData } = await getUserAuthInfoAPI();
@@ -30,7 +40,7 @@ export const getUserAuthInfoAdapter = async (): Promise<User> => {
   if (userProfileData) {
     profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
-      childs: userProfileData.childs,
+      childs: transformChilds(userProfileData.childs),
       error: "",
       isLoading: false,
       lastName: userProfileData.profile.LAST_NAME,
@@ -71,7 +81,7 @@ export const registrationUserAdapter = async ({
   if (userProfileData) {
     profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
-      childs: [],
+      childs: transformChilds(userProfileData.childs),
       error: "",
       isLoading: false,
       lastName: userProfileData.profile.LAST_NAME,
@@ -114,7 +124,7 @@ export const loginUserAdapter = async ({
   if (userProfileData) {
     profile = {
       birth: userProfileData.profile.PERSONAL_BIRTHDAY,
-      childs: [],
+      childs: transformChilds(userProfileData.childs),
       error: "",
       isLoading: false,
       lastName: userProfileData.profile.LAST_NAME,
@@ -168,7 +178,7 @@ export const setUserProfileDataAdapter = async (
 export const setUserChildAdapter = async (child: UserChild[]) => {
   const children: UserChildrenData[] = child.map((child) => {
     return {
-      id: "",
+      id: child.id || "",
       name: child.name,
       birthday: child.birth,
       gender: child.gender,
@@ -186,7 +196,6 @@ export const removeUserChildAdapter = async (
 ): Promise<UserChild[]> => {
   const { data } = await removeUserChildAPI(childId);
   let userChilds: UserChild[] = [];
-  debugger;
   if (data.length > 0) {
     userChilds = data.map((child) => {
       return {
