@@ -93,7 +93,7 @@ export default defineComponent({
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-20px);
   }
   &__content {
     width: 100%;
