@@ -1,25 +1,33 @@
 <template>
-  <div
-    class="cabinet-title__title"
-    :class="{ isLogin: isAuth }"
-    @click="$router.push(`${isAuth ? '/personal' : '/sign-in/login'}`)"
-  >
-    <Tooltip v-if="isAuth">
-      <template v-slot:reference>
-        <span class="cabinet-title__icon"><ProfileIcon /></span>
-      </template>
-      <template v-slot:content>
-        <div class="tooltip-content">
-          <span class="tooltip-content__name">{{ name }}</span>
-          <a class="tooltip-content__link" href="">История заказов</a>
-          <a class="tooltip-content__link" href="">Персональные данные</a>
-          <a class="tooltip-content__link" href="">Уведомления</a>
-          <span class="tooltip-content__link-out" @click="logout">Выйти</span>
-        </div>
-      </template>
-    </Tooltip>
-    <span v-else class="cabinet-title__icon"><ProfileIcon /></span>
-    <span>{{ text }}</span>
+  <div class="cabinet-title">
+    <div
+      class="cabinet-title__title"
+      :class="{ isLogin: isAuth }"
+      @click="$router.push(`${isAuth ? '/personal' : '/sign-in/login'}`)"
+    >
+      <Tooltip v-if="isAuth" :trigger="['mouseenter']">
+        <template v-slot:reference>
+          <span class="cabinet-title__icon"><ProfileIcon /></span>
+        </template>
+        <template v-slot:content>
+          <div class="tooltip-content">
+            <span class="tooltip-content__name">{{ name }}</span>
+            <router-link to="/personal" class="tooltip-content__link">
+              История заказов
+            </router-link>
+            <router-link to="/personal" class="tooltip-content__link">
+              Персональные данные
+            </router-link>
+            <router-link to="/personal" class="tooltip-content__link">
+              Уведомления
+            </router-link>
+            <span class="tooltip-content__link-out" @click="logout">Выйти</span>
+          </div>
+        </template>
+      </Tooltip>
+      <span v-else class="cabinet-title__icon"><ProfileIcon /></span>
+      <span>{{ text }}</span>
+    </div>
   </div>
 </template>
 
@@ -107,7 +115,7 @@ export default {
     }
   }
 
-  .tooltip-content {
+  :deep .tooltip-content {
     height: 100%;
     width: 100%;
     display: flex;

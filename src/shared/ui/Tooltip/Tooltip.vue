@@ -1,6 +1,6 @@
 <template>
   <div class="tooltip">
-    <div class="tooltip__reference" @[trigger]="open">
+    <div class="tooltip__reference" v-on="events">
       <slot name="reference"></slot>
     </div>
 
@@ -31,13 +31,24 @@ export default defineComponent({
       default: () => 0,
     },
     trigger: {
-      type: String,
+      type: String || Array,
       default: "click",
     },
   },
   setup(props) {
     const isOpen = ref(false);
     const tooltipContent = ref<HTMLElement>(null);
+    const events = computed(() => {
+      let obj = {};
+      if (typeof props.trigger === "string") {
+        obj[props.trigger] = open;
+      } else {
+        (props.trigger as string[]).forEach((eventName) => {
+          obj[eventName] = open;
+        });
+      }
+      return obj;
+    });
     const translateX = computed(() => {
       if (props.offset) {
         return `transform: translateY(100%) translateX(-${
@@ -74,6 +85,7 @@ export default defineComponent({
       open,
       translateX,
       tooltipContent,
+      events,
     };
   },
   methods: {
