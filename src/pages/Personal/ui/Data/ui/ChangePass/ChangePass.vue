@@ -7,16 +7,14 @@
           name="newPassword"
           id="newPassword"
           placeholder="Новый пароль"
-          :validation="isPassword"
         />
       </div>
       <div class="change-pass__input">
         <VInput
           type="password"
-          name="confirm  Password"
-          id="confirm  Password"
+          name="confirmPassword"
+          id="confirmPassword"
           placeholder="Подтверждение пароля"
-          :validation="isPassword"
         />
       </div>
     </div>
@@ -54,6 +52,7 @@ import { VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import anime from "animejs";
 import { useStore } from "@/services/vuex";
+import { useField } from "vee-validate";
 export default defineComponent({
   name: "ChangePass",
   components: { VInput },
@@ -63,6 +62,8 @@ export default defineComponent({
     const isPassword = yup.string().required("Обязательное поле");
     const isOpen = ref(false);
     const body = ref(null);
+    useField("newPassword");
+    useField("confirmPassword");
 
     const animation = (isOpen) => {
       if (isOpen) {

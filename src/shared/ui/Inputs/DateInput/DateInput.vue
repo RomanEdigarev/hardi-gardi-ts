@@ -8,7 +8,6 @@
       inputFormat="dd.MM.yyyy"
     />
     <img class="date-input__icon" src="./assets/icon.svg" alt="calendar" />
-    {{ picked }}
   </div>
 </template>
 
@@ -34,9 +33,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const picked = ref<Date>(
-      new Date(parse(props.value as string, "dd.MM.yyyy", new Date()))
-    );
+    const parseDate = props.value
+      ? parse(props.value as string, "dd.MM.yyyy", new Date())
+      : new Date();
+    const picked = ref<Date>(parseDate);
     const date = ref(null);
     const { handleChange } = useField("date");
     onMounted(() => {

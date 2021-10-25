@@ -23,18 +23,20 @@ export type UserRegistrationData = {
   email: UserEmail;
   password: UserPassword;
 };
-
+export type UserProfileDataModel = {
+  firstName?: UserName;
+  lastName?: UserLastName;
+  secondName?: UserSecondName;
+  newPassword?: UserNewPassword;
+  phone?: UserPhone;
+  birth?: UserBirth;
+  childs?: UserChild[];
+  sessionId?: UserSessionId;
+};
 export type User = {
   isLoading?: boolean;
   error?: UserErrorMessage;
   isAuth: UserAuth;
   name: UserName;
   email: UserEmail;
-  lastName: UserLastName;
-  secondName: UserSecondName;
-  newPassword: UserNewPassword;
-  phone: UserPhone;
-  birth: UserBirth;
-  childs: UserChild[];
-  sessionId: UserSessionId;
-};
+} & UserProfileDataModel;

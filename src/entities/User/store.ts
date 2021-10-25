@@ -1,12 +1,19 @@
 import { Module } from "vuex";
 import { Shop } from "@/entities/Shop/model";
 import { State } from "@/services/vuex";
-import { User, UserRegistrationData } from "@/entities/User/model";
+import {
+  User,
+  UserChild,
+  UserProfileDataModel,
+  UserRegistrationData,
+  UserSessionId,
+} from "@/entities/User/model";
 import {
   getUserAuthInfoAdapter,
   loginUserAdapter,
   logoutUserAdapter,
   registrationUserAdapter,
+  setUserProfileDataAdapter,
 } from "@/entities/User/adapters";
 
 export const userModule: Module<User, State> = {
@@ -17,13 +24,13 @@ export const userModule: Module<User, State> = {
       error: "",
       name: "",
       email: "",
-      birth: "",
+      lastName: undefined,
+      secondName: undefined,
+      newPassword: undefined,
+      phone: undefined,
+      birth: undefined,
       childs: [],
-      lastName: "",
-      newPassword: "",
-      phone: "",
-      secondName: "",
-      sessionId: "",
+      sessionId: undefined,
     };
   },
   mutations: {
@@ -83,6 +90,17 @@ export const userModule: Module<User, State> = {
       if (isLogout) {
         commit("logoutUser");
       }
+      commit("toggleLoading");
+    },
+    fetchSetProfileUser: async (
+      { commit, state },
+      payload: UserProfileDataModel
+    ) => {
+      commit("toggleLoading");
+      const response = setUserProfileDataAdapter(state, {
+        ...state,
+        ...payload,
+      });
       commit("toggleLoading");
     },
   },
