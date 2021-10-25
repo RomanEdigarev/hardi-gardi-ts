@@ -59,7 +59,7 @@ export default defineComponent({
     const check = () => {
       if (!props.isDisabled) {
         isChecked.value = !isChecked.value;
-        emit("update:model-value", isChecked.value);
+        emit("update:modelValue", isChecked.value);
       }
     };
 

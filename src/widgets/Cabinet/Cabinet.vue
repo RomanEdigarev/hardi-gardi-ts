@@ -1,7 +1,7 @@
 <template>
   <div class="cabinet">
-    <div class="cabinet__title" :class="{ isLogin: isLogin }">
-      <CabinetTitle />
+    <div class="cabinet__title" :class="{ isLogin: userAuthInfo.isAuth }">
+      <CabinetTitle :is-auth="userAuthInfo.isAuth" :name="userAuthInfo.name" />
     </div>
     <div class="cabinet__links">
       <CabinetLinks
@@ -41,12 +41,17 @@ export default defineComponent({
       return props.isLogin ? props.name : "Личный кабинет";
     });
 
+    const userAuthInfo = computed(() => {
+      return store.getters["user/getUserAuthInfo"];
+    });
+
     return {
       text,
       basketCount: computed(() => store.getters["basket/getBasketCount"]),
       favoritesCount: computed(
         () => store.getters["favorites/getFavoritesTotalCount"]
       ),
+      userAuthInfo,
     };
   },
 });

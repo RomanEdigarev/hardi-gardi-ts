@@ -1,13 +1,13 @@
 import { InjectionKey } from "vue";
 import { createStore, Store, useStore as baseUseStore } from "vuex";
-import { Shop } from "@/entities/Shop/model";
-import { shopModule } from "@/entities/Shop/store";
-import { Products } from "@/entities/Products/model";
-import { productsModule } from "@/entities/Products/store";
-import { Basket } from "@/entities/Basket/model";
-import { basketsModule } from "@/entities/Basket/store";
-import { favoritesModule } from "@/entities/Favorites/store";
-import { Favorites } from "@/entities/Favorites/model";
+import { User, Shop, Basket, Products, Favorites } from "@/entities/models";
+import {
+  basketsModule,
+  shopModule,
+  productsModule,
+  favoritesModule,
+  userModule,
+} from "@/entities/modules";
 
 export type State = {
   loading: boolean;
@@ -19,6 +19,7 @@ export type State = {
   products?: Products;
   basket?: Basket;
   favorites?: Favorites;
+  user: User | {};
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -29,6 +30,7 @@ export const store = createStore<State>({
     isMobile: false,
     isPhone: false,
     isToken: false,
+    user: {},
   },
   mutations: {
     init: (state, payload) => {
@@ -57,9 +59,10 @@ export const store = createStore<State>({
     products: productsModule,
     basket: basketsModule,
     favorites: favoritesModule,
+    user: userModule,
   },
 });
 
-export const useStore = () => {
-  return baseUseStore(key);
+export const useStore = (customKey = key) => {
+  return baseUseStore(customKey);
 };
