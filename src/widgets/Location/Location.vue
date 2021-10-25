@@ -16,7 +16,11 @@
               <AlfaButton styling="primary" text="Да, верно" />
             </div>
             <div class="tooltip-content__button">
-              <AlfaButton styling="secondary" text="Выбрать другой" />
+              <AlfaButton
+                styling="secondary"
+                text="Выбрать другой"
+                @click="$emit('change-city')"
+              />
             </div>
           </div>
           <div class="tooltip-content__close-button" @click="close">

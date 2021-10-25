@@ -7,6 +7,7 @@ import {
   Products,
   Favorites,
   Order,
+  City,
 } from "@/entities/models";
 import {
   basketsModule,
@@ -15,6 +16,7 @@ import {
   favoritesModule,
   userModule,
   orderModule,
+  cityModule,
 } from "@/entities/modules";
 
 export type State = {
@@ -29,6 +31,7 @@ export type State = {
   favorites?: Favorites;
   user: User | {};
   order?: Order;
+  city: City;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -40,6 +43,10 @@ export const store = createStore<State>({
     isPhone: false,
     isToken: false,
     user: {},
+    city: {
+      current: "0",
+      items: undefined,
+    },
   },
   mutations: {
     init: (state, payload) => {
@@ -70,6 +77,7 @@ export const store = createStore<State>({
     favorites: favoritesModule,
     user: userModule,
     order: orderModule,
+    city: cityModule,
   },
 });
 

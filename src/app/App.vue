@@ -10,7 +10,11 @@
           @open-burger="openBurger"
           @openSearchModalPhone="openSearchModal"
         />
-        <Header v-else @open-burger="openBurger" />
+        <Header
+          v-else
+          @open-burger="openBurger"
+          @change-city="openChangeCity"
+        />
       </div>
 
       <div class="app__wrapper">
@@ -56,20 +60,29 @@
         <SearchModalPhone @close="closeSearchModal" />
       </div>
     </template>
-
+    <div ref="changeCity" class="app__change-city">
+      <ChangeCity @close="closeChangeCity" />
+    </div>
     <div class="modal-bg"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
+import {
+  Header,
+  Footer,
+  HeaderForPhone,
+  FooterForPhone,
+  ChangeCity,
+} from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onBeforeMount, onMounted } from "vue";
+import { computed, defineComponent, onBeforeMount, onMounted, ref } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
+import anime from "animejs";
 
 export default defineComponent({
   components: {
@@ -80,9 +93,11 @@ export default defineComponent({
     HeaderForPhone,
     FooterForPhone,
     SearchModalPhone,
+    ChangeCity,
   },
   name: "App",
   setup() {
+    const changeCity = ref(null);
     const store = useStore();
     const isToken = computed(() => store.getters["getIsToken"]);
     onMounted(async () => {
@@ -116,6 +131,27 @@ export default defineComponent({
 
     const isMobile = computed(() => store.state.isMobile);
 
+    const closeChangeCity = () => {
+      anime({
+        targets: changeCity.value,
+        opacity: [1, 0],
+        duration: 400,
+        easing: "linear",
+        complete: () => {
+          changeCity.value.style.zIndex = "-10";
+        },
+      });
+    };
+    const openChangeCity = () => {
+      changeCity.value.style.zIndex = "100";
+      anime({
+        targets: changeCity.value,
+        opacity: [0, 1],
+        duration: 400,
+        easing: "linear",
+      });
+    };
+
     return {
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
@@ -126,6 +162,9 @@ export default defineComponent({
       isMobile,
       ...useBurgerMenu(),
       ...useSearchModalPhone(),
+      closeChangeCity,
+      changeCity,
+      openChangeCity,
     };
   },
 });
@@ -140,6 +179,12 @@ export default defineComponent({
   height: 100%;
   position: relative;
 
+  &__change-city {
+    position: relative;
+    opacity: 0;
+    z-index: -10;
+  }
+
   &__wrapper {
     min-height: 50vh;
     height: 100%;
@@ -151,7 +196,6 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    //min-height: 100vh;
     max-width: 1195px;
     display: flex;
     flex-direction: column;
