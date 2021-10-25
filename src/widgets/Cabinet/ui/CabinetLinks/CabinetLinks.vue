@@ -23,13 +23,20 @@
         </template>
       </IconWithCount>
     </router-link>
-    <router-link class="cabinet-links__link" id="shop" to="/basket">
-      <IconWithCount :count="basketCount">
-        <template v-slot:svg-icon>
-          <ShopIcon />
-        </template>
-      </IconWithCount>
-    </router-link>
+    <Tooltip trigger="mouseenter" offset="-42">
+      <template v-slot:reference>
+        <router-link class="cabinet-links__link" id="shop" to="/basket">
+          <IconWithCount :count="basketCount">
+            <template v-slot:svg-icon>
+              <ShopIcon />
+            </template>
+          </IconWithCount>
+        </router-link>
+      </template>
+      <template v-slot:content>
+        <CabinetTooltip />
+      </template>
+    </Tooltip>
   </div>
 </template>
 
@@ -37,7 +44,9 @@
 import { FavoriteIcon, SearchIcon, ShopIcon } from "@/shared/ui/icons";
 import { computed, defineComponent } from "vue";
 import { IconWithCount } from "@/features";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
+import { Tooltip } from "@/shared/ui";
+import CabinetTooltip from "./CabinetTooltip";
 
 export default defineComponent({
   name: "CabinetLinks",
@@ -46,6 +55,8 @@ export default defineComponent({
     FavoriteIcon,
     ShopIcon,
     IconWithCount,
+    Tooltip,
+    CabinetTooltip,
   },
   props: {
     basketCount: {
@@ -59,9 +70,9 @@ export default defineComponent({
   },
   emits: ["openSearchModalPhone"],
   setup() {
-    const store = useStore()
+    const store = useStore();
     return {
-      isPhone: computed(() => store.getters['getIsPhone']),
+      isPhone: computed(() => store.getters["getIsPhone"]),
     };
   },
 });

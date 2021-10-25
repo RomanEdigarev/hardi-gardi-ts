@@ -1,11 +1,11 @@
 <template>
   <div class="tooltip">
-    <div class="tooltip__reference" @click="open">
+    <div class="tooltip__reference" @[trigger]="open">
       <slot name="reference"></slot>
     </div>
 
     <transition @enter="enterElement" @leave="leaveElement">
-      <div v-if="isOpen" class="tooltip__container">
+      <div ref="tooltipContent" v-show="isOpen" class="tooltip__container">
         <div class="tooltip__content" :style="translateX">
           <slot name="content" />
         </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from "vue";
+import { ref, computed, defineComponent, onUpdated, watch } from "vue";
 import anime from "animejs";
 
 export default defineComponent({
@@ -30,9 +30,14 @@ export default defineComponent({
       type: Number,
       default: () => 0,
     },
+    trigger: {
+      type: String,
+      default: "click",
+    },
   },
   setup(props) {
     const isOpen = ref(false);
+    const tooltipContent = ref<HTMLElement>(null);
     const translateX = computed(() => {
       if (props.offset) {
         return `transform: translateY(100%) translateX(-${
@@ -49,6 +54,15 @@ export default defineComponent({
         document.removeEventListener("click", documentListener, false);
       }
     };
+    watch(isOpen, () => {
+      console.log("change open");
+      if (isOpen.value) {
+        tooltipContent.value.addEventListener("mouseleave", open);
+      } else {
+        tooltipContent.value.removeEventListener("mouseleave", open, false);
+        document.removeEventListener("click", documentListener, false);
+      }
+    });
 
     const open = () => {
       isOpen.value = !isOpen.value;
@@ -59,6 +73,7 @@ export default defineComponent({
       isOpen,
       open,
       translateX,
+      tooltipContent,
     };
   },
   methods: {

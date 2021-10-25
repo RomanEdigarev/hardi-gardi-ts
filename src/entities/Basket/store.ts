@@ -82,6 +82,7 @@ export const basketsModule: Module<Basket, State> = {
         return product.positionID === positionId;
       })[0];
     },
+    getBasketSum: (state) => state.sumTotal,
   },
   namespaced: true,
 };
