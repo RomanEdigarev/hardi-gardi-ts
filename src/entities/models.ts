@@ -4,3 +4,4 @@ export * from "./Products/model";
 export * from "./Favorites/model";
 export * from "./Breadcrumb/model";
 export * from "./Basket/model";
+export * from "./Order/model";

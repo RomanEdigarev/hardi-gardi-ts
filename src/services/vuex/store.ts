@@ -1,12 +1,20 @@
 import { InjectionKey } from "vue";
 import { createStore, Store, useStore as baseUseStore } from "vuex";
-import { User, Shop, Basket, Products, Favorites } from "@/entities/models";
+import {
+  User,
+  Shop,
+  Basket,
+  Products,
+  Favorites,
+  Order,
+} from "@/entities/models";
 import {
   basketsModule,
   shopModule,
   productsModule,
   favoritesModule,
   userModule,
+  orderModule,
 } from "@/entities/modules";
 
 export type State = {
@@ -20,6 +28,7 @@ export type State = {
   basket?: Basket;
   favorites?: Favorites;
   user: User | {};
+  order?: Order;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -60,6 +69,7 @@ export const store = createStore<State>({
     basket: basketsModule,
     favorites: favoritesModule,
     user: userModule,
+    order: orderModule,
   },
 });
 
