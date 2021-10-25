@@ -256,6 +256,7 @@ export default defineComponent({
     border-bottom: 1px solid $clr-alpha-mu;
     overflow: hidden;
     transition: padding-bottom 0.5s ease-in-out;
+    margin-bottom: 22px;
 
     &__title-container {
       width: 100%;

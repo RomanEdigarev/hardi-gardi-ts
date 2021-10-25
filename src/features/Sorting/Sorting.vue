@@ -44,11 +44,13 @@ export default defineComponent({
 .sorting {
   display: flex;
   font-weight: $regular;
-  font-size: 14px;
   line-height: 17px;
   color: $clr-phi;
   height: 20px;
   align-items: center;
+  * {
+    font-size: 14px;
+  }
   &__title {
     margin-right: 16px;
   }
