@@ -35,8 +35,6 @@ export const changeBasketPositionAPI = async (
   positionID,
   quantity: number
 ): Promise<Basket> => {
-  debugger;
-  console.log("position ID = ", positionID);
   try {
     const { data, status } = await apiInstance().post(
       `user/basket/modify.php?id=${positionID}&quantity=${quantity}`

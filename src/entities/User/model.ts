@@ -9,11 +9,13 @@ type UserEmail = string;
 type UserPassword = string;
 type UserGender = "male" | "female";
 type UserBirth = string;
+type UserId = string;
 export type UserSessionId = string;
 export type UserErrorMessage = string;
 // Alias type END //
 
 export type UserChild = {
+  id?: UserId;
   name: UserName;
   gender: UserGender;
   birth: UserBirth;
