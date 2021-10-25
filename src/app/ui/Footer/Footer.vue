@@ -60,7 +60,9 @@
               Беловодский пер. 5</span
             >
             <a href="#" class="footer__item__link">info@khardigardi.ru</a>
-            <span class="footer__item__link phone">+7 921 961 14 41</span>
+            <a href="tel:+7 921 961 14 41" class="footer__item__link phone">
+              +7 921 961 14 41
+            </a>
             <span class="footer__item__link working"
               >Пн-Пт: с 10.00 до 20.00 <br />
               Сб-Вс: с 11.00 до 18.00</span
@@ -165,6 +167,9 @@ export default defineComponent({
 
     &__link {
       line-height: 1.89;
+      &:hover {
+        color: #c1cee9;
+      }
     }
   }
 
@@ -193,6 +198,7 @@ export default defineComponent({
   font-size: 22px;
   margin-top: 12px;
   font-weight: $bold;
+  cursor: pointer;
 }
 
 .working {

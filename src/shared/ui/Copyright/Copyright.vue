@@ -33,10 +33,15 @@ export default defineComponent({
   color: $clr-tau;
   padding: 28px 0;
   border-top: 1px solid $clr-alpha-eta;
+  span {
+    font-size: 12px !important;
+  }
 
   &__left {
     flex: 0.5;
-    line-height: 1.67;
+    span {
+      line-height: 1.67;
+    }
   }
 
   &__right {

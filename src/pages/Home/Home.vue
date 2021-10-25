@@ -82,11 +82,10 @@
   <div class="app__header-bg">
     <HomeAnimationBG />
   </div>
-
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 
 import {
   Prolog,
@@ -97,7 +96,7 @@ import {
   CategoryCard,
   HomeAnimationBG,
 } from "./ui";
-import {asyncUseProduct, useProduct} from "@/entities/Products/Product/lib";
+import { asyncUseProduct, useProduct } from "@/entities/Products/Product/lib";
 import { PromotionSection } from "@/widgets";
 import { useStore } from "@/services/vuex";
 
@@ -116,17 +115,17 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const { product } = useProduct();
-    const testProducts = ref([])
+    const testProducts = ref([]);
 
     onMounted(async () => {
-      testProducts.value.push(await asyncUseProduct(201))
-      testProducts.value.push(await asyncUseProduct(193))
-    })
+      testProducts.value.push(await asyncUseProduct(201));
+      testProducts.value.push(await asyncUseProduct(193));
+    });
 
     return {
       product,
       isPhone: computed(() => store.state.isPhone),
-      testProducts
+      testProducts,
     };
   },
 });
@@ -139,8 +138,8 @@ export default defineComponent({
   &__prolog-container {
     width: 100%;
     height: 816px;
-    //margin-top: 757px;
-    margin-top: 62vh;
+    margin-top: 757px;
+    //margin-top: 62vh;
     margin-bottom: 114px;
   }
 
@@ -193,7 +192,6 @@ export default defineComponent({
       height: auto;
       margin-bottom: 236px;
       margin-top: 68vh;
-
     }
     &__promotion-container {
       height: auto;

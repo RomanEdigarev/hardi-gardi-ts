@@ -1,7 +1,11 @@
 <template>
   <div class="panel">
     <div class="left">
-      <BetaButton styling="beta-zeta-btn" @click="goToPrevSlide">
+      <BetaButton
+        styling="beta-zeta-btn"
+        @click="goToPrevSlide"
+        :is-disabled="currentSlide === 0"
+      >
         <SlideArrowIcon />
       </BetaButton>
     </div>
@@ -14,7 +18,11 @@
       />
     </div>
     <div class="right">
-      <BetaButton styling="beta-zeta-btn" @click="goToNextSlide">
+      <BetaButton
+        styling="beta-zeta-btn"
+        @click="goToNextSlide"
+        :is-disabled="currentSlide === count - 1"
+      >
         <SlideArrowIcon />
       </BetaButton>
     </div>
@@ -22,9 +30,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import { useSlidePanel } from "../lib";
-import {BetaButton} from "@/shared/ui/buttons";
+import { BetaButton } from "@/shared/ui/buttons";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 
 export default defineComponent({
@@ -59,6 +67,8 @@ export default defineComponent({
   methods: {
     goToNextSlide() {
       this.nextSlide();
+      this.currentSlide++;
+
       this.$emit("next-slide", this.currentSlide);
     },
     goToPrevSlide() {
