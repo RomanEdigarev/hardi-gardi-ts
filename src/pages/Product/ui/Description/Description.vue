@@ -95,7 +95,7 @@ export default defineComponent({
         opacity: 0;
         position: absolute;
         z-index: 2;
-        top: 0;
+        top: -2px;
         transform: translateX(-50%);
         transition: opacity 0.3s ease-in-out;
       }

@@ -74,16 +74,17 @@
         </div>
         <div class="product-page__body__right-footer">
           <div
-            v-if="currentProduct.linkProducts"
+            v-if="currentProduct.linkProducts.length !== 0"
             class="product-page__body__right-footer__slider"
           >
             <FooterSlider
+              v-if="!currentProduct.isComplect"
               title="Похожие товары"
               :products="currentProduct.linkProducts"
             />
           </div>
           <div
-            v-if="currentProduct.linkProducts"
+            v-if="currentProduct.linkProducts.length !== 0"
             class="product-page__body__right-footer__slider"
           >
             <FooterSlider

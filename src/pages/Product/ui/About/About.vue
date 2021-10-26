@@ -39,7 +39,7 @@
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">
-        <!--        <SetSlider :products="partsProducts" />-->
+        <SetSlider :products="partsProducts" />
       </div>
     </div>
     <div class="about-product__footer">
