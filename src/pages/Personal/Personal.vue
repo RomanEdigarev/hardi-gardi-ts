@@ -4,7 +4,7 @@
       <div class="page-main__header">
         <PageTitle :text="`Здравствуйте, ${user.name}!`" />
       </div>
-      <div class="personal__footer">
+      <div v-show="currentItemNumber === 0" class="personal__footer">
         <Details />
       </div>
       <div class="personal__header">
@@ -106,6 +106,9 @@ export default defineComponent({
       border-radius: 25px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
+      span {
+        transform: translateY(-6px);
+      }
     }
     &__item:first-child {
       border-bottom-left-radius: 0;

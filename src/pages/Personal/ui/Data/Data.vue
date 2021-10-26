@@ -1,67 +1,72 @@
 <template>
   <div class="data">
-    <div class="data__body">
-      <div class="data__body__item">
-        <VInput
-          name="email"
-          placeholder="Email"
-          id="email"
-          type="email"
-          :value="user.email"
-          :validation="schema.email"
-        />
-      </div>
-      <div class="grid">
+    <template v-if="isAuth">
+      <div class="data__body">
         <div class="data__body__item">
           <VInput
-            name="firstName"
-            placeholder="Имя"
-            id="firstName"
-            :value="user.name"
-            type="text"
-            :validation="schema.firstName"
+            name="email"
+            placeholder="Email"
+            id="email"
+            type="email"
+            :value="user.email"
+            :validation="schema.email"
           />
         </div>
+        <div class="grid">
+          <div class="data__body__item">
+            <VInput
+              name="firstName"
+              placeholder="Имя"
+              id="firstName"
+              :value="user.name"
+              type="text"
+              :validation="schema.firstName"
+            />
+          </div>
+          <div class="data__body__item">
+            <VInput
+              name="lastName"
+              placeholder="Фамилия"
+              id="lastName"
+              :value="user.lastName"
+              type="text"
+              :validation="schema.lastName"
+            />
+          </div>
+          <div class="data__body__item">
+            <VInput
+              name="phone"
+              placeholder="Телефон"
+              id="phone"
+              :value="user.phone || null"
+              type="phone"
+              :validation="schema.phone"
+            />
+          </div>
+          <div class="data__body__item">
+            <DateInput name="userDate" :value="user.birth" />
+          </div>
+        </div>
         <div class="data__body__item">
-          <VInput
-            name="lastName"
-            placeholder="Фамилия"
-            id="lastName"
-            :value="user.lastName"
-            type="text"
-            :validation="schema.lastName"
+          <ChangePass />
+        </div>
+        <div class="data__body__item">
+          <ChangeChild
+            :childs="childs"
+            @set-childs="setChilds"
+            @remove-child="removeChild"
           />
         </div>
-        <div class="data__body__item">
-          <VInput
-            name="phone"
-            placeholder="Телефон"
-            id="phone"
-            :value="user.phone || null"
-            type="phone"
-            :validation="schema.phone"
-          />
-        </div>
-        <div class="data__body__item">
-          <DateInput name="userDate" :value="user.birth" />
+      </div>
+      <div class="data__footer">
+        <div class="data__footer__btn">
+          <AlfaButton text="Сохранить" @click="onSubmit" />
         </div>
       </div>
-      <div class="data__body__item">
-        <ChangePass />
-      </div>
-      <div class="data__body__item">
-        <ChangeChild
-          :childs="childs"
-          @set-childs="setChilds"
-          @remove-child="removeChild"
-        />
-      </div>
-    </div>
-    <div class="data__footer">
-      <div class="data__footer__btn">
-        <AlfaButton text="Сохранить" @click="onSubmit" />
-      </div>
-    </div>
+    </template>
+    <template v-else>
+      <h3>Необходимо авторизоваться</h3>
+    </template>
   </div>
 </template>
 
@@ -86,6 +91,9 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const isAuth = computed(() => {
+      return store.getters["user/getUserAuthInfo"].isAuth;
+    });
     const childs = computed(() => store.getters["user/getUserChilds"]);
     const setChilds = (childs) => {
       store.commit("user/setUserChilds", childs);
@@ -138,6 +146,7 @@ export default defineComponent({
       setChilds,
       removeChild,
       childs,
+      isAuth,
     };
   },
 });

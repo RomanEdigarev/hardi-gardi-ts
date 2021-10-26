@@ -70,24 +70,30 @@ export default defineComponent({
         anime
           .timeline({
             targets: body.value,
-            maxHeight: [0, "1000px"],
+            maxHeight: ["0px", "1000px"],
             height: isMobile.value ? "166px" : "72px",
-            duration: 600,
-            easing: "easeOutCirc",
+            duration: 400,
+            easing: "linear",
+            complete: () => {
+              body.value.style.overflow = "visible";
+            },
           })
           .add({
             targets: body.value,
             opacity: [0, 1],
-            duration: 600,
-            easing: "easeOutCirc",
+            marginBottom: ["0px", "60px"],
+            duration: 400,
+            easing: "linear",
           });
       } else {
+        body.value.style.overflow = "hidden";
         anime({
           targets: body.value,
           maxHeight: ["1000px", "0px"],
           height: [0],
-          duration: 600,
-          easing: "easeOutCirc",
+          marginBottom: ["60px", "0px"],
+          duration: 400,
+          easing: "linear",
         });
       }
     };
