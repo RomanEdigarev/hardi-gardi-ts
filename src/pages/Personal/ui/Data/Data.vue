@@ -94,7 +94,7 @@ export default defineComponent({
       store.dispatch("user/fetchRemoveUserChild", childId);
     };
 
-    const phoneRegExp = /(^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$)|(^\s*$)/;
+    const phoneRegExp = /(.{16}$)|(^\s*$)/;
     const schema = yup.object({
       firstName: yup.string().required("Обязательное поле"),
       lastName: yup.string(),

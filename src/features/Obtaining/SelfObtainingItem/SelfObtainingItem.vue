@@ -80,6 +80,9 @@ export default defineComponent({
     margin-bottom: 20px;
     &__text {
       margin-bottom: 20px;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 22px;
     }
     &__subtext {
       font-size: 13px;
@@ -112,12 +115,15 @@ export default defineComponent({
       }
       span {
         cursor: pointer;
+        font-size: 15px;
+        line-height: 24px;
       }
     }
   }
   // *** Footer END *** //
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .self {
     &__body {
       margin-top: 14px;

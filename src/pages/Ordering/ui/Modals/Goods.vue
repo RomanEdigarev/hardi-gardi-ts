@@ -2,7 +2,9 @@
   <div class="goods-modal">
     <div class="goods-modal__header">
       <div class="goods-modal__header__title">Состав заказа</div>
-      <div class="goods-modal__close-btn"></div>
+      <div class="goods-modal__close-btn" data-close-modal>
+        <CloseIcon />
+      </div>
     </div>
     <div class="goods-modal__body">
       <div v-for="product in products" class="goods-modal__body__item">
@@ -33,7 +35,13 @@
       <div class="goods-modal__footer__btn" data-close-modal>
         <AlfaButton text="Продолжить" />
       </div>
-      <div class="goods-modal__footer__sub-btn alfa-link">Изменить</div>
+      <div
+        class="goods-modal__footer__sub-btn alfa-link"
+        @click="$router.push('/basket')"
+        data-close-modal
+      >
+        Изменить
+      </div>
     </div>
   </div>
 </template>
@@ -41,12 +49,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { ProductCardCart } from "@/widgets";
-import { PlusIcon } from "@/shared/ui/icons";
+import { CloseIcon, PlusIcon } from "@/shared/ui/icons";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { BasketItem } from "@/entities/Basket/model";
 export default defineComponent({
   name: "Modal",
-  components: { ProductCardCart, PlusIcon, AlfaButton },
+  components: { ProductCardCart, PlusIcon, AlfaButton, CloseIcon },
   props: {
     products: {
       type: Object as PropType<BasketItem[]>,
@@ -60,7 +68,7 @@ export default defineComponent({
 .goods-modal {
   width: 786px;
   max-height: 68.79vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 36px;
   color: $clr-phi;
   background-color: $clr-tau;
@@ -128,14 +136,24 @@ export default defineComponent({
     align-items: center;
     &__btn {
       width: 276px;
+      height: 62px;
       margin-right: 30px;
     }
     &__sub-btn {
     }
   }
   // *** Footer END *** //
+  &__close-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+  }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .goods-modal {
     max-width: 339px;
     padding: 40px 22px;

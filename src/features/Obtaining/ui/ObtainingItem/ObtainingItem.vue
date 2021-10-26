@@ -62,6 +62,7 @@ export default defineComponent({
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     max-height: 0;
+    margin-top: 22px;
   }
 
   &__body.is-open {

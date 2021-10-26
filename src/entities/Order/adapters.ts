@@ -15,12 +15,7 @@ export const getOrderAdapter = async (): Promise<Order> => {
 
   // Transformation API data here //
   const order: Order = {
-    contactPerson: {
-      name: "Роман",
-      lastName: "Test",
-      phone: "123456789",
-      email: "test@mail.ru",
-    },
+    contactPerson: undefined,
     delivery: {
       current: getOrderDelivery(getCurrentItem(data.deliveries.items)),
       items: data.deliveries.items.map((item) => {

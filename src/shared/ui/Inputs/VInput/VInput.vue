@@ -3,21 +3,21 @@
     class="container"
     :class="{
       focused: isFocused,
-      dirty: meta.dirty || errors.length > 0,
+      dirty: errors.length > 0,
       success: isSuccess,
       error: errors.length > 0,
       disabled: isDisabled,
     }"
   >
     <input
-      ref="input"
+      :ref="type === 'phone' ? 'el' : 'input'"
       class="input"
       :name="name"
       :type="type"
       :placeholder="placeholder"
       :id="id"
-      :value="value"
-      @input="handleChange"
+      :value="type === 'phone' ? value.substring(1) : value"
+      @input="type === 'phone' ? null : handleChange"
       @change="handleChange"
       @blur="handleChange"
       :disabled="isDisabled"
@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { useIMask } from "vue-imask";
 import { useField } from "vee-validate";
 import { BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon } from "@/shared/ui/icons";
@@ -63,9 +64,25 @@ export default defineComponent({
     const input = ref(null);
     const isFocused = ref(false);
     const isDirty = ref(false);
+    const { el, masked } = useIMask({
+      mask: "+{7}(000)000-00-00",
+    });
+
+    onMounted(() => {
+      if (props.type === "phone") {
+        console.log(el, masked);
+      }
+    });
 
     const clearInput = () => {
-      input.value.focus();
+      if (props.type === "phone") {
+        el.value.focus();
+        el.value.value = "";
+      } else {
+        input.value.focus();
+        input.value.value = "";
+      }
+      onBlur();
       emit("clear-input");
     };
 
@@ -102,6 +119,8 @@ export default defineComponent({
       value,
       meta,
       errors,
+      el,
+      masked,
     };
   },
 });

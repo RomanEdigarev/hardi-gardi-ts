@@ -35,9 +35,12 @@ export const orderModule: Module<Order, State> = {
     fetchGetOrder: async ({ commit, state, rootGetters }) => {
       commit("toggleLoading", true);
       const order: Order = await getOrderAdapter();
-      // if (!order.contactPerson) {
-      //     order.contactPerson = rootGetters['']
-      // }
+      if (!order.contactPerson) {
+        const { name, lastName, phone, email } = rootGetters[
+          "user/getUserAuthInfo"
+        ];
+        order.contactPerson = { name, lastName, phone, email };
+      }
       commit("initOrder", order);
       commit("toggleLoading", false);
     },

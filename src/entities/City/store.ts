@@ -52,6 +52,7 @@ export const cityModule: Module<City, State> = {
   },
   getters: {
     getCurrentCityId: (state) => state.current,
+    getCurrentCityName: (state) => state.items[state.current],
     getAllCities: (state) => state.items,
     getSearchResults: (state) => state.searchingItems,
   },

@@ -14,12 +14,16 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+
     "types": [
       "webpack-env"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "vue-imask": [
+        "node_modules/vue-imask/dist/vue-imask.js"
       ]
     },
     "lib": [

@@ -22,6 +22,7 @@
       <VInput
         name="contactPersonLastPhone"
         id="phone"
+        type="phone"
         :value="contactPerson.phone"
         label-text="Телефон"
         placeholder="Телефон"
@@ -60,7 +61,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const phoneRegExp = /(^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$)|(^\s*$)/;
+    const phoneRegExp = /(.{16}$)|(^\s*$)/;
     const schema = yup.object({
       contactPersonName: yup.string().required("Обязательное поле"),
       contactPersonLastName: yup.string(),
@@ -77,7 +78,7 @@ export default defineComponent({
       validationSchema: schema,
     });
     const onSubmit = handleSubmit(async (values) => {
-      console.log(values)
+      console.log(values);
     });
   },
 });
