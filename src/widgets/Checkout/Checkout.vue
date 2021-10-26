@@ -149,6 +149,7 @@ export default defineComponent({
       line-height: 1.54;
       margin-bottom: 29px;
       span {
+        font-size: 13px;
         color: $clr-zeta;
       }
     }
