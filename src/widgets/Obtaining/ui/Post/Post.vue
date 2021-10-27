@@ -13,14 +13,16 @@
               <ObtainingInfo title="Срок доставки" :value="item.time" />
             </div>
             <div class="post__footer">
-              <div class="post_footer__input">
+              <div class="post__footer__input">
                 <VInput
                   :id="`delivery_${item.id}_index`"
                   placeholder="Индекс"
                   name="deliveryIndex"
+                  :mask="/^[1-6]\d{0,5}$/"
+                  type="text"
                 />
               </div>
-              <div class="post_footer__input">
+              <div class="post__footer__input">
                 <VInput
                   :id="`delivery_${item.id}_address`"
                   placeholder="Адрес доставки"
@@ -60,12 +62,11 @@ export default defineComponent({
 
     const schema = yup.object({
       deliveryAddress: yup.string().required("Обязательное поле"),
-      deliveryIndex: yup.number().required("Обязательное поле"),
+      deliveryIndex: yup.string().required("Обязательное поле").matches(/^[1-6]\d{0,5}$/,'Неверный формат'),
     });
-    const { submitForm } = useForm({
+    const { setFieldTouched } = useForm({
       validationSchema: schema,
     });
-    submitForm();
     const enterElement = (el, done) => {
       anime({
         targets: el,
@@ -132,6 +133,9 @@ export default defineComponent({
   &__footer {
     width: 98%;
     margin: 0 auto 28px auto;
+    &__input {
+      margin-bottom: 54px;
+    }
   }
   // *** Footer END *** //
 }

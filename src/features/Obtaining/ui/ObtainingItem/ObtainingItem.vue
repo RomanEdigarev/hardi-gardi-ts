@@ -7,6 +7,7 @@
         :id="id"
         @toggle="toggle"
         :value="name"
+        :checked="isOpen"
       />
     </div>
     <div class="obtaining-item__body" :class="{ 'is-open': isOpen }">
@@ -16,8 +17,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {computed, defineComponent, ref} from "vue";
 import { RadioInput } from "@/shared/ui/inputs";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "ObtainingItem",
@@ -37,9 +39,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isOpen = ref(false);
+    const store = useStore()
+    const isOpen = computed(() => {
+      return store.getters['order/getCurrentDelivery'] === props.id
+    });
     const toggle = (id) => {
-      isOpen.value = props.id === id;
+      store.commit('order/setNewCurrentId', id)
     };
 
     return {

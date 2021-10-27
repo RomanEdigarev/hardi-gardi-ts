@@ -10,14 +10,14 @@
     }"
   >
     <input
-      :ref="type === 'phone' ? 'el' : 'input'"
+      ref="el"
       class="input"
       :name="name"
       :type="type"
       :placeholder="placeholder"
       :id="id"
-      :value="type === 'phone' ? value.substring(1) : value"
-      @input="type === 'phone' ? null : handleChange"
+      :value="value"
+      @input="null"
       @change="handleChange"
       @blur="handleChange"
       :disabled="isDisabled"
@@ -59,36 +59,24 @@ export default defineComponent({
       type: Object,
       default: {},
     },
+    mask: {
+      type: String,
+      default: null
+    }
   },
   setup(props, { emit }) {
-    const input = ref(null);
     const isFocused = ref(false);
     const isDirty = ref(false);
-    const { el, masked } = useIMask({
-      mask: "+{7}(000)000-00-00",
-    });
-
-    onMounted(() => {
-      if (props.type === "phone") {
-        console.log(el, masked);
-      }
-    });
-
     const clearInput = () => {
-      if (props.type === "phone") {
         el.value.focus();
         el.value.value = "";
-      } else {
-        input.value.focus();
-        input.value.value = "";
-      }
       onBlur();
       emit("clear-input");
     };
 
     const onBlur = () => {
       isFocused.value = false;
-      if (input.value.value) {
+      if (el.value.value) {
         isDirty.value = true;
       } else {
         isDirty.value = false;
@@ -107,10 +95,13 @@ export default defineComponent({
       validateOnValueUpdate: false,
     });
 
+    const { el, masked, mask, typed } = useIMask({
+      mask: props.mask,
+    });
+
     return {
       clearInput,
       onBlur,
-      input,
       isFocused,
       isDirty,
       handleChange,

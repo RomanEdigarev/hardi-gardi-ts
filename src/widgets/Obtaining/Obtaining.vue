@@ -24,7 +24,9 @@
       </div>
       <div class="obtaining__body__content">
         <div class="obtaining__body__content__item">
-          <Self />
+          <component :is="currentItemKey"></component>
+          <!--          <Self />-->
+          <!--          <Courier />-->
         </div>
       </div>
     </div>
@@ -32,15 +34,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onUpdated, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { SearchIcon, CloseIcon } from "@/shared/ui/icons";
-import { Self } from "./ui";
+import { Courier, Post, Self } from "./ui";
 import { ToggleMenu } from "@/shared/ui";
 import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Obtaining",
-  components: { SearchIcon, CloseIcon, Self, ToggleMenu },
+  components: { SearchIcon, CloseIcon, Self, ToggleMenu, Courier, Post },
   setup() {
     const store = useStore();
     const userCity = computed(() => {
@@ -53,7 +55,7 @@ export default defineComponent({
       courier: "Курьер",
       post: "Почта России",
     };
-    const currentItemKey = ref<keyof typeof obtainingTypes>("post");
+    const currentItemKey = ref<keyof typeof obtainingTypes>("self");
 
     const items = computed(() => {
       return Object.entries(obtainingTypes).map(([key, value]) => {

@@ -10,7 +10,11 @@ export const orderModule: Module<Order, State> = {
       contactPerson: undefined,
       delivery: {
         current: undefined,
-        items: [],
+        items: {
+          self: [],
+          courier: [],
+          post: [],
+        },
       },
       payment: {
         current: undefined,
@@ -30,6 +34,9 @@ export const orderModule: Module<Order, State> = {
         state[key] = value;
       });
     },
+    setNewCurrentId: (state, payload: string) => {
+      state.delivery.current = payload;
+    },
   },
   actions: {
     fetchGetOrder: async ({ commit, state, rootGetters }) => {
@@ -47,6 +54,10 @@ export const orderModule: Module<Order, State> = {
   },
   getters: {
     getOrder: (state) => state,
+    getSelfDeliveryItems: (state) => state.delivery.items.self,
+    getCourierDeliveryItems: (state) => state.delivery.items.courier,
+    getPostDeliveryItems: (state) => state.delivery.items.post,
+    getCurrentDelivery: (state) => state.delivery.current,
   },
   namespaced: true,
 };

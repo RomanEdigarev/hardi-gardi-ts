@@ -5,17 +5,18 @@ export type OrderContactPerson = {
   email: string;
 };
 type OrderDeliveryType = "self" | "courier" | "post";
+type OrderDeliveryId = string;
 export type OrderDeliveryVariant = {
   name: string;
   price: string | number;
   time: string;
   comment: string;
   type: OrderDeliveryType;
-  id: string;
+  id: OrderDeliveryId;
 };
-type OrderDeliveryItem = {
-  type: OrderDeliveryType;
-  variants: OrderDeliveryVariant[];
+type OrderDelivery = {
+  // type: OrderDeliveryType;
+  [key in OrderDeliveryType]: OrderDeliveryVariant[];
 };
 export type OrderPaymentType = "onSite" | "onDeliver";
 export type OrderTotalPrice = {
@@ -28,8 +29,8 @@ export type Order = {
   isLoading?: boolean;
   contactPerson?: OrderContactPerson;
   delivery: {
-    current: OrderDeliveryVariant;
-    items: OrderDeliveryItem[];
+    current: OrderDeliveryId;
+    items: OrderDelivery;
   };
   payment: {
     current: OrderPaymentType;

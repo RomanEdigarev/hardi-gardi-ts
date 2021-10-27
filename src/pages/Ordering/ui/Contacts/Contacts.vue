@@ -24,8 +24,10 @@
         id="phone"
         type="phone"
         :value="contactPerson.phone"
+        mask="+{7}(000)000-00-00"
         label-text="Телефон"
         placeholder="Телефон"
+        :validation="schema.contactPersonLastPhone"
       />
     </div>
     <div class="contacts__input">
@@ -77,9 +79,9 @@ export default defineComponent({
     const { handleSubmit } = useForm({
       validationSchema: schema,
     });
-    const onSubmit = handleSubmit(async (values) => {
-      console.log(values);
-    });
+    return {
+      schema
+    }
   },
 });
 </script>

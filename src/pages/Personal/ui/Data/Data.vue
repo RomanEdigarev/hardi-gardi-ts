@@ -40,6 +40,7 @@
               id="phone"
               :value="user.phone || null"
               type="phone"
+              mask="+{7}(000)000-00-00"
               :validation="schema.phone"
             />
           </div>

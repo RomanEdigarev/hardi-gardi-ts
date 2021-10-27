@@ -1,32 +1,54 @@
 <template>
+  <transition appear @enter="enterElement" @leave="leaveElement">
   <div class="obtaining-self">
-    <div class="obtaining-self__item">
+    <div v-for="item in selfItems" class="obtaining-self__item">
       <SelfObtainingItem
         name="self"
-        title="Самовывоз из пункта выдачи ХардиГарди"
-        id="hardi"
-      />
-    </div>
-    <div class="obtaining-self__item">
-      <SelfObtainingItem name="self" title="Пункт выдачи СДЭК" id="sdek" />
-    </div>
-    <div class="obtaining-self__item">
-      <SelfObtainingItem
-        name="self"
-        title="Пункт выдачи Boxberry (пример доп. пункта доставки)"
-        id="boxberry"
+       :item="item"
       />
     </div>
   </div>
+  </transition>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent} from "vue";
 import { SelfObtainingItem } from "@/features/Obtaining";
+import {useStore} from "@/services/vuex";
+import {OrderDeliveryVariant} from "@/entities/Order/model";
+import anime from "animejs";
 
 export default defineComponent({
   name: "Self",
   components: { SelfObtainingItem },
+  setup() {
+    const store = useStore()
+    const selfItems = computed<OrderDeliveryVariant[]>(() => store.getters['order/getSelfDeliveryItems'])
+
+    const enterElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        duration: 600,
+        easing: "linear",
+        complete: done,
+      });
+    }
+    const leaveElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [1, 0],
+        easing: "linear",
+        duration: 600,
+        complete: done,
+      });
+    }
+    return {
+      selfItems,
+      enterElement,
+      leaveElement
+    }
+  }
 });
 </script>
 
