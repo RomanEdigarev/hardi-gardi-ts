@@ -21,6 +21,7 @@
             :price-prev="currentProduct.prevPrice"
             :price-current="currentProduct.currentPrice"
             :parts-products="currentProduct.parts"
+            :product-id="currentProduct.id"
           />
         </div>
         <div class="product-page__body__right-body">

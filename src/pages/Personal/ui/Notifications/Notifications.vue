@@ -105,6 +105,7 @@ export default defineComponent({
       margin-bottom: 12px;
     }
     &__text {
+      font-size: 15px;
       line-height: 1.6;
     }
     &__icon {

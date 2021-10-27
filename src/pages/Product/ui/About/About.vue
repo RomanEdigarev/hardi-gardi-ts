@@ -19,23 +19,23 @@
           {{ priceCurrent }} &#8381;/шт
         </div>
         <div class="about-product__body__price-container__add-to-fav">
-          <AddToFavorite :is-favorite="false" />
+          <AddToFavorite :is-favorite="false" :product-id="productId"/>
         </div>
       </div>
       <div class="about-product__body__add-container">
         <div class="about-product__body__add-container__count">
           <span class="about-product__body__add-container__count__btn">
-            <CounterButton :isPlus="false" />
+            <CounterButton :isPlus="false"  @click="quality--" :disabled="quality=== 1"/>
           </span>
           <span class="about-product__body__add-container__count__value">
-            1
+            {{quality}}
           </span>
           <span class="about-product__body__add-container__count__btn">
-            <CounterButton :isPlus="true" />
+            <CounterButton :isPlus="true"  @click="quality++"/>
           </span>
         </div>
         <div class="about-product__body__add-container__btn">
-          <AlfaButton styling="primary" text="В корзину"></AlfaButton>
+          <AlfaButton styling="primary" text="В корзину" @click="addToBasket"></AlfaButton>
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">
@@ -102,11 +102,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import {defineComponent, PropType, ref} from "vue";
 import { AddToFavorite } from "@/features";
 import { CounterButton, AlfaButton } from "@/shared/ui/buttons";
 import SetSlider from "../SetSlider/SetSlider.vue";
 import { Product } from "@/entities/Products/Product/model";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "About",
@@ -130,7 +131,24 @@ export default defineComponent({
     partsProducts: {
       type: Object as PropType<Product[]>,
     },
+    productId: {
+      type: String,
+      required: true
+    }
   },
+  setup(props) {
+    const store = useStore()
+    const quality = ref(1)
+
+    const addToBasket = async () => {
+      await store.dispatch('basket/addToBasket', {id: props.productId, quantity: quality.value})
+    }
+
+    return {
+      quality,
+      addToBasket
+    }
+  }
 });
 </script>
 

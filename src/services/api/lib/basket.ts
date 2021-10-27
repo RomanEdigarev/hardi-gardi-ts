@@ -6,7 +6,7 @@ export const addToBasketAPI = async (
 ): Promise<Basket> => {
   try {
     const { data, status } = await apiInstance().post(
-      `user/basket/add.php?id=${basketData.id}&quality=${basketData.quantity}`
+      `user/basket/add.php?id=${basketData.id}&quantity=${basketData.quantity}`
     );
     if (status === 200 && data.isSuccess) {
       return data;
