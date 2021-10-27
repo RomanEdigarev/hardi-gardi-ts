@@ -69,8 +69,6 @@ export default defineComponent({
       searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
     })
 
-
-
     onMounted(() => {
       if (searchInput.value.$el) {
         searchInput.value.$el.querySelectorAll('[name=search]')[0].setAttribute('autocomplete', 'off')

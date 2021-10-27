@@ -31,9 +31,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-input {
   position: relative;
+  height: 60px;
   .input {
     padding: 16px 30px;
   }
@@ -47,5 +48,11 @@ export default defineComponent({
     right: 6px;
     transform: translateY(-50%);
   }
+
+     :deep .close-btn {
+      width: 30px;
+      right: 86px
+    }
+
 }
 </style>
