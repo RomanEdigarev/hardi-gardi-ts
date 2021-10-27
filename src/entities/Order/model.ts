@@ -26,6 +26,7 @@ export type OrderTotalPrice = {
   total: number;
 };
 export type Order = {
+  id?: string;
   isLoading?: boolean;
   contactPerson?: OrderContactPerson;
   delivery: {

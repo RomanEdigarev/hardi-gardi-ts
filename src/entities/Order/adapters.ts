@@ -76,4 +76,5 @@ export const createOrderAdapter = async (order: Order): Promise<any> => {
   });
 
   const response = await createOrderAPI(formData);
+  return response.data;
 };

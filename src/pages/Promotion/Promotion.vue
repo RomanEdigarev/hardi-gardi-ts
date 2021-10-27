@@ -45,6 +45,10 @@ export default defineComponent({
     }
   }
   // *** Body END *** //
+  :deep .panel, :deep .promotion-section__title-container{
+    display: none;
+  }
+
 }
 </style>
 <style lang="scss">

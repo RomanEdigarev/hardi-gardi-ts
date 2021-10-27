@@ -75,7 +75,7 @@
         <!-- Checkbox END -->
       </div>
       <div class="ordering__body__right">
-        <Checkout is-ordering @checkout="createOrder"/>
+        <Checkout is-ordering @checkout="createOrder" :disabled="!isValid" />
       </div>
     </div>
     <div class="ordering__modal-container">
@@ -85,15 +85,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
 import { Contacts, Goods } from "./ui";
 import { Checkbox } from "@/shared/ui/inputs";
 import { Basket } from "@/entities/Basket/model";
 import { useStore } from "@/services/vuex";
-import { getOrderAPI } from "@/services/api/lib/order";
-import { Order, OrderContactPerson } from "@/entities/Order/model";
+import { Order } from "@/entities/Order/model";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Ordering",
@@ -108,6 +108,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     onMounted(async () => {
       await store.dispatch("order/fetchGetOrder");
     });
@@ -124,16 +125,23 @@ export default defineComponent({
     ];
     const currentPaymentType = ref("onSite");
     const order = computed<Order>(() => store.getters["order/getOrder"]);
+    const isValid = ref(false);
 
+    watch(order.value, () => {
+      const { contactPerson, location, delivery} = order.value;
+      if (contactPerson) {
+        isValid.value = !!contactPerson.name && !!contactPerson.email && !!contactPerson.phone && (delivery.current === '3' || !!location.address)
+      }
+    });
 
     const setNewPayment = (key) => {
       currentPaymentType.value = key;
       store.commit("order/setPaymentType", key);
     };
-    const createOrder = () => {
-      store.dispatch('order/fetchCreateOrder')
-    }
-
+    const createOrder = async (link) => {
+     await store.dispatch('order/fetchCreateOrder')
+      router.push(link);
+    };
 
     return {
       paymentItems,
@@ -141,7 +149,8 @@ export default defineComponent({
       order,
       setNewPayment,
       currentPaymentType,
-      createOrder
+      createOrder,
+      isValid,
     };
   },
 });

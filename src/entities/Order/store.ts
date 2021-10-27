@@ -51,7 +51,10 @@ export const orderModule: Module<Order, State> = {
       state.contactPerson = payload;
     },
     setPaymentType: (state, payload) => {
-      state.payment = payload;
+      state.payment.current = payload;
+    },
+    setOrderId: (state, payload) => {
+      state.id = payload;
     },
   },
   actions: {
@@ -70,6 +73,7 @@ export const orderModule: Module<Order, State> = {
     fetchCreateOrder: async ({ commit, state }) => {
       commit("toggleLoading", true);
       const response = await createOrderAdapter(state);
+      commit("setOrderId", response.id);
       commit("toggleLoading", false);
     },
   },
@@ -80,6 +84,16 @@ export const orderModule: Module<Order, State> = {
     getPostDeliveryItems: (state) => state.delivery.items.post,
     getCurrentDelivery: (state) => state.delivery.current,
     getPaymentType: (state) => state.payment.current,
+    getDeliveryType: (state) => {
+      const map = {
+        "3": "self",
+        "2": "courier",
+        "12": "self",
+        "11": "courier",
+        "22": "post",
+      };
+      return map[state.delivery.current];
+    },
   },
   namespaced: true,
 };

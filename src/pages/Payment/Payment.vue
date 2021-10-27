@@ -16,35 +16,47 @@
         </div>
         <div class="payment__body__item contacts">
           <div class="payment__body__item__title">Контактные данные</div>
-          <div class="payment__body__item__text">Англеина обрамова</div>
-          <div class="payment__body__item__text">test@test.ru</div>
-          <div class="payment__body__item__text">+7 (911) 786-98-98</div>
+          <template v-if="contactPerson">
+            <div class="payment__body__item__text">{{ contactPerson.name }}</div>
+            <div class="payment__body__item__text">{{ contactPerson.email }}</div>
+            <div class="payment__body__item__text">{{ contactPerson.phone }}</div>
+          </template>
         </div>
         <div class="payment__body__item method">
           <div class="payment__body__item__title">Способ получения</div>
           <p>
-            <span class="payment__body__item__subtitle">Доставка: Курьер</span>
+            <span class="payment__body__item__subtitle"
+              >Доставка: {{ deliveryMap[deliveryType] }}</span
+            >
             <span v-if="!isPhone" class="payment__body__item__subtitle">
               Сроки доставки: 4 дня
             </span>
           </p>
-          <div class="payment__body__item__text">Курьером: СДЭК</div>
+          <!--          <div class="payment__body__item__text">Курьером: СДЭК</div>-->
           <div class="payment__body__item__text">
-            г. Санкт-Петербург, проспект Энгельса д,96 кв.93
+            {{ order.location.address }}
           </div>
           <span v-if="isPhone" class="payment__body__item__subtitle">
-              Сроки доставки: 4 дня
-            </span>
+            Сроки доставки: 4 дня
+          </span>
         </div>
         <div class="payment__body__item pay">
           <div class="payment__body__item__title">Способ оплаты</div>
-          <div class="payment__body__item__subtitle">Оплата: Картой</div>
+          <div class="payment__body__item__subtitle">
+            Оплата: {{ paymentMap[paymentType] }}
+          </div>
         </div>
         <div class="payment__body__item order-list">
           <div class="payment__body__item__title">Состав заказа</div>
-          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
-          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
-          <div class="order-list__item"><ProductCardCart to-modal :product="product" :count="2"/></div>
+          <div class="order-list__item">
+            <ProductCardCart to-modal :product="product" :count="2" />
+          </div>
+          <div class="order-list__item">
+            <ProductCardCart to-modal :product="product" :count="2" />
+          </div>
+          <div class="order-list__item">
+            <ProductCardCart to-modal :product="product" :count="2" />
+          </div>
         </div>
       </div>
     </main>
@@ -52,21 +64,49 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent, onMounted} from "vue";
 import { PageTitle } from "@/shared/ui";
 import { ProductCardCart } from "@/widgets";
 import { OrderInfo } from "./ui";
 import { useStore } from "@/services/vuex";
-import {useProduct} from "@/entities/Products/Product/lib";
+import { useProduct } from "@/entities/Products/Product/lib";
+import {getOrderAPI} from "@/services/api/lib/order";
 export default defineComponent({
   name: "Payment",
   components: { PageTitle, ProductCardCart, OrderInfo },
   setup() {
-    const {product} = useProduct()
+    const { product } = useProduct();
     const store = useStore();
+    const order = computed(() => {
+      return store.getters["order/getOrder"];
+    });
+
+    const deliveryMap = {
+      self: "Самовывоз",
+      courier: "Курьером",
+      post: "Почтой",
+    };
+
+    const paymentMap = {
+      onSite: "Картой",
+      onDeliver: "При получении",
+    };
+
+    onMounted(async () => {
+      debugger
+      const response = await getOrderAPI(order.value.id)
+      debugger
+    })
+
     return {
       product,
       isPhone: computed(() => store.getters["getIsPhone"]),
+      contactPerson: order.value.contactPerson,
+      order,
+      deliveryMap,
+      deliveryType: computed(() => store.getters["order/getDeliveryType"]),
+      paymentType: computed(() => store.getters["order/getPaymentType"]),
+      paymentMap,
     };
   },
 });
@@ -154,7 +194,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (max-width: 1367px){
+@media screen and (max-width: 1367px) {
   .payment {
     :deep .order-list__item {
       max-width: 714px;
@@ -183,7 +223,6 @@ export default defineComponent({
             -webkit-box-orient: vertical;
             overflow: hidden;
           }
-
         }
       }
       &__price {
@@ -211,7 +250,8 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .payment {
     &__header {
       margin-bottom: 36px;

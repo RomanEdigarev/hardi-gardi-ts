@@ -1,9 +1,12 @@
 import { apiInstance } from "@/services/api/config";
 import { Order } from "@/services/api/model/Order";
 
-export const getOrderAPI = async (): Promise<Order> => {
+export const getOrderAPI = async (id?): Promise<Order> => {
+  debugger;
   try {
-    const { data, status } = await apiInstance().post(`user/order/order.php`);
+    const { data, status } = await apiInstance().post(
+      `user/order/order.php${id ? `?id=${id}` : ""}`
+    );
     if (status === 200 && data.isSuccess) {
       return data;
     } else {
