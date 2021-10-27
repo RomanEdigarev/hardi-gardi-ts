@@ -16,13 +16,13 @@
     >
       <SearchIcon />
     </span>
-    <router-link class="cabinet-links__link" id="favorite" to="/favorites">
+    <div class="cabinet-links__link" id="favorite" @click="goToFavorites">
       <IconWithCount :count="favoritesCount">
         <template v-slot:svg-icon>
           <FavoriteIcon />
         </template>
       </IconWithCount>
-    </router-link>
+    </div>
     <Tooltip trigger="mouseenter" offset="-42">
       <template v-slot:reference>
         <router-link class="cabinet-links__link" id="shop" to="/basket">
@@ -47,6 +47,7 @@ import { IconWithCount } from "@/features";
 import { useStore } from "@/services/vuex";
 import { Tooltip } from "@/shared/ui";
 import CabinetTooltip from "./CabinetTooltip";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "CabinetLinks",
@@ -71,8 +72,18 @@ export default defineComponent({
   emits: ["openSearchModalPhone"],
   setup() {
     const store = useStore();
+    const router = useRouter();
+    const favoritesCount = computed(
+      () => store.getters["favorites/getFavoritesTotalCount"]
+    );
+    const goToFavorites = () => {
+      if (favoritesCount.value > 0) {
+        router.push("/favorites");
+      }
+    };
     return {
       isPhone: computed(() => store.getters["getIsPhone"]),
+      goToFavorites,
     };
   },
 });

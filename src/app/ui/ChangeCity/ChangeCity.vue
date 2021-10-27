@@ -15,7 +15,7 @@
             v-model="searchStr"
             @update:modelValue="searchCity"
           />
-          <template v-if="searchResults">
+          <template v-if="searchResults && Object.keys(searchResults).length > 0">
             <div class="change-city__body__input__search-results">
               <div
                 v-for="resultItem in Object.entries(searchResults)"
