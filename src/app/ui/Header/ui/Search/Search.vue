@@ -22,11 +22,11 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
+import {computed, defineComponent, onMounted, ref, watch} from "vue";
 import { SearchInput } from "@/features";
 import {useStore} from "@/services/vuex";
 import ProductCardCatalog from "@/widgets/Cards/ProductCardCatalog/ProductCardCatalog.vue";
-import {useRouter} from "vue-router";
+import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 export default defineComponent({
   name: "Search",
   components: {
@@ -35,6 +35,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const store = useStore()
     const searchQuery = ref('')
     const searchInput = ref(null)
@@ -58,12 +59,17 @@ export default defineComponent({
     }
     const goToCatalog = () => {
       router.push('/catalog')
+    }
+
+    watch(route, () => {
       document.documentElement.click()
       searchQuery.value = ''
       store.commit('search/setSearchQuery', '')
       store.commit('search/setResults', [])
       searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
-    }
+    })
+
+
 
     onMounted(() => {
       if (searchInput.value.$el) {
