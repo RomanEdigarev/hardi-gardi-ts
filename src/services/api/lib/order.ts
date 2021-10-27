@@ -13,3 +13,19 @@ export const getOrderAPI = async (): Promise<Order> => {
     console.log(e);
   }
 };
+
+export const createOrderAPI = async (form: FormData): Promise<any> => {
+  try {
+    const { data, status } = await apiInstance().post(
+      `user/order/order.php`,
+      form
+    );
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};

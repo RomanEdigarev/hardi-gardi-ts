@@ -17,7 +17,10 @@
               1. Контактные данные
             </div>
             <div class="ordering__body__left__item__body">
-              <Contacts v-if="order.contactPerson" :contact-person="order.contactPerson"/>
+              <Contacts
+                v-if="order.contactPerson"
+                :contact-person="order.contactPerson"
+              />
             </div>
           </div>
           <!-- Contacts END -->
@@ -33,9 +36,15 @@
           <!-- Receiving END -->
           <!-- Payment -->
           <div class="ordering__body__left__item payment">
-            <div class="ordering__body__left__item__title">2. Способ оплаты</div>
+            <div class="ordering__body__left__item__title">
+              2. Способ оплаты
+            </div>
             <div class="payment__toggle-menu">
-              <ToggleMenu :items="paymentItems" />
+              <ToggleMenu
+                :items="paymentItems"
+                :current-item-key="currentPaymentType"
+                @set-current-item="setNewPayment"
+              />
             </div>
           </div>
           <!-- Payment END -->
@@ -45,12 +54,12 @@
               4. Комментарий к заказу
             </div>
             <textarea
-                class="ordering__body__left__item__textarea"
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                placeholder="Комментарий"
+              class="ordering__body__left__item__textarea"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Комментарий"
             ></textarea>
           </div>
           <!-- Comments END -->
@@ -66,7 +75,7 @@
         <!-- Checkbox END -->
       </div>
       <div class="ordering__body__right">
-        <Checkout is-ordering />
+        <Checkout is-ordering @checkout="createOrder"/>
       </div>
     </div>
     <div class="ordering__modal-container">
@@ -76,15 +85,15 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted} from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
 import { Contacts, Goods } from "./ui";
 import { Checkbox } from "@/shared/ui/inputs";
 import { Basket } from "@/entities/Basket/model";
 import { useStore } from "@/services/vuex";
-import {getOrderAPI} from "@/services/api/lib/order";
-import {Order, OrderContactPerson} from "@/entities/Order/model";
+import { getOrderAPI } from "@/services/api/lib/order";
+import { Order, OrderContactPerson } from "@/entities/Order/model";
 
 export default defineComponent({
   name: "Ordering",
@@ -99,16 +108,40 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const paymentItems = ["Картой на сайте", "При получении"];
-    const order = computed<Order>(() => store.getters['order/getOrder'])
+    onMounted(async () => {
+      await store.dispatch("order/fetchGetOrder");
+    });
 
-    onMounted( async () => {
-      await store.dispatch('order/fetchGetOrder')
-    })
+    const paymentItems = [
+      {
+        key: "onSite",
+        value: "Картой на сайте",
+      },
+      {
+        key: "onDeliver",
+        value: "При получении",
+      },
+    ];
+    const currentPaymentType = ref("onSite");
+    const order = computed<Order>(() => store.getters["order/getOrder"]);
+
+
+    const setNewPayment = (key) => {
+      currentPaymentType.value = key;
+      store.commit("order/setPaymentType", key);
+    };
+    const createOrder = () => {
+      store.dispatch('order/fetchCreateOrder')
+    }
+
+
     return {
       paymentItems,
       basket: computed<Basket>(() => store.getters["basket/getBasket"]),
-      order
+      order,
+      setNewPayment,
+      currentPaymentType,
+      createOrder
     };
   },
 });

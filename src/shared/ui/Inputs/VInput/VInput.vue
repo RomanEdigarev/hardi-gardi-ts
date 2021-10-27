@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import {computed, defineComponent, onMounted, ref, watch} from "vue";
 import { useIMask } from "vue-imask";
 import { useField } from "vee-validate";
 import { BetaButton } from "@/shared/ui/buttons";
@@ -98,6 +98,10 @@ export default defineComponent({
     const { el, masked, mask, typed } = useIMask({
       mask: props.mask,
     });
+
+    watch(value, () => {
+      emit('change-value', value)
+    })
 
     return {
       clearInput,

@@ -27,7 +27,6 @@
         mask="+{7}(000)000-00-00"
         label-text="Телефон"
         placeholder="Телефон"
-        :validation="schema.contactPersonLastPhone"
       />
     </div>
     <div class="contacts__input">
@@ -44,7 +43,7 @@
 
 <script lang="ts">
 import * as yup from "yup";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, watch, watchEffect } from "vue";
 import { VInput } from "@/shared/ui/inputs";
 import { OrderContactPerson } from "@/entities/Order/model";
 import { useForm } from "vee-validate";
@@ -76,12 +75,23 @@ export default defineComponent({
         .nullable()
         .matches(phoneRegExp, "Неверный формат телефона"),
     });
-    const { handleSubmit } = useForm({
+    const { handleSubmit, values } = useForm({
       validationSchema: schema,
     });
+
+    watchEffect(() => {
+      const person: OrderContactPerson = {
+        email: values.contactPersonLastEmail,
+        lastName: values.contactPersonLastName,
+        phone: values.contactPersonLastPhone,
+        name: values.contactPersonName,
+      };
+      store.commit('order/setContactPerson', person)
+    });
+
     return {
-      schema
-    }
+      schema,
+    };
   },
 });
 </script>

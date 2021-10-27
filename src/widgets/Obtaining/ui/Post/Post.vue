@@ -20,6 +20,7 @@
                   name="deliveryIndex"
                   :mask="/^[1-6]\d{0,5}$/"
                   type="text"
+                  @change="changeIndex"
                 />
               </div>
               <div class="post__footer__input">
@@ -27,6 +28,7 @@
                   :id="`delivery_${item.id}_address`"
                   placeholder="Адрес доставки"
                   name="deliveryAddress"
+                  @change="changeAddress"
                 />
               </div>
             </div>
@@ -67,6 +69,14 @@ export default defineComponent({
     const { setFieldTouched } = useForm({
       validationSchema: schema,
     });
+
+    const changeIndex = (e) => {
+      store.commit('order/setLocationIndex', e.target.value)
+    }
+    const changeAddress = (e) => {
+      store.commit('order/setAddress', e.target.value)
+    }
+
     const enterElement = (el, done) => {
       anime({
         targets: el,
@@ -89,6 +99,8 @@ export default defineComponent({
       postItems,
       enterElement,
       leaveElement,
+      changeIndex,
+      changeAddress
     };
   },
 });

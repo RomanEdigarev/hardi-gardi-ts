@@ -37,6 +37,10 @@ export type Order = {
     items: OrderPaymentType[];
   };
   price: OrderTotalPrice;
+  location: {
+    index: string | number;
+    address: string;
+  };
   comment: string;
   sessId: string;
 };

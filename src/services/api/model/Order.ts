@@ -1,5 +1,6 @@
 import { Basket } from "@/services/api/model/Basket";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
+import { actions } from "@storybook/addon-actions";
 
 type OrderBasket = Basket;
 type OrderComment = {
@@ -72,6 +73,26 @@ type OrderData = {
   personType: OrderPersonType;
   propGroups: OrderPropsGroups[];
   total: OrderTotal;
+};
+export type OrderCreateForm = {
+  action: "create";
+  sessid: string;
+  PERSON_TYPE: "1" | "2";
+  PAY_SYSTEM_ID: "11" | "13";
+  DELIVERY_ID: string;
+  ORDER_DESCRIPTION: string;
+  //ФИО
+  ORDER_PROP_1: string;
+  // Email
+  ORDER_PROP_2: string;
+  //Phone
+  ORDER_PROP_3: string;
+  //Subscribe
+  ORDER_PROP_24?: "y" | "n";
+  // Post index
+  ORDER_PROP_4: string;
+  // Location
+  ORDER_PROP_6: string;
 };
 
 export type Order = LayoutAPI<OrderData>;

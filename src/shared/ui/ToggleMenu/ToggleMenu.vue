@@ -64,7 +64,6 @@ export default defineComponent({
     watch(props, () => {
       console.log(props.currentItemKey)
       animation.value.play()
-
     })
     onUpdated(() => {
       // const index = (items as {key: string, value: string}[]).findIndex(item => {
@@ -78,8 +77,6 @@ export default defineComponent({
     const setCurrentItemIndex = (itemKey) => {
       // currentItemIndex.value = index;
       emit('set-current-item', itemKey)
-
-
     };
     return {
       currentItemIndex,

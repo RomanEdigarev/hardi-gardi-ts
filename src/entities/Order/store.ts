@@ -1,6 +1,6 @@
 import { Module } from "vuex";
 import { State } from "@/services/vuex";
-import { getOrderAdapter } from "@/entities/Order/adapters";
+import { createOrderAdapter, getOrderAdapter } from "@/entities/Order/adapters";
 import { Order } from "@/entities/Order/model";
 
 export const orderModule: Module<Order, State> = {
@@ -20,6 +20,10 @@ export const orderModule: Module<Order, State> = {
         current: undefined,
         items: [],
       },
+      location: {
+        index: "",
+        address: "",
+      },
       comment: "",
       sessId: "",
       price: undefined,
@@ -37,6 +41,18 @@ export const orderModule: Module<Order, State> = {
     setNewCurrentId: (state, payload: string) => {
       state.delivery.current = payload;
     },
+    setLocationIndex: (state, payload: string) => {
+      state.location.index = payload;
+    },
+    setAddress: (state, payload) => {
+      state.location.address = payload;
+    },
+    setContactPerson: (state, payload) => {
+      state.contactPerson = payload;
+    },
+    setPaymentType: (state, payload) => {
+      state.payment = payload;
+    },
   },
   actions: {
     fetchGetOrder: async ({ commit, state, rootGetters }) => {
@@ -51,6 +67,11 @@ export const orderModule: Module<Order, State> = {
       commit("initOrder", order);
       commit("toggleLoading", false);
     },
+    fetchCreateOrder: async ({ commit, state }) => {
+      commit("toggleLoading", true);
+      const response = await createOrderAdapter(state);
+      commit("toggleLoading", false);
+    },
   },
   getters: {
     getOrder: (state) => state,
@@ -58,6 +79,7 @@ export const orderModule: Module<Order, State> = {
     getCourierDeliveryItems: (state) => state.delivery.items.courier,
     getPostDeliveryItems: (state) => state.delivery.items.post,
     getCurrentDelivery: (state) => state.delivery.current,
+    getPaymentType: (state) => state.payment.current,
   },
   namespaced: true,
 };

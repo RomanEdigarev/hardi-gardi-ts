@@ -15,7 +15,7 @@
               <ObtainingInfo title="Срок доставки" :value="item.time" />
             </div>
             <div class="courier__footer">
-              <VInput :id="`delivery_${item.id}`" placeholder="Адрес доставки" name="deliveryAddress"/>
+              <VInput :id="`delivery_${item.id}`" placeholder="Адрес доставки" name="deliveryAddress" @change="changeAddress"/>
             </div>
           </template>
         </ObtainingItem>
@@ -45,10 +45,9 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const courierItems = computed<OrderDeliveryVariant[]>(() => store.getters['order/getCourierDeliveryItems'])
-    onMounted(() => {
-      console.log('mounted courier')
-    })
-
+    const changeAddress = (e) => {
+      store.commit('order/setAddress', e.target.value)
+    }
     const schema = yup.object({
       deliveryAddress: yup.string().required("Обязательное поле"),
     });
@@ -77,7 +76,8 @@ export default defineComponent({
     return {
       courierItems,
       enterElement,
-      leaveElement
+      leaveElement,
+      changeAddress
     }
   }
 })
