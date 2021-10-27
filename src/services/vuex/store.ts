@@ -8,6 +8,7 @@ import {
   Favorites,
   Order,
   City,
+  Search,
 } from "@/entities/models";
 import {
   basketsModule,
@@ -17,6 +18,7 @@ import {
   userModule,
   orderModule,
   cityModule,
+  searchModule,
 } from "@/entities/modules";
 
 export type State = {
@@ -32,6 +34,7 @@ export type State = {
   user: User | {};
   order?: Order;
   city: City;
+  search?: Search;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -78,6 +81,7 @@ export const store = createStore<State>({
     user: userModule,
     order: orderModule,
     city: cityModule,
+    search: searchModule,
   },
 });
 
