@@ -180,6 +180,14 @@ export default defineComponent({
       margin-bottom: 60px;
       padding: 0;
     }
+    &__text {
+      p {
+        font-size: 16px;
+      }
+    }
+    &__link {
+      font-size: 14px;
+    }
     &__title {
       span {
         font-size: 36px;
@@ -200,6 +208,9 @@ export default defineComponent({
     &__button {
       width: 52px;
       height: 52px;
+    }
+    &__image {
+      width: 41vw;
     }
   }
 }

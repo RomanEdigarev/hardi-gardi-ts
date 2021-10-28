@@ -173,9 +173,12 @@ export default defineComponent({
       & > div:first-child {
         margin-bottom: 8px;
       }
+      a {
+        font-size: 20px ;
+      }
       p {
         font-weight: $regular;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 1.5;
       }
     }
@@ -197,5 +200,11 @@ export default defineComponent({
   &__footer {
   }
   // *** Footer END *** //
+  :deep .info {
+    text-align: center;
+  }
+  :deep .items {
+    margin-bottom: 42px;
+  }
 }
 </style>

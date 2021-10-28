@@ -86,12 +86,23 @@
   </div>
 
   <div class="app__header-bg">
-    <HomeAnimationBG />
+    <div class="home__header-bg__static" v-if="staticBg">
+      <img src="./assets/static-bg.svg" alt="" />
+      <img :src="require('./assets/static-header-image.png')" alt="" />
+    </div>
+    <HomeAnimationBG v-else />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 
 import {
   Prolog,
@@ -122,16 +133,28 @@ export default defineComponent({
     const store = useStore();
     const { product } = useProduct();
     const testProducts = ref([]);
+    const staticBg = ref(false);
 
     onMounted(async () => {
       testProducts.value.push(await asyncUseProduct(201));
       testProducts.value.push(await asyncUseProduct(193));
+      window.addEventListener("resize", () => {
+        staticBg.value = document.documentElement.clientWidth <= 1024;
+      });
+    });
+
+    watchEffect(() => {
+      if (document.documentElement.clientWidth <= 1024) {
+        staticBg.value = true;
+      }
     });
 
     return {
       product,
       isPhone: computed(() => store.state.isPhone),
+      isMobile: computed(() => store.getters["getIsMobile"]),
       testProducts,
+      staticBg,
     };
   },
 });
@@ -141,6 +164,25 @@ export default defineComponent({
 .home {
   position: relative;
   z-index: 4;
+  &__header-bg {
+    &__static {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      //max-height: 30vh;
+      img:first-child {
+        width: 100%;
+        height: 100%;
+      }
+      img:nth-child(2) {
+        width: 32vw;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 6vw;
+      }
+    }
+  }
   &__prolog-container {
     width: 100%;
     height: 816px;
@@ -219,6 +261,22 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 737px),
   (-webkit-min-device-pixel-ratio: 3) {
   .home {
+    &__header-bg {
+      &__static {
+        width: 100%;
+        height: 100%;
+        max-height: 40vh;
+        position: relative;
+        img:first-child {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
     &__prolog-container {
       height: auto;
       margin-top: 427px;

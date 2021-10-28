@@ -390,7 +390,7 @@ export default defineComponent({
       width: 339px;
     }
     &__footer-bg {
-      max-height: 111vh;
+      max-height: 145vh;
       height: 1192px;
     }
   }
