@@ -142,11 +142,11 @@ export default defineComponent({
       transform: translate(-50%, -50%);
     }
     &__left-btn {
-      left: 8%;
+      left: -28px;
     }
     &__right-btn {
       transform: translate(50%, -50%)rotate(180deg);
-      right: 8%;
+      right: -28px;
     }
   }
   &__footer {
