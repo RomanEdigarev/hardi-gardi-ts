@@ -1,4 +1,8 @@
-import { createOrderAPI, getOrderAPI } from "@/services/api/lib/order";
+import {
+  createOrderAPI,
+  getOrderAPI,
+  getOrdersListAPI,
+} from "@/services/api/lib/order";
 import { Order } from "@/entities/Order/model";
 import {
   getCurrentItem,
@@ -76,5 +80,10 @@ export const createOrderAdapter = async (order: Order): Promise<any> => {
   });
 
   const response = await createOrderAPI(formData);
+  return response.data;
+};
+
+export const getOrdersListAdapter = async () => {
+  const response = await getOrdersListAPI();
   return response.data;
 };

@@ -140,6 +140,7 @@ export default defineComponent({
     };
     const createOrder = async (link) => {
      await store.dispatch('order/fetchCreateOrder')
+     await store.dispatch('order/fetchHistoryOrders')
       router.push(link);
     };
 

@@ -44,4 +44,5 @@ export type Order = {
   };
   comment: string;
   sessId: string;
+  historyOrderList?: any[];
 };

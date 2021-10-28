@@ -1,6 +1,10 @@
 import { Module } from "vuex";
 import { State } from "@/services/vuex";
-import { createOrderAdapter, getOrderAdapter } from "@/entities/Order/adapters";
+import {
+  createOrderAdapter,
+  getOrderAdapter,
+  getOrdersListAdapter,
+} from "@/entities/Order/adapters";
 import { Order } from "@/entities/Order/model";
 
 export const orderModule: Module<Order, State> = {
@@ -27,6 +31,7 @@ export const orderModule: Module<Order, State> = {
       comment: "",
       sessId: "",
       price: undefined,
+      historyOrderList: [],
     };
   },
   mutations: {
@@ -56,6 +61,9 @@ export const orderModule: Module<Order, State> = {
     setOrderId: (state, payload) => {
       state.id = payload;
     },
+    setHistoryOrders: (state, payload) => {
+      state.historyOrderList = payload;
+    },
   },
   actions: {
     fetchGetOrder: async ({ commit, state, rootGetters }) => {
@@ -74,6 +82,12 @@ export const orderModule: Module<Order, State> = {
       commit("toggleLoading", true);
       const response = await createOrderAdapter(state);
       commit("setOrderId", response.id);
+      commit("toggleLoading", false);
+    },
+    fetchHistoryOrders: async ({ commit }) => {
+      commit("toggleLoading", true);
+      const response = await getOrdersListAdapter();
+      commit("setHistoryOrders", response);
       commit("toggleLoading", false);
     },
   },

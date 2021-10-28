@@ -11,6 +11,7 @@ export const initShop = async (store): Promise<Shop> => {
   await store.dispatch("user/fetchUserAuthInfo");
   await store.dispatch("basket/initBasket");
   await store.dispatch("favorites/initFavorites");
+  await store.dispatch("order/fetchHistoryOrders");
 
   return store.state.shop;
 };

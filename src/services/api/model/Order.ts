@@ -1,4 +1,4 @@
-import { Basket } from "@/services/api/model/Basket";
+import { Basket, BasketItem } from "@/services/api/model/Basket";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 import { actions } from "@storybook/addon-actions";
 
@@ -95,4 +95,42 @@ export type OrderCreateForm = {
   ORDER_PROP_6: string;
 };
 
+type OrderHistoryPayment = {
+  number: string;
+  name: string;
+  price: number;
+  isPaid: boolean;
+  payUrl: string;
+};
+type OrderHistoryDelivery = {
+  number: string;
+  name: string;
+  price: number;
+  trackingNumber: string;
+  status: {
+    code: string;
+    name: string;
+  };
+};
+export type OrderHistoryItem = {
+  id: string;
+  date: string;
+  status: {
+    code: string;
+    name: string;
+  };
+  price: number;
+  deliveryAddress: string;
+  isPayed: boolean;
+  isCanceled: boolean;
+  isDeducted: boolean;
+  delivery: OrderHistoryDelivery[];
+  payment: OrderHistoryPayment[];
+  basket: BasketItem[];
+};
+export type OrderHistoryData = {
+  orders: OrderHistoryItem[];
+};
+
+export type OrderHistoryList = LayoutAPI<OrderHistoryData>;
 export type Order = LayoutAPI<OrderData>;
