@@ -53,7 +53,7 @@
         </div>
 
         <div class="footer__item contacts">
-          <div class="footer__item__title">Контакты</div>
+          <router-link to="/contacts" class="footer__item__title">Контакты</router-link>
           <div class="footer__item__links">
             <span class="footer__item__link"
               >Санкт-Петербург<br />
@@ -208,6 +208,11 @@ export default defineComponent({
 .small {
   display: block;
   font-size: 14px;
+}
+.contacts {
+  .footer__item__title {
+    cursor: pointer;
+  }
 }
 
 @media screen and (min-width: 1368px) and (max-width: 1919px) {
