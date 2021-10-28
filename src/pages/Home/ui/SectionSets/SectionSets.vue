@@ -96,7 +96,11 @@ export default defineComponent({
       margin: 0 auto;
     }
     :deep .block-with-slider-phone__header__title {
-      max-width: 250px;
+      max-width: 287px;
+      &__bg-container {
+        left: 10px;
+        width: 268px;
+      }
     }
   }
 }

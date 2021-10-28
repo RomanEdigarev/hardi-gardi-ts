@@ -1,6 +1,6 @@
 <template>
-  <div class="header-for-phone">
-    <div class="header-for-phone__header">
+  <div  class="header-for-phone">
+    <div ref="location" class="header-for-phone__header">
       <div class="header-for-phone__header__left">
         <Location  :city="cities[currentCityIndex]" @change-city="$emit('change-city')"/>
       </div>
@@ -8,7 +8,7 @@
         <CabinetTitle />
       </div>
     </div>
-    <div class="header-for-phone__body">
+    <div ref="body" class="header-for-phone__body" :class="{'is-fixed': isFixed}">
       <div class="header-for-phone__body__logo">
         <Logo @click="$router.push('/')" />
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted} from "vue";
+import {computed, defineComponent, onMounted, ref, watch, watchEffect} from "vue";
 import { Location } from "@/widgets";
 import Logo from "@/app/ui/Header/assets/Logo.vue";
 import { CabinetLinks, CabinetTitle } from "@/widgets/Cabinet/ui";
@@ -42,6 +42,25 @@ export default defineComponent({
   components: { Location, CabinetTitle, Logo, CabinetLinks },
   setup() {
     const store = useStore();
+    const location = ref<HTMLElement>(null)
+    const body = ref<HTMLElement>(null)
+    const isFixed = ref(false)
+
+    watchEffect(() => {
+      if (location.value && body.value) {
+        const options = {
+          root: null,
+          threshold: 0
+        }
+        const callback = (entries, observer) => {
+          if (entries[0].intersectionRatio < 1) {
+           isFixed.value = !isFixed.value
+          }
+        }
+        const observer = new IntersectionObserver(callback, options)
+        observer.observe(location.value)
+      }
+    })
 
     const currentCityIndex = computed(
         () => store.getters["city/getCurrentCityId"]
@@ -56,7 +75,10 @@ export default defineComponent({
         () => store.getters["favorites/getFavoritesTotalCount"]
       ),
       cities,
-      currentCityIndex
+      currentCityIndex,
+      location,
+      body,
+      isFixed
     };
   },
 });
@@ -79,6 +101,8 @@ export default defineComponent({
 
   // *** Body *** //
   &__body {
+    width: 100%;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     padding: 10px 18px;
@@ -101,6 +125,11 @@ export default defineComponent({
     }
   }
   // *** Body END *** //
+
+  .is-fixed {
+    position: fixed;
+    top: 0
+  }
 }
 @media screen and (max-width: 375px) {
   .header-for-phone {
