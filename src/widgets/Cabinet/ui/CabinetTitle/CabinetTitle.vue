@@ -148,4 +148,13 @@ export default {
     }
   }
 }
+@media screen and (max-width: 375px) {
+  .cabinet-title {
+    &__title {
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}
 </style>

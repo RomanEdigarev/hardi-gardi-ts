@@ -2,7 +2,7 @@
   <div class="header-for-phone">
     <div class="header-for-phone__header">
       <div class="header-for-phone__header__left">
-        <Location city="Санкт-Петербург" />
+        <Location  :city="cities[currentCityIndex]" @change-city="$emit('change-city')"/>
       </div>
       <div class="header-for-phone__header__right">
         <CabinetTitle />
@@ -30,22 +30,33 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent, onMounted} from "vue";
 import { Location } from "@/widgets";
 import Logo from "@/app/ui/Header/assets/Logo.vue";
 import { CabinetLinks, CabinetTitle } from "@/widgets/Cabinet/ui";
 import { useStore } from "@/services/vuex";
+import {HeaderModal} from "@/app/ui/Header/ui";
 
 export default defineComponent({
   name: "HeaderForPhone",
   components: { Location, CabinetTitle, Logo, CabinetLinks },
   setup() {
     const store = useStore();
+
+    const currentCityIndex = computed(
+        () => store.getters["city/getCurrentCityId"]
+    );
+    const cities = computed(() => store.getters["city/getAllCities"]);
+    onMounted(async () => {
+      await store.dispatch("city/getCityItems");
+    });
     return {
       basketCount: computed(() => store.getters["basket/getBasketCount"]),
       favoritesCount: computed(
         () => store.getters["favorites/getFavoritesTotalCount"]
       ),
+      cities,
+      currentCityIndex
     };
   },
 });

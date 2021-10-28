@@ -4,33 +4,30 @@
       <div class="search-modal-phone__header__title">Поиск</div>
       <div
         class="search-modal-phone__header__close-btn"
-        @click="$emit('close')"
+        @click="close"
       >
         <CloseIcon />
       </div>
       <div class="search-modal-phone__header__input">
-        <SearchInput />
+        <SearchInput ref="searchInput" :is-loading="isLoading" @input="setSearchQuery" @search="searchProducts"/>
       </div>
     </div>
     <div class="search-modal-phone__body">
-      <div class="search-modal-phone__body__no-results">
+      <div v-if="results.length === 0" class="search-modal-phone__body__no-results">
         <div class="search-modal-phone__body__no-results__title">
           По вашему запросу ничего не найдено
         </div>
         <div class="search-modal-phone__body__no-results__text">
           Попробуйте изменить формулировку или воспользуйтесь нашим
-          <span @click="$router.push('catalog')">каталогом</span>
+          <span @click="$router.push('/catalog')">каталогом</span>
         </div>
       </div>
-      <div class="search-modal-phone__body__item">
-        <ProductCardCart />
+      <div class="search-modal-phone__body__results" v-else>
+        <div v-for="product in results" class="search-modal-phone__body__item">
+          <ProductCardCatalog is-search-result :product="product" />
+        </div>
       </div>
-      <div class="search-modal-phone__body__item">
-        <ProductCardCart />
-      </div>
-      <div class="search-modal-phone__body__item">
-        <ProductCardCart />
-      </div>
+
     </div>
     <div class="search-modal-phone__footer">
       <button class="search-modal-phone__footer__btn">
@@ -63,19 +60,83 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent, onMounted, ref, watch} from "vue";
 import { SearchInput } from "@/features";
 import { ProductCardCart } from "@/widgets";
 import { CloseIcon } from "@/shared/ui/icons";
+import {useStore} from "@/services/vuex";
+import {useRoute, useRouter} from "vue-router";
+import ProductCardCatalog from "@/widgets/Cards/ProductCardCatalog/ProductCardCatalog.vue";
 
 export default defineComponent({
   name: "SearchModalPhone",
   components: {
     SearchInput,
-    ProductCardCart,
+    ProductCardCatalog,
     CloseIcon,
   },
   emits: ["close"],
+  setup(_, {emit}) {
+    const store = useStore()
+    const router = useRouter()
+    const route = useRoute()
+    const searchQuery = ref('')
+    const searchInput = ref(null)
+    const isLoading = computed(() => {
+      return store.getters['search/getSearchingIsLoading']
+    })
+    const results = computed(() => {
+      if (store.getters['search/getSearchResults']) {
+        return store.getters['search/getSearchResults']
+      } else {
+        return []
+      }
+    })
+
+    const setSearchQuery = (e) => {
+      searchQuery.value = e.target.value
+      store.commit('search/setSearchQuery', e.target.value)
+    }
+    const searchProducts = async () => {
+      await store.dispatch('search/fetchSearchProducts', searchQuery.value)
+    }
+    const goToCatalog = () => {
+      router.push('/catalog')
+    }
+    const close = () => {
+      emit('close')
+      searchQuery.value = ''
+      store.commit('search/setSearchQuery', '')
+      store.commit('search/setResults', [])
+      searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
+    }
+
+    watch(route, () => {
+      document.documentElement.click()
+      emit('close')
+      searchQuery.value = ''
+      store.commit('search/setSearchQuery', '')
+      store.commit('search/setResults', [])
+      searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
+    })
+
+    onMounted(() => {
+      if (searchInput.value.$el) {
+        searchInput.value.$el.querySelectorAll('[name=search]')[0].setAttribute('autocomplete', 'off')
+      }
+    })
+
+    return {
+      searchInput,
+      searchQuery,
+      isLoading,
+      results,
+      setSearchQuery,
+      searchProducts,
+      goToCatalog,
+      close
+    }
+  }
 });
 </script>
 
@@ -109,9 +170,6 @@ export default defineComponent({
   // *** Body *** //
   &__body {
     margin-bottom: 24px;
-    &__item {
-      margin-bottom: 18px;
-    }
     &__no-results {
       text-align: center;
       &__title {
@@ -129,6 +187,15 @@ export default defineComponent({
           cursor: pointer;
         }
       }
+    }
+    &__results {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 131px;
+    }
+    &__item {
+      padding: 8px 0px;
+      border-bottom: 1px solid #ECEDF0;
     }
   }
   // *** Body END *** //
@@ -151,24 +218,10 @@ export default defineComponent({
     width: 26px;
     right: 25%;
   }
-  :deep .product-card {
-    &__del-btn,
-    &__fav-btn {
+  :deep .catalog-product-card {
+    background-color: transparent;
+    &__shop-btn {
       display: none;
-    }
-    &__count {
-      display: none;
-    }
-    &__price {
-      flex-direction: row;
-      justify-content: flex-start;
-      margin-bottom: 0;
-      &__prev {
-        margin-right: 8px;
-      }
-      span {
-        width: auto;
-      }
     }
   }
 }

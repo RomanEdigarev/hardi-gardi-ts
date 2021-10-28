@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import anime from "animejs";
 
 export const useBurgerMenu = () => {
@@ -53,21 +53,38 @@ export const useBurgerMenu = () => {
 };
 
 export const useSearchModalPhone = () => {
-  const searchModalPhone = ref(null);
+  const searchModalPhone = ref<HTMLElement>(null);
+  const openAnimation = computed(() => {
+    if (searchModalPhone.value) {
+      return anime.timeline().add({
+        targets: searchModalPhone.value,
+        translateY: ["100%", "0%"],
+        easing: "spring(1, 70, 13, 0)",
+      });
+    }
+  });
   const openSearchModal = () => {
-    anime.timeline().add({
-      targets: searchModalPhone.value,
-      translateY: ["100%", "0%"],
-      easing: "spring(1, 70, 13, 0)",
-    });
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    searchModalPhone.value.style.display = "block";
+    openAnimation.value.play();
   };
+  watch(searchModalPhone, () => {
+    console.log(searchModalPhone.value);
+  });
 
   const closeSearchModal = () => {
+    document.documentElement.style.overflow = "visible";
+    document.body.style.overflow = "visible";
+
     anime.timeline().add(
       {
         targets: searchModalPhone.value,
         translateY: ["0", "100%"],
         easing: "spring(1, 70, 13, 0)",
+        complete: () => {
+          searchModalPhone.value.style.display = "none";
+        },
       },
       100
     );

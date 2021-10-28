@@ -9,6 +9,7 @@
           v-if="isPhone"
           @open-burger="openBurger"
           @openSearchModalPhone="openSearchModal"
+          @change-city="openChangeCity"
         />
         <Header
           v-else
@@ -54,7 +55,7 @@
       </div>
       <div
         ref="searchModalPhone"
-        v-if="isMobile"
+        v-if="isMobile || isPhone"
         class="app__search-modal-phone"
       >
         <SearchModalPhone @close="closeSearchModal" />
@@ -76,7 +77,7 @@ import {
   ChangeCity,
 } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onBeforeMount, onMounted, ref } from "vue";
+import {computed, defineComponent, onBeforeMount, onMounted, ref, watch} from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
