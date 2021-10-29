@@ -77,7 +77,14 @@ import {
   ChangeCity,
 } from "./ui";
 import { ScrollUpPage } from "@/features";
-import {computed, defineComponent, onBeforeMount, onMounted, ref, watch} from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  ref,
+  watch,
+} from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
@@ -104,13 +111,6 @@ export default defineComponent({
     onMounted(async () => {
       if (!store.state.isInit) {
         await initShop(store);
-
-        store.commit(
-          "setIsMobile",
-          document.documentElement.clientWidth <= 1360 &&
-            document.documentElement.clientWidth > 737
-        );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 737);
       }
     });
 

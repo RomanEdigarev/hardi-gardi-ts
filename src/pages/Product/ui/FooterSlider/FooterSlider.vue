@@ -276,6 +276,7 @@ export default defineComponent({
     }
     &__body__item {
       max-height: 86vw;
+      height: auto;
       & > div {
         margin: 0 auto;
         justify-content: center;
@@ -291,6 +292,12 @@ export default defineComponent({
         display: block;
         width: 44px;
         height: 44px;
+      }
+      &__price__prev {
+        font-size: 12px;
+      }
+      &__price__current {
+        font-size: 16px;
       }
     }
     :deep .product-card-info-phone__add-to-shop-btn {

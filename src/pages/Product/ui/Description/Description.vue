@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, onUpdated, ref } from "vue";
 import { useDescription } from "./lib";
 import anime from "animejs";
 
@@ -43,8 +43,10 @@ export default defineComponent({
     },
   },
   setup({ isClose }) {
+    const data = useDescription(isClose);
+
     return {
-      ...useDescription(isClose),
+      ...data,
     };
   },
 });
@@ -95,7 +97,7 @@ export default defineComponent({
         opacity: 0;
         position: absolute;
         z-index: 2;
-        top: -2px;
+        top: -1px;
         transform: translateX(-50%);
         transition: opacity 0.3s ease-in-out;
       }

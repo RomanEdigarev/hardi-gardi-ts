@@ -19,23 +19,31 @@
           {{ priceCurrent }} &#8381;/шт
         </div>
         <div class="about-product__body__price-container__add-to-fav">
-          <AddToFavorite :is-favorite="false" :product-id="productId"/>
+          <AddToFavorite :is-favorite="false" :product-id="productId" />
         </div>
       </div>
       <div class="about-product__body__add-container">
         <div class="about-product__body__add-container__count">
           <span class="about-product__body__add-container__count__btn">
-            <CounterButton :isPlus="false"  @click="quality--" :disabled="quality=== 1"/>
+            <CounterButton
+              :isPlus="false"
+              @click="quality--"
+              :disabled="quality === 1"
+            />
           </span>
           <span class="about-product__body__add-container__count__value">
-            {{quality}}
+            {{ quality }}
           </span>
           <span class="about-product__body__add-container__count__btn">
-            <CounterButton :isPlus="true"  @click="quality++"/>
+            <CounterButton :isPlus="true" @click="quality++" />
           </span>
         </div>
         <div class="about-product__body__add-container__btn">
-          <AlfaButton styling="primary" text="В корзину" @click="addToBasket"></AlfaButton>
+          <AlfaButton
+            styling="primary"
+            text="В корзину"
+            @click="addToBasket"
+          ></AlfaButton>
         </div>
       </div>
       <div v-if="isSets" class="about-product__body__set-slider">
@@ -102,12 +110,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType, ref} from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { AddToFavorite } from "@/features";
 import { CounterButton, AlfaButton } from "@/shared/ui/buttons";
 import SetSlider from "../SetSlider/SetSlider.vue";
 import { Product } from "@/entities/Products/Product/model";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "About",
@@ -133,22 +141,25 @@ export default defineComponent({
     },
     productId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
-    const store = useStore()
-    const quality = ref(1)
+    const store = useStore();
+    const quality = ref(1);
 
     const addToBasket = async () => {
-      await store.dispatch('basket/addToBasket', {id: props.productId, quantity: quality.value})
-    }
+      await store.dispatch("basket/addToBasket", {
+        id: props.productId,
+        quantity: quality.value,
+      });
+    };
 
     return {
       quality,
-      addToBasket
-    }
-  }
+      addToBasket,
+    };
+  },
 });
 </script>
 
@@ -325,6 +336,9 @@ export default defineComponent({
         &__price-prev {
           font-size: 18px;
           line-height: 22px;
+        }
+        &__add-to-fav {
+          width: 70px;
         }
       }
     }
