@@ -158,6 +158,7 @@ export default defineComponent({
   padding: 24px 18px;
   color: $clr-phi;
   position: relative;
+  display: none;
   // *** Header *** //
   &__header {
     margin-bottom: 30px;

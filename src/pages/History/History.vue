@@ -11,7 +11,7 @@
       </div>
       <div class="history__body">
         <div
-          class="history__body__item pl-130 pr-123"
+          class="history__body__item first-block pl-130 pr-123"
           :class="{ 'pl-40': isMobile, 'pr-88': isMobile }"
         >
           <div class="history__body__item__text">
@@ -35,30 +35,8 @@
               </template>
             </TextBlock>
           </div>
-          <div class="history__body__item__img-container first-block">
-            <svg
-              viewBox="0 0 498 605"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="29.2475"
-                y="161.181"
-                width="369"
-                height="418"
-                rx="40"
-                transform="rotate(3.57527 29.2475 161.181)"
-                stroke="#ECF0F8"
-                stroke-width="6"
-              />
-              <path
-                d="M222.699 280.438L222.701 280.477L222.704 280.516C224.661 308.41 228.084 340.912 232.965 378.011L232.969 378.036L232.972 378.061C234.535 388.998 238.542 397.734 245.511 403.542L245.6 403.616L245.692 403.685C252.26 408.611 259.53 411.164 267.398 411.164C276.564 411.164 284.524 407.386 291.113 400.278C298.673 392.673 301.212 382.123 299.641 369.556L299.638 369.529L299.634 369.502C296.233 344.722 293.808 322.403 292.354 302.539C291.054 284.338 289.948 267.492 289.034 252C297.618 253.339 306.98 253.999 317.106 253.999C337.017 253.999 356.912 251.261 376.779 245.797L376.829 245.783L376.879 245.768C393.988 240.636 410.013 234.019 424.947 225.91C424.358 243.329 423.223 262.769 421.539 284.235L421.535 284.279L421.533 284.323C420.078 309.059 417.408 337.469 413.518 369.563C411.957 382.063 414.213 392.583 421.257 400.214L421.318 400.28L421.381 400.343C428.424 407.386 436.591 411.164 445.762 411.164C453.63 411.164 460.9 408.611 467.468 403.685L467.56 403.616L467.649 403.542C474.619 397.734 478.625 388.998 480.188 378.061L480.191 378.036L480.195 378.011C485.076 340.911 488.257 308.395 489.728 280.477C491.682 252.616 492.66 225.72 492.66 199.791C492.66 173.849 491.681 147.666 489.724 121.242C487.766 94.8035 484.585 66.6727 480.185 36.8522L480.183 36.8415C478.616 26.3899 474.59 18.0978 467.562 12.7806C461.027 7.36333 453.725 4.5 445.762 4.5C436.181 4.5 427.754 8.21764 420.65 15.321L423.803 18.4743L420.65 15.321C412.981 22.9896 410.502 34.0982 412.052 47.5278L412.059 47.5882L412.067 47.6484C416.831 80.995 420.425 112.223 422.853 141.334C417.511 147.746 411.133 153.582 403.693 158.834C395.656 164.507 386.893 169.483 377.394 173.757C367.952 178.007 358.029 181.318 347.619 183.689C337.684 185.577 327.758 186.519 317.837 186.519C311.745 186.519 305.912 186.051 300.335 185.124C296.264 184.383 292.191 183.498 288.116 182.468C289.697 143.521 294.019 98.5811 301.095 47.6311L301.102 47.5795L301.108 47.5278C302.658 34.0982 300.179 22.9896 292.51 15.321L289.328 18.503L292.51 15.321C285.407 8.21765 276.979 4.5 267.398 4.5C259.435 4.5 252.133 7.36332 245.598 12.7806C238.571 18.0978 234.545 26.3898 232.977 36.8415L232.975 36.8522C228.575 66.6727 225.395 94.8035 223.436 121.242C221.479 147.666 220.5 173.849 220.5 199.791C220.5 225.704 221.233 252.587 222.699 280.438Z"
-                fill="#FADDEA"
-                stroke="#FADDEA"
-                stroke-width="9"
-              />
-            </svg>
-
+          <div class="history__body__item__img-container">
+            <img src="./assets/01.svg" alt="" />
             <img
               class="history__body__item__img w-357 h-462"
               :class="{ firstImageMobile: isMobile }"
@@ -298,14 +276,6 @@ export default defineComponent({
     margin-top: 0 !important;
   }
 
-  .first-block {
-    svg {
-      width: 498px;
-      height: 605px;
-      top: -238px;
-    }
-  }
-
   .history__body__item:first-child {
     margin-bottom: 300px;
   }
@@ -319,10 +289,31 @@ export default defineComponent({
     }
   }
   // *** Other END *** //
+  .first-block {
+    .history__body__item {
+      &__img-container {
+        img:first-child {
+          width: 488px;
+          height: 595px;
+          transform: translate(-50%, -50%);
+          top: 19%;
+          left: 73%;
+          position: absolute;
+          z-index: -1;
+        }
+        img {
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }
 @media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {
   .history {
+    :deep .page-main__header {
+      margin-bottom: 108px;
+    }
     &__body {
       &__item {
         &__text {
@@ -339,10 +330,33 @@ export default defineComponent({
     .history__body__item:first-child {
       margin-bottom: 328px;
     }
+
     .first-block {
-      svg {
-        width: 326px;
-        top: -171px;
+      margin-top: 296px;
+      justify-content: flex-start;
+      .history__body__item {
+        &__text {
+          max-width: 329px;
+          margin-right: 0;
+          :deep .text-block__header__title {
+            max-width: 115px;
+            svg {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+        &__img-container {
+          img:first-child {
+            width: 31vw;
+            height: 37vw;
+            min-width: 325px;
+            min-height: 397px;
+            transform: translate(-50%, -50%);
+            top: 30%;
+            left: 73%;
+          }
+        }
       }
     }
 
@@ -377,6 +391,22 @@ export default defineComponent({
       }
       .history__body__item:first-child {
         margin-bottom: 57px;
+      }
+      &__item__img-container.first-block {
+        width: 238px;
+        height: 308px;
+        position: relative;
+        margin-top: 0;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          margin-top: 0 !important;
+        }
       }
       .second-block {
         flex-direction: column-reverse;

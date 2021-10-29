@@ -67,7 +67,7 @@ export default defineComponent({
   methods: {
     goToNextSlide() {
       this.nextSlide();
-      this.currentSlide++;
+      // this.currentSlide++;
 
       this.$emit("next-slide", this.currentSlide);
     },

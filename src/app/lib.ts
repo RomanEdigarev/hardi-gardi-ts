@@ -69,9 +69,6 @@ export const useSearchModalPhone = () => {
     searchModalPhone.value.style.display = "block";
     openAnimation.value.play();
   };
-  watch(searchModalPhone, () => {
-    console.log(searchModalPhone.value);
-  });
 
   const closeSearchModal = () => {
     document.documentElement.style.overflow = "visible";

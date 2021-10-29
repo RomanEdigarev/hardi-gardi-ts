@@ -58,6 +58,7 @@ export default defineComponent({
   position: absolute;
   cursor: pointer;
   &__title {
+    padding-top: 4px;
     font-weight: $semi-bold;
     font-size: 12px;
     line-height: 1.67;

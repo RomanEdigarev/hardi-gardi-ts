@@ -1,15 +1,17 @@
 <template>
   <div class="text-page">
     <main class="page-main">
-      <div v-if="!isMobile" class="text-page__sidebar">
+      <div v-if="!isMobile && !isPhone" class="text-page__sidebar">
         <Sidebar />
+        {{ isMobile }}
+        {{ isPhone }}
       </div>
       <div class="page-main__header">
         <BreadCrumbs />
         <PageTitle text="О компании" />
       </div>
       <div class="text-page__sidebar">
-        <SidebarMobile v-if="isMobile" />
+        <SidebarMobile v-if="isMobile || isPhone" />
       </div>
       <div class="text-page__header">
         <p class="text-page__header__text">
@@ -160,9 +162,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const isMobile = computed(() => store.state.isMobile);
+    const isMobile = computed(() => store.getters["getIsMobile"]);
+    const isPhone = computed(() => store.getters["getIsPhone"]);
     return {
       isMobile,
+      isPhone,
     };
   },
 });
@@ -342,6 +346,12 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .text-page {
+    &__sidebar {
+      position: static;
+      padding-top: 0;
+      float: none;
+      height: 60px;
+    }
     &__body {
       &__list {
         padding-left: 28px;
