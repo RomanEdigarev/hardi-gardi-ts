@@ -46,6 +46,13 @@
             :is-disabled="isLoading"
           />
         </div>
+        <div v-if="isPhone" class="registration__footer">
+          <div class="registration__footer__text">
+            Кликнув на "Зарегистрироваться", Вы соглашаетесь с
+            <span>политикой безопасности</span> и
+            <span>конфиденциальности</span>.
+          </div>
+        </div>
         <div class="registration__body__btns__item">
           Есть аккаунт?
           <span class="alfa-link" @click="$router.push('/sign-in/login')">
@@ -55,7 +62,7 @@
       </div>
     </div>
 
-    <div class="registration__footer">
+    <div v-if="!isPhone" class="registration__footer">
       <div class="registration__footer__text">
         Кликнув на "Зарегистрироваться", Вы соглашаетесь с
         <span>политикой безопасности</span> и <span>конфиденциальности</span>.
@@ -83,7 +90,6 @@ export default defineComponent({
     const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
 
     watch(isAuth, () => {
-      debugger;
       if (isAuth.value.isAuth === true) {
         router.push("/personal");
       }
@@ -126,6 +132,7 @@ export default defineComponent({
       onSubmit,
       isSubmitting,
       isLoading: computed(() => store.getters["user/getUserIsLoading"]),
+      isPhone: computed(() => store.getters["getIsPhone"]),
     };
   },
 });
@@ -212,6 +219,43 @@ export default defineComponent({
       &__text {
         font-size: 12px;
         line-height: 18px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px) {
+  .registration {
+    &__body {
+      &__inputs {
+        margin-bottom: 18px;
+        &__item {
+          margin-bottom: 18px;
+        }
+      }
+      .double {
+        flex-direction: column;
+        gap: 0;
+      }
+      &__btns {
+        flex-direction: column;
+        &__item {
+          width: 100%;
+        }
+      }
+    }
+
+    &__footer {
+      margin-top: 16px;
+      margin-bottom: 36px;
+      &__text {
+        font-size: 12px;
+        line-height: 1.38;
+        text-align: center;
+        span {
+          font-size: 12px;
+          font-weight: $semi-bold;
+          cursor: pointer;
+        }
       }
     }
   }

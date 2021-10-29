@@ -2,18 +2,23 @@
   <div class="search-modal-phone">
     <div class="search-modal-phone__header">
       <div class="search-modal-phone__header__title">Поиск</div>
-      <div
-        class="search-modal-phone__header__close-btn"
-        @click="close"
-      >
+      <div class="search-modal-phone__header__close-btn" @click="close">
         <CloseIcon />
       </div>
       <div class="search-modal-phone__header__input">
-        <SearchInput ref="searchInput" :is-loading="isLoading" @input="setSearchQuery" @search="searchProducts"/>
+        <SearchInput
+          ref="searchInput"
+          :is-loading="isLoading"
+          @input="setSearchQuery"
+          @search="searchProducts"
+        />
       </div>
     </div>
     <div class="search-modal-phone__body">
-      <div v-if="results.length === 0" class="search-modal-phone__body__no-results">
+      <div
+        v-if="results.length === 0"
+        class="search-modal-phone__body__no-results"
+      >
         <div class="search-modal-phone__body__no-results__title">
           По вашему запросу ничего не найдено
         </div>
@@ -27,7 +32,6 @@
           <ProductCardCatalog is-search-result :product="product" />
         </div>
       </div>
-
     </div>
     <div class="search-modal-phone__footer">
       <button class="search-modal-phone__footer__btn">
@@ -60,12 +64,12 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref, watch} from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { SearchInput } from "@/features";
 import { ProductCardCart } from "@/widgets";
 import { CloseIcon } from "@/shared/ui/icons";
-import {useStore} from "@/services/vuex";
-import {useRoute, useRouter} from "vue-router";
+import { useStore } from "@/services/vuex";
+import { useRoute, useRouter } from "vue-router";
 import ProductCardCatalog from "@/widgets/Cards/ProductCardCatalog/ProductCardCatalog.vue";
 
 export default defineComponent({
@@ -76,55 +80,61 @@ export default defineComponent({
     CloseIcon,
   },
   emits: ["close"],
-  setup(_, {emit}) {
-    const store = useStore()
-    const router = useRouter()
-    const route = useRoute()
-    const searchQuery = ref('')
-    const searchInput = ref(null)
+  setup(_, { emit }) {
+    const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
+    const searchQuery = ref("");
+    const searchInput = ref(null);
+    const isOpen = ref(false);
     const isLoading = computed(() => {
-      return store.getters['search/getSearchingIsLoading']
-    })
+      return store.getters["search/getSearchingIsLoading"];
+    });
     const results = computed(() => {
-      if (store.getters['search/getSearchResults']) {
-        return store.getters['search/getSearchResults']
+      if (store.getters["search/getSearchResults"]) {
+        return store.getters["search/getSearchResults"];
       } else {
-        return []
+        return [];
       }
-    })
+    });
 
     const setSearchQuery = (e) => {
-      searchQuery.value = e.target.value
-      store.commit('search/setSearchQuery', e.target.value)
-    }
+      searchQuery.value = e.target.value;
+      store.commit("search/setSearchQuery", e.target.value);
+    };
     const searchProducts = async () => {
-      await store.dispatch('search/fetchSearchProducts', searchQuery.value)
-    }
+      await store.dispatch("search/fetchSearchProducts", searchQuery.value);
+    };
     const goToCatalog = () => {
-      router.push('/catalog')
-    }
+      router.push("/catalog");
+    };
     const close = () => {
-      emit('close')
-      searchQuery.value = ''
-      store.commit('search/setSearchQuery', '')
-      store.commit('search/setResults', [])
-      searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
-    }
+      emit("close");
+      isOpen.value = false;
+      searchQuery.value = "";
+      store.commit("search/setSearchQuery", "");
+      store.commit("search/setResults", []);
+      searchInput.value.$el.querySelectorAll("[name=search]")[0].value = "";
+    };
 
     watch(route, () => {
-      document.documentElement.click()
-      emit('close')
-      searchQuery.value = ''
-      store.commit('search/setSearchQuery', '')
-      store.commit('search/setResults', [])
-      searchInput.value.$el.querySelectorAll('[name=search]')[0].value = ''
-    })
+      document.documentElement.click();
+      if (isOpen.value) {
+        emit("close");
+      }
+      searchQuery.value = "";
+      store.commit("search/setSearchQuery", "");
+      store.commit("search/setResults", []);
+      searchInput.value.$el.querySelectorAll("[name=search]")[0].value = "";
+    });
 
     onMounted(() => {
       if (searchInput.value.$el) {
-        searchInput.value.$el.querySelectorAll('[name=search]')[0].setAttribute('autocomplete', 'off')
+        searchInput.value.$el
+          .querySelectorAll("[name=search]")[0]
+          .setAttribute("autocomplete", "off");
       }
-    })
+    });
 
     return {
       searchInput,
@@ -134,9 +144,9 @@ export default defineComponent({
       setSearchQuery,
       searchProducts,
       goToCatalog,
-      close
-    }
-  }
+      close,
+    };
+  },
 });
 </script>
 
@@ -195,7 +205,7 @@ export default defineComponent({
     }
     &__item {
       padding: 8px 0px;
-      border-bottom: 1px solid #ECEDF0;
+      border-bottom: 1px solid #ecedf0;
     }
   }
   // *** Body END *** //

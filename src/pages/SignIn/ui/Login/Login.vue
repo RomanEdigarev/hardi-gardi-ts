@@ -30,7 +30,12 @@
             v-model="isRemember"
           />
         </div>
-        <div class="login__body__status__link alfa-link">Забыли пароль?</div>
+        <div
+          class="login__body__status__link alfa-link"
+          @click="$router.push('/sign-in/new-password')"
+        >
+          Забыли пароль?
+        </div>
       </div>
 
       <div class="login__body__btns">
@@ -136,6 +141,7 @@ export default defineComponent({
     &__status {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 34px;
     }
     &__btns {
@@ -201,6 +207,27 @@ export default defineComponent({
         gap: 18px;
         &__item {
           width: 100%;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .login {
+    &__body {
+      &__inputs {
+        &__item {
+          margin-bottom: 18px;
+        }
+      }
+      &__btns {
+        flex-direction: column;
+        &__item {
+          width: 100%;
+        }
+        div:first-child {
+          margin-bottom: 18px;
         }
       }
     }

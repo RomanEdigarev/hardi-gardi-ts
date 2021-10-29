@@ -376,7 +376,7 @@ export default defineComponent({
       margin-bottom: 136px;
     }
     &__footer-bg {
-      //max-height: 100vh;
+      max-height: none;
       height: 1157px;
     }
     &__scroll-btn-container {

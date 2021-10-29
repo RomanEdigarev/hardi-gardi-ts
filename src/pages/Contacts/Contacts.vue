@@ -34,10 +34,21 @@
         <div class="contacts__footer__form">
           <div class="contacts__footer__form__inputs">
             <div class="contacts__footer__form__inputs__input">
-              <VInput id="name" label-text="Имя" placeholder="Имя" />
+              <VInput
+                id="name"
+                label-text="Имя"
+                placeholder="Имя"
+                name="contact-name"
+              />
             </div>
             <div class="contacts__footer__form__inputs__input">
-              <VInput id="phone" label-text="Телефон" placeholder="Телефон" />
+              <VInput
+                id="phone"
+                label-text="Телефон"
+                placeholder="Телефон"
+                name="contact-phone"
+                mask="+{7}(000)000-00-00"
+              />
             </div>
           </div>
           <div class="contacts__footer__form__btn">

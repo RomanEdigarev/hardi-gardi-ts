@@ -111,6 +111,21 @@ export default defineComponent({
   (-webkit-min-device-pixel-ratio: 3) {
   .info {
     max-width: 100%;
+    &__body {
+      &__item {
+        display: flex;
+        align-items: center;
+        &__title {
+          font-size: 16px;
+          line-height: 18px;
+          margin-bottom: 0;
+        }
+        &__text div {
+          margin-top: 8px;
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 </style>
