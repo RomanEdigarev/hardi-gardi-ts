@@ -254,6 +254,12 @@ export default defineComponent({
   (-webkit-min-device-pixel-ratio: 3) {
   .details {
     max-width: 310px;
+    padding: 26px 22px;
+    &__header {
+      &__title {
+        font-size: 22px;
+      }
+    }
     &__body {
       &__info {
         &__row {
@@ -265,6 +271,10 @@ export default defineComponent({
         }
       }
       &__delivery {
+        div,
+        span {
+          font-size: 14px;
+        }
         &__row {
           flex-direction: row;
         }

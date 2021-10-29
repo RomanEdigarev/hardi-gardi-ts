@@ -7,7 +7,12 @@
       :locale="ru"
       inputFormat="dd.MM.yyyy"
     />
-    <img class="date-input__icon" src="./assets/icon.svg" alt="calendar" />
+    <img
+      @click="openCalendar"
+      class="date-input__icon"
+      src="./assets/icon.svg"
+      alt="calendar"
+    />
   </div>
 </template>
 
@@ -39,12 +44,11 @@ export default defineComponent({
     const picked = ref<Date>(parseDate);
     const date = ref(null);
     const { handleChange } = useField(props.name as string);
-    onMounted(() => {
-      // (date.value.inputRef as HTMLInputElement).setAttribute(
-      //   props.name as string,
-      //   "date"
-      // );
-    });
+
+    const openCalendar = () => {
+      date.value.inputRef.click();
+      console.log(date.value);
+    };
 
     watch(picked, () => {
       handleChange(format(picked.value as Date, "dd.MM.yyyy"));
@@ -55,6 +59,7 @@ export default defineComponent({
       ru,
       handleChange,
       date,
+      openCalendar,
     };
   },
 });

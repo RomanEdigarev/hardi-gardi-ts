@@ -195,4 +195,21 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .data {
+    padding: 19px 9px;
+    &__body__item {
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    //:deep .input {
+    //  padding: 18px 24px;
+    //}
+    &__footer__btn {
+      width: 100%;
+    }
+  }
+}
 </style>
