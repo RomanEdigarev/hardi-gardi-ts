@@ -44,7 +44,6 @@ export default defineComponent({
           },
         ],
         complete: () => {
-          debugger
           // right.value.style.transformOrigin = 'top right'
         },
         easing: "linear",
