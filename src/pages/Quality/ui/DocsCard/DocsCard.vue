@@ -50,10 +50,14 @@ export default defineComponent({
     right: 21px;
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3) {
+@include phone {
   .docs-card {
     max-width: 163px;
     padding: 15px;
+    span {
+      font-size: 14px;
+      line-height: 21px;
+    }
 
   }
 
