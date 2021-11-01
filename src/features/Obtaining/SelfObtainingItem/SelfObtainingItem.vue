@@ -1,16 +1,16 @@
 <template>
   <div class="self">
-    <ObtainingItem :title="title" :name="name" :id="id">
+    <ObtainingItem :title="name" :name="type" :id="id">
       <template v-slot:content>
         <div class="self__body">
-          <div class="self__body__text">
-            Доставка заказа в один из пунктов самовывоза компании СДЭК
+          <div class="self__body__text" v-html="comment">
+
           </div>
-          <ObtainingInfo title="Стоимость" value="200 Р" />
+          <ObtainingInfo title="Стоимость" :value="price" />
           <div class="self__body__subtext">
-            При заказе от 2000 руб. доставка будет бесплатной
+<!--            При заказе от 2000 руб. доставка будет бесплатной-->
           </div>
-          <ObtainingInfo title="Срок доставки" value="4 дня" />
+          <ObtainingInfo title="Срок доставки" :value="time" />
           <div class="self__body__btn">
             <AlfaButton text="Выбрать пункт выдачи" />
           </div>
@@ -33,7 +33,7 @@
                 />
               </svg>
             </div>
-            <span>Санкт-Петербург</span>
+            <span>{{cityName}}</span>
           </div>
         </div>
       </template>
@@ -42,9 +42,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent, PropType} from "vue";
 import { ObtainingInfo, ObtainingItem } from "../ui";
 import { AlfaButton } from "@/shared/ui/buttons";
+import {OrderDeliveryVariant} from "@/entities/Order/model";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "SelfObtainingItem",
@@ -54,19 +56,18 @@ export default defineComponent({
     AlfaButton,
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    id: {
-      type: String,
-      required: true,
+    item: {
+      type: Object as PropType<OrderDeliveryVariant>
     },
   },
+  setup(props) {
+    const store = useStore()
+    const cityName = computed(() => store.getters['city/getCurrentCityName'])
+    return {
+      ...(props.item as OrderDeliveryVariant),
+      cityName
+    }
+  }
 });
 </script>
 
@@ -80,6 +81,9 @@ export default defineComponent({
     margin-bottom: 20px;
     &__text {
       margin-bottom: 20px;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 22px;
     }
     &__subtext {
       font-size: 13px;
@@ -112,12 +116,15 @@ export default defineComponent({
       }
       span {
         cursor: pointer;
+        font-size: 15px;
+        line-height: 24px;
       }
     }
   }
   // *** Footer END *** //
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .self {
     &__body {
       margin-top: 14px;

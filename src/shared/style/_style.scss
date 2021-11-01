@@ -133,3 +133,24 @@ button {
   }
 }
 
+$tablet-width: 738px;
+$desktop-width: 1200px;
+$phone-width:320px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width}), (-webkit-min-device-pixel-ratio: 3) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media screen and (min-width: #{$phone-width}) and (max-width: #{$tablet-width - 1px}), (-webkit-min-device-pixel-ratio: 3) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+

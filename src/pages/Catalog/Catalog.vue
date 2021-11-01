@@ -300,6 +300,9 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 737px),
   (-webkit-min-device-pixel-ratio: 3) {
   .catalog {
+    &__bg {
+      display: none;
+    }
     &__content {
       grid-template-columns: 1fr;
       position: relative;

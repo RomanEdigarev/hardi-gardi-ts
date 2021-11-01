@@ -2,16 +2,15 @@
   <div class="sign-in">
     <div class="sign-in__header">
       <div class="sign-in__header__title">
-        <PageTitle text="Восстановление пароля" />
+        <PageTitle :text="title" />
       </div>
     </div>
     <div class="sign-in__body">
-      <!--      <Login />-->
-      <!--      <Registration />-->
-      <NewPassword />
+      <span v-if="error">{{ error }}</span>
+      <component :is="step"></component>
     </div>
     <div class="sign-in__bg">
-      <img src="./assets/bg.svg" alt="" />
+      <img :src="require(`./assets/bg-${bg}.svg`)" alt="" />
     </div>
   </div>
   <div class="sign-in__modal-container">
@@ -20,9 +19,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted, watch, watchEffect } from "vue";
 import { Login, NewPassword, RecoveryPassModal, Registration } from "./ui";
 import { PageTitle } from "@/shared/ui";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "SignIn",
@@ -32,6 +33,43 @@ export default defineComponent({
     Registration,
     NewPassword,
     RecoveryPassModal,
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const error = computed(() => store.getters["user/getUserError"]);
+    const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
+    const bg = computed(() => {
+      if (store.getters["getIsPhone"]) {
+        return "phone";
+      } else if (store.getters["getIsMobile"]) {
+        return "mobile";
+      } else {
+        return "desktop";
+      }
+    });
+    watchEffect(() => {
+      if (isAuth.value.isAuth === true) {
+        router.push("/personal");
+      }
+    });
+    const titles = {
+      login: "Вход",
+      registration: "Регистрация",
+      "new-password": "Восстановление пароля",
+    };
+    const route = useRoute();
+    const step = computed(() => route.params.step);
+    const title = computed(() => {
+      return titles[step.value as string];
+    });
+
+    return {
+      step,
+      title,
+      error,
+      bg,
+    };
   },
 });
 </script>
@@ -96,9 +134,16 @@ export default defineComponent({
     margin: 0;
     margin-top: 110px;
     &__bg {
-      left: 0%;
-      top: -4%;
-      width: 395px;
+      transform: translateX(-50%);
+      left: 50%;
+      top: 1%;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+    :deep .page-title {
+      font-size: 32px;
     }
   }
 }

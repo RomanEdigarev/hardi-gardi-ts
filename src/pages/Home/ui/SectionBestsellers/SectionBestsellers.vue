@@ -47,7 +47,7 @@
           />
         </svg>
       </template>
-    </BlockWithSliderPhone>
+    </BlockWithSliderPhone >
   </div>
 </template>
 

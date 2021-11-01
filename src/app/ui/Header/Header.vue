@@ -9,6 +9,7 @@
           <Navigation
             :tooltip-links="tooltipLinks"
             @show-modal="setCurrentModal"
+            @change-city="$emit('change-city')"
           />
         </div>
         <a class="header__phone" href="tel:+7 921 961 14 41">

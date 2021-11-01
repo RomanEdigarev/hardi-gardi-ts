@@ -46,4 +46,11 @@ export default defineComponent({
   width: 62px;
   height: 62px;
 }
+@media screen and (min-width: 320px) and (max-width: 736px) {
+  .scroll-page-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+}
 </style>

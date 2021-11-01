@@ -1,9 +1,7 @@
 <template>
-  <div class="package">
+  <div class="package" :class="{ 'is-open': isOpen }">
     <div class="package__header" @click="toggleBody">
-      <div class="package__header__title" >
-        Доступна подарочная упаковка
-      </div>
+      <div class="package__header__title">Доступна подарочная упаковка</div>
       <div class="package__header__icon">
         <svg
           width="18"
@@ -54,7 +52,7 @@ export default defineComponent({
   },
   setup() {
     const packageBody = ref<HTMLElement>(null);
-    let isOpen = false;
+    let isOpen = ref(false);
     const closeBody = () => {
       anime({
         targets: packageBody.value,
@@ -62,7 +60,7 @@ export default defineComponent({
         duration: 300,
         easing: "linear",
         complete: () => {
-          isOpen = !isOpen;
+          isOpen.value = !isOpen.value;
         },
       });
     };
@@ -73,12 +71,12 @@ export default defineComponent({
         duration: 300,
         easing: "linear",
         complete: () => {
-          isOpen = !isOpen;
+          isOpen.value = !isOpen.value;
         },
       });
     };
     const toggleBody = () => {
-      if (isOpen) {
+      if (isOpen.value) {
         closeBody();
       } else {
         openBody();
@@ -88,6 +86,7 @@ export default defineComponent({
     return {
       packageBody,
       toggleBody,
+      isOpen,
     };
   },
 });
@@ -139,8 +138,14 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
+.is-open {
+  .package__header__icon {
+    transform: rotate(-180deg);
+  }
+}
 
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .package {
     &__body {
       justify-content: space-between;
@@ -150,5 +155,4 @@ export default defineComponent({
     }
   }
 }
-
 </style>

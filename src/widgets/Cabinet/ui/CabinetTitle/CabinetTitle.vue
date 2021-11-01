@@ -1,32 +1,42 @@
 <template>
-  <div
-    class="cabinet-title__title"
-    :class="{ isLogin: isLogin }"
-    @click="$router.push('/personal')"
-  >
-    <Tooltip v-if="isLogin">
-      <template v-slot:reference>
-        <span class="cabinet-title__icon"><ProfileIcon /></span>
-      </template>
-      <template v-slot:content>
-        <div class="tooltip-content">
-          <span class="tooltip-content__name">{{ name }}</span>
-          <a class="tooltip-content__link" href="">История заказов</a>
-          <a class="tooltip-content__link" href="">Персональные данные</a>
-          <a class="tooltip-content__link" href="">Уведомления</a>
-          <a class="tooltip-content__link-out" href="">Выйти</a>
-        </div>
-      </template>
-    </Tooltip>
-    <span v-else class="cabinet-title__icon"><ProfileIcon /></span>
-    <span>{{ text }}</span>
+  <div class="cabinet-title">
+    <div
+      class="cabinet-title__title"
+      :class="{ isLogin: isAuth }"
+      @click="$router.push(`${isAuth ? '/personal' : '/sign-in/login'}`)"
+    >
+      <Tooltip v-if="isAuth" :trigger="['mouseenter']">
+        <template v-slot:reference>
+          <span class="cabinet-title__icon"><ProfileIcon /></span>
+        </template>
+        <template v-slot:content>
+          <div class="tooltip-content">
+            <span class="tooltip-content__name">{{ name }}</span>
+            <router-link to="/personal" class="tooltip-content__link">
+              История заказов
+            </router-link>
+            <router-link to="/personal" class="tooltip-content__link">
+              Персональные данные
+            </router-link>
+            <router-link to="/personal" class="tooltip-content__link">
+              Уведомления
+            </router-link>
+            <span class="tooltip-content__link-out" @click="logout">Выйти</span>
+          </div>
+        </template>
+      </Tooltip>
+      <span v-else class="cabinet-title__icon"><ProfileIcon /></span>
+      <span>{{ text }}</span>
+    </div>
   </div>
 </template>
 
 <script>
 import { ProfileIcon } from "../../../../shared/ui/icons";
 import Tooltip from "../../../../shared/ui/Tooltip/Tooltip";
-import { computed } from "vue";
+import { computed, getCurrentInstance } from "vue";
+import { useStore } from "@/services/vuex";
+import { initShop } from "@/entities/Shop/lib";
 
 export default {
   name: "CabinetTitle",
@@ -35,7 +45,7 @@ export default {
     Tooltip,
   },
   props: {
-    isLogin: {
+    isAuth: {
       type: Boolean,
       default: false,
     },
@@ -43,13 +53,21 @@ export default {
       type: String,
     },
   },
-  setup(props) {
+  setup(props, context) {
+    const store = useStore();
     const text = computed(() => {
-      return props.isLogin ? props.name : "Личный кабинет";
+      return props.isAuth ? props.name : "Личный кабинет";
     });
+
+    const logout = async () => {
+      await store.dispatch("user/fetchLogoutUser");
+      localStorage.removeItem("token");
+      await initShop(store);
+    };
 
     return {
       text,
+      logout,
     };
   },
 };
@@ -85,6 +103,7 @@ export default {
     display: inline-block;
     width: 14px;
     margin-right: 8px;
+    cursor: pointer;
   }
 
   .isLogin {
@@ -96,7 +115,7 @@ export default {
     }
   }
 
-  .tooltip-content {
+  :deep .tooltip-content {
     height: 100%;
     width: 100%;
     display: flex;
@@ -113,6 +132,7 @@ export default {
     &__link {
       padding: 6px 0;
       transition: color 0.3s ease-in-out;
+      cursor: pointer;
       &:hover {
         color: $clr-alpha-epsilon;
       }
@@ -124,6 +144,15 @@ export default {
 
       &:hover {
         text-shadow: 0 0 1px $clr-zeta;
+      }
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .cabinet-title {
+    &__title {
+      span {
+        font-size: 13px;
       }
     }
   }

@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="delete-modal__footer">
-      <div class="delete-modal__footer__btn">
-        <AlfaButton text="Удалить" />
+      <div class="delete-modal__footer__btn" data-close-modal>
+        <AlfaButton text="Удалить" @click="deleteProduct" />
       </div>
     </div>
     <div class="delete-modal__close-btn" data-close-modal>
@@ -26,6 +26,7 @@
 import { defineComponent } from "vue";
 import { AlfaButton, BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon } from "@/shared/ui/icons";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "DeleteModal",
@@ -33,6 +34,24 @@ export default defineComponent({
     AlfaButton,
     BetaButton,
     CloseIcon,
+  },
+  props: {
+    productId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const store = useStore();
+    const deleteProduct = async () => {
+      await store.dispatch("basket/changeQuantity", {
+        id: props.productId as string,
+        quantity: 0,
+      });
+    };
+    return {
+      deleteProduct,
+    };
   },
 });
 </script>

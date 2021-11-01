@@ -7,7 +7,7 @@
       <div class="details__body__info">
         <div class="details__body__info__row">
           <span>Статус</span>
-          <span>Готов к выдаче</span>
+          <span class="ready">Готов к выдаче</span>
         </div>
         <div class="details__body__info__row">
           <span>Номер заказа</span>
@@ -64,7 +64,7 @@
             stroke-width="0.1"
           />
         </svg>
-        <span>Оменить заказ</span>
+        <span>Отменить заказ</span>
       </button>
     </div>
   </div>
@@ -126,11 +126,16 @@ export default defineComponent({
       }
     }
     &__delivery {
+      span,
+      div {
+        font-size: 15px;
+      }
       &__title {
         margin-bottom: 5px;
       }
       &__text {
         line-height: 1.6;
+        font-size: 15px;
       }
       &__row {
         margin-top: 5px;
@@ -174,6 +179,9 @@ export default defineComponent({
       text-decoration-line: underline;
       color: $clr-nu;
     }
+  }
+  .ready {
+    color: #469b68;
   }
   // *** Other END *** //
 }
@@ -246,6 +254,12 @@ export default defineComponent({
   (-webkit-min-device-pixel-ratio: 3) {
   .details {
     max-width: 310px;
+    padding: 26px 22px;
+    &__header {
+      &__title {
+        font-size: 22px;
+      }
+    }
     &__body {
       &__info {
         &__row {
@@ -257,6 +271,10 @@ export default defineComponent({
         }
       }
       &__delivery {
+        div,
+        span {
+          font-size: 14px;
+        }
         &__row {
           flex-direction: row;
         }

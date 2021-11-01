@@ -41,12 +41,12 @@
     <div class="checkout__footer">
       <div v-if="isOrdering" class="checkout__footer__info">
         <div class="checkout__footer__info__row">
-          <span>Доставка:</span>
-          <span> Курьер</span>
+          <span>Доставка: </span>
+          <span> {{ deliveryMap[deliverType] }}</span>
         </div>
         <div class="checkout__footer__info__row">
           <span>Оплата: </span>
-          <span> Картой</span>
+          <span> {{ paymentMap[paymentType] }}</span>
         </div>
       </div>
       <AlfaButton
@@ -55,6 +55,7 @@
         @click="
           $emit('checkout', isOrdering ? '/payment' : '/ordering', promoCode)
         "
+        :is-disabled="disabled"
       />
       <div v-if="isOrdering" class="checkout__footer__policy">
         Оформляя заказ, вы соглашаетесь с <span>договором оферты</span> и
@@ -84,17 +85,33 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+    },
   },
   setup(props) {
     const promoCode = ref("");
     const router = useRouter();
     const store = useStore();
+    const deliveryMap = {
+      self: "Самовывоз",
+      courier: "Курьером",
+      post: "Почтой",
+    };
+    const paymentMap = {
+      onSite: "Картой",
+      "onDeliver": "При получении",
+    };
     return {
       promoCode,
       basket: computed<Basket>(() => store.getters["basket/getBasket"]),
       basketCount: computed<number>(
         () => store.getters["basket/getBasketCount"]
       ),
+      paymentType: computed(() => store.getters["order/getPaymentType"]),
+      deliverType: computed(() => store.getters["order/getDeliveryType"]),
+      paymentMap,
+      deliveryMap,
     };
   },
 });
@@ -149,6 +166,7 @@ export default defineComponent({
       line-height: 1.54;
       margin-bottom: 29px;
       span {
+        font-size: 13px;
         color: $clr-zeta;
       }
     }

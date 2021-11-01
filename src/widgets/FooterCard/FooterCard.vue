@@ -65,4 +65,20 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 736px),
+(-webkit-min-device-pixel-ratio: 3) {
+  .footer-card {
+    height: 446px;
+    width: 100%;
+    border-radius: 60px;
+    padding-left: 28px;
+    padding-right: 28px;
+
+    &__text {
+      font-size: 20px;
+      line-height: 24px;
+      z-index: 2;
+    }
+  }
+}
 </style>

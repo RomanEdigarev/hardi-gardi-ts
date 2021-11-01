@@ -3,21 +3,21 @@
     class="container"
     :class="{
       focused: isFocused,
-      dirty: meta.dirty || errors.length > 0,
+      dirty: errors.length > 0,
       success: isSuccess,
       error: errors.length > 0,
       disabled: isDisabled,
     }"
   >
     <input
-      ref="input"
+      ref="el"
       class="input"
       :name="name"
       :type="type"
       :placeholder="placeholder"
       :id="id"
       :value="value"
-      @input="handleChange"
+      @input="null"
       @change="handleChange"
       @blur="handleChange"
       :disabled="isDisabled"
@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {computed, defineComponent, onMounted, ref, watch} from "vue";
+import { useIMask } from "vue-imask";
 import { useField } from "vee-validate";
 import { BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon } from "@/shared/ui/icons";
@@ -58,20 +59,24 @@ export default defineComponent({
       type: Object,
       default: {},
     },
+    mask: {
+      type: String,
+      default: null
+    }
   },
   setup(props, { emit }) {
-    const input = ref(null);
     const isFocused = ref(false);
     const isDirty = ref(false);
-
     const clearInput = () => {
-      input.value.focus();
+        el.value.focus();
+        el.value.value = "";
+      onBlur();
       emit("clear-input");
     };
 
     const onBlur = () => {
       isFocused.value = false;
-      if (input.value.value) {
+      if (el.value.value) {
         isDirty.value = true;
       } else {
         isDirty.value = false;
@@ -90,10 +95,17 @@ export default defineComponent({
       validateOnValueUpdate: false,
     });
 
+    const { el, masked, mask, typed } = useIMask({
+      mask: props.mask,
+    });
+
+    watch(value, () => {
+      emit('change-value', value)
+    })
+
     return {
       clearInput,
       onBlur,
-      input,
       isFocused,
       isDirty,
       handleChange,
@@ -102,6 +114,8 @@ export default defineComponent({
       value,
       meta,
       errors,
+      el,
+      masked,
     };
   },
 });

@@ -43,7 +43,7 @@ export const basketsModule: Module<Basket, State> = {
     },
     addToBasket: async ({ commit }, payload: AddToBasketData) => {
       commit("toggleLoading", true);
-      const basket = await addToBasketAdapter(payload.id, payload.quality);
+      const basket = await addToBasketAdapter(payload.id, payload.quantity);
       commit("initBasket", basket);
       commit("toggleLoading", false);
     },
@@ -82,6 +82,7 @@ export const basketsModule: Module<Basket, State> = {
         return product.positionID === positionId;
       })[0];
     },
+    getBasketSum: (state) => state.sumTotal,
   },
   namespaced: true,
 };

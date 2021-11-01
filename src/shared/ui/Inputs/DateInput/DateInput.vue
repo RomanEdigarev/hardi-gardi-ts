@@ -7,7 +7,12 @@
       :locale="ru"
       inputFormat="dd.MM.yyyy"
     />
-    <img class="date-input__icon" src="./assets/icon.svg" alt="calendar" />
+    <img
+      @click="openCalendar"
+      class="date-input__icon"
+      src="./assets/icon.svg"
+      alt="calendar"
+    />
   </div>
 </template>
 
@@ -17,6 +22,7 @@ import Datepicker from "vue3-datepicker";
 import { ref, watch } from "vue";
 import { ru } from "date-fns/locale";
 import format from "date-fns/format";
+import parse from "date-fns/parse";
 import { useField } from "vee-validate";
 
 export default defineComponent({
@@ -27,17 +33,22 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    value: {
+      type: String,
+    },
   },
   setup(props) {
-    const picked = ref<Date>(new Date());
+    const parseDate = props.value
+      ? parse(props.value as string, "dd.MM.yyyy", new Date())
+      : new Date();
+    const picked = ref<Date>(parseDate);
     const date = ref(null);
-    const { handleChange } = useField("date");
-    onMounted(() => {
-      (date.value.inputRef as HTMLInputElement).setAttribute(
-        props.name as string,
-        "date"
-      );
-    });
+    const { handleChange } = useField(props.name as string);
+
+    const openCalendar = () => {
+      date.value.inputRef.click();
+      console.log(date.value);
+    };
 
     watch(picked, () => {
       handleChange(format(picked.value as Date, "dd.MM.yyyy"));
@@ -48,6 +59,7 @@ export default defineComponent({
       ru,
       handleChange,
       date,
+      openCalendar,
     };
   },
 });

@@ -6,6 +6,7 @@
       :id="id"
       :name="name"
       :value="value"
+      :checked="checked"
       @change="toggle"
     />
     <label :for="id">{{ text }}</label>
@@ -31,6 +32,9 @@ export default defineComponent({
     text: {
       type: String,
       required: true,
+    },
+    checked: {
+      type: Boolean,
     },
     value: {
       type: String,

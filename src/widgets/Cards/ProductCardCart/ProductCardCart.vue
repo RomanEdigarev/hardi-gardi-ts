@@ -32,21 +32,29 @@
       </div>
     </div>
     <div class="product-card__price">
-      <span class="product-card__price__prev"
-        >{{ product.prevPrice }} &#8381;</span
-      >
-      <span class="product-card__price__current"
-        >{{ product.currentPrice }} &#8381;/шт</span
-      >
+      <span class="product-card__price__prev">
+        {{ product.prevPrice }} &#8381;
+      </span>
+      <span class="product-card__price__current">
+        {{ product.currentPrice }} &#8381;/шт
+      </span>
     </div>
     <!--     v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"-->
-    <div v-if="!toModal" class="product-card__del-btn">
-      <BetaButton styling="beta-gamma-btn">
+    <div
+      v-if="!toModal"
+      class="product-card__del-btn"
+      v-toggle-modal="{ modal: 'delete-modal', name: 'delete' }"
+    >
+      <BetaButton styling="beta-gamma-btn" @click="deletingProduct">
         <DeleteIcon />
       </BetaButton>
     </div>
-    <div v-if="!toModal" class="product-card__fav-btn">
-      <BetaButton styling="beta-gamma-btn">
+    <div
+      v-if="!toModal"
+      class="product-card__fav-btn"
+      :class="{ 'is-favorite': isFavorite }"
+    >
+      <BetaButton styling="beta-gamma-btn" @click="addToFavorite">
         <FavoriteIcon />
       </BetaButton>
     </div>
@@ -54,10 +62,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import { CounterButton, BetaButton } from "@/shared/ui/buttons";
 import { DeleteIcon, FavoriteIcon } from "@/shared/ui/icons";
 import { Product } from "@/entities/Products/Product/model";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "ProductCard",
   components: { CounterButton, BetaButton, DeleteIcon, FavoriteIcon },
@@ -78,6 +87,25 @@ export default defineComponent({
       type: Number || String,
       required: false,
     },
+  },
+  setup({ product, positionId }, { emit }) {
+    const store = useStore();
+    const isFavorite = computed(() => {
+      return store.getters["favorites/getIsFavoriteByProductId"](
+        +(product as Product).id
+      );
+    });
+    const addToFavorite = async () => {
+      await store.dispatch("favorites/addToFavorite", +(product as Product).id);
+    };
+    const deletingProduct = () => {
+      emit("delete-product", positionId);
+    };
+    return {
+      isFavorite,
+      addToFavorite,
+      deletingProduct,
+    };
   },
 });
 </script>
@@ -193,6 +221,11 @@ export default defineComponent({
     width: 20px;
     bottom: 26px;
     right: 35px;
+  }
+  &__fav-btn.is-favorite {
+    :deep .beta-gamma-btn {
+      opacity: 1;
+    }
   }
 
   // *** Buttons END *** //

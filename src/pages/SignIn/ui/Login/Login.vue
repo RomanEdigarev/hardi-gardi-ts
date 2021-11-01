@@ -24,17 +24,30 @@
 
       <div class="login__body__status">
         <div class="login__body__status__checkbox">
-          <Checkbox id="remember" label-text="Запомнить меня" />
+          <Checkbox
+            id="remember"
+            label-text="Запомнить меня"
+            v-model="isRemember"
+          />
         </div>
-        <div class="login__body__status__link alfa-link">Забыли пароль?</div>
+        <div
+          class="login__body__status__link alfa-link"
+          @click="$router.push('/sign-in/new-password')"
+        >
+          Забыли пароль?
+        </div>
       </div>
 
       <div class="login__body__btns">
         <div class="login__body__btns__item">
-          <AlfaButton text="Войти" />
+          <AlfaButton text="Войти" @click="onSubmit" />
         </div>
         <div class="login__body__btns__item">
-          <AlfaButton text="Регистрация" styling="secondary" />
+          <AlfaButton
+            text="Регистрация"
+            styling="secondary"
+            @click="$router.push('/sign-in/registration')"
+          />
         </div>
       </div>
     </div>
@@ -61,25 +74,50 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { Checkbox, VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import * as yup from "yup";
+import { useForm } from "vee-validate";
+import { useStore } from "@/services/vuex";
+import { initShop } from "@/entities/Shop/lib";
 
 export default defineComponent({
   name: "Login",
   components: { VInput, Checkbox, AlfaButton },
   setup() {
+    const store = useStore();
     const isEmail = yup
       .string()
       .email("Неверный формат")
       .required("Обязательное поле");
 
-    const isPassword = yup.string().required("Обязательное поле");
+    const isPassword = yup
+      .string()
+      .required("Обязательное поле")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Восемь символов, заглавная буква, строчная буква, цифра"
+      );
+    const isRemember = ref(false);
+
+    const { handleSubmit } = useForm();
+
+    const onSubmit = handleSubmit(async (values) => {
+      const userData = {
+        email: values.email,
+        password: values.password,
+        remember: isRemember.value,
+      };
+      await store.dispatch("user/fetchLoginUser", userData);
+      await initShop(store);
+    });
 
     return {
       isEmail,
       isPassword,
+      isRemember,
+      onSubmit,
     };
   },
 });
@@ -103,6 +141,7 @@ export default defineComponent({
     &__status {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 34px;
     }
     &__btns {
@@ -168,6 +207,27 @@ export default defineComponent({
         gap: 18px;
         &__item {
           width: 100%;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .login {
+    &__body {
+      &__inputs {
+        &__item {
+          margin-bottom: 18px;
+        }
+      }
+      &__btns {
+        flex-direction: column;
+        &__item {
+          width: 100%;
+        }
+        div:first-child {
+          margin-bottom: 18px;
         }
       }
     }

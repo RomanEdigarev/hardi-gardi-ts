@@ -29,7 +29,31 @@
                     alt=""
                   />
                 </div>
+                <div
+                  v-if="isPhone && linkItem.sections.length > 0"
+                  class="catalog-submenu__link-text alfa-link"
+                  @click.stop="openDropdown(linkItem.id)"
+                >
+                  {{ linkItem.name }}
+                  <svg
+                    width="11"
+                    height="7"
+                    viewBox="0 0 11 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.20652 2L5.63044 5.36956L9 2"
+                      stroke="#D23C50"
+                      stroke-width="2.5"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
                 <router-link
+                  v-else
                   :to="linkItem.link.toLowerCase()"
                   class="catalog-submenu__link-text alfa-link"
                   @click="$emit('close-burger-menu')"
@@ -40,6 +64,7 @@
               <div
                 v-if="linkItem.sections.length > 0"
                 class="catalog-submenu__sublinks-container"
+                :class="{ 'is-open': currentOpenDropdownId === linkItem.id }"
               >
                 <router-link
                   v-for="sublinkItem in linkItem.sections"
@@ -59,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useCatalogSubmenu } from "./lib";
 import { useStore } from "@/services/vuex";
 
@@ -69,6 +94,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const { result } = useCatalogSubmenu();
+    const currentOpenDropdownId = ref("");
     const resetFilter = async () => {
       store.commit("products/resetCurrentFilters");
       await store.dispatch("products/setProductsByPage", 1);
@@ -82,10 +108,22 @@ export default defineComponent({
       await store.dispatch("products/setProductsByPage", 1);
     };
 
+    const openDropdown = (e) => {
+      console.log(e);
+      if (currentOpenDropdownId.value === e) {
+        currentOpenDropdownId.value = "";
+      } else {
+        currentOpenDropdownId.value = e;
+      }
+    };
+
     return {
       result,
       setFilter,
       resetFilter,
+      isPhone: computed(() => store.getters["getIsPhone"]),
+      openDropdown,
+      currentOpenDropdownId,
     };
   },
 });
@@ -102,6 +140,7 @@ export default defineComponent({
 
   &__content-container {
     height: 100%;
+    padding-bottom: 60px;
   }
 
   &__links-container {
@@ -113,8 +152,15 @@ export default defineComponent({
   &__link-container {
     display: flex;
     flex-direction: column;
-    //align-items: center;
     margin-bottom: 42px;
+  }
+  &__link-drop {
+    input {
+      display: none;
+    }
+    input:checked ~ .catalog-submenu__sublinks-container {
+      max-height: 1000px;
+    }
   }
 
   &__link-icon-container {
@@ -132,6 +178,8 @@ export default defineComponent({
     flex-direction: column;
     padding-left: 46px;
     margin-top: 14px;
+    max-height: 0;
+    overflow: hidden;
   }
 
   // *** Containers END *** //
@@ -161,12 +209,18 @@ export default defineComponent({
   &__link {
     display: flex;
     align-items: center;
+    height: 20px;
   }
 
   &__link-text {
     font-weight: $bold;
     font-size: 18px;
     line-height: 1.22;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-left: 6px;
+    }
   }
 
   &__sublink {
@@ -175,5 +229,8 @@ export default defineComponent({
       font-size: 18px;
     }
   }
+}
+.is-open {
+  max-height: 1000px;
 }
 </style>

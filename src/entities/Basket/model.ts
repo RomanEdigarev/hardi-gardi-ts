@@ -2,7 +2,7 @@ import { Product } from "@/entities/Products/Product/model";
 
 export type AddToBasketData = {
   id: string | number;
-  quality: number;
+  quantity: number;
 };
 
 export type BasketItem = {

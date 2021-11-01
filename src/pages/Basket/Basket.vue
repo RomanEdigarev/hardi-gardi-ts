@@ -2,7 +2,7 @@
   <div class="basket">
     <main class="page-main">
       <div class="page-main__header">
-        <PageTitle text="Корзина (2)" />
+        <PageTitle :text="`Корзина (${basketCount})`" />
       </div>
       <div class="basket__body">
         <div class="basket__body__products-list">
@@ -16,6 +16,7 @@
               :position-id="product.positionID"
               @plus-position="plusPosition"
               @minus-position="minusPosition"
+              @delete-product="deleteProduct"
             />
           </div>
         </div>
@@ -33,13 +34,13 @@
       </div>
     </main>
     <div ref="deleteModal" class="basket__delete-modal-container">
-      <DeleteModal />
+      <DeleteModal :product-id="deletingProductId" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
 import { Checkout, ProductCardCart } from "@/widgets";
@@ -61,6 +62,7 @@ export default defineComponent({
     const products = computed<BasketItem[]>(
       () => store.getters["basket/getProducts"]
     );
+    const deletingProductId = ref();
     const plusPosition = (positionID) => {
       const position = store.getters["basket/getPosition"](positionID);
       store.dispatch("basket/changeQuantity", {
@@ -79,6 +81,9 @@ export default defineComponent({
       promoCode && store.dispatch("basket/addBasketCoupon", promoCode);
       router.push(link);
     };
+    const deleteProduct = (positionId) => {
+      deletingProductId.value = positionId;
+    };
 
     return {
       products,
@@ -90,6 +95,8 @@ export default defineComponent({
       minusPosition,
       checkout,
       isPhone: computed(() => store.getters["getIsPhone"]),
+      deleteProduct,
+      deletingProductId,
     };
   },
 });

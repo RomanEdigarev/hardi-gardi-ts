@@ -9,8 +9,13 @@
           v-if="isPhone"
           @open-burger="openBurger"
           @openSearchModalPhone="openSearchModal"
+          @change-city="openChangeCity"
         />
-        <Header v-else @open-burger="openBurger" />
+        <Header
+          v-else
+          @open-burger="openBurger"
+          @change-city="openChangeCity"
+        />
       </div>
 
       <div class="app__wrapper">
@@ -50,26 +55,42 @@
       </div>
       <div
         ref="searchModalPhone"
-        v-if="isMobile"
+        v-if="isMobile || isPhone"
         class="app__search-modal-phone"
       >
         <SearchModalPhone @close="closeSearchModal" />
       </div>
     </template>
-
+    <div ref="changeCity" class="app__change-city">
+      <ChangeCity @close="closeChangeCity" />
+    </div>
     <div class="modal-bg"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Header, Footer, HeaderForPhone, FooterForPhone } from "./ui";
+import {
+  Header,
+  Footer,
+  HeaderForPhone,
+  FooterForPhone,
+  ChangeCity,
+} from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onBeforeMount, onMounted } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  ref,
+  watch,
+} from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
+import anime from "animejs";
 
 export default defineComponent({
   components: {
@@ -80,27 +101,20 @@ export default defineComponent({
     HeaderForPhone,
     FooterForPhone,
     SearchModalPhone,
+    ChangeCity,
   },
   name: "App",
   setup() {
+    const changeCity = ref(null);
     const store = useStore();
     const isToken = computed(() => store.getters["getIsToken"]);
-    onBeforeMount(async () => {});
     onMounted(async () => {
       if (!store.state.isInit) {
-        await initShop();
-
-        store.commit(
-          "setIsMobile",
-          document.documentElement.clientWidth <= 1360 &&
-            document.documentElement.clientWidth > 737
-        );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 737);
+        await initShop(store);
       }
     });
 
     window.addEventListener("resize", () => {
-      console.log("resize");
       if (
         document.documentElement.clientWidth <= 1360 &&
         document.documentElement.clientWidth > 737
@@ -118,6 +132,27 @@ export default defineComponent({
 
     const isMobile = computed(() => store.state.isMobile);
 
+    const closeChangeCity = () => {
+      anime({
+        targets: changeCity.value,
+        opacity: [1, 0],
+        duration: 400,
+        easing: "linear",
+        complete: () => {
+          changeCity.value.style.zIndex = "-10";
+        },
+      });
+    };
+    const openChangeCity = () => {
+      changeCity.value.style.zIndex = "100";
+      anime({
+        targets: changeCity.value,
+        opacity: [0, 1],
+        duration: 400,
+        easing: "linear",
+      });
+    };
+
     return {
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
@@ -128,6 +163,9 @@ export default defineComponent({
       isMobile,
       ...useBurgerMenu(),
       ...useSearchModalPhone(),
+      closeChangeCity,
+      changeCity,
+      openChangeCity,
     };
   },
 });
@@ -142,6 +180,12 @@ export default defineComponent({
   height: 100%;
   position: relative;
 
+  &__change-city {
+    position: relative;
+    opacity: 0;
+    z-index: -10;
+  }
+
   &__wrapper {
     min-height: 50vh;
     height: 100%;
@@ -153,7 +197,6 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    //min-height: 100vh;
     max-width: 1195px;
     display: flex;
     flex-direction: column;
@@ -186,9 +229,11 @@ export default defineComponent({
   }
 
   &__header-bg {
-    top: 0;
+    top: 100px;
     left: 0;
     height: 821px;
+    z-index: 0;
+    overflow: hidden;
   }
 
   &__footer-bg {
@@ -314,7 +359,7 @@ export default defineComponent({
       margin-bottom: 136px;
     }
     &__footer-bg {
-      max-height: 90vh;
+      //max-height: 90vh;
       height: 1157px;
     }
     &__scroll-btn-container {
@@ -326,12 +371,16 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .app {
+    overflow: hidden;
+    &__header {
+      z-index: 6;
+    }
     &__wrapper {
       //padding: 0 18px;
       margin-bottom: 136px;
     }
     &__footer-bg {
-      max-height: 100vh;
+      max-height: none;
       height: 1157px;
     }
     &__scroll-btn-container {
@@ -345,7 +394,7 @@ export default defineComponent({
       width: 339px;
     }
     &__footer-bg {
-      max-height: 111vh;
+      //max-height: 145vh;
       height: 1192px;
     }
   }

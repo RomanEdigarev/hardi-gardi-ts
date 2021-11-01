@@ -133,7 +133,7 @@
     </div>
     <div class="catalog-filter__footer">
       <div class="catalog-filter__footer__btn-container">
-        <AlfaButton text="Показать" @click="$emit('apply-filter')" />
+        <AlfaButton text="Показать" @click="applyFilter" />
       </div>
       <div class="catalog-filter__footer__btn-container">
         <AlfaButton
@@ -160,7 +160,7 @@ export default defineComponent({
     RangeSlider,
     AlfaButton,
   },
-  emits: ["hide-mobile-filter", "filter-section", "set-price"],
+  emits: ["hide-mobile-filter", "filter-section", "set-price", "apply-filter"],
   setup(_, { emit }) {
     const store = useStore();
     const sections = computed<Section[]>(
@@ -200,6 +200,10 @@ export default defineComponent({
         item.classList.add("active");
       }
     };
+    const applyFilter = () => {
+      emit("apply-filter");
+      emit("hide-mobile-filter");
+    };
 
     return {
       setActiveClass,
@@ -208,6 +212,7 @@ export default defineComponent({
       currentFilters,
       setPrice,
       setSectionFilter,
+      applyFilter,
     };
   },
 });
@@ -256,6 +261,7 @@ export default defineComponent({
     border-bottom: 1px solid $clr-alpha-mu;
     overflow: hidden;
     transition: padding-bottom 0.5s ease-in-out;
+    margin-bottom: 22px;
 
     &__title-container {
       width: 100%;
@@ -363,6 +369,13 @@ export default defineComponent({
     &__content {
       &__back {
         display: flex;
+      }
+    }
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      &__btn-container {
+        flex: 0.48;
       }
     }
   }

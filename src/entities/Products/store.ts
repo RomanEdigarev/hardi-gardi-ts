@@ -53,10 +53,24 @@ export const productsModule: Module<Products, State> = {
       state,
       payload: { name: string; value: string | number }
     ) => {
-      state.currentFilter = {
-        ...state.currentFilter,
-        [payload.name]: payload.value,
-      };
+      if (
+        Object.keys(state.currentFilter).some((key) => key === payload.name)
+      ) {
+        const {
+          [payload.name]: removingFilter,
+          ...newCurrentFilter
+        } = state.currentFilter;
+        if (payload.name === "section") {
+          newCurrentFilter["section"] = payload.value;
+        }
+        state.currentFilter = newCurrentFilter;
+        debugger;
+      } else {
+        state.currentFilter = {
+          ...state.currentFilter,
+          [payload.name]: payload.value,
+        };
+      }
     },
     removeCurrentFilter: (state, payload: string) => {
       const {

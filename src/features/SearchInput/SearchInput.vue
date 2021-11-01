@@ -1,8 +1,8 @@
 <template>
   <div class="search-input">
-    <VInput placeholder="Поиск" name="search" />
+    <VInput placeholder="Поиск по товарам..." name="search"/>
     <div class="search-input__btn-container">
-      <BetaButton styling="beta-alfa-btn" :is-pending="false">
+      <BetaButton styling="beta-alfa-btn" :is-pending="isLoading" @click="$emit('search')">
         <ArrowIcon />
       </BetaButton>
     </div>
@@ -22,12 +22,19 @@ export default defineComponent({
     BetaButton,
     ArrowIcon,
   },
+  props: {
+    isLoading: {
+      type: Boolean,
+      required: true
+    }
+  }
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-input {
   position: relative;
+  height: 60px;
   .input {
     padding: 16px 30px;
   }
@@ -36,9 +43,16 @@ export default defineComponent({
     width: 64px;
     height: 48px;
     position: absolute;
+    z-index: 2;
     top: 50%;
     right: 6px;
     transform: translateY(-50%);
   }
+
+     :deep .close-btn {
+      width: 30px;
+      right: 86px
+    }
+
 }
 </style>

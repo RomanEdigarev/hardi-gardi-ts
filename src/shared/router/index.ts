@@ -37,6 +37,7 @@ type Breadcrumb = {
 const routes = [
   {
     path: "/",
+    exact: true,
     name: "Home",
     component: Home,
     meta: {
@@ -187,12 +188,17 @@ const routes = [
     },
   },
   {
-    path: "/error",
+    path: "/404",
     name: "Error",
     component: Error,
   },
   {
-    path: "/sign-in",
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+    component: null,
+  },
+  {
+    path: "/sign-in/:step",
     name: "SignIn",
     component: SignIn,
   },

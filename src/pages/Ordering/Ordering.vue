@@ -11,48 +11,60 @@
     <div class="ordering__body">
       <div class="ordering__body__left">
         <!-- Contacts -->
-        <div class="ordering__body__left__item">
-          <div class="ordering__body__left__item__title">
-            1. Контактные данные
+        <template v-if="!order.isLoading">
+          <div class="ordering__body__left__item">
+            <div class="ordering__body__left__item__title">
+              1. Контактные данные
+            </div>
+            <div class="ordering__body__left__item__body">
+              <Contacts
+                v-if="order.contactPerson"
+                :contact-person="order.contactPerson"
+              />
+            </div>
           </div>
-          <div class="ordering__body__left__item__body">
-            <Contacts />
+          <!-- Contacts END -->
+          <!-- Receiving -->
+          <div class="ordering__body__left__item receiving">
+            <div class="ordering__body__left__item__title">
+              2. Способ получения
+            </div>
+            <div>
+              <Obtaining />
+            </div>
           </div>
-        </div>
-        <!-- Contacts END -->
-        <!-- Receiving -->
-        <div class="ordering__body__left__item receiving">
-          <div class="ordering__body__left__item__title">
-            2. Способ получения
+          <!-- Receiving END -->
+          <!-- Payment -->
+          <div class="ordering__body__left__item payment">
+            <div class="ordering__body__left__item__title">
+              2. Способ оплаты
+            </div>
+            <div class="payment__toggle-menu">
+              <ToggleMenu
+                :items="paymentItems"
+                :current-item-key="currentPaymentType"
+                @set-current-item="setNewPayment"
+              />
+            </div>
           </div>
-          <div>
-            <Obtaining />
+          <!-- Payment END -->
+          <!-- Comments -->
+          <div class="ordering__body__left__item comments">
+            <div class="ordering__body__left__item__title">
+              4. Комментарий к заказу
+            </div>
+            <textarea
+              class="ordering__body__left__item__textarea"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Комментарий"
+            ></textarea>
           </div>
-        </div>
-        <!-- Receiving END -->
-        <!-- Payment -->
-        <div class="ordering__body__left__item payment">
-          <div class="ordering__body__left__item__title">2. Способ оплаты</div>
-          <div class="payment__toggle-menu">
-            <ToggleMenu :items="paymentItems" />
-          </div>
-        </div>
-        <!-- Payment END -->
-        <!-- Comments -->
-        <div class="ordering__body__left__item comments">
-          <div class="ordering__body__left__item__title">
-            4. Комментарий к заказу
-          </div>
-          <textarea
-            class="ordering__body__left__item__textarea"
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="Комментарий"
-          ></textarea>
-        </div>
-        <!-- Comments END -->
+          <!-- Comments END -->
+        </template>
+
         <!-- Checkbox -->
         <div class="ordering__body__checkbox">
           <Checkbox
@@ -63,7 +75,7 @@
         <!-- Checkbox END -->
       </div>
       <div class="ordering__body__right">
-        <Checkout is-ordering />
+        <Checkout is-ordering @checkout="createOrder" :disabled="!isValid" />
       </div>
     </div>
     <div class="ordering__modal-container">
@@ -73,13 +85,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
 import { Contacts, Goods } from "./ui";
 import { Checkbox } from "@/shared/ui/inputs";
 import { Basket } from "@/entities/Basket/model";
 import { useStore } from "@/services/vuex";
+import { Order } from "@/entities/Order/model";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Ordering",
@@ -94,10 +108,49 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const paymentItems = ["Картой на сайте", "При получении"];
+    const router = useRouter();
+    onMounted(async () => {
+      await store.dispatch("order/fetchGetOrder");
+    });
+
+    const paymentItems = [
+      {
+        key: "onSite",
+        value: "Картой на сайте",
+      },
+      {
+        key: "onDeliver",
+        value: "При получении",
+      },
+    ];
+    const currentPaymentType = ref("onSite");
+    const order = computed<Order>(() => store.getters["order/getOrder"]);
+    const isValid = ref(false);
+
+    watch(order.value, () => {
+      const { contactPerson, location, delivery} = order.value;
+      if (contactPerson) {
+        isValid.value = !!contactPerson.name && !!contactPerson.email && !!contactPerson.phone && (delivery.current === '3' || !!location.address)
+      }
+    });
+
+    const setNewPayment = (key) => {
+      currentPaymentType.value = key;
+      store.commit("order/setPaymentType", key);
+    };
+    const createOrder = async (link) => {
+     await store.dispatch('order/fetchCreateOrder')
+      router.push(link);
+    };
+
     return {
       paymentItems,
       basket: computed<Basket>(() => store.getters["basket/getBasket"]),
+      order,
+      setNewPayment,
+      currentPaymentType,
+      createOrder,
+      isValid,
     };
   },
 });

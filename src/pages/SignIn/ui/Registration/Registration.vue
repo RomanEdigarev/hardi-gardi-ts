@@ -7,8 +7,7 @@
             type="text"
             placeholder="Имя"
             label-text="Имя"
-            name="first-name"
-            :validation="isFirstName"
+            name="firstName"
           />
         </div>
         <div class="registration__body__inputs__item">
@@ -17,7 +16,6 @@
             placeholder="Email"
             label-text="Email"
             name="email"
-            :validation="isEmail"
           />
         </div>
       </div>
@@ -28,7 +26,6 @@
             placeholder="Пароль"
             label-text="Пароль"
             name="password"
-            :validation="isPassword"
           />
         </div>
         <div class="registration__body__inputs__item">
@@ -36,24 +33,36 @@
             type="password"
             placeholder="Подтверждение пароля"
             label-text="Подтверждение пароля"
-            name="confirm-password"
-            :validation="isPassword"
+            name="confirmPassword"
           />
         </div>
       </div>
 
       <div class="registration__body__btns">
         <div class="registration__body__btns__item">
-          <AlfaButton text="Зарегистрироваться" />
+          <AlfaButton
+            text="Зарегистрироваться"
+            @click="onSubmit"
+            :is-disabled="isLoading"
+          />
+        </div>
+        <div v-if="isPhone" class="registration__footer">
+          <div class="registration__footer__text">
+            Кликнув на "Зарегистрироваться", Вы соглашаетесь с
+            <span>политикой безопасности</span> и
+            <span>конфиденциальности</span>.
+          </div>
         </div>
         <div class="registration__body__btns__item">
           Есть аккаунт?
-          <span class="alfa-link">Войти</span>
+          <span class="alfa-link" @click="$router.push('/sign-in/login')">
+            Войти
+          </span>
         </div>
       </div>
     </div>
 
-    <div class="registration__footer">
+    <div v-if="!isPhone" class="registration__footer">
       <div class="registration__footer__text">
         Кликнув на "Зарегистрироваться", Вы соглашаетесь с
         <span>политикой безопасности</span> и <span>конфиденциальности</span>.
@@ -63,27 +72,67 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, watch } from "vue";
 import { Checkbox, VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import * as yup from "yup";
+import { useForm } from "vee-validate";
+import { UserRegistrationData } from "@/entities/User/model";
+import { useStore } from "@/services/vuex";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Registration",
   components: { VInput, Checkbox, AlfaButton },
   setup() {
-    const isFirstName = yup.string().required("Обязательное поле");
-    const isEmail = yup
-      .string()
-      .required("Обязательное поле")
-      .email("Неверный формат");
+    const store = useStore();
+    const router = useRouter();
+    const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
 
-    const isPassword = yup.string().required("Обязательное поле");
+    watch(isAuth, () => {
+      if (isAuth.value.isAuth === true) {
+        router.push("/personal");
+      }
+    });
+
+    const schema = yup.object({
+      firstName: yup.string().required("Обязательное поле"),
+      email: yup
+        .string()
+        .required("Обязательное поле")
+        .email("Неверный формат"),
+      password: yup
+        .string()
+        .required("Обязательное поле")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+          "Восемь символов, заглавная буква, строчная буква, цифра"
+        ),
+      confirmPassword: yup
+        .string()
+        .required("Обязательное поле")
+        .oneOf([yup.ref("password"), null], "Пароли не совпадают"),
+    });
+
+    const { handleSubmit, isSubmitting } = useForm({
+      validationSchema: schema,
+    });
+
+    const onSubmit = handleSubmit(async (values) => {
+      const userData: UserRegistrationData = {
+        name: values.firstName,
+        email: values.email,
+        password: values.password,
+      };
+      await store.dispatch("user/fetchRegistrationUser", userData);
+    });
 
     return {
-      isFirstName,
-      isPassword,
-      isEmail,
+      schema,
+      onSubmit,
+      isSubmitting,
+      isLoading: computed(() => store.getters["user/getUserIsLoading"]),
+      isPhone: computed(() => store.getters["getIsPhone"]),
     };
   },
 });
@@ -170,6 +219,43 @@ export default defineComponent({
       &__text {
         font-size: 12px;
         line-height: 18px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px) {
+  .registration {
+    &__body {
+      &__inputs {
+        margin-bottom: 18px;
+        &__item {
+          margin-bottom: 18px;
+        }
+      }
+      .double {
+        flex-direction: column;
+        gap: 0;
+      }
+      &__btns {
+        flex-direction: column;
+        &__item {
+          width: 100%;
+        }
+      }
+    }
+
+    &__footer {
+      margin-top: 16px;
+      margin-bottom: 36px;
+      &__text {
+        font-size: 12px;
+        line-height: 1.38;
+        text-align: center;
+        span {
+          font-size: 12px;
+          font-weight: $semi-bold;
+          cursor: pointer;
+        }
       }
     }
   }

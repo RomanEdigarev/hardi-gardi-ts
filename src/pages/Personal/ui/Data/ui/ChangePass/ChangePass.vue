@@ -7,16 +7,14 @@
           name="newPassword"
           id="newPassword"
           placeholder="Новый пароль"
-          :validation="isPassword"
         />
       </div>
       <div class="change-pass__input">
         <VInput
           type="password"
-          name="confirm  Password"
-          id="confirm  Password"
+          name="confirmPassword"
+          id="confirmPassword"
           placeholder="Подтверждение пароля"
-          :validation="isPassword"
         />
       </div>
     </div>
@@ -54,39 +52,49 @@ import { VInput } from "@/shared/ui/inputs";
 import * as yup from "yup";
 import anime from "animejs";
 import { useStore } from "@/services/vuex";
+import { useField } from "vee-validate";
 export default defineComponent({
   name: "ChangePass",
   components: { VInput },
   setup() {
     const store = useStore();
     const isMobile = computed(() => store.state.isMobile);
+    const isPhone = computed(() => store.getters["getIsPhone"]);
     const isPassword = yup.string().required("Обязательное поле");
     const isOpen = ref(false);
     const body = ref(null);
+    useField("newPassword");
+    useField("confirmPassword");
 
     const animation = (isOpen) => {
       if (isOpen) {
         anime
           .timeline({
             targets: body.value,
-            maxHeight: [0, "1000px"],
-            height: isMobile.value ? "166px" : "72px",
-            duration: 600,
-            easing: "easeOutCirc",
+            maxHeight: ["0px", "1000px"],
+            height: isMobile.value || isPhone.value ? "166px" : "73px",
+            duration: 400,
+            easing: "linear",
+            complete: () => {
+              body.value.style.overflow = "visible";
+            },
           })
           .add({
             targets: body.value,
             opacity: [0, 1],
-            duration: 600,
-            easing: "easeOutCirc",
+            marginBottom: ["0px", "60px"],
+            duration: 400,
+            easing: "linear",
           });
       } else {
+        body.value.style.overflow = "hidden";
         anime({
           targets: body.value,
           maxHeight: ["1000px", "0px"],
           height: [0],
-          duration: 600,
-          easing: "easeOutCirc",
+          marginBottom: ["60px", "0px"],
+          duration: 400,
+          easing: "linear",
         });
       }
     };
@@ -140,6 +148,18 @@ export default defineComponent({
     &__body {
       grid-template-columns: 1fr;
       row-gap: 30px;
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .change-pass {
+    &__body {
+      gap: 18px;
+      grid-auto-rows: 60px;
+      margin-bottom: 0px !important;
+    }
+    &__input {
     }
   }
 }

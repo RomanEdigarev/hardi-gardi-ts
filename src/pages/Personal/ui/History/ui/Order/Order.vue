@@ -149,6 +149,9 @@ export default defineComponent({
       &__info {
         &__title {
           margin-bottom: 8px;
+          span {
+            font-size: 15px;
+          }
           span:first-child {
             margin-right: 10px;
             font-weight: $bold;
@@ -206,12 +209,15 @@ export default defineComponent({
     }
   }
   // *** Footer END *** //
+  :deep .product-card__count span {
+    font-size: 14px;
+  }
 }
 
 .is-open {
   .order {
     &__body {
-      background-color: $clr-upsilon;
+      background-color: #ecf0f8;
       &__left__btn {
         svg {
           transform: rotate(180deg);

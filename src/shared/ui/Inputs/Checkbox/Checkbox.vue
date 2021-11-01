@@ -59,7 +59,7 @@ export default defineComponent({
     const check = () => {
       if (!props.isDisabled) {
         isChecked.value = !isChecked.value;
-        emit("update:model-value", isChecked.value);
+        emit("update:modelValue", isChecked.value);
       }
     };
 
@@ -98,7 +98,8 @@ export default defineComponent({
 }
 
 .input {
-  width: 0;
+  width: 0px;
+  display: none;
 }
 
 .checkbox {

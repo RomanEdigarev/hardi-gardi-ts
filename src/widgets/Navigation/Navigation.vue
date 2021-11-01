@@ -1,6 +1,11 @@
 <template>
   <div class="navigation">
-    <div class="navigation__location"><Location city="Санкт-Петербург" /></div>
+    <div class="navigation__location">
+      <Location
+        :city="cities[currentCityIndex]"
+        @change-city="$emit('change-city')"
+      />
+    </div>
     <div class="navigation__container">
       <nav class="navigation__links">
         <span
@@ -51,12 +56,13 @@
 
 <script lang="ts">
 import { NavigationButton } from "./ui";
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, onMounted, PropType } from "vue";
 import { CatalogSubmenu } from "./ui";
 import Location from "../Location/Location.vue";
 import { useTopMenu } from "@/widgets/Navigation/lib";
 import CabinetTitle from "@/widgets/Cabinet/ui/CabinetTitle/CabinetTitle.vue";
 import { MenuLink } from "@/entities/Shop/Menu/model";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Navigation",
@@ -73,8 +79,20 @@ export default defineComponent({
     },
   },
   setup() {
+    const store = useStore();
+
+    const currentCityIndex = computed(
+      () => store.getters["city/getCurrentCityId"]
+    );
+    const cities = computed(() => store.getters["city/getAllCities"]);
+    onMounted(async () => {
+      await store.dispatch("city/getCityItems");
+    });
+
     return {
       ...useTopMenu(),
+      currentCityIndex,
+      cities,
     };
   },
 });

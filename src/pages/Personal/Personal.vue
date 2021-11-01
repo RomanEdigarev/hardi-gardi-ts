@@ -2,9 +2,9 @@
   <div class="personal">
     <main class="page-main">
       <div class="page-main__header">
-        <PageTitle text="Здравствуйте, Ангелина!" />
+        <PageTitle :text="`Здравствуйте, ${user.name}!`" />
       </div>
-      <div class="personal__footer">
+      <div v-show="currentItemNumber === 0" class="personal__footer">
         <Details />
       </div>
       <div class="personal__header">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="personal__body">
-        <component :is="items[currentItemNumber].name"></component>
+        <component :is="items[currentItemNumber].name" :user="user"></component>
       </div>
       <div v-if="isPhone" class="personal__log-out">
         <span>Выйти</span>
@@ -75,12 +75,16 @@ export default defineComponent({
       },
     ];
     const currentItemNumber = ref(0);
+    const user = computed(() => {
+      return store.state.user;
+    });
 
     return {
       currentItemNumber,
       items,
       isMobile,
       isPhone: computed(() => store.getters["getIsPhone"]),
+      user,
     };
   },
 });
@@ -102,6 +106,9 @@ export default defineComponent({
       border-radius: 25px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
+      span {
+        transform: translateY(-6px);
+      }
     }
     &__item:first-child {
       border-bottom-left-radius: 0;
@@ -192,12 +199,14 @@ export default defineComponent({
         height: 70px;
         flex-shrink: 1.5;
         padding: 0;
-        font-size: 11px;
-        line-height: 1.45;
-        font-weight: $bold;
-        color: $clr-phi;
+
         justify-content: center;
         span {
+          text-align: center;
+          font-size: 11px;
+          line-height: 1.45;
+          font-weight: $bold;
+          color: $clr-phi;
           padding: 6px;
           display: inline-block;
           max-width: 95%;

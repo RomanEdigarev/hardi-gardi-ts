@@ -19,7 +19,7 @@
           />
         </svg>
       </div>
-      <div class="notifications__item__title">Скидки, распродажи, обзоры</div>
+      <div class="notifications__item__title">Скидки на любимые игры</div>
       <div class="notifications__item__text">
         Все о подарках и выгодных покупках с доставкой самых свежих новостей!
       </div>
@@ -43,7 +43,7 @@
           />
         </svg>
       </div>
-      <div class="notifications__item__title">SMS оповещения</div>
+      <div class="notifications__item__title">Новинки от ХардиГарди</div>
       <div class="notifications__item__text">
         Возвращение к последнему месту просмотра и возобновление процесса
         оформления заказа.
@@ -91,7 +91,7 @@ export default defineComponent({
 
   &__item {
     width: 100%;
-    max-width: 408px;
+    //max-width: 408px;
     color: $clr-phi;
     margin-bottom: 46px;
     padding-left: 36px;
@@ -105,6 +105,7 @@ export default defineComponent({
       margin-bottom: 12px;
     }
     &__text {
+      font-size: 15px;
       line-height: 1.6;
     }
     &__icon {

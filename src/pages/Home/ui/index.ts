@@ -4,3 +4,4 @@ export { default as SectionNewGames } from "./SectionNewGames/SectionNewGames.vu
 export { default as SectionSales } from "./SectionSales/SectionSales.vue";
 export { default as SectionSets } from "./SectionSets/SectionSets.vue";
 export { default as CategoryCard } from "./CategoryCard/CategoryCard.vue";
+export { default as HomeAnimationBG } from "./HomeAnimationBG/HeaderAnimationBG.vue";

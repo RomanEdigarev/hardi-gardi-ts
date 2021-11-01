@@ -1,6 +1,7 @@
-import { Products, Sections } from "@/services/api/model";
+import { ProductItem, Products, Sections } from "@/services/api/model";
 import { apiInstance } from "@/services/api/config";
 import { Filters } from "@/services/api/model/Filter";
+import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 
 export const getProductsByPageAPI = async (
   page: number,
@@ -41,6 +42,23 @@ export const getFilterFieldsAPI = async (): Promise<Filters> => {
 export const getSectionsAPI = async (): Promise<Sections> => {
   try {
     const { data, status } = await apiInstance().post(`catalog/sections.php`);
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getProductByIdAPI = async (
+  id: number
+): Promise<LayoutAPI<ProductItem>> => {
+  try {
+    const { data, status } = await apiInstance().post(
+      `catalog/item.php?id=${id}`
+    );
     if (status === 200 && data.isSuccess) {
       return data;
     } else {

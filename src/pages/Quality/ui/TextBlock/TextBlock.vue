@@ -68,4 +68,13 @@ export default defineComponent({
     }
   }
 }
+@include phone {
+  .text-block {
+    &__body {
+      &__text {
+        font-size: 16px;
+      }
+    }
+  }
+}
 </style>

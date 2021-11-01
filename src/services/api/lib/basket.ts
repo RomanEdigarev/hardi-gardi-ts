@@ -6,7 +6,7 @@ export const addToBasketAPI = async (
 ): Promise<Basket> => {
   try {
     const { data, status } = await apiInstance().post(
-      `user/basket/add.php?id=${basketData.id}&quality=${basketData.quantity}`
+      `user/basket/add.php?id=${basketData.id}&quantity=${basketData.quantity}`
     );
     if (status === 200 && data.isSuccess) {
       return data;
@@ -35,8 +35,6 @@ export const changeBasketPositionAPI = async (
   positionID,
   quantity: number
 ): Promise<Basket> => {
-  debugger;
-  console.log("position ID = ", positionID);
   try {
     const { data, status } = await apiInstance().post(
       `user/basket/modify.php?id=${positionID}&quantity=${quantity}`

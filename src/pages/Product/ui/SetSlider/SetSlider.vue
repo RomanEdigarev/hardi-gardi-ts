@@ -6,12 +6,12 @@
     <div class="set-slider__body">
       <div class="set-slider__body__slider">
         <div class="set-slider__body__slider__prev-btn" @click="goToPrevSlide">
-          <BetaButton styling="beta-zeta-btn">
+          <BetaButton styling="beta-zeta-btn" :is-disabled="slideIndex === 0">
             <SlideArrowIcon />
           </BetaButton>
         </div>
         <div class="set-slider__body__slider__items">
-          <Splide :options="options">
+          <Splide ref="splide" :options="options">
             <SplideSlide v-for="product in products">
               <div class="set-slider__body__item">
                 <img
@@ -37,7 +37,11 @@
         </div>
 
         <div class="set-slider__body__slider__next-btn" @click="goToNextSlide">
-          <BetaButton @click="" styling="beta-zeta-btn">
+          <BetaButton
+            @click=""
+            styling="beta-zeta-btn"
+            :is-disabled="pageLength - 3 === 0"
+          >
             <SlideArrowIcon />
           </BetaButton>
         </div>
@@ -48,11 +52,11 @@
 
 <script lang="ts">
 import { Product } from "@/entities/Products/Product/model";
-import {computed, defineComponent, PropType, ref} from "vue";
+import { computed, defineComponent, onMounted, PropType, ref } from "vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { SlideArrowIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 export default defineComponent({
   name: "SetSlider",
   components: {
@@ -68,19 +72,37 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore()
-    const isPhone = computed(() => store.getters['getIsPhone'])
+    const store = useStore();
+    const isPhone = computed(() => store.getters["getIsPhone"]);
     const options = computed(() => {
       return {
-        type: "loop",
+        type: "slide",
         perPage: 3,
         perMove: 3,
         gap: 15,
-        width: isPhone.value ? '273px':"378px",
+        width: isPhone.value ? "273px" : "378px",
         rewind: true,
+      };
+    });
+    const splide = ref(null);
+    const pageLength = computed(() => {
+      if (splide.value && splide.value.splide) {
+        return splide.value.splide.length;
       }
-    })
+    });
+    const slideIndex = computed(() => {
+      if (splide.value && splide.value.splide) {
+        return splide.value.index;
+      } else {
+        return 0;
+      }
+    });
 
+    onMounted(() => {
+      if (splide.value && splide.value.splide) {
+        console.log(splide.value.splide);
+      }
+    });
 
     const nextSlideBtn = ref<HTMLElement>(null);
     const prevSlideBtn = ref<HTMLElement>(null);
@@ -98,6 +120,9 @@ export default defineComponent({
       prevSlideBtn,
       goToNextSlide,
       goToPrevSlide,
+      splide,
+      pageLength,
+      slideIndex,
     };
   },
 });
@@ -151,14 +176,14 @@ export default defineComponent({
   }
   // *** Body END *** //
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .set-slider {
     &__body__item {
       width: 80px;
       height: 100px;
     }
   }
-
 }
 </style>
 <style lang="scss">
@@ -190,5 +215,4 @@ export default defineComponent({
 
   // *** Splide END *** //
 }
-
 </style>
