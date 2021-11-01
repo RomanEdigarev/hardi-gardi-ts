@@ -7,7 +7,11 @@
           :style="`background-color: #${color}`"
         >
           <div class="prolog-card__image-wrapper">
-            <slot name="image" />
+            <component
+              v-if="sectionId"
+              :is="`section-id_${sectionId}`"
+            ></component>
+            <slot v-else name="image" />
           </div>
 
           <div class="prolog-card__title-wrapper">
@@ -22,11 +26,13 @@
 <script lang="ts">
 import { Card } from "@/shared/ui";
 import { defineComponent } from "vue";
+import * as Icons from "@/pages/Home/ui/Prolog/ui/PrologCard/icons";
 
 export default defineComponent({
   name: "PrologCard",
   components: {
     Card,
+    ...Icons
   },
   props: {
     title: {
@@ -36,6 +42,9 @@ export default defineComponent({
     color: {
       type: String,
       required: true,
+    },
+    sectionId: {
+      type: String,
     },
   },
   setup() {},

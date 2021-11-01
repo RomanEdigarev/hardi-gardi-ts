@@ -95,6 +95,7 @@ import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
+import {useRoute} from "vue-router";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -115,6 +116,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
+    const route = useRoute()
     const { product } = useProduct();
     const phoneView = ref("cl-2");
     const changePhoneView = (viewType: string) => {
@@ -122,7 +124,11 @@ export default defineComponent({
     };
 
     onMounted(async () => {
+      if(route.params.section) {
+        store.commit("products/addCurrentFilter", { name: "section", value: route.params.section });
+      }
       await initCatalog();
+      console.log(route.params.section)
     });
 
     const applyFilter = async () => {
