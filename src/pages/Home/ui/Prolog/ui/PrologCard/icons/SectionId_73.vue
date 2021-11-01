@@ -31,7 +31,7 @@ import { computed, defineComponent, ref } from "vue";
 import anime from "animejs";
 
 export default defineComponent({
-  name: "SectionId_76",
+  name: "SectionId_73",
   setup() {
     const svg = ref<HTMLElement>(null);
     const container = ref<HTMLElement>(null);

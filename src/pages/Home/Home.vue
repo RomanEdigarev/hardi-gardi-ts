@@ -185,7 +185,7 @@ export default defineComponent({
   }
   &__prolog-container {
     width: 100%;
-    height: 816px;
+    //height: 816px;
     margin-top: 757px;
     //margin-top: 62vh;
     margin-bottom: 114px;

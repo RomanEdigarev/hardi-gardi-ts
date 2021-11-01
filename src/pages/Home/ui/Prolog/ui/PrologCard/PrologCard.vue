@@ -26,20 +26,13 @@
 <script lang="ts">
 import { Card } from "@/shared/ui";
 import { defineComponent } from "vue";
-import {
-  SectionId_5,
-  SectionId_71, SectionId_72,
-  SectionId_76,
-} from "@/pages/Home/ui/Prolog/ui/PrologCard/icons";
+import * as Icons from "@/pages/Home/ui/Prolog/ui/PrologCard/icons";
 
 export default defineComponent({
   name: "PrologCard",
   components: {
     Card,
-    SectionId_76,
-    SectionId_71,
-    SectionId_72,
-    SectionId_5,
+    ...Icons
   },
   props: {
     title: {

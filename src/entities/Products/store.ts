@@ -64,7 +64,6 @@ export const productsModule: Module<Products, State> = {
           newCurrentFilter["section"] = payload.value;
         }
         state.currentFilter = newCurrentFilter;
-        debugger;
       } else {
         state.currentFilter = {
           ...state.currentFilter,
