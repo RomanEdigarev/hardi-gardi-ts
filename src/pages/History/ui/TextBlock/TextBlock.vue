@@ -78,9 +78,25 @@ export default defineComponent({
   .text-block {
     max-width: 100%;
     &__header {
+      &__title {
+        margin-bottom: 23px;
+      }
+      &__subtitle {
+        font-size: 20px;
+        font-weight: $bold;
+        line-height: 24px;
+        margin-bottom: 16px;
+      }
     }
     &__body {
+     :deep p {
+        margin: 0;
+      }
       max-width: none;
+      max-height: 192px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 }
