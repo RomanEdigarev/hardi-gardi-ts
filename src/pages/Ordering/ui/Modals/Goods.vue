@@ -126,6 +126,9 @@ export default defineComponent({
       border-radius: 20px;
       display: flex;
       align-items: center;
+      .packing__icon {
+        min-width: 20px;
+      }
     }
   }
   // *** Body END *** //
@@ -158,6 +161,9 @@ export default defineComponent({
     max-width: 339px;
     padding: 40px 22px;
     max-height: 95vh;
+    .packing {
+      padding-left: 21px;
+    }
   }
 }
 </style>

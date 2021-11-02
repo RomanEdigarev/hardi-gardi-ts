@@ -28,7 +28,7 @@
         <div class="basket__footer__package">
           <Package />
         </div>
-        <div v-if="isPhone" class="basket__footer__checkout">
+        <div ref="checkoutRef" v-if="isPhone" class="basket__footer__checkout" :class="{'is-fixed': isFixed}">
           <Checkout @checkout="checkout" />
         </div>
       </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {computed, defineComponent, ref, watchEffect} from "vue";
 import { DeleteModal, Package } from "./ui";
 import { PageTitle } from "@/shared/ui";
 import { Checkout, ProductCardCart } from "@/widgets";
@@ -85,6 +85,31 @@ export default defineComponent({
       deletingProductId.value = positionId;
     };
 
+
+    const checkoutRef = ref(null)
+    const isFixed = ref(true)
+    watchEffect(() => {
+      if (checkoutRef.value) {
+        const options = {
+          root: null,
+          threshold: 0
+        }
+        const callback = (entries, observer) => {
+          if (entries[0].intersectionRatio >= 0) {
+            isFixed.value = !entries[0].isIntersecting
+            console.log(
+                // observer
+                // entries[0].isIntersecting
+                parseFloat(entries[0].intersectionRatio.toFixed(1))
+            )
+          }
+        }
+        const observer = new IntersectionObserver(callback, options)
+        observer.observe(checkoutRef.value)
+      }
+    })
+
+
     return {
       products,
       basketCount: computed<number>(
@@ -97,6 +122,8 @@ export default defineComponent({
       isPhone: computed(() => store.getters["getIsPhone"]),
       deleteProduct,
       deletingProductId,
+      checkoutRef,
+      isFixed
     };
   },
 });
@@ -144,8 +171,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px),
-  (-webkit-min-device-pixel-ratio: 3) {
+@include phone {
   .basket {
     &__body {
       flex-direction: column;
@@ -156,6 +182,80 @@ export default defineComponent({
     &__footer {
       &__package {
         margin-bottom: 22px;
+      }
+    }
+    &__delete-modal-container {
+      width: 98vw;
+      max-width: 339px;
+    }
+    :deep .product-card {
+      &__price {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        &__current {
+          margin-right: 10px;
+        }
+        span {
+          width: auto;
+        }
+      }
+    }
+    :deep .checkout {
+      &__header {
+        margin-bottom: 18px;
+      }
+      &__body {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "list"
+          "title"
+          "subtitle";
+
+        &__title {
+          grid-area: title;
+          span {
+            font-size: 22px;
+          }
+        }
+        &__subtitle {
+          grid-area: subtitle;
+          font-size: 12px;
+          max-width: 204px;
+          margin-bottom: 26px;
+          span {
+            font-size: 12px;
+          }
+        }
+        &__list {
+          grid-area: list;
+          padding-bottom: 16px;
+          margin-bottom: 16px;
+          border-bottom: 1px solid #FFFFFF;
+          &__goods {
+            margin-bottom: 0;
+          }
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .is-fixed {
+    :deep .checkout__footer {
+      width: 100%;
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+       button {
+        width: 295px;
       }
     }
   }
