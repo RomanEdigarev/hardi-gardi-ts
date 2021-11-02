@@ -109,4 +109,21 @@ export default defineComponent({
     right: 14px;
   }
 }
+@include phone {
+  .delete-modal {
+    padding: 40px 26px 26px 26px;
+    &__header {
+      &__title {
+        font-size: 22px;
+      }
+    }
+    &__body {
+      margin-bottom: 26px;
+      &__text {
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+  }
+}
 </style>
