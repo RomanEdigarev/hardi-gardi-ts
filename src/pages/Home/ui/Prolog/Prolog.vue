@@ -34,7 +34,7 @@
           :key="card.name"
         >
           <PrologCard
-              @click="$router.push(`/catalog/${card.id}`)"
+            @click="$router.push(`/catalog/${card.id}`)"
             :section-id="card.id"
             :color="card.color"
             :title="card.name"
@@ -44,22 +44,26 @@
       <transition appear @enter="enterElement" @leave="leaveElement">
         <div v-if="isOpen" class="prolog__cards__row">
           <div
-              v-for="(card, index) in secondRow"
-              class="prolog__card"
-              :key="card.name"
+            v-for="(card, index) in secondRow"
+            class="prolog__card"
+            :key="card.name"
           >
             <PrologCard
-                @click="$router.push(`/catalog/${card.id}`)"
-                :section-id="card.id"
-                :color="card.color"
-                :title="card.name"
+              @click="$router.push(`/catalog/${card.id}`)"
+              :section-id="card.id"
+              :color="card.color"
+              :title="card.name"
             />
           </div>
         </div>
       </transition>
     </div>
     <div class="prolog__button">
-      <BetaButton styling="beta-beta-btn" v-if="!isOpen" @click="isOpen = !isOpen">
+      <BetaButton
+        styling="beta-beta-btn"
+        v-if="!isOpen"
+        @click="isOpen = !isOpen"
+      >
         <PlusIcon />
       </BetaButton>
     </div>
@@ -71,9 +75,9 @@ import PrologCard from "./ui/PrologCard/PrologCard.vue";
 import { useCards } from "./lib/useCards";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";
-import {defineComponent, ref} from "vue";
+import {computed, defineComponent, getCurrentInstance, ref, watch} from "vue";
 import anime from "animejs";
-import {useStore} from "@/services/vuex";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Prolog",
@@ -83,16 +87,24 @@ export default defineComponent({
     PlusIcon,
   },
   setup() {
-    const store = useStore()
-    const { rows } = useCards();
-    const [firstRow, secondRow] = rows;
-    const isOpen = ref(false)
+    const store = useStore();
+    const isOpen = ref(false);
+    const isMobile = computed(() => {
+      return store.getters["getIsMobile"];
+    });
+    const currentInstance = getCurrentInstance()
+    const rows = ref(useCards( isMobile.value ? 3 : 4))
+    const [firstRow, secondRow] = rows.value;
+
+
+    watch(isMobile, () => {
+      rows.value = useCards.call(currentInstance,3)
+    });
 
     const setSectionFilter = async (value) => {
       store.commit("products/addCurrentFilter", { name: "section", value });
       await store.dispatch("products/setProductsByPage", 1);
     };
-
 
     const enterElement = (el, done) => {
       anime({
@@ -119,7 +131,7 @@ export default defineComponent({
       isOpen,
       enterElement,
       leaveElement,
-      setSectionFilter
+      setSectionFilter,
     };
   },
 });
