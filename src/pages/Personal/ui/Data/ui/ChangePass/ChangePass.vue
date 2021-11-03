@@ -59,6 +59,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const isMobile = computed(() => store.state.isMobile);
+    const isPhone = computed(() => store.getters["getIsPhone"]);
     const isPassword = yup.string().required("Обязательное поле");
     const isOpen = ref(false);
     const body = ref(null);
@@ -71,7 +72,7 @@ export default defineComponent({
           .timeline({
             targets: body.value,
             maxHeight: ["0px", "1000px"],
-            height: isMobile.value ? "166px" : "72px",
+            height: isMobile.value || isPhone.value ? "166px" : "73px",
             duration: 400,
             easing: "linear",
             complete: () => {
@@ -147,6 +148,18 @@ export default defineComponent({
     &__body {
       grid-template-columns: 1fr;
       row-gap: 30px;
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .change-pass {
+    &__body {
+      gap: 18px;
+      grid-auto-rows: 60px;
+      margin-bottom: 0px !important;
+    }
+    &__input {
     }
   }
 }

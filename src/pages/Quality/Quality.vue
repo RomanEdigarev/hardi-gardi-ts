@@ -204,6 +204,9 @@
             </TextBlock>
           </div>
           <div class="quality__body__item__img-container img-h">
+            <img :src="require('/public/images/pages/2019.jpg')" alt="" style="margin-bottom: 12px" />
+          </div>
+          <div class="quality__body__item__img-container img-h">
             <img :src="require('/public/images/pages/2019.jpg')" alt="" />
           </div>
         </div>
@@ -564,16 +567,40 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 736px),
-  (-webkit-min-device-pixel-ratio: 3) {
+@include phone {
   .quality {
     // *** Header *** //
+    :deep .page-main__header {
+      margin-bottom: 36px;
+    }
+    &__title {
+      display: inline-block;
+      max-width: 80vw;
+      font-size: 28px;
+      line-height: 34px;
+      margin-bottom: 0;
+    }
     &__header {
+      margin-bottom: 18px;
+      &__title {
+        margin-bottom: 329px;
+        font-size: 16px;
+      }
+      &__subtitle div {
+        font-size: 20px;
+        line-height: 24px;
+        max-width: 70vw;
+        margin: 0 auto;
+      }
       &__img-container {
-        width: 240px;
-        height: auto;
-        top: 17%;
-        left: 10%;
+        width: 252px;
+        height: 209px;
+        top: 28%;
+        left: 16%;
+        img:nth-child(2) {
+          width: 197px;
+          height: 163px;
+        }
       }
     }
     // *** Header END *** //
@@ -585,6 +612,11 @@ export default defineComponent({
         margin-bottom: 60px;
         .quality__body__item__text-block {
           margin-bottom: 30px;
+        }
+        &__img-container {
+          img {
+            border-radius: 15px;
+          }
         }
       }
       &__item:first-child {
@@ -618,15 +650,31 @@ export default defineComponent({
     &__footer {
       &__docs {
         min-width: 100vw;
-        margin-left: -18px;
+        margin-left: -10px;
         padding: 52px 32px;
         svg {
           display: none !important;
         }
+        &__text {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 21px;
+          margin-bottom: 40px;
+        }
+        &__items {
+          gap: 13px;
+        }
       }
     }
     // *** Footer END *** //
+    .img-v {
+      margin-left: auto;
+      width: 100vw;
+      max-width: 248px;
+      height: 311px;
+    }
   }
+
 }
 </style>
 <style lang="scss">

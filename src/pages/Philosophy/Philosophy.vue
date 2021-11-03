@@ -54,11 +54,8 @@
         </p>
       </div>
       <div class="philosophy__body">
-        <div class="philosophy__body__item pr-72 mb-78">
-          <div
-            class="philosophy__body__item__img-container"
-            style="width: 649px; height: 376px"
-          >
+        <div class="philosophy__body__item pr-72 first-block">
+          <div class="philosophy__body__item__img-container">
             <img src="./assets/01.jpg" alt="" />
             <svg
               width="60"
@@ -66,7 +63,6 @@
               viewBox="0 0 60 85"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style="bottom: -130px; left: 60px"
             >
               <path
                 d="M45.3566 0.543101C14.2978 9.78697 -4.3244 41.7203 0.862915 74.5587C3.38061 90.4823 26.6476 86.5175 24.1299 70.637C21.113 51.5244 33.7014 30.0847 51.347 24.8487C66.2578 20.4314 60.3542 -3.91723 45.3566 0.543101Z"
@@ -79,7 +75,6 @@
               viewBox="0 0 51 51"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style="bottom: -186px; left: 118px"
             >
               <path
                 d="M25.1471 51.0002C39.0272 51.0002 50.2941 39.739 50.2941 25.8531C50.2941 11.9672 39.0415 0.706055 25.1471 0.706055C11.2526 0.706055 0 11.9531 0 25.839C0 39.739 11.2526 51.0002 25.1471 51.0002Z"
@@ -93,23 +88,15 @@
             идеи и задумки, заканчивая ее воплощением.
           </div>
         </div>
-        <div class="philosophy__body__item mb-78">
+        <div class="philosophy__body__item mb-78 second-block">
           <div class="philosophy__body__item__text-block">
             Иллюстраторы, дизайнеры, технологи. Все вовлечены в процесс создания
             наших игр. И на каждом этапе мы стараемся представить, что будет
             чувствовать ребенок, когда будет играть в Харди Гарди.
           </div>
           <div class="philosophy__body__item__img-container image-grid">
-            <img
-              src="./assets/01.jpg"
-              alt=""
-              style="max-width: 152px; justify-self: end"
-            />
-            <img
-              src="./assets/01.jpg"
-              alt=""
-              style="grid-row: 1 /3; grid-column: 2"
-            />
+            <img src="./assets/01.jpg" alt="" />
+            <img src="./assets/01.jpg" alt="" />
             <img src="./assets/01.jpg" alt="" />
           </div>
         </div>
@@ -268,19 +255,64 @@ export default defineComponent({
     gap: 23px;
     grid-template-rows: 154px 368px;
   }
+  .first-block {
+    margin-bottom: 79px;
+    .philosophy__body__item {
+      &__img-container {
+        max-width: 649px;
+        svg:nth-child(2) {
+          top: 108%;
+          left: 12%;
+        }
+        svg:last-child {
+          left: 24%;
+          top: 126%;
+        }
+      }
+    }
+  }
+  .second-block {
+    .philosophy__body__item {
+      &__img-container {
+        grid-template-columns: 434px 257px;
+        img:first-child {
+          grid-row: 1 /3;
+          grid-column: 2;
+        }
+        img:nth-child(2) {
+          max-width: 153px;
+          justify-self: flex-end;
+        }
+        img:nth-child(3) {
+        }
+      }
+    }
+  }
   // *** Other END *** //
 }
 
-@media screen and (min-width: 738px) and (max-width: 1200px),
-  (-webkit-min-device-pixel-ratio: 3) {
+@include tablet {
   .philosophy {
     // *** Header *** //
     &__header {
       max-width: 338px;
       &__image-container {
-        svg {
-          bottom: -40px;
-          left: 46px;
+        position: absolute;
+        top: 0%;
+        right: -104%;
+        img {
+          width: 295px;
+          height: 295px;
+        }
+        svg:nth-child(2) {
+          width: 53px;
+          height: 57px;
+          bottom: 0%;
+          left: 2%;
+        }
+        svg:last-child {
+          width: 31px;
+          height: 31px;
         }
       }
 
@@ -326,17 +358,41 @@ export default defineComponent({
       }
     }
     // *** Body END *** //
-
-    .image-grid {
-      max-width: 339px;
-      gap: 11px;
-      grid-template-rows: 73px 174px;
-      grid-template-columns: 206px 122px;
-      img {
-        border-radius: 14px;
+    .first-block {
+      .philosophy__body__item {
+        &__img-container {
+          img {
+            border-radius: 15px;
+          }
+        }
       }
-      img:first-child {
-        max-width: 72px !important;
+    }
+    .second-block {
+      .philosophy__body__item {
+        &__img-container {
+        }
+      }
+      .image-grid {
+        grid-template-columns: 1fr 122px;
+        grid-template-rows: 72px 174px;
+        gap: 11px;
+        img:first-child {
+          width: 100%;
+          border-radius: 14px;
+        }
+        img:nth-child(2) {
+          max-width: 72px;
+          border-radius: 14px;
+        }
+        img:nth-child(3) {
+          border-radius: 14px;
+        }
+      }
+    }
+
+    &__footer__img {
+      img {
+        border-radius: 36px;
       }
     }
   }
@@ -344,12 +400,28 @@ export default defineComponent({
 
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
+}
+@include phone {
   .philosophy {
+    :deep .page-main__header {
+      margin-bottom: 0;
+    }
+    :deep .history__title {
+      font-size: 28px;
+    }
     &__header {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      margin-bottom: 44px;
+      &__title {
+        font-size: 22px;
+        margin-bottom: 28px;
+      }
+      &__text-block {
+        margin: 0;
+      }
       &__image-container {
         position: static;
         width: 280px;
@@ -360,43 +432,68 @@ export default defineComponent({
           height: 100%;
         }
         svg:nth-child(2) {
-          top: 38% !important;
-          left: 4% !important;
+          width: 46px;
+          height: 50px;
+          top: 36% !important;
+          left: 12% !important;
         }
         svg:last-child {
-          left: 85% !important;
-          top: 6px !important;
+          width: 27px;
+          height: 27px;
+          left: 82% !important;
+          top: 50px !important;
         }
       }
     }
-    &__body {
-      &__item {
+    .first-block {
+      flex-direction: column;
+      padding: 0;
+      margin-bottom: 82px;
+      .philosophy__body__item {
         &__img-container {
-          margin-bottom: 30px;
-        }
-        &__text-block {
-          font-size: 16px;
-          line-height: 1.5;
-          /* or 150% */
-        }
-      }
-      &__item:first-child {
-        flex-direction: column;
-        .philosophy__body__item__img-container {
-          svg:nth-child(3) {
-            left: 10% !important;
-            bottom: -158% !important;
+          width: 100%;
+          margin-bottom: 27px;
+          img {
+            border-radius: 15px;
           }
           svg:nth-child(2) {
-            bottom: -147% !important;
-            left: 0% !important;
+            top: 198%;
+            left: 6%;
+          }
+          svg:nth-child(3) {
+            left: 20%;
+            top: 228%;
           }
         }
       }
-      &__item:nth-child(2) {
-        flex-direction: column-reverse;
+    }
+    .second-block {
+      flex-direction: column-reverse;
+      padding: 0;
+      margin-bottom: 44px;
+      .philosophy__body__item {
+        &__img-container {
+          margin-bottom: 44px;
+        }
+      }
+      .image-grid {
+        grid-template-columns: 1fr 122px;
+        grid-template-rows: 72px 174px;
+        gap: 11px;
+        img:first-child {
+          border-radius: 9px;
+
+        }
+        img:nth-child(2) {
+          border-radius: 14px;
+          max-width: 72px;
+        }
+        img:nth-child(3) {
+          border-radius: 14px;
+        }
       }
     }
+
     &__footer {
       &__img {
         img {

@@ -113,4 +113,28 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
+  .child {
+    &__body {
+      &__item {
+        margin-bottom: 26px;
+      }
+      &__item:last-child {
+        margin-bottom: 12px;
+      }
+      &__inputs {
+        margin-bottom: 0;
+      }
+      &__checkbox {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 26px;
+        div {
+          margin-left: -18px;
+        }
+      }
+    }
+  }
+}
 </style>

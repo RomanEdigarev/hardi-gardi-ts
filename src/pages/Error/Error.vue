@@ -16,7 +16,7 @@
         </svg>
       </div>
       <div class="error__body__title">Ой! Страница не найдена :(</div>
-      <div class="error__body__btn">
+      <div class="error__body__btn" @click="$router.push('/')">
         <AlfaButton text="Вернуться на главную" />
       </div>
     </div>
@@ -38,6 +38,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .error {
+  margin-bottom: 20vh;
   // *** Body *** //
   &__body {
     margin-left: 625px;
@@ -62,6 +63,7 @@ export default defineComponent({
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
   }
 }
 </style>

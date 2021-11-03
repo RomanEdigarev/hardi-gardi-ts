@@ -1,26 +1,34 @@
 import { getCatalog } from "@/entities/Shop/lib";
+import { Section } from "@/entities/Shop/Catalog/model";
+import { getCurrentInstance, toRaw } from "vue";
+import { useStore } from "@/services/vuex";
 
 type PrologCard = {
-  title: string;
   color: string;
-};
+} & Section;
 
-type PrologCards = {
-  cards: PrologCard[];
-};
+type PrologCards = PrologCard[][];
 
-export const useCards = (): PrologCards => {
-  const catalog = getCatalog();
-  const titles = catalog.sections.slice(0, 4).map((item) => item.name);
+export const useCards = (itemsInRow): PrologCards => {
+  const currentInstance = getCurrentInstance();
+  const store = useStore();
+
+  const catalog = store.getters["shop/getCatalog"];
+  const sections = [...catalog.sections];
   const colors = ["FFC124", "5F73AA", "F27F94", "5F73AA"];
-  const cards = titles.map((title, index) => {
-    return {
-      title,
-      color: colors[index],
-    };
-  });
+  const chunks = [];
+  while (sections.length > 0) {
+    const splice = sections.splice(0, itemsInRow).map((item) => toRaw(item));
+    chunks.push(
+      splice.map((card, index) => {
+        return {
+          ...card,
+          color: colors[index],
+        };
+      })
+    );
+  }
+  const rows: PrologCard[][] = chunks;
 
-  return {
-    cards,
-  };
+  return rows;
 };

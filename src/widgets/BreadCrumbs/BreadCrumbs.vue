@@ -88,4 +88,10 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 736px) {
+  .breadcrumbs {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
 </style>

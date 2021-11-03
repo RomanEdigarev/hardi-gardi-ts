@@ -9,6 +9,7 @@
           v-if="isPhone"
           @open-burger="openBurger"
           @openSearchModalPhone="openSearchModal"
+          @change-city="openChangeCity"
         />
         <Header
           v-else
@@ -40,6 +41,7 @@
       </div>
 
       <img
+          v-if="!isOrderingPage"
         class="app__footer-bg"
         :src="require('/public/images/footer-bg.svg')"
         alt=""
@@ -54,7 +56,7 @@
       </div>
       <div
         ref="searchModalPhone"
-        v-if="isMobile"
+        v-if="isMobile || isPhone"
         class="app__search-modal-phone"
       >
         <SearchModalPhone @close="closeSearchModal" />
@@ -76,13 +78,21 @@ import {
   ChangeCity,
 } from "./ui";
 import { ScrollUpPage } from "@/features";
-import { computed, defineComponent, onBeforeMount, onMounted, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  ref,
+  watch, watchEffect,
+} from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
 import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
 import anime from "animejs";
+import {useRoute} from "vue-router";
 
 export default defineComponent({
   components: {
@@ -99,17 +109,14 @@ export default defineComponent({
   setup() {
     const changeCity = ref(null);
     const store = useStore();
+    const route = useRoute();
     const isToken = computed(() => store.getters["getIsToken"]);
+    const isOrderingPage = ref(false);
+
     onMounted(async () => {
+      isOrderingPage.value = route.path === "/ordering";
       if (!store.state.isInit) {
         await initShop(store);
-
-        store.commit(
-          "setIsMobile",
-          document.documentElement.clientWidth <= 1360 &&
-            document.documentElement.clientWidth > 737
-        );
-        store.commit("setIsPhone", document.documentElement.clientWidth <= 737);
       }
     });
 
@@ -152,6 +159,12 @@ export default defineComponent({
       });
     };
 
+
+
+    watchEffect(() => {
+      route.path === "/ordering" ? (isOrderingPage.value = true) : false;
+    });
+
     return {
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
@@ -165,6 +178,7 @@ export default defineComponent({
       closeChangeCity,
       changeCity,
       openChangeCity,
+      isOrderingPage
     };
   },
 });
@@ -358,7 +372,7 @@ export default defineComponent({
       margin-bottom: 136px;
     }
     &__footer-bg {
-      max-height: 90vh;
+      //max-height: 90vh;
       height: 1157px;
     }
     &__scroll-btn-container {
@@ -370,12 +384,16 @@ export default defineComponent({
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .app {
+    overflow: hidden;
+    &__header {
+      z-index: 6;
+    }
     &__wrapper {
       //padding: 0 18px;
       margin-bottom: 136px;
     }
     &__footer-bg {
-      max-height: 100vh;
+      max-height: none;
       height: 1157px;
     }
     &__scroll-btn-container {
@@ -389,7 +407,7 @@ export default defineComponent({
       width: 339px;
     }
     &__footer-bg {
-      max-height: 111vh;
+      //max-height: 145vh;
       height: 1192px;
     }
   }

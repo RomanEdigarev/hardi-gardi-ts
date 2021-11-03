@@ -3,11 +3,22 @@
     <div class="search__input-container">
       <SearchInput ref="searchInput" :is-loading="isLoading" @input="setSearchQuery" @search="searchProducts"/>
     </div>
-    <div v-if="results.length > 0" class="search__results-container">
+    <div class="search__results-container">
       <slot name="search-results">
+        <template v-if="results.length > 0">
           <div v-for="product in results">
             <ProductCardCatalog is-search-result :product="product"/>
           </div>
+        </template>
+        <div v-else-if="isDirty" class="search__results-container__no-results">
+          <div>
+            По вашему запросу ничего не найдено
+          </div>
+          <div>
+            Попробуйте изменить формулировку или воспользуйтесь нашим <span @click="$router.push('/catalog')">каталогом</span>
+          </div>
+        </div>
+
       </slot>
 
     </div>
@@ -39,6 +50,7 @@ export default defineComponent({
     const store = useStore()
     const searchQuery = ref('')
     const searchInput = ref(null)
+    const isDirty = ref(false)
     const isLoading = computed(() => {
       return store.getters['search/getSearchingIsLoading']
     })
@@ -55,14 +67,17 @@ export default defineComponent({
       store.commit('search/setSearchQuery', e.target.value)
     }
     const searchProducts = async () => {
+      isDirty.value = true
       await store.dispatch('search/fetchSearchProducts', searchQuery.value)
     }
     const goToCatalog = () => {
       router.push('/catalog')
+      isDirty.value = false
     }
 
     watch(route, () => {
       document.documentElement.click()
+      isDirty.value = false
       searchQuery.value = ''
       store.commit('search/setSearchQuery', '')
       store.commit('search/setResults', [])
@@ -81,7 +96,8 @@ export default defineComponent({
       setSearchQuery,
       searchProducts,
       goToCatalog,
-      searchInput
+      searchInput,
+      isDirty
     }
 
   }
@@ -110,6 +126,29 @@ export default defineComponent({
     column-gap: 15px;
     row-gap: 16px;
     grid-auto-rows: 132px;
+    &__no-results {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      div:first-child {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+        color: #606060;
+        margin-bottom: 12px;
+      }
+      div:nth-child(2) {
+        font-size: 15px;
+        line-height: 24px;
+        span {
+          font-size: 15px;
+          cursor: pointer;
+          color: #D23C50;
+        }
+      }
+    }
   }
   &__btn {
     padding: 11px 16px;

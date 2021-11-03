@@ -1,8 +1,8 @@
 <template>
   <div class="sorting">
     <div class="sorting__title">Сортировать по:</div>
-    <div class="sorting__item current">
-      популярности
+    <div class="sorting__item current" @click="dropdownIsOpen = !dropdownIsOpen">
+      {{map[currentSortingType]}}
       <svg
         width="11"
         height="6"
@@ -30,13 +30,72 @@
       </div>
     </div>
     <div class="sorting__item">скидке</div>
+    <transition appear @enter="enterElement" @leave="leaveElement">
+      <div v-if="isPhone" v-show="dropdownIsOpen" class="sorting__dropdown">
+        <div
+          v-for="sortingItem in Object.entries(map)"
+          :class="{ current: sortingItem[0] === currentSortingType }"
+          @click="setNewSortingType(sortingItem[0])"
+        >
+          {{ sortingItem[1] }}
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { useStore } from "@/services/vuex";
+import anime from "animejs";
 export default defineComponent({
   name: "Sorting",
+  setup() {
+    const store = useStore();
+    const currentSortingType = ref("polarity");
+    const dropdownIsOpen = ref(false);
+    const map = {
+      polarity: "популярности",
+      newness: "новизне",
+      ascendingPrice: "цена по возрастанию",
+      descendingPrice: "цена по убыванию",
+      sales: "скидке",
+    };
+
+    const enterElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        duration: 300,
+        easing: "linear",
+        complete: done,
+      });
+    };
+    const leaveElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [1, 0],
+        easing: "linear",
+        duration: 300,
+        complete: done,
+      });
+    };
+
+    const setNewSortingType = (type) => {
+      dropdownIsOpen.value = !dropdownIsOpen.value
+      currentSortingType.value = type;
+    };
+
+    return {
+      isPhone: computed(() => store.getters["getIsPhone"]),
+      currentSortingType,
+      map,
+      setNewSortingType,
+      enterElement,
+      leaveElement,
+      dropdownIsOpen
+    };
+  },
 });
 </script>
 
@@ -114,12 +173,16 @@ export default defineComponent({
   &__item.current {
     text-shadow: 0 0 1px $clr-phi;
   }
+  .current {
+    text-shadow: 0 0 1px $clr-phi;
+  }
 
   // *** Item END *** //
 }
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {
   .sorting {
+    position: relative;
     &__title {
       margin-right: 6px;
     }
@@ -134,6 +197,28 @@ export default defineComponent({
         padding-top: 2px;
         margin-left: 5px;
         display: block;
+      }
+    }
+    &__dropdown {
+      top: 100%;
+      left: 82px;
+      z-index: 100;
+      margin-top: 6px;
+      position: absolute;
+      height: 185px;
+      width: 194px;
+      background: #ffffff;
+      box-shadow: 0px 12px 25px rgba(10, 26, 49, 0.12);
+      border-radius: 15px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      div {
+        font-size: 14px;
+        line-height: 17px;
+        color: #606060;
+        cursor: pointer;
       }
     }
   }

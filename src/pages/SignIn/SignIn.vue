@@ -10,7 +10,7 @@
       <component :is="step"></component>
     </div>
     <div class="sign-in__bg">
-      <img src="./assets/bg.svg" alt="" />
+      <img :src="require(`./assets/bg-${bg}.svg`)" alt="" />
     </div>
   </div>
   <div class="sign-in__modal-container">
@@ -39,13 +39,22 @@ export default defineComponent({
     const router = useRouter();
     const error = computed(() => store.getters["user/getUserError"]);
     const isAuth = computed(() => store.getters["user/getUserAuthInfo"]);
+    const bg = computed(() => {
+      if (store.getters["getIsPhone"]) {
+        return "phone";
+      } else if (store.getters["getIsMobile"]) {
+        return "mobile";
+      } else {
+        return "desktop";
+      }
+    });
     watchEffect(() => {
       if (isAuth.value.isAuth === true) {
         router.push("/personal");
       }
     });
     const titles = {
-      login: "Войти",
+      login: "Вход",
       registration: "Регистрация",
       "new-password": "Восстановление пароля",
     };
@@ -59,6 +68,7 @@ export default defineComponent({
       step,
       title,
       error,
+      bg,
     };
   },
 });
@@ -124,9 +134,16 @@ export default defineComponent({
     margin: 0;
     margin-top: 110px;
     &__bg {
-      left: 0%;
-      top: -4%;
-      width: 395px;
+      transform: translateX(-50%);
+      left: 50%;
+      top: 1%;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+    :deep .page-title {
+      font-size: 32px;
     }
   }
 }

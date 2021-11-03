@@ -60,6 +60,9 @@ export const productsModule: Module<Products, State> = {
           [payload.name]: removingFilter,
           ...newCurrentFilter
         } = state.currentFilter;
+        if (payload.name === "section") {
+          newCurrentFilter["section"] = payload.value;
+        }
         state.currentFilter = newCurrentFilter;
       } else {
         state.currentFilter = {

@@ -280,12 +280,21 @@ export default defineComponent({
         font-size: 16px;
       }
     }
+    &__plus-btn {
+      display: none;
+    }
     :deep .product-card-info {
       &__content {
         padding: 16px;
       }
       &__price div {
         font-size: 16px;
+      }
+      &__title {
+        font-size: 22px;
+        line-height: 1.27;
+        max-width: 100px;
+        margin-bottom: 0;
       }
     }
   }

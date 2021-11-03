@@ -2,7 +2,6 @@ import { apiInstance } from "@/services/api/config";
 import { Order, OrderHistoryList } from "@/services/api/model/Order";
 
 export const getOrderAPI = async (id?): Promise<Order> => {
-  debugger;
   try {
     const { data, status } = await apiInstance().post(
       `user/order/order.php${id ? `?id=${id}` : ""}`

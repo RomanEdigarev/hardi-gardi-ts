@@ -15,7 +15,6 @@ export const useDescription = (isClose: boolean) => {
       titleContainer.value.style.marginBottom = "0";
     }
   });
-
   const closeAnim = () => {
     const timeline = anime.timeline({
       autoplay: false,

@@ -107,9 +107,8 @@ export default defineComponent({
 }
 @media screen and (max-width: 374px) {
   .location {
-    background-color: rebeccapurple;
     &__text {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 }
@@ -149,6 +148,23 @@ export default defineComponent({
     height: 11px;
     top: 0;
     right: 0;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 736px),
+(-webkit-min-device-pixel-ratio: 3) {
+  .location {
+      .tooltip-content {
+        width: 60vw;
+        &__buttons {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        &__button {
+          width: 100%;
+          margin-bottom: 8px;
+        }
+      }
   }
 }
 </style>

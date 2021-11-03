@@ -176,9 +176,9 @@
         >
           <SplideSlide v-for="photo in photos">
             <img
-                :src="photo"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              :src="photo"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
@@ -202,9 +202,9 @@
         >
           <SplideSlide v-for="photo in photos">
             <img
-                :src="photo"
-                alt=""
-                class="main-slider__body__current-slide__img"
+              :src="photo"
+              alt=""
+              class="main-slider__body__current-slide__img"
             />
           </SplideSlide>
           <template v-slot:controls>
@@ -229,24 +229,23 @@
           <SplideSlide v-for="(photo, index) in photos">
             <template v-if="index === 0">
               <img
-                  :src="photo"
-                  alt=""
-                  class="main-slider__body__current-slide__img"
+                :src="photo"
+                alt=""
+                class="main-slider__body__current-slide__img"
               />
               <img
-                  :src="photos[index + 1]"
-                  alt=""
-                  class="main-slider__body__current-slide__img"
+                :src="photos[index + 1]"
+                alt=""
+                class="main-slider__body__current-slide__img"
               />
             </template>
             <template v-else>
               <img
-                  :src="photo"
-                  alt=""
-                  class="main-slider__body__current-slide__img"
+                :src="photo"
+                alt=""
+                class="main-slider__body__current-slide__img"
               />
             </template>
-
           </SplideSlide>
 
           <template v-slot:controls>
@@ -426,24 +425,7 @@ export default defineComponent({
   }
 
   // *** Splide *** //
-  &__body__current-slide {
-    :deep .splide__slide:first-child{
-      //position: relative;
-      img {
-        position: absolute;
-        top:0;
-        left:0;
 
-      }
-      img:first-child {
-        z-index: 1;
-        transition: opacity 0.3s ease-in-out;
-      }
-      img:first-child:hover {
-        opacity: 0;
-      }
-    }
-  }
   .splide__arrow {
     display: none;
   }
@@ -487,6 +469,27 @@ export default defineComponent({
   .main-slider__close-btn {
     display: block;
     z-index: 25;
+  }
+}
+@media screen and (min-width: 738px) {
+  .main-slider {
+    &__body__current-slide {
+      :deep .splide__slide:first-child {
+        //position: relative;
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        img:first-child {
+          z-index: 1;
+          transition: opacity 0.3s ease-in-out;
+        }
+        img:first-child:hover {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
 @media screen and (min-width: 738px) and (max-width: 1366px),

@@ -29,7 +29,7 @@
             <Description
               id="description"
               title="Описание товара"
-              :is-close="false"
+              :is-close="isOpenDescription"
             >
               <template v-slot:content>
                 <div ref="text" class="product-page__body__description__text">
@@ -79,13 +79,13 @@
             class="product-page__body__right-footer__slider"
           >
             <FooterSlider
-              v-if="!currentProduct.isComplect"
+              v-if="currentProduct.linkProducts.length !== 0"
               title="Похожие товары"
               :products="currentProduct.linkProducts"
             />
           </div>
           <div
-            v-if="currentProduct.linkProducts.length !== 0"
+            v-if="!currentProduct.isComplect"
             class="product-page__body__right-footer__slider"
           >
             <FooterSlider
@@ -109,6 +109,7 @@ import {
   onUpdated,
   PropType,
   ref,
+  watchEffect,
 } from "vue";
 import { BreadCrumbs } from "@/widgets";
 import { About, Description, FooterSlider, MainSlider, SetSlider } from "./ui";
@@ -142,7 +143,9 @@ export default defineComponent({
     let currentProduct = ref<Product>(null);
     const isLoading = computed(() => store.state.products.isLoading);
     let breadcrumbs = ref(null);
-
+    const isOpenDescription = ref(false);
+    const isPhone = computed(() => store.getters["getIsPhone"]);
+    const isMobile = computed(() => store.getters["getIsMobile"]);
     const text = ref<HTMLElement>(null);
 
     onMounted(async () => {
@@ -158,6 +161,10 @@ export default defineComponent({
           link: `/product/${currentProduct.value.id}`,
         },
       ];
+
+      if (isPhone.value || isMobile.value) {
+        isOpenDescription.value = true;
+      }
     });
 
     onUpdated(() => {
@@ -174,6 +181,9 @@ export default defineComponent({
       text,
       breadcrumbs,
       product,
+      isPhone,
+      isMobile,
+      isOpenDescription,
     };
   },
 });

@@ -27,23 +27,43 @@
     </div>
 
     <div class="prolog__cards">
-      <div
-        v-for="(card, index) in cards"
-        class="prolog__card"
-        :key="card.title"
-      >
-        <PrologCard :color="card.color" :title="card.title">
-          <template v-slot:image>
-            <img
-              :src="require(`/public/images/cards/${index}-card.svg`)"
-              :alt="`${index}-card`"
-            />
-          </template>
-        </PrologCard>
+      <div class="prolog__cards__row">
+        <div
+          v-for="(card, index) in firstRow"
+          class="prolog__card"
+          :key="card.name"
+        >
+          <PrologCard
+            @click="$router.push(`/catalog/${card.id}`)"
+            :section-id="card.id"
+            :color="card.color"
+            :title="card.name"
+          />
+        </div>
       </div>
+      <transition appear @enter="enterElement" @leave="leaveElement">
+        <div v-if="isOpen" class="prolog__cards__row">
+          <div
+            v-for="(card, index) in secondRow"
+            class="prolog__card"
+            :key="card.name"
+          >
+            <PrologCard
+              @click="$router.push(`/catalog/${card.id}`)"
+              :section-id="card.id"
+              :color="card.color"
+              :title="card.name"
+            />
+          </div>
+        </div>
+      </transition>
     </div>
     <div class="prolog__button">
-      <BetaButton styling="beta-beta-btn">
+      <BetaButton
+        styling="beta-beta-btn"
+        v-if="!isOpen"
+        @click="isOpen = !isOpen"
+      >
         <PlusIcon />
       </BetaButton>
     </div>
@@ -55,7 +75,9 @@ import PrologCard from "./ui/PrologCard/PrologCard.vue";
 import { useCards } from "./lib/useCards";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";
-import { defineComponent } from "vue";
+import {computed, defineComponent, getCurrentInstance, ref, watch} from "vue";
+import anime from "animejs";
+import { useStore } from "@/services/vuex";
 
 export default defineComponent({
   name: "Prolog",
@@ -65,9 +87,51 @@ export default defineComponent({
     PlusIcon,
   },
   setup() {
-    const { cards } = useCards();
+    const store = useStore();
+    const isOpen = ref(false);
+    const isMobile = computed(() => {
+      return store.getters["getIsMobile"];
+    });
+    const currentInstance = getCurrentInstance()
+    const rows = ref(useCards( isMobile.value ? 3 : 4))
+    const [firstRow, secondRow] = rows.value;
+
+
+    watch(isMobile, () => {
+      rows.value = useCards.call(currentInstance,3)
+    });
+
+    const setSectionFilter = async (value) => {
+      store.commit("products/addCurrentFilter", { name: "section", value });
+      await store.dispatch("products/setProductsByPage", 1);
+    };
+
+    const enterElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        duration: 300,
+        easing: "linear",
+        complete: done,
+      });
+    };
+    const leaveElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [1, 0],
+        easing: "linear",
+        duration: 300,
+        complete: done,
+      });
+    };
     return {
-      cards,
+      firstRow,
+      secondRow,
+      rows,
+      isOpen,
+      enterElement,
+      leaveElement,
+      setSectionFilter,
     };
   },
 });
@@ -87,6 +151,7 @@ export default defineComponent({
     justify-content: space-between;
     padding: 0 7%;
     align-items: center;
+    margin-bottom: 108px;
   }
 
   &__title {
@@ -113,8 +178,14 @@ export default defineComponent({
   }
 
   &__cards {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 38px;
+    margin-bottom: 50px;
+    &__row {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &__card {
@@ -157,10 +228,12 @@ export default defineComponent({
       margin-bottom: 60px;
     }
     &__cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
+      &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
     }
     &__card {
       height: 301px;
@@ -180,6 +253,14 @@ export default defineComponent({
       margin-bottom: 60px;
       padding: 0;
     }
+    &__text {
+      p {
+        font-size: 16px;
+      }
+    }
+    &__link {
+      font-size: 14px;
+    }
     &__title {
       span {
         font-size: 36px;
@@ -188,11 +269,13 @@ export default defineComponent({
       }
     }
     &__cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      grid-auto-rows: minmax(219px, 1fr);
-      gap: 20px;
-      margin-bottom: 20px;
+      &__row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-auto-rows: minmax(219px, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+      }
     }
     &__card {
       height: 100%;
@@ -200,6 +283,9 @@ export default defineComponent({
     &__button {
       width: 52px;
       height: 52px;
+    }
+    &__image {
+      width: 41vw;
     }
   }
 }

@@ -177,4 +177,29 @@ export default defineComponent({
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 736px),
+(-webkit-min-device-pixel-ratio: 3) {
+  .change-city {
+    width: 100vw;
+    &__container {
+      margin: 28px auto 0 auto;
+    }
+    &__header {
+      margin-bottom: 32px;
+      align-items: center;
+      &__title {
+        font-size: 20px;
+      }
+      &__close-btn {
+        right: 16px;
+        top: 16px;
+      }
+    }
+    &__body {
+      &__items {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
 </style>

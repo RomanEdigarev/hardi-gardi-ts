@@ -14,9 +14,9 @@ const getSecondaryOptions = (status?: string, width?: string) => {
     // focus: "center",
     padding: {
       // left: "100px",
-      right: "0",
+      right: isPhone || isMobile || width ? "20px" : "0px",
     },
-    gap: "16px",
+    // gap: "2px",
     direction: isMobile || isPhone ? "ltr" : "ttb",
     height: isMobile || isPhone ? "auto" : "480px",
     // width: width || getWidthForOptions(),

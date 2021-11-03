@@ -57,8 +57,8 @@ export const shopModule: Module<Shop, State> = {
       commit("toggleLoading", true, { root: true });
       const shop = await getShopAdapter();
       commit("initShop", shop);
-      commit("toggleLoading", false, { root: true });
       commit("init", true, { root: true });
+      commit("toggleLoading", false, { root: true });
     },
   },
   namespaced: true,

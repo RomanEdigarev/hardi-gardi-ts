@@ -43,7 +43,7 @@
           class="burger-menu__body__links__link"
           @click="$emit('close-burger-menu')"
         >
-          <span>Доаствка и оплата</span>
+          <span>Доствка и оплата</span>
         </router-link>
         <router-link
           to="/contacts"
@@ -53,7 +53,7 @@
           <span>Контакты</span>
         </router-link>
         <router-link
-          to="/about"
+          to="/about/history.html"
           class="burger-menu__body__links__link"
           @click="$emit('close-burger-menu')"
         >
@@ -163,6 +163,7 @@ export default defineComponent({
   padding: 65px 24px;
   color: $clr-phi;
   position: relative;
+  overflow: auto;
 
   &__line-container {
     width: 100%;

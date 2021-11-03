@@ -23,20 +23,28 @@
         </template>
       </IconWithCount>
     </div>
-    <Tooltip trigger="mouseenter" offset="-42">
-      <template v-slot:reference>
-        <router-link class="cabinet-links__link" id="shop" to="/basket">
-          <IconWithCount :count="basketCount">
-            <template v-slot:svg-icon>
-              <ShopIcon />
-            </template>
-          </IconWithCount>
-        </router-link>
-      </template>
-      <template v-slot:content>
-        <CabinetTooltip />
-      </template>
-    </Tooltip>
+      <Tooltip v-if="!isPhone && !isMobile" trigger="mouseenter" offset="-42">
+        <template v-slot:reference>
+          <router-link class="cabinet-links__link" id="shop" to="/basket">
+            <IconWithCount :count="basketCount">
+              <template v-slot:svg-icon>
+                <ShopIcon />
+              </template>
+            </IconWithCount>
+          </router-link>
+        </template>
+        <template v-slot:content>
+          <CabinetTooltip />
+        </template>
+      </Tooltip>
+      <router-link v-else class="cabinet-links__link" id="shop" to="/basket">
+        <IconWithCount :count="basketCount">
+          <template v-slot:svg-icon>
+            <ShopIcon />
+          </template>
+        </IconWithCount>
+      </router-link>
+
   </div>
 </template>
 
@@ -84,7 +92,7 @@ export default defineComponent({
     return {
       isPhone: computed(() => store.getters["getIsPhone"]),
       goToFavorites,
-    };
+      isMobile: computed(() => store.getters['getIsMobile']),};
   },
 });
 </script>

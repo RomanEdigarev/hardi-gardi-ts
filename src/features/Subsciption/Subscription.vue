@@ -103,6 +103,9 @@ export default defineComponent({
     }
     &__social {
       width: 70%;
+      :deep .items {
+        margin-bottom: 18px;
+      }
     }
   }
 }
@@ -134,6 +137,7 @@ export default defineComponent({
     }
     &__social {
       width: 100%;
+
     }
   }
 }

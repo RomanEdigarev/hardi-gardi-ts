@@ -98,7 +98,8 @@ export default defineComponent({
 }
 
 .input {
-  width: 0;
+  width: 0px;
+  display: none;
 }
 
 .checkbox {
