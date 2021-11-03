@@ -1,5 +1,4 @@
 // Alias Type //
-import { CatalogMenu } from "@/services/api/model/Menu";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 
 type HistoryId = string;

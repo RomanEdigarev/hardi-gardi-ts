@@ -5,7 +5,7 @@ import {
   getOrderAdapter,
   getOrdersListAdapter,
 } from "@/entities/Order/adapters";
-import { Order } from "@/entities/Order/model";
+import { Order, OrderHistoryItem } from "@/entities/Order/model";
 
 export const orderModule: Module<Order, State> = {
   state: () => {
@@ -31,7 +31,10 @@ export const orderModule: Module<Order, State> = {
       comment: "",
       sessId: "",
       price: undefined,
-      historyOrderList: [],
+      historyOrderList: {
+        orders: [],
+        selectedOrder: undefined,
+      },
     };
   },
   mutations: {
@@ -62,7 +65,10 @@ export const orderModule: Module<Order, State> = {
       state.id = payload;
     },
     setHistoryOrders: (state, payload) => {
-      state.historyOrderList = payload;
+      state.historyOrderList.orders = payload;
+    },
+    setSelectedHistoryOrder: (state, payload: OrderHistoryItem) => {
+      state.historyOrderList.selectedOrder = payload;
     },
   },
   actions: {
@@ -86,8 +92,8 @@ export const orderModule: Module<Order, State> = {
     },
     fetchHistoryOrders: async ({ commit }) => {
       commit("toggleLoading", true);
-      const response = await getOrdersListAdapter();
-      commit("setHistoryOrders", response);
+      const orders = await getOrdersListAdapter();
+      commit("setHistoryOrders", orders);
       commit("toggleLoading", false);
     },
   },
@@ -108,6 +114,8 @@ export const orderModule: Module<Order, State> = {
       };
       return map[state.delivery.current];
     },
+    getHistoryOrderList: (state) => state.historyOrderList.orders,
+    getHistoryOrderSelected: (state) => state.historyOrderList.selectedOrder,
   },
   namespaced: true,
 };

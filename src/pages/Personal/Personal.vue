@@ -4,8 +4,8 @@
       <div class="page-main__header">
         <PageTitle :text="`Здравствуйте, ${user.name}!`" />
       </div>
-      <div v-show="currentItemNumber === 0" class="personal__footer">
-        <Details />
+      <div v-if="selectedHistoryOrder" class="personal__footer">
+        <Details :order="selectedHistoryOrder" />
       </div>
       <div class="personal__header">
         <div
@@ -75,6 +75,7 @@ export default defineComponent({
       },
     ];
     const currentItemNumber = ref(0);
+    const selectedHistoryOrder = computed(() => store.getters['order/getHistoryOrderSelected'])
     const user = computed(() => {
       return store.state.user;
     });
@@ -85,6 +86,7 @@ export default defineComponent({
       isMobile,
       isPhone: computed(() => store.getters["getIsPhone"]),
       user,
+      selectedHistoryOrder
     };
   },
 });

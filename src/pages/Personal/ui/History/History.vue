@@ -1,32 +1,42 @@
 <template>
   <div class="history">
     <div class="history__body">
-      <div class="history__body__item"><Order /></div>
-      <div class="history__body__item"><Order /></div>
-      <div class="history__body__item"><Order /></div>
+      <div v-for="order in orders" class="history__body__item"><Order :order="order" /></div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { Order } from "./ui";
+import { useStore } from "@/services/vuex";
+import { OrderHistoryItem } from "@/entities/Order/model";
 
 export default defineComponent({
   name: "History",
   components: {
     Order,
   },
+  setup() {
+    const store = useStore();
+    const orders = computed<OrderHistoryItem[]>(
+      () => store.getters["order/getHistoryOrderList"]
+    );
+    return {
+      orders
+    }
+  },
 });
 </script>
 
 <style lang="scss" scoped>
-@media screen and (max-width: 769px) and (min-width: 377px){
+@media screen and (max-width: 769px) and (min-width: 377px) {
   .history {
     :deep .order__footer__item {
       padding: 20px;
     }
-    :deep .product-card.toModal, :deep .product-card {
+    :deep .product-card.toModal,
+    :deep .product-card {
       grid-template-columns: 1fr 0fr;
       &__product {
         grid-row: 1/3;
@@ -66,11 +76,12 @@ export default defineComponent({
       }
     }
   }
-
 }
-@media screen and (min-width: 320px) and (max-width: 736px), (-webkit-min-device-pixel-ratio: 3){
+@media screen and (min-width: 320px) and (max-width: 736px),
+  (-webkit-min-device-pixel-ratio: 3) {
   .history {
-    :deep .product-card.toModal, :deep .product-card {
+    :deep .product-card.toModal,
+    :deep .product-card {
       grid-template-rows: 1fr 0fr;
       &__product {
         grid-column: 1/3;
@@ -82,7 +93,6 @@ export default defineComponent({
             -webkit-box-orient: vertical;
             overflow: hidden;
           }
-
         }
       }
       &__price {
@@ -109,6 +119,5 @@ export default defineComponent({
       }
     }
   }
-
 }
 </style>

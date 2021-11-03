@@ -22,43 +22,41 @@
         </div>
         <div class="order__body__left__info">
           <div class="order__body__left__info__title">
-            <span>№6578</span>
-            <span>от 15.12.2020</span>
+            <span>№{{ order.number }}</span>
+            <span>от {{ order.date }}</span>
           </div>
           <div class="order__body__left__info__status">
-            <span>В пути</span>
-            <span>29358769048</span>
+            <span>{{ order.status.deliverStatus }}</span>
+            <span>{{order.code}}</span>
           </div>
         </div>
       </div>
       <div class="order__body__right">
-        <div class="order__body__right__price">2 400 ₽</div>
-        <div class="order__body__right__quantity">5 товаров</div>
+        <div class="order__body__right__price">{{ order.price }} ₽</div>
+        <div class="order__body__right__quantity">
+          {{ order.quantity }} товаров
+        </div>
       </div>
     </div>
     <div ref="footer" class="order__footer">
       <div class="order__footer__details">
-        <Details />
+        <Details :order="order"/>
       </div>
-      <div class="order__footer__item">
-        <ProductCardCart to-modal :product="product" :count="2" />
-      </div>
-      <div class="order__footer__item">
-        <ProductCardCart to-modal :product="product" :count="2" />
-      </div>
-      <div class="order__footer__item">
-        <ProductCardCart to-modal :product="product" :count="2" />
+      <div v-for="product in order.basket.products" class="order__footer__item">
+        <ProductCardCart to-modal :product="product.product" :count="product.quantity" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { ProductCardCart } from "@/widgets";
 import anime from "animejs";
 import Details from "@/pages/Personal/ui/Details/Details.vue";
 import { useProduct } from "@/entities/Products/Product/lib";
+import { OrderHistoryItem } from "@/entities/Order/model";
+import { store } from "@/services/vuex";
 
 export default defineComponent({
   name: "Order",
@@ -66,10 +64,15 @@ export default defineComponent({
     ProductCardCart,
     Details,
   },
-  setup() {
+  props: {
+    order: {
+      type: Object as PropType<OrderHistoryItem>,
+      required: true,
+    },
+  },
+  setup({ order }) {
     const isOpen = ref(false);
     const footer = ref<HTMLElement>(null);
-    const { product } = useProduct();
     const animation = (isOpen) => {
       if (isOpen) {
         anime
@@ -95,6 +98,7 @@ export default defineComponent({
     };
     const toggle = () => {
       isOpen.value = !isOpen.value;
+      store.commit("order/setSelectedHistoryOrder", isOpen.value ? order: null);
       animation(isOpen.value);
     };
 
@@ -102,7 +106,6 @@ export default defineComponent({
       isOpen,
       footer,
       toggle,
-      product,
     };
   },
 });

@@ -1,3 +1,5 @@
+import { Basket } from "@/entities/Basket/model";
+
 export type OrderContactPerson = {
   name: string;
   lastName: string;
@@ -25,6 +27,25 @@ export type OrderTotalPrice = {
   sale: number;
   total: number;
 };
+export type OrderHistoryItem = {
+  number: number | string;
+  code: string;
+  status: {
+    deliverStatus: string;
+    isPayed: boolean;
+  };
+  date: string;
+  basket: Basket;
+  price: string | number;
+  quantity: number;
+  delivery: {
+    address: string;
+    type: string;
+    name: string;
+    price: number;
+  };
+  payment: OrderPaymentType;
+};
 export type Order = {
   id?: string;
   isLoading?: boolean;
@@ -44,5 +65,8 @@ export type Order = {
   };
   comment: string;
   sessId: string;
-  historyOrderList?: any[];
+  historyOrderList?: {
+    selectedOrder: OrderHistoryItem;
+    orders: OrderHistoryItem[];
+  };
 };

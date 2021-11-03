@@ -3,7 +3,7 @@ import {
   getOrderAPI,
   getOrdersListAPI,
 } from "@/services/api/lib/order";
-import { Order } from "@/entities/Order/model";
+import { Order, OrderHistoryItem } from "@/entities/Order/model";
 import {
   getCurrentItem,
   getOrderDelivery,
@@ -13,6 +13,8 @@ import {
 } from "@/entities/Order/utils";
 import { key } from "@/services/vuex";
 import { OrderCreateForm } from "@/services/api/model/Order";
+import { transformItemsResponse } from "@/entities/Basket/adapters";
+import { BasketItem } from "@/entities/Basket/model";
 
 const map = {
   "3": "self",
@@ -83,7 +85,39 @@ export const createOrderAdapter = async (order: Order): Promise<any> => {
   return response.data;
 };
 
-export const getOrdersListAdapter = async () => {
-  const response = await getOrdersListAPI();
-  return response.data;
+export const getOrdersListAdapter = async (): Promise<OrderHistoryItem[]> => {
+  const { data } = await getOrdersListAPI();
+  console.log(data.orders);
+  const orders: OrderHistoryItem[] = data.orders.map((order) => {
+    let quantitySum = 0;
+    order.basket.forEach(({ quantity }) => {
+      quantitySum += quantity;
+    });
+    return {
+      number: order.id,
+      date: order.date,
+      status: {
+        deliverStatus: order.status.name,
+        isPayed: order.isPayed,
+      },
+      basket: {
+        products: transformItemsResponse(order.basket),
+        sumDiscount: 0,
+        sumOld: 0,
+        sumTotal: 0,
+      },
+      price: order.price,
+      code: "" + order.delivery[0].trackingNumber,
+      quantity: quantitySum,
+      delivery: {
+        address: order.deliveryAddress,
+        type: "",
+        name: order.delivery[0].name,
+        price: order.delivery[0].price,
+      },
+      payment:
+        order.payment[0].name === "Оплата на сайте" ? "onSite" : "onDeliver",
+    };
+  });
+  return orders;
 };

@@ -7,7 +7,9 @@ import {
 import { Basket, BasketItem } from "@/entities/Basket/model";
 import { BasketItem as BasketItemAPI } from "@/services/api/model/Basket";
 
-const transformItemsResponse = (items: BasketItemAPI[]): BasketItem[] => {
+export const transformItemsResponse = (
+  items: BasketItemAPI[]
+): BasketItem[] => {
   return items.map((item) => {
     return {
       product: {

@@ -2,7 +2,7 @@
   <div class="product-card" :class="{ toModal: toModal }">
     <div class="product-card__product">
       <img
-        src="./assets/product_0.jpg"
+        :src="product.img"
         class="product-card__product__img"
         alt=""
       />

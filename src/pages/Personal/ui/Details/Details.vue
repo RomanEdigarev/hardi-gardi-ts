@@ -7,35 +7,43 @@
       <div class="details__body__info">
         <div class="details__body__info__row">
           <span>Статус</span>
-          <span class="ready">Готов к выдаче</span>
+          <span class="ready">{{ order.status.deliverStatus }}</span>
         </div>
         <div class="details__body__info__row">
           <span>Номер заказа</span>
-          <span>7344</span>
+          <span>{{ order.number }}</span>
         </div>
         <div class="details__body__info__row">
           <span>Сумма</span>
-          <span>3 800 ₽</span>
+          <span>{{ order.price }} ₽</span>
         </div>
         <div class="details__body__info__row">
           <span>Доставка</span>
-          <span>150 ₽</span>
+          <span>{{ order.delivery.price }} ₽</span>
         </div>
       </div>
       <div class="details__body__delivery">
         <div class="details__body__delivery__title">
-          <span><b>Доставка:</b></span> <span><b>Самовывоз</b></span>
+          <span><b>Доставка:</b></span> <span><b></b></span>
         </div>
-        <div class="details__body__delivery__text">Пункт выдачи СДЭК</div>
         <div class="details__body__delivery__text">
-          г. Санкт-Петербург, Купчинская ул. 1/5 лит. А
+          {{ order.delivery.name }}
+        </div>
+        <div class="details__body__delivery__text">
+          {{ order.delivery.address }}
         </div>
         <div class="details__body__delivery__row track-number">
-          <span>Трек-номер</span><span>29358769048</span>
+          <span>Трек-номер</span><span>{{ order.code }}</span>
         </div>
         <div class="details__body__delivery__row">
-          <span><b>Оплата: Картой</b></span>
-          <span>Оплачено</span>
+          <span>
+            <b>Оплата:
+              {{
+                order.payment === "onSite" ? "Картой на сайте" : "При получении"
+              }}
+            </b>
+          </span>
+          <span>{{ order.status.isPayed ? "Оплачено" : "Неоплачено" }}</span>
         </div>
       </div>
     </div>
@@ -71,8 +79,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { AlfaButton } from "@/shared/ui/buttons";
+import { OrderHistoryItem } from "@/entities/Order/model";
 export default defineComponent({
   name: "Details",
   components: {
@@ -82,6 +91,9 @@ export default defineComponent({
     isPayment: {
       type: Boolean,
       default: false,
+    },
+    order: {
+      type: Object as PropType<OrderHistoryItem>,
     },
   },
 });
