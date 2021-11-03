@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{ 'is-ordering-page': isOrderingPage }">
     <div class="header__wrapper">
       <div class="header__container">
         <div class="header__logo">
@@ -49,11 +49,19 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 import Logo from "./assets/Logo.vue";
 import { Navigation, Cabinet } from "@/widgets";
 import { HeaderModal, CatalogSubmenu, Search } from "./ui";
 import { useStore } from "@/services/vuex";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "Header",
@@ -72,14 +80,27 @@ export default defineComponent({
       currentModal.value = currentModalName;
     };
     const store = useStore();
+    const route = useRoute();
     const isMobile = computed(() => store.state.isMobile);
     const tooltipLinks = computed(() => store.getters["shop/getTooltipMenu"]);
+    const isOrderingPage = ref(false);
+
+    onMounted(() => {
+      isOrderingPage.value = route.path === "/ordering";
+    });
+
+    watchEffect(() => {
+      route.path === "/ordering"
+        ? (isOrderingPage.value = true)
+        : (isOrderingPage.value = false);
+    });
 
     return {
       currentModal,
       setCurrentModal,
       isMobile,
       tooltipLinks,
+      isOrderingPage,
     };
   },
 });
@@ -144,6 +165,23 @@ export default defineComponent({
   &__header-modal__content {
     width: 100%;
     padding: 0 27.5vw;
+  }
+}
+
+.is-ordering-page {
+  .header {
+    &__cabinet {
+      display: none;
+    }
+  }
+  :deep .navigation {
+    &__links,
+    &__tooltip {
+      display: none;
+    }
+    &__location {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -1,5 +1,8 @@
 <template>
   <div ref="layer" class="home-animation-bg">
+    <div ref="closeIcon" class="home-animation-bg__close-icon">
+      <CloseIcon />
+    </div>
     <svg
       id="shape-2"
       viewBox="0 0 888 474"
@@ -117,9 +120,11 @@ import {
   useShapeBounceAnimation,
   useShapeRotateAnimation,
 } from "./animations";
+import { CloseIcon } from "@/shared/ui/icons";
 
 export default defineComponent({
   name: "HomeAnimationBG",
+  components: { CloseIcon },
   setup() {
     const layer = ref<HTMLElement>(null);
     const shapeForth = ref<HTMLElement>(null);
@@ -128,6 +133,8 @@ export default defineComponent({
     const alfaShape = ref<HTMLElement>(null);
     const betaShape = ref<HTMLElement>(null);
     const gammaShape = ref<HTMLElement>(null);
+    const closeIcon = ref<HTMLElement>(null);
+    const isOpen = ref(false);
     const alfaAnimationShape = computed(() => starAnimation(alfaShape.value));
     const betaAnimationShape = computed(() => charAnimation(betaShape.value));
     const gammaAnimationShape = computed(() =>
@@ -167,7 +174,9 @@ export default defineComponent({
     });
 
     const playStarAnimation = (event) => {
+      closeIcon.value.style.display = isOpen.value ? "none" : "block";
       animations.value[event.currentTarget.id].play();
+      isOpen.value = !isOpen.value;
     };
     const toggleLoopAnimation = (event) => {
       if (animationsLoop[event.currentTarget.id].paused) {
@@ -188,6 +197,7 @@ export default defineComponent({
       gammaShape,
       playStarAnimation,
       toggleLoopAnimation,
+      closeIcon,
     };
   },
 });
@@ -247,6 +257,15 @@ export default defineComponent({
   mask-repeat: no-repeat;
   mask-position: center;
   overflow: hidden;
+  &__close-icon {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    top: 38px;
+    right: 48px;
+    z-index: 100;
+    display: none;
+  }
 
   svg {
     width: 100%;

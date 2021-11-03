@@ -73,7 +73,6 @@ export default defineComponent({
       animation.value.play();
     });
     watchEffect(() => {
-      console.log('watch')
       if (toggleMenu.value && !isPhone.value) {
         bgWidth.value = toggleMenu.value.offsetWidth / (props.items as []).length + "px"
         bg.value.style.width = bgWidth.value;

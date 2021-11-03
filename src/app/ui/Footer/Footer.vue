@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="footer__wrapper">
+    <div v-if="!isOrderingPage" class="footer__wrapper">
       <div class="footer__content-container">
         <div class="footer__item catalog">
           <div class="footer__item__title">Каталог</div>
@@ -78,15 +78,19 @@
         <Copyright />
       </div>
     </div>
+    <div v-else class="footer__is-ordering-page">
+      © khardigardi.ru  2019<br>Развивающие игры для детей. Все права защищены
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Subscription } from "@/features";
 import { Copyright } from "@/shared/ui";
-import { defineComponent, PropType } from "vue";
+import {defineComponent, onMounted, PropType, ref, watchEffect} from "vue";
 import { useFooterCatalog, useFooterMenu } from "@/app/ui/Footer/lib";
 import { Social as SocialType } from "@/entities/Shop/Social/model";
+import {useRoute} from "vue-router";
 export default defineComponent({
   name: "Footer",
   components: {
@@ -101,6 +105,7 @@ export default defineComponent({
   },
   setup() {
     const footerCatalog = useFooterCatalog();
+    const route = useRoute();
     const firstPartFooterLinks = footerCatalog.sections.slice(0, 4);
     const secondPartFooterLinks = footerCatalog.sections.slice(4);
     const leftLinks =
@@ -111,11 +116,21 @@ export default defineComponent({
       firstPartFooterLinks.length < secondPartFooterLinks.length
         ? secondPartFooterLinks
         : firstPartFooterLinks;
+
+    const isOrderingPage = ref(false);
+    onMounted(() => {
+      isOrderingPage.value = route.path === "/ordering";
+    });
+
+    watchEffect(() => {
+      route.path === "/ordering" ? (isOrderingPage.value = true) : false;
+    });
     return {
       footerMenu: useFooterMenu(),
       footerCatalog,
       leftLinks,
       rightLinks,
+      isOrderingPage,
     };
   },
 });
@@ -181,6 +196,12 @@ export default defineComponent({
   &__copyright {
     width: 100%;
     margin-top: 56px;
+  }
+
+  &__is-ordering-page {
+    font-size: 12px;
+    color: #606060;
+    padding: 40px 19vw;
   }
 }
 

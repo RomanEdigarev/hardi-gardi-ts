@@ -41,6 +41,7 @@
       </div>
 
       <img
+          v-if="!isOrderingPage"
         class="app__footer-bg"
         :src="require('/public/images/footer-bg.svg')"
         alt=""
@@ -83,7 +84,7 @@ import {
   onBeforeMount,
   onMounted,
   ref,
-  watch,
+  watch, watchEffect,
 } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
@@ -91,6 +92,7 @@ import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
 import anime from "animejs";
+import {useRoute} from "vue-router";
 
 export default defineComponent({
   components: {
@@ -107,8 +109,12 @@ export default defineComponent({
   setup() {
     const changeCity = ref(null);
     const store = useStore();
+    const route = useRoute();
     const isToken = computed(() => store.getters["getIsToken"]);
+    const isOrderingPage = ref(false);
+
     onMounted(async () => {
+      isOrderingPage.value = route.path === "/ordering";
       if (!store.state.isInit) {
         await initShop(store);
       }
@@ -153,6 +159,12 @@ export default defineComponent({
       });
     };
 
+
+
+    watchEffect(() => {
+      route.path === "/ordering" ? (isOrderingPage.value = true) : false;
+    });
+
     return {
       loading: computed(() => store.state.loading),
       isPhone: computed(() => store.state.isPhone),
@@ -166,6 +178,7 @@ export default defineComponent({
       closeChangeCity,
       changeCity,
       openChangeCity,
+      isOrderingPage
     };
   },
 });
