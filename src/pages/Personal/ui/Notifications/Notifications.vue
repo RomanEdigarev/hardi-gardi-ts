@@ -2,22 +2,7 @@
   <div class="notifications">
     <div class="notifications__item">
       <div class="notifications__item__icon">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="10" cy="10" r="10" fill="#D23C50" />
-          <path
-            d="M13.75 7.5L8.59375 13.125L6.25 10.5682"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <Checkbox id="sales" />
       </div>
       <div class="notifications__item__title">Скидки на любимые игры</div>
       <div class="notifications__item__text">
@@ -26,22 +11,7 @@
     </div>
     <div class="notifications__item">
       <div class="notifications__item__icon">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="10" cy="10" r="10" fill="#D23C50" />
-          <path
-            d="M13.75 7.5L8.59375 13.125L6.25 10.5682"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <Checkbox id="new-items" />
       </div>
       <div class="notifications__item__title">Новинки от ХардиГарди</div>
       <div class="notifications__item__text">
@@ -51,22 +21,7 @@
     </div>
     <div class="notifications__item">
       <div class="notifications__item__icon">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="10" cy="10" r="10" fill="#D23C50" />
-          <path
-            d="M13.75 7.5L8.59375 13.125L6.25 10.5682"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <Checkbox id="relevant-reminders" />
       </div>
       <div class="notifications__item__title">Актуальные напоминания</div>
       <div class="notifications__item__text">
@@ -79,9 +34,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Checkbox } from "@/shared/ui/inputs";
 
 export default defineComponent({
   name: "Notifications",
+  components: { Checkbox },
 });
 </script>
 

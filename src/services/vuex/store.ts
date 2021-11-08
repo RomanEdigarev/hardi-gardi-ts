@@ -35,6 +35,7 @@ export type State = {
   order?: Order;
   city: City;
   search?: Search;
+  token: string;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -50,6 +51,7 @@ export const store = createStore<State>({
       current: "0",
       items: undefined,
     },
+    token: "",
   },
   mutations: {
     init: (state, payload) => {
@@ -64,6 +66,7 @@ export const store = createStore<State>({
     setIsToken: (state, payload: boolean) => {
       state.isToken = payload;
     },
+    setToken: (state, payload) => (state.token = payload),
     setIsPhone: (state, payload: boolean) => {
       state.isPhone = payload;
     },

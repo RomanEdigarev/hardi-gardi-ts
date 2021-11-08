@@ -40,7 +40,6 @@ export default defineComponent({
     },
     labelText: {
       type: String,
-      required: true,
     },
     isDisabled: {
       type: Boolean,

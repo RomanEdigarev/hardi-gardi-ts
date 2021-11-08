@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <template v-if="loading || !isToken">
-      <h1>{{ "LOADING" }}</h1>
+      <div class="loader__container">
+        <div class="loader"></div>
+      </div>
     </template>
     <template v-else>
       <div class="app__header">
@@ -41,7 +43,7 @@
       </div>
 
       <img
-          v-if="!isOrderingPage"
+        v-if="!isOrderingPage"
         class="app__footer-bg"
         :src="require('/public/images/footer-bg.svg')"
         alt=""
@@ -84,7 +86,8 @@ import {
   onBeforeMount,
   onMounted,
   ref,
-  watch, watchEffect,
+  watch,
+  watchEffect,
 } from "vue";
 import { useStore } from "@/services/vuex";
 import { initShop } from "@/entities/Shop/lib";
@@ -92,7 +95,7 @@ import { BurgerMenu } from "@/widgets";
 import { useBurgerMenu, useSearchModalPhone } from "./lib";
 import { SearchModalPhone } from "@/app/ui/Header/ui";
 import anime from "animejs";
-import {useRoute} from "vue-router";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   components: {
@@ -159,8 +162,6 @@ export default defineComponent({
       });
     };
 
-
-
     watchEffect(() => {
       route.path === "/ordering" ? (isOrderingPage.value = true) : false;
     });
@@ -178,7 +179,7 @@ export default defineComponent({
       closeChangeCity,
       changeCity,
       openChangeCity,
-      isOrderingPage
+      isOrderingPage,
     };
   },
 });
@@ -410,6 +411,98 @@ export default defineComponent({
       //max-height: 145vh;
       height: 1192px;
     }
+  }
+}
+</style>
+<style scoped lang="scss">
+.loader__container {
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: center;
+  padding-top: 24vh;
+}
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: $clr-zeta;
+  background: -moz-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -o-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -ms-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: linear-gradient(
+    to right,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: $clr-zeta;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.loader:after {
+  background: white;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 </style>

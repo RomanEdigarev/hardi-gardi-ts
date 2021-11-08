@@ -31,6 +31,7 @@ export const getApiInstance = async () => {
   instance.defaults.headers = {
     "X-Auth-Token": response.data.token,
   };
+  return response.data.token;
   // }
 };
 getApiInstance();

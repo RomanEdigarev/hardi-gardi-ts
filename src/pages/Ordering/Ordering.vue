@@ -64,9 +64,12 @@
           </div>
           <!-- Comments END -->
         </template>
+        <template v-else>
+          <div class="loader"></div>
+        </template>
 
         <!-- Checkbox -->
-        <div class="ordering__body__checkbox">
+        <div class="ordering__body__checkbox" v-if="!order.isLoading">
           <Checkbox
             id="subscription"
             label-text="Я хочу получать информацию о скидках и новости"
@@ -74,7 +77,7 @@
         </div>
         <!-- Checkbox END -->
       </div>
-      <div class="ordering__body__right">
+      <div class="ordering__body__right" v-if="!order.isLoading">
         <Checkout is-ordering @checkout="createOrder" :disabled="!isValid" />
       </div>
     </div>
@@ -128,9 +131,13 @@ export default defineComponent({
     const isValid = ref(false);
 
     watch(order.value, () => {
-      const { contactPerson, location, delivery} = order.value;
+      const { contactPerson, location, delivery } = order.value;
       if (contactPerson) {
-        isValid.value = !!contactPerson.name && !!contactPerson.email && !!contactPerson.phone && (delivery.current === '3' || !!location.address)
+        isValid.value =
+          !!contactPerson.name &&
+          !!contactPerson.email &&
+          !!contactPerson.phone &&
+          (delivery.current === "3" || !!location.address);
       }
     });
 
@@ -139,8 +146,8 @@ export default defineComponent({
       store.commit("order/setPaymentType", key);
     };
     const createOrder = async (link) => {
-     await store.dispatch('order/fetchCreateOrder')
-     await store.dispatch('order/fetchHistoryOrders')
+      await store.dispatch("order/fetchCreateOrder");
+      await store.dispatch("order/fetchHistoryOrders");
       router.push(link);
     };
 
@@ -282,6 +289,91 @@ export default defineComponent({
       width: 100%;
       display: block;
     }
+  }
+}
+</style>
+<style scoped lang="scss">
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: $clr-zeta;
+  background: -moz-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -o-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -ms-linear-gradient(
+    left,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: linear-gradient(
+    to right,
+    $clr-zeta 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: $clr-zeta;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.loader:after {
+  background: white;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 </style>

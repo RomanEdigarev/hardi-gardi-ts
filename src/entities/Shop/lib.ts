@@ -6,7 +6,10 @@ import { getApiInstance } from "@/services/api/config";
 import { getCurrentInstance } from "vue";
 
 export const initShop = async (store): Promise<Shop> => {
-  await getApiInstance();
+  if (!store.state.token) {
+    const token = await getApiInstance();
+    store.commit("setToken", token);
+  }
 
   store.commit(
     "setIsMobile",
