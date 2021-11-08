@@ -21,17 +21,17 @@ let instance = axios.create({
   baseURL: API_URL,
 });
 export const getApiInstance = async () => {
-  if (localStorage.getItem("token")) {
-    instance.defaults.headers = {
-      "X-Auth-Token": localStorage.getItem("token"),
-    };
-  } else {
-    const response = await getTokenAPI();
-    localStorage.setItem("token", response.data.token);
-    instance.defaults.headers = {
-      "X-Auth-Token": response.data.token,
-    };
-  }
+  // if (localStorage.getItem("token")) {
+  //   instance.defaults.headers = {
+  //     "X-Auth-Token": localStorage.getItem("token"),
+  //   };
+  // } else {
+  const response = await getTokenAPI();
+  localStorage.setItem("token", response.data.token);
+  instance.defaults.headers = {
+    "X-Auth-Token": response.data.token,
+  };
+  // }
 };
 getApiInstance();
 export const apiInstance = () => {

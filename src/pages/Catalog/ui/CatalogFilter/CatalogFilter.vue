@@ -163,6 +163,8 @@ export default defineComponent({
   emits: ["hide-mobile-filter", "filter-section", "set-price", "apply-filter"],
   setup(_, { emit }) {
     const store = useStore();
+    const isPhone = computed(() => store.getters["getIsPhone"]);
+    const isMobile = computed(() => store.getters["getIsMobile"]);
     const sections = computed<Section[]>(
       () => store.getters["products/getSections"]
     );
@@ -202,7 +204,9 @@ export default defineComponent({
     };
     const applyFilter = () => {
       emit("apply-filter");
-      emit("hide-mobile-filter");
+      if (isPhone.value || isMobile.value) {
+        emit("hide-mobile-filter");
+      }
     };
 
     return {
