@@ -242,8 +242,9 @@ export default defineComponent({
       padding: 0 10vw;
     }
     &__content-container {
-      width: 1194px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 1194px;
+      //margin: 0 auto;
     }
     &__container {
       max-width: none;

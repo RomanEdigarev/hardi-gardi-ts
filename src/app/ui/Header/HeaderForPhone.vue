@@ -111,7 +111,7 @@ export default defineComponent({
       margin-left: 38px;
     }
     &__logo {
-      flex: 1;
+      flex: 0.6;
       svg {
         width: 70px;
       }

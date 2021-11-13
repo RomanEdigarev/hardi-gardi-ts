@@ -315,9 +315,12 @@ export default defineComponent({
       padding: 0;
       margin-bottom: 80px;
       &__mobile-filter-btn {
+        display: block;
+        position: absolute;
+        transform: translateY(-50%);
         width: 44px;
         height: 44px;
-        right: 0;
+        right: 12px;
         top: 8px;
         img {
           height: 100%;
@@ -352,16 +355,16 @@ export default defineComponent({
         }
       }
       &__body {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, 160px);
         row-gap: 19px;
         gap: 10px;
-        justify-content: space-between;
+        justify-content: center;
         grid-auto-rows: auto;
       }
 
       &__body.cl-1 {
         .catalog__results__item {
-          width: 80vw;
+          width: 100%;
           max-width: 460px;
         }
 
@@ -461,6 +464,9 @@ export default defineComponent({
             height: 32px;
             top: 10px;
             right: 10px;
+          }
+          &__image-wrapper {
+            max-height: 175px;
           }
         }
       }

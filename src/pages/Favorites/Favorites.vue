@@ -147,10 +147,21 @@ export default defineComponent({
       grid-auto-rows: 160px;
       :deep .catalog-product-card {
         flex-direction: row;
+        &__image-wrapper {
+          max-width: 112px;
+          max-height: 175px;
+        }
         &__info {
           padding-left: 16px;
           max-width: 135px;
           justify-content: space-between;
+        }
+      }
+    }
+    &__body.cl-2 {
+      :deep .catalog-product-card {
+        &__image-wrapper {
+          max-height: 175px;
         }
       }
     }

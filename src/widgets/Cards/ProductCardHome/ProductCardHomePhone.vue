@@ -62,7 +62,7 @@ export default defineComponent({
     }
     &__body {
       &__text {
-        font-size: 2vw;
+        font-size: 3vw;
       }
     }
     &__footer__price {

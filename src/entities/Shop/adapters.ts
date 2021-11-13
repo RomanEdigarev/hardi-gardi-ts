@@ -42,7 +42,30 @@ export const getShopAdapter = async (): Promise<Shop> => {
     footer: responseMenu.data.footer,
   };
   const contacts: Contacts = await getContactsAdapter();
-  const social: Social = await getSocialAdapter();
+  // const social: Social = await getSocialAdapter();
+
+  const social: Social = [
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/khardigardi/",
+    },
+    {
+      name: "YouTube",
+      url: "https://www.youtube.com/channel/UCiQQUVCL-sgiph59BYwUaow",
+    },
+    {
+      name: "VK",
+      url: "https://vk.com/khardigardi",
+    },
+    {
+      name: "TikTok",
+      url: "https://www.tiktok.com/@khardigardi?",
+    },
+    {
+      name: "FB",
+      url: "https://www.facebook.com/Харди-Гарди-281238202374152",
+    },
+  ];
   // Transformation API data here //
 
   return {
