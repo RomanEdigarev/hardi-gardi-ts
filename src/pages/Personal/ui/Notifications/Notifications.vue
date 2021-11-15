@@ -6,7 +6,7 @@
       </div>
       <div class="notifications__item__title">Скидки на любимые игры</div>
       <div class="notifications__item__text">
-        Все о подарках и выгодных покупках с доставкой самых свежих новостей!
+        Если Вы хотите первыми узнавать об акциях, скидках и закрытых распродажах на игры Харди Гарди, подпишитесь на уведомления по электронной почте. Мы обязательно Вас проинформируем.
       </div>
     </div>
     <div class="notifications__item">
@@ -15,18 +15,7 @@
       </div>
       <div class="notifications__item__title">Новинки от ХардиГарди</div>
       <div class="notifications__item__text">
-        Возвращение к последнему месту просмотра и возобновление процесса
-        оформления заказа.
-      </div>
-    </div>
-    <div class="notifications__item">
-      <div class="notifications__item__icon">
-        <Checkbox id="relevant-reminders" />
-      </div>
-      <div class="notifications__item__title">Актуальные напоминания</div>
-      <div class="notifications__item__text">
-        Возвращение к последнему месту просмотра и возобновление процесса
-        оформления заказа.
+        Если Вы хотите первыми узнавать о выходе новинок и получать специальные предложения на их покупку, подпишитесь на уведомления по электронной почте. Мы обязательно Вас проинформируем
       </div>
     </div>
   </div>

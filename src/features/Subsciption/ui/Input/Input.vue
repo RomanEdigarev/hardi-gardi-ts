@@ -2,19 +2,30 @@
   <div class="container">
     <form class="form" action="">
       <input class="input" type="email" placeholder="E-mail" />
-      <button class="button">Отправить</button>
+      <button class="button" :class="{'phone': isPhone}">
+<!--        <span>Отправить</span>-->
+        <img src="./assets/icon.svg" alt="">
+      </button>
     </form>
     <span class="info">
-      Нажимая «Отправить» вы соглашаетесь на обработку персональных данных
+      Нажимая «Отправить» вы соглашаетесь на <span>обработку персональных данных</span>
     </span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent} from "vue";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "Input",
+  setup() {
+    const store = useStore()
+    const isPhone = computed(() => store.getters["getIsPhone"])
+    return {
+      isPhone
+    }
+  }
 });
 </script>
 
@@ -34,6 +45,7 @@ export default defineComponent({
 .input {
   width: 100%;
   height: 100%;
+  max-height: 50px;
   border-radius: 18px;
   outline: none;
   border: none;
@@ -55,6 +67,15 @@ export default defineComponent({
   padding: 12px 17px;
   border-radius: 16px;
   background-color: $clr-alpha-zeta;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button.phone {
+  width: 50px;
+  height: 100%;
+  right: 0;
+  border-radius: 18px;
 }
 
 .info {
@@ -64,5 +85,8 @@ export default defineComponent({
   color: $clr-eta;
   bottom: -16px;
   transform: translateY(100%);
+  span {
+    cursor: pointer;
+  }
 }
 </style>

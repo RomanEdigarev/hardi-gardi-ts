@@ -177,6 +177,7 @@ export default defineComponent({
 
   // *** Body *** //
   &__body {
+    padding-left: 115px;
     &__item {
       position: relative;
       width: 100%;
@@ -191,6 +192,9 @@ export default defineComponent({
   &__footer {
     width: 100%;
     height: 621px;
+    &__line {
+      height: 2088px;
+    }
     &__line,
     &__line-phone {
       position: absolute;
@@ -232,7 +236,13 @@ export default defineComponent({
       width: 100px;
       position: absolute;
       top: -40px;
-      left: 0;
+      left: -114px;
+      @include phone {
+        width: 100px;
+        position: absolute;
+        top: -40px;
+        left: 37px;
+      }
     }
     .history__body__item {
       &__title {
@@ -256,16 +266,22 @@ export default defineComponent({
           position: absolute;
           bottom: 16px;
           width: 72%;
+          height: 462px;
           object-fit: cover;
           border-radius: 30px;
+          @include phone {
+            height: auto;
+          }
         }
       }
     }
   }
 
   .second-block {
-    padding-left: 6.6%;
-    margin-bottom: 452px;
+    @include phone {
+      padding-left: 6.6%;
+    }
+    margin-bottom: 432px;
     .history__body__item {
       &__title {
         width: 23.86%;
@@ -294,7 +310,9 @@ export default defineComponent({
     }
   }
   .third-block {
-    padding-left: 121px;
+    @include phone {
+      padding-left: 121px;
+    }
     margin-bottom: 168px;
     .history__body__item {
       &__title {
@@ -331,6 +349,10 @@ export default defineComponent({
         }
       }
     }
+  }
+
+  :deep .page-main__header {
+    margin-bottom: 132px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -407,10 +429,10 @@ export default defineComponent({
       padding-right: 0;
       justify-content: space-between;
       .nachalo {
-        width: 100px;
-        position: absolute;
-        top: -40px;
-        left: 37px;
+          width: 100px;
+          position: absolute;
+          top: -40px;
+          left: 37px;
       }
       .history__body__item {
         &__title {
@@ -477,8 +499,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 320px) and (max-width: 736px),
-  (-webkit-min-device-pixel-ratio: 3) {
+@include phone {
   .history {
     padding: 0 10px;
     &__title {
@@ -490,6 +511,7 @@ export default defineComponent({
     }
 
     &__body {
+      padding-left: 0;
       &__item {
         padding: 0;
         flex-direction: column;
@@ -596,8 +618,9 @@ export default defineComponent({
       height: auto;
       &__line-phone {
         display: block;
-        top: 126px;
-        left: -11px;
+        left: -18px;
+        top: 132px;
+        width: 100vw;
       }
     }
   }
