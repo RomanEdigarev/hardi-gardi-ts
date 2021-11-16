@@ -27,36 +27,18 @@
     </div>
 
     <div class="prolog__cards">
-      <div class="prolog__cards__row">
-        <div
-          v-for="(card, index) in firstRow"
+      <div
+          v-for="(card, index) in arr"
           class="prolog__card"
           :key="card.name"
-        >
-          <PrologCard
+      >
+        <PrologCard
             @click="$router.push(`/catalog/${card.id}`)"
             :section-id="card.id"
             :color="card.color"
             :title="card.name"
-          />
-        </div>
+        />
       </div>
-      <transition appear @enter="enterElement" @leave="leaveElement">
-        <div v-if="isOpen" class="prolog__cards__row">
-          <div
-            v-for="(card, index) in secondRow"
-            class="prolog__card"
-            :key="card.name"
-          >
-            <PrologCard
-              @click="$router.push(`/catalog/${card.id}`)"
-              :section-id="card.id"
-              :color="card.color"
-              :title="card.name"
-            />
-          </div>
-        </div>
-      </transition>
     </div>
     <div class="prolog__button">
       <BetaButton
@@ -95,6 +77,7 @@ export default defineComponent({
     const currentInstance = getCurrentInstance()
     const rows = ref(useCards( isMobile.value ? 3 : 4))
     const [firstRow, secondRow] = rows.value;
+    const arr = [...firstRow, ...secondRow]
 
 
     watch(isMobile, () => {
@@ -132,6 +115,7 @@ export default defineComponent({
       enterElement,
       leaveElement,
       setSectionFilter,
+      arr
     };
   },
 });
@@ -179,18 +163,26 @@ export default defineComponent({
 
   &__cards {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, 270px);
+    justify-content: space-between;
     row-gap: 38px;
     margin-bottom: 50px;
     &__row {
-      display: flex;
-      justify-content: space-between;
+      //display: flex;
+      //justify-content: space-between;
+      display: grid;
+      //grid-template-columns: repeat(auto-fill, 25%);
     }
   }
 
   &__card {
     flex: 0.23;
+    max-width: 270px;
     height: 370px;
+    display: none;
+    &:nth-child(-n + 4) {
+      display: block;
+    }
 
     &__content {
       height: 100%;
@@ -228,12 +220,13 @@ export default defineComponent({
       margin-bottom: 60px;
     }
     &__cards {
-      &__row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 30px;
-        margin-bottom: 40px;
-      }
+      grid-template-columns: repeat(auto-fill, 220px);
+      //&__row {
+      //  display: grid;
+      //  grid-template-columns: 1fr 1fr 1fr;
+      //  gap: 30px;
+      //  margin-bottom: 40px;
+      //}
     }
     &__card {
       height: 301px;
@@ -269,6 +262,9 @@ export default defineComponent({
       }
     }
     &__cards {
+      grid-template-columns: repeat(auto-fill, 160px);
+      grid-auto-rows: 220px;
+      justify-content: space-evenly;
       &__row {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

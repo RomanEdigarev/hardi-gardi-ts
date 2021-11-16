@@ -186,8 +186,8 @@ export default defineComponent({
   &__prolog-container {
     width: 100%;
     //height: 816px;
-    margin-top: 757px;
-    //margin-top: 62vh;
+    //margin-top: 757px;
+    margin-top: 38vw;
     margin-bottom: 114px;
   }
 
@@ -239,7 +239,7 @@ export default defineComponent({
     &__prolog-container {
       height: auto;
       margin-bottom: 236px;
-      margin-top: 68vh;
+      margin-top: 502px;
     }
     &__promotion-container {
       height: auto;
@@ -255,6 +255,16 @@ export default defineComponent({
     }
     &__category-cards-container {
       gap: 30px;
+    }
+  }
+}
+@media screen and (min-width: 738px) and (max-width: 1000px),
+(-webkit-min-device-pixel-ratio: 3) {
+  .home {
+    &__prolog-container {
+      height: auto;
+      margin-bottom: 236px;
+      margin-top: 800px;
     }
   }
 }
@@ -279,7 +289,7 @@ export default defineComponent({
     }
     &__prolog-container {
       height: auto;
-      margin-top: 427px;
+      margin-top: 490px;
       margin-bottom: 52px;
     }
     &__new-games-container {
@@ -315,6 +325,12 @@ export default defineComponent({
 }
 @media screen and (max-width: 375px) {
   .home {
+    &__prolog-container {
+      height: auto;
+      margin-bottom: 236px;
+      margin-top: 68vw;
+    }
+
     &__category-cards-container {
       grid-template-columns: 1fr;
       grid-auto-rows: 158px;
