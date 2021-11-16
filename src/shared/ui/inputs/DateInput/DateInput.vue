@@ -5,6 +5,7 @@
       ref="date"
       v-model="picked"
       :locale="ru"
+      weekdayFormat="EEEEEE"
       inputFormat="dd.MM.yyyy"
     />
     <img

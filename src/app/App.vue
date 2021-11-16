@@ -264,7 +264,7 @@ export default defineComponent({
 
   &__scroll-btn-container {
     position: fixed;
-    bottom: 780px;
+    bottom: 10vh;
     right: 13.54%;
   }
 

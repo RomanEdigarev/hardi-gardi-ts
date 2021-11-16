@@ -240,6 +240,11 @@ export default defineComponent({
   }
 
   // *** Results END *** //
+  :deep .catalog-product-card {
+    &__title {
+      font-size: 15px;
+    }
+  }
 }
 
 @media screen and (min-width: 738px) and (max-width: 1200px),

@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="product-card-info__description">{{ description }}</div>
-            <div class="product-card-info__link alfa-link">Подробнее</div>
+            <div class="product-card-info__link alfa-link" @click="$router.push(`/product/${id}`)">Подробнее</div>
           </div>
         </template>
       </Card>
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import { Card } from "@/shared/ui";
 import { FavoriteButton, ShopButton } from "@/shared/ui/buttons";
 import { AddToFavorite, AddToBasket } from "@/features";
@@ -74,6 +74,10 @@ export default defineComponent({
       default: false,
       required: false,
     },
+    id: {
+      type: String,
+      required: true
+    }
   },
   setup() {
     const content = ref<HTMLElement>(null);

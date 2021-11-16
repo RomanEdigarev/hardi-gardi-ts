@@ -7,7 +7,7 @@
       class="cabinet-links__link"
       @click="$emit('show-modal', 'search')"
     >
-      <SearchIcon />
+      <SearchIcon  />
     </span>
     <span
       v-else
@@ -77,7 +77,7 @@ export default defineComponent({
       default: 0,
     },
   },
-  emits: ["openSearchModalPhone"],
+  emits: ["openSearchModalPhone", "show-modal"],
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -89,10 +89,12 @@ export default defineComponent({
         router.push("/favorites");
       }
     };
+
     return {
       isPhone: computed(() => store.getters["getIsPhone"]),
       goToFavorites,
-      isMobile: computed(() => store.getters['getIsMobile']),};
+      isMobile: computed(() => store.getters['getIsMobile']),
+    }
   },
 });
 </script>

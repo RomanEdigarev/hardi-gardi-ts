@@ -7,6 +7,7 @@
       <CabinetLinks
         :basket-count="basketCount"
         :favorites-count="favoritesCount"
+        @show-modal="$emit('show-modal', 'search')"
       />
     </div>
   </div>

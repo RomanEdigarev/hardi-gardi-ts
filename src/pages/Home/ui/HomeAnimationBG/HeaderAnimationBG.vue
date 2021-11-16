@@ -76,7 +76,7 @@
         @mouseover="toggleLoopAnimation"
         @mouseleave="toggleLoopAnimation"
       >
-        <video autoplay muted loop src="./assets/video_1.mp4"></video>
+        <video autoplay muted loop src="./assets/video_2.mp4"></video>
       </div>
       <div
         ref="betaShape"
@@ -87,7 +87,7 @@
         }"
         @click="playStarAnimation"
       >
-        <video autoplay muted loop src="./assets/video_1.mp4"></video>
+        <video autoplay muted loop src="./assets/video_3.mp4"></video>
       </div>
       <div
         ref="gammaShape"
@@ -98,7 +98,7 @@
         }"
         @click="playStarAnimation"
       >
-        <video autoplay muted loop src="./assets/video_1.mp4"></video>
+        <video autoplay muted loop src="./assets/video_4.mp4"></video>
       </div>
     </div>
   </div>
