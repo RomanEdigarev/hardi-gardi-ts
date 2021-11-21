@@ -76,7 +76,7 @@
         @mouseover="toggleLoopAnimation"
         @mouseleave="toggleLoopAnimation"
       >
-        <video autoplay muted loop src="./assets/video_2.mp4"></video>
+        <video autoplay muted loop :src="videoPath ? videoPath[0] : ''"></video>
       </div>
       <div
         ref="betaShape"
@@ -87,7 +87,7 @@
         }"
         @click="playStarAnimation"
       >
-        <video autoplay muted loop src="./assets/video_3.mp4"></video>
+        <video autoplay muted loop :src="videoPath ? videoPath[1] : ''"></video>
       </div>
       <div
         ref="gammaShape"
@@ -98,7 +98,7 @@
         }"
         @click="playStarAnimation"
       >
-        <video autoplay muted loop src="./assets/video_4.mp4"></video>
+        <video autoplay muted loop :src="videoPath ? videoPath[2] : ''"></video>
       </div>
     </div>
   </div>
@@ -121,6 +121,7 @@ import {
   useShapeRotateAnimation,
 } from "./animations";
 import { CloseIcon } from "@/shared/ui/icons";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "HomeAnimationBG",
@@ -187,6 +188,9 @@ export default defineComponent({
       }
     };
 
+    const store = useStore()
+    const videoPath = computed(() => store.getters['promo/getPromoVideo'])
+
     return {
       layer,
       shapeForth,
@@ -198,6 +202,7 @@ export default defineComponent({
       playStarAnimation,
       toggleLoopAnimation,
       closeIcon,
+      videoPath
     };
   },
 });

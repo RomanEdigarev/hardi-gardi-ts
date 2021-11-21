@@ -7,3 +7,4 @@ export * from "./Basket/model";
 export * from "./Order/model";
 export * from "./City/model";
 export * from "./Search/model";
+export * from "./Promo/model";

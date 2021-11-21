@@ -3,7 +3,6 @@ import { Shop } from "./model";
 import { Catalog } from "./Catalog/model";
 import { FooterMenu, MenuLink } from "./Menu/model";
 import { getApiInstance } from "@/services/api/config";
-import { getCurrentInstance } from "vue";
 
 export const initShop = async (store): Promise<Shop> => {
   if (!store.state.token) {
@@ -19,6 +18,7 @@ export const initShop = async (store): Promise<Shop> => {
   store.commit("setIsPhone", document.documentElement.clientWidth <= 737);
   store.commit("setIsToken", true);
   await store.dispatch("shop/initShop");
+  await store.dispatch("promo/fetchPromo");
   await store.dispatch("user/fetchUserAuthInfo");
   await store.dispatch("basket/initBasket");
   await store.dispatch("favorites/initFavorites");

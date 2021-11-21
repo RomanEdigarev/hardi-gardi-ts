@@ -9,6 +9,7 @@ import {
   Order,
   City,
   Search,
+  Promo,
 } from "@/entities/models";
 import {
   basketsModule,
@@ -19,6 +20,7 @@ import {
   orderModule,
   cityModule,
   searchModule,
+  promoModule,
 } from "@/entities/modules";
 
 export type State = {
@@ -36,6 +38,7 @@ export type State = {
   city: City;
   search?: Search;
   token: string;
+  promo: Promo;
 };
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -52,6 +55,7 @@ export const store = createStore<State>({
       items: undefined,
     },
     token: "",
+    promo: undefined,
   },
   mutations: {
     init: (state, payload) => {
@@ -85,6 +89,7 @@ export const store = createStore<State>({
     order: orderModule,
     city: cityModule,
     search: searchModule,
+    promo: promoModule,
   },
 });
 

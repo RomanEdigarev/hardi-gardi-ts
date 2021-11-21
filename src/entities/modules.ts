@@ -6,3 +6,4 @@ export * from "./User/store";
 export * from "./Order/store";
 export * from "./City/store";
 export * from "./Search/store";
+export * from "./Promo/store";

@@ -10,12 +10,11 @@ type PrologCard = {
 type PrologCards = PrologCard[][];
 
 export const useCards = (itemsInRow): PrologCards => {
-  const currentInstance = getCurrentInstance();
   const store = useStore();
 
   const catalog = store.getters["shop/getCatalog"];
   const sections = [...catalog.sections];
-  const colors = ["FFC124", "5F73AA", "F27F94", "5F73AA"];
+  const colors = ["FFC124", "F27F94", "5F73AA", "FFC124"];
   const chunks = [];
   while (sections.length > 0) {
     const splice = sections.splice(0, itemsInRow).map((item) => toRaw(item));

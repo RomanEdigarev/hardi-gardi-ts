@@ -114,7 +114,7 @@ export default defineComponent({
     margin-right: 16px;
   }
 
-  // *** Item *** //
+  // *** MainPagePromoItem *** //
   &__item {
     height: 100%;
     display: flex;
@@ -177,7 +177,7 @@ export default defineComponent({
     text-shadow: 0 0 1px $clr-phi;
   }
 
-  // *** Item END *** //
+  // *** MainPagePromoItem END *** //
 }
 @media screen and (min-width: 320px) and (max-width: 736px),
   (-webkit-min-device-pixel-ratio: 3) {

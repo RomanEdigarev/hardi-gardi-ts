@@ -256,7 +256,7 @@ export default defineComponent({
     margin-bottom: 22px;
   }
 
-  // *** Item *** ///
+  // *** MainPagePromoItem *** ///
 
   &__item {
     width: 100%;
@@ -347,7 +347,7 @@ export default defineComponent({
     margin-bottom: 154px;
   }
 
-  // *** Item END *** //
+  // *** MainPagePromoItem END *** //
 
   // *** Footer *** //
   &__footer {

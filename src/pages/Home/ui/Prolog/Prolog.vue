@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="prolog__cards">
+    <div class="prolog__cards" :class="{'is-open': isOpen}">
       <div
           v-for="(card, index) in arr"
           class="prolog__card"
@@ -190,6 +190,10 @@ export default defineComponent({
       justify-content: center;
       align-items: center;
     }
+  }
+
+  .is-open &__card {
+      display: block;
   }
 
   &__button {
