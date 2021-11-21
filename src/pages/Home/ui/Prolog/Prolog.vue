@@ -185,19 +185,16 @@ export default defineComponent({
     }
     @include tablet {
       &:nth-child(-n + 6) {
-        background-color: red;
         display: block;
       }
     }
     @media screen and (max-width:670px) and (min-width: 495px){
       &:nth-child(-n + 6) {
-        background-color: red;
         display: block;
       }
     }
     @include phone {
       &:nth-child(-n + 4) {
-        background-color: red;
         display: block;
       }
     }
