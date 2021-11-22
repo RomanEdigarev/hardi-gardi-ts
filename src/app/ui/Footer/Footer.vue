@@ -106,14 +106,14 @@ export default defineComponent({
   setup() {
     const footerCatalog = useFooterCatalog();
     const route = useRoute();
-    const firstPartFooterLinks = footerCatalog.sections.slice(0, 4);
-    const secondPartFooterLinks = footerCatalog.sections.slice(4);
+    const firstPartFooterLinks = footerCatalog.sections.slice(0, 2);
+    const secondPartFooterLinks = footerCatalog.sections.slice(2);
     const leftLinks =
       firstPartFooterLinks.length > secondPartFooterLinks.length
         ? firstPartFooterLinks
         : secondPartFooterLinks;
     const rightLinks =
-      firstPartFooterLinks.length < secondPartFooterLinks.length
+      firstPartFooterLinks.length > secondPartFooterLinks.length
         ? secondPartFooterLinks
         : firstPartFooterLinks;
 
