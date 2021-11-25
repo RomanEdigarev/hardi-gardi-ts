@@ -5,21 +5,29 @@
     </div>
 
     <div class="sidebar__body">
-      <div class="sidebar__body__item">Доставка и оплата</div>
-      <div class="sidebar__body__item current-item">О компании</div>
-      <div class="sidebar__body__item">Сертификат</div>
-      <div class="sidebar__body__item">Договор оферты</div>
-      <div class="sidebar__body__item">Сотрудничество</div>
-      <div class="sidebar__body__item">Благотворительность</div>
+      <router-link
+        v-for="footerItem in footerMenu"
+        :to="footerItem.link"
+        class="sidebar__body__item"
+        active-class="current-item"
+        >
+        {{ footerItem.name }}
+      </router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useFooterMenu } from "@/app/ui/Footer/lib";
 
 export default defineComponent({
   name: "Sidebar",
+  setup() {
+    return {
+      footerMenu: useFooterMenu(),
+    };
+  },
 });
 </script>
 
@@ -49,6 +57,7 @@ export default defineComponent({
       cursor: pointer;
       line-height: 2.27;
       transition: text-shadow 0.3s ease-in-out;
+      display: inline-block;
       &:hover {
         text-shadow: 0 0 1px $clr-phi;
       }

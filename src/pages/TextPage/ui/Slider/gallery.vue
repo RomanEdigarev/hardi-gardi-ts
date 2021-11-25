@@ -1,21 +1,20 @@
 <template>
-  <div class="slider">
-    <div class="slider__body">
-      <Splide ref="slider" :options="options">
-        <SplideSlide>
-          <img class="slider__body__img" src="../../assets/01.jpg" alt="" />
-        </SplideSlide>
-        <SplideSlide>
-          <img class="slider__body__img" src="../../assets/02.jpg" alt="" />
-        </SplideSlide>
-      </Splide>
-    </div>
-    <div class="slider__footer">
-      <SliderPanel
-        :count="sliderLength"
-        @next-slide="goToNextSlide"
-        @prev-slide="goToPrevSlide"
-      />
+  <div class="text-page__body__slider">
+    <div class="slider">
+      <div class="slider__body">
+        <Splide ref="slider" :options="options">
+          <SplideSlide v-for="image in images">
+            <img class="slider__body__img" :src="image.file['ORIGIN_SRC']" alt="" />
+          </SplideSlide>
+        </Splide>
+      </div>
+      <div class="slider__footer">
+        <SliderPanel
+            :count="sliderLength"
+            @next-slide="goToNextSlide"
+            @prev-slide="goToPrevSlide"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -26,11 +25,16 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { SliderPanel } from "@/features";
 
 export default defineComponent({
-  name: "Slider",
+  name: "gallery",
   components: {
     Splide,
     SplideSlide,
     SliderPanel,
+  },
+  props: {
+    images: {
+      type: Array
+    }
   },
   setup() {
     const options = {
@@ -40,7 +44,7 @@ export default defineComponent({
       arrows: false,
       gap: "1rem",
       pagination: false,
-      height: "460px",
+      height: "auto",
     };
 
     const slider = ref(null);

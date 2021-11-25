@@ -5,7 +5,6 @@ import { Social } from "@/services/api/model/Social";
 
 export const getUserCity = async () => {
   const response = await apiInstance().post("user/city/getFavoriteCities.php");
-  console.log(response);
   return response;
 };
 
@@ -40,7 +39,6 @@ export const getProductAPI = async (id: number): Promise<ProductItem> => {
 export const getHistoryAPI = async (): Promise<History> => {
   try {
     const { data, status } = await apiInstance().post("about/history.php");
-    console.log(await apiInstance().post("about/history.php"));
     if (status === 200 && data.isSuccess) {
       return data;
     } else {

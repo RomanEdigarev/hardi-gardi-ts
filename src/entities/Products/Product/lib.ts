@@ -30,7 +30,6 @@ export const useProduct = () => {
 
 export const asyncUseProduct = async (id: number): Promise<Product> => {
   const { data } = await getProductByIdAPI(id);
-  console.log(data);
   return {
     article: "",
     characteristics: undefined,

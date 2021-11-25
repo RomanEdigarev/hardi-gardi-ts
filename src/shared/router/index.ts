@@ -149,16 +149,11 @@ const routes = [
     },
   },
   {
-    path: "/about/about.html",
+    path: "/about/:type",
     name: "TextPage",
     component: TextPage,
     meta: {
-      breadcrumb: [
-        {
-          name: "О компании",
-          link: "text-page",
-        },
-      ],
+      breadcrumb: [],
     },
   },
   {

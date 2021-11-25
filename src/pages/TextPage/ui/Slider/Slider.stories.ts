@@ -1,4 +1,4 @@
-import Slider from "./Slider.vue";
+import Slider from "./gallery.vue";
 import { withKnobs } from "@storybook/addon-knobs";
 import { useProduct } from "@/entities/Products/Product/lib";
 
