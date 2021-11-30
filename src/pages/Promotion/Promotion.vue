@@ -6,31 +6,30 @@
         <PageTitle text="Акции" />
       </div>
       <div class="promotion__body">
-        <div class="promotion__body__item">
-          <PromotionSection :products="[product, product]" />
-        </div>
-        <div class="promotion__body__item">
-          <PromotionSection :products="[product, product]" />
-        </div>
+        <PromotionSection v-if="actions.length > 0" :actions="actions"/>
       </div>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent, onMounted} from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, PromotionSection } from "@/widgets";
-import { useStore } from "@/services/vuex";
 import { useProduct } from "@/entities/Products/Product/lib";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "Promotion",
   components: { PageTitle, BreadCrumbs, PromotionSection },
   setup() {
+    const store = useStore()
     const { product } = useProduct();
+    const actions = computed(() => store.getters['actions/getActions'])
+
     return {
       product,
+      actions
     };
   },
 });

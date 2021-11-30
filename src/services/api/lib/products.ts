@@ -2,6 +2,7 @@ import { ProductItem, Products, Sections } from "@/services/api/model";
 import { apiInstance } from "@/services/api/config";
 import { Filters } from "@/services/api/model/Filter";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
+import { Product } from "@/entities/Products/Product/model";
 
 export const getProductsByPageAPI = async (
   page: number,
@@ -58,6 +59,21 @@ export const getProductByIdAPI = async (
   try {
     const { data, status } = await apiInstance().post(
       `catalog/item.php?id=${id}`
+    );
+    if (status === 200 && data.isSuccess) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getBestProductsAPI = async (type: string): Promise<Products> => {
+  try {
+    const { data, status } = await apiInstance().post(
+      `catalog/bestItems.php?type=${type}`
     );
     if (status === 200 && data.isSuccess) {
       return data;

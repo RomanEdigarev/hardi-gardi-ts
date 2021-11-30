@@ -18,4 +18,8 @@ export type Products = {
   filters: Filters;
   currentFilter: CurrentFilter;
   sections: Section[];
+  best?: Product[];
+  new?: Product[];
+  sale?: Product[];
+  best_set?: Product[];
 };

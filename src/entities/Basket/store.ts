@@ -7,11 +7,6 @@ import {
   changeBasketPositionAdapter,
   getBasketAdapter,
 } from "@/entities/Basket/adapters";
-import {
-  addBasketCouponAPI,
-  changeBasketPositionAPI,
-} from "@/services/api/lib/basket";
-
 export const basketsModule: Module<Basket, State> = {
   state: () => {
     return {

@@ -2,6 +2,7 @@ import { apiInstance } from "../config";
 import { Menu, History, TooltipMenu, Products, ProductItem } from "../model";
 import { Contacts } from "@/services/api/model/Contacts";
 import { Social } from "@/services/api/model/Social";
+import { Product } from "@/entities/Products/Product/model";
 
 export const getUserCity = async () => {
   const response = await apiInstance().post("user/city/getFavoriteCities.php");

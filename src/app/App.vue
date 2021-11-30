@@ -193,6 +193,7 @@ export default defineComponent({
   min-height: 130vh;
   height: 100%;
   position: relative;
+  overflow: hidden;
 
   &__change-city {
     position: relative;

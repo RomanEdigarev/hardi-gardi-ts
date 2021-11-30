@@ -1,5 +1,5 @@
 <template>
-  <div class="block-with-slider-phone">
+  <div class="block-with-slider-phone" :class="{'is-actions': isActions}">
 
     <div class="block-with-slider-phone__header">
       <div class="block-with-slider-phone__header__title">
@@ -56,6 +56,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    isActions: {
+      type: Boolean,
+      default: false
+    }
   },
   setup({ products }) {
 
@@ -183,6 +187,16 @@ export default defineComponent({
         font-size: 16px;
         line-height: 18px;
       }
+    }
+  }
+}
+.is-actions {
+  :deep .product-card-info {
+    &__price {
+      display: none;
+    }
+    &__favorite-btn-container, &__shop-btn-container {
+      display: none;
     }
   }
 }

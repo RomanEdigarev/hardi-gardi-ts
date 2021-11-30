@@ -3,7 +3,10 @@ import { State } from "@/services/vuex";
 import { Products, ProductsPage } from "./model";
 import { getProductAdapter } from "@/entities/Products/Product/adapters";
 import { Product } from "./Product/model";
-import { getProductsByPageAdapter } from "@/entities/Products/adapters";
+import {
+  getBestProductsAdapter,
+  getProductsByPageAdapter,
+} from "@/entities/Products/adapters";
 import {
   getFiltersAdapter,
   getSectionsAdapter,
@@ -23,6 +26,10 @@ export const productsModule: Module<Products, State> = {
       filters: undefined,
       sections: [],
       currentFilter: {},
+      best: [],
+      new: [],
+      sale: [],
+      best_set: [],
     };
   },
   mutations: {
@@ -79,6 +86,9 @@ export const productsModule: Module<Products, State> = {
       state.currentFilter = newCurrentFilter;
     },
     resetCurrentFilters: (state) => (state.currentFilter = {}),
+    setBestItems: (state, payload) => {
+      state[payload.type] = payload.items;
+    },
   },
   actions: {
     initSections: async ({ commit, rootState }) => {
@@ -124,6 +134,10 @@ export const productsModule: Module<Products, State> = {
       }
     },
     getProductWithFilter: async () => {},
+    fetchBestProducts: async ({ commit }, type: string) => {
+      const products = await getBestProductsAdapter(type);
+      commit("setBestItems", { type, items: products });
+    },
   },
   getters: {
     getCurrentProduct: (state) => state.currentProduct,
@@ -134,6 +148,9 @@ export const productsModule: Module<Products, State> = {
     getSections: (state) => state.sections,
     getFilters: (state) => state.filters,
     getCurrentFilters: (state) => state.currentFilter,
+    getBestItems: (state) => (type: string) => {
+      return state[type];
+    },
   },
   namespaced: true,
 };

@@ -7,7 +7,7 @@
       <Card borderRadiusPX="25" :bg-color="bgColor">
         <template v-slot:content>
           <div ref="content" class="product-card-info__content">
-            <div class="product-card-info__title">{{ title }}</div>
+            <div class="product-card-info__title" @click="$router.push(`/product/${id}`)">{{ title }}</div>
 
             <div class="product-card-info__price">
               <div class="product-card-info__price__prev">
@@ -26,10 +26,10 @@
     </div>
 
     <div class="product-card-info__favorite-btn-container">
-      <AddToFavorite :is-favorite="isFavorite" />
+      <AddToFavorite :is-favorite="isFavorite"  :product-id="id"/>
     </div>
     <div class="product-card-info__shop-btn-container">
-      <AddToBasket />
+      <AddToBasket :product-id="id"/>
     </div>
   </div>
 </template>
@@ -119,6 +119,7 @@ export default defineComponent({
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    cursor: pointer;
   }
 
   &__price {

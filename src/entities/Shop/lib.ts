@@ -22,7 +22,13 @@ export const initShop = async (store): Promise<Shop> => {
   await store.dispatch("user/fetchUserAuthInfo");
   await store.dispatch("basket/initBasket");
   await store.dispatch("favorites/initFavorites");
-  await store.dispatch("order/fetchHistoryOrders");
+  await store.dispatch("actions/getActions");
+  await store.dispatch("products/fetchBestProducts", "best");
+  await store.dispatch("products/fetchBestProducts", "new");
+  await store.dispatch("products/fetchBestProducts", "sale");
+  if (store.state.user.isAuth) {
+    await store.dispatch("order/fetchHistoryOrders");
+  }
 
   return store.state.shop;
 };

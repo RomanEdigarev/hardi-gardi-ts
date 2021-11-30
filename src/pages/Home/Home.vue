@@ -4,21 +4,21 @@
       <Prolog />
     </section>
     <section class="home__bestsellers-container">
-      <template v-if="testProducts.length > 0">
-        <SectionBestsellers :products="testProducts" />
+      <template v-if="bestProducts.length > 0">
+        <SectionBestsellers  :products="bestProducts" />
       </template>
     </section>
     <section class="home__new-games-container">
-      <SectionNewGames :products="[product, product]" />
+      <SectionNewGames v-if="newestProducts.length > 0" :products="newestProducts" />
     </section>
     <section class="home__promotion-container">
-      <PromotionSection :products="[product, product]" />
+      <PromotionSection v-if="actions.length > 0"  :actions="actions"/>
     </section>
     <section class="home__sales-container">
-      <SectionSales :products="[product, product, product, product]" />
+      <SectionSales v-if="salesProducts.length > 0" :products="salesProducts" />
     </section>
     <section class="home__sets-container">
-      <SectionSets :products="[product, product]" />
+      <SectionSets v-if="bestSetsProducts.length > 0" :products="bestSetsProducts" />
     </section>
     <section class="home__category-cards-container">
       <div class="home__category-cards-container__card-container">
@@ -134,6 +134,11 @@ export default defineComponent({
     const { product } = useProduct();
     const testProducts = ref([]);
     const staticBg = ref(false);
+    const actions = computed(() => store.getters['actions/getActions'])
+    const bestProducts = computed(() => store.getters['products/getBestItems']('best'))
+    const newestProducts = computed(() => store.getters['products/getBestItems']('new'))
+    const salesProducts = computed(() => store.getters['products/getBestItems']('sale'))
+    const bestSetsProducts = computed(() => store.getters['products/getBestItems']('best_set'))
 
     onMounted(async () => {
       testProducts.value.push(await asyncUseProduct(201));
@@ -155,6 +160,11 @@ export default defineComponent({
       isMobile: computed(() => store.getters["getIsMobile"]),
       testProducts,
       staticBg,
+      actions,
+      bestProducts,
+      newestProducts,
+      salesProducts,
+      bestSetsProducts
     };
   },
 });

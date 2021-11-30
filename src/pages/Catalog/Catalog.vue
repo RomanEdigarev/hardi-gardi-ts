@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="catalog__footer">
-        <PromotionSection :products="[product, product]" />
+        <PromotionSection v-if="actions.length > 0" :actions="actions" />
       </div>
     </main>
   </div>
@@ -173,6 +173,7 @@ export default defineComponent({
       applyFilter,
       setPrice,
       filters,
+      actions: computed(() => store.getters['actions/getActions'])
     };
   },
 });

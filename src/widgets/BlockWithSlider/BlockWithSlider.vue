@@ -1,5 +1,5 @@
 <template>
-  <div class="block-with-slider">
+  <div class="block-with-slider" :class="{'is-actions': isActions}">
     <div ref="imageCard" class="block-with-slider__image-card-container">
       <ImageProductCard
         :title="currentProduct.title"
@@ -43,6 +43,7 @@ import { Product } from "@/entities/Products/Product/model";
 import InfoProductCard from "@/widgets/Product/InfoProductCard/InfoProductCard.vue";
 import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCard.vue";
 import { useAnimation } from "./animations";
+import {Action} from "@/entities/Actions/model";
 
 export default defineComponent({
   name: "BlockWithSlider",
@@ -56,6 +57,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    isActions: {
+      type: Boolean,
+      default: false
+    }
   },
   setup({ products }) {
     const infoProduct = ref<InstanceType<typeof InfoProductCard>>();
@@ -175,6 +180,16 @@ export default defineComponent({
       div {
         margin-bottom: 0;
       }
+    }
+  }
+}
+.is-actions {
+  :deep .product-card-info {
+    &__price {
+      display: none;
+    }
+    &__favorite-btn-container, &__shop-btn-container {
+      display: none;
     }
   }
 }

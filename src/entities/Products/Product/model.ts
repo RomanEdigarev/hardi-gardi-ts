@@ -25,8 +25,8 @@ export type Characteristics = {
 export type Product = {
   id: number | string;
   title: string;
-  currentPrice: Price;
-  prevPrice: Price;
+  currentPrice?: Price;
+  prevPrice?: Price;
   img: ImgPath;
   article?: string;
   isFavorite?: boolean;
