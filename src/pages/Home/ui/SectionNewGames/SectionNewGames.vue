@@ -20,17 +20,17 @@
 
         <div class="new-games__first-row">
           <div class="new-games__first-row__info-product-card-container">
-            <InfoProductCard v-bind="product" :is-simple="true" />
+            <InfoProductCard v-bind="firstProduct" :is-simple="true" />
           </div>
           <div class="new-games__first-row__image-product-card-container">
-            <ImageProductCard :img-path="product.img" :title="product.title" />
+            <ImageProductCard :img-path="firstProduct.img" :title="firstProduct.title" />
           </div>
           <div class="new-games__first-row__image-card-container">
             <Card>
               <template v-slot:content>
                 <img
                   class="new-games__first-row__image-card"
-                  :src="require('/public/images/newGames.png')"
+                  :src="firstProduct.img2"
                   alt=""
                 />
               </template>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="new-games__second-row">
-          <div v-for="product in products" class="new-games__second-row__item">
+          <div v-for="product in alsoProducts" class="new-games__second-row__item">
             <ProductCardHome :product="product" />
           </div>
         </div>
@@ -64,7 +64,7 @@ import { PlusIcon } from "@/shared/ui/icons";
 import { Product } from "@/entities/Products/Product/model";
 
 export default defineComponent({
-  name: "SectionNewGames",
+    name: "SectionNewGames",
   components: {
     Card,
     InfoProductCard,
@@ -79,11 +79,13 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
-    const { product } = useProduct();
+  setup(props) {
+    const [firstProduct, ...alsoProducts] = props.products as Product[]
+
 
     return {
-      product,
+      firstProduct,
+      alsoProducts
     };
   },
 });

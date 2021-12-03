@@ -63,7 +63,7 @@
         </router-link>
       </div>
       <div class="home__category-cards-container__card-container">
-        <router-link to="/quality">
+        <router-link to="/about/">
           <CategoryCard :title="`Продукция \nи качество`" bg-color="#FFE2A0">
             <template v-slot:svg-container>
               <svg

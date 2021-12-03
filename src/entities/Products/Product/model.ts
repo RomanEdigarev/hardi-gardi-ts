@@ -28,6 +28,7 @@ export type Product = {
   currentPrice?: Price;
   prevPrice?: Price;
   img: ImgPath;
+  img2?: ImgPath;
   article?: string;
   isFavorite?: boolean;
   description?: string;

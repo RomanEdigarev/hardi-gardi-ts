@@ -48,6 +48,7 @@ export const getBestProductsAdapter = async (
       currentPrice: product.price.sum,
       prevPrice: product.price.oldSum,
       img: product.img,
+      img2: product.img2,
       isFavorite: false,
     };
   });

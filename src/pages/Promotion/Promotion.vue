@@ -48,6 +48,10 @@ export default defineComponent({
     display: none;
   }
 
+  :deep .promotion-section {
+    height: auto;
+  }
+
 }
 </style>
 <style lang="scss">

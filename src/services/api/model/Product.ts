@@ -67,6 +67,7 @@ export type ProductItem = {
   anonce: ProductAnonce;
   describe: ProductDescribe;
   img?: ProductIsIMG;
+  img2?: ProductIsIMG;
   video: ProductVideo;
   photos: Photo[];
   section: Section;

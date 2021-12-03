@@ -21,7 +21,7 @@
           Сант-Петербурга.
         </p>
         <div class="prolog__link">
-          <a href="#">Подробнее о нас</a>
+          <router-link to="/about/about.html">Подробнее о нас</router-link>
         </div>
       </div>
     </div>

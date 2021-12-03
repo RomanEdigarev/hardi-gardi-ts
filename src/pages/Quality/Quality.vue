@@ -260,11 +260,13 @@
             процедуры оценки и подтверждения. Для вашего удобства мы сохранили
             все сертификаты на игры «Харди Гарди» ниже.
           </div>
-          <div class="quality__footer__docs__items">
-            <div class="quality__footer__docs__items__item"><DocsCard /></div>
-            <div class="quality__footer__docs__items__item"><DocsCard /></div>
-            <div class="quality__footer__docs__items__item"><DocsCard /></div>
-            <div class="quality__footer__docs__items__item"><DocsCard /></div>
+          <div class="quality__footer__docs__items" v-if="certificates">
+            <div
+              class="quality__footer__docs__items__item"
+              v-for="certificate in certificates.items"
+            >
+              <DocsCard :certificate="certificate" />
+            </div>
           </div>
           <svg
             width="68"
@@ -315,13 +317,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs } from "@/widgets";
 import { TextBlock, FooterCard, DocsCard } from "./ui";
+import { getCertificatesAPI } from "@/services/api/lib/certificates";
 export default defineComponent({
   name: "Quality",
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard, DocsCard },
+  setup() {
+    const certificates = ref(null);
+
+    onMounted(async () => {
+      const { data } = await getCertificatesAPI();
+      certificates.value = data;
+    });
+
+    return {
+      certificates,
+    };
+  },
 });
 </script>
 

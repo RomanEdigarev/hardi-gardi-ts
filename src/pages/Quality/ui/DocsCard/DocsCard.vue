@@ -1,6 +1,6 @@
 <template>
-  <div class="docs-card">
-    <span>Сертификат ГОСТ 23565-85756</span>
+  <a :href="certificate.file" class="docs-card">
+    <span>{{certificate.name}}</span>
     <svg
       width="11"
       height="12"
@@ -13,13 +13,19 @@
         fill="#D23C50"
       />
     </svg>
-  </div>
+  </a>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "DocsCard",
+  props: {
+    certificate: {
+      type: Object,
+      required: true
+    }
+  }
 });
 </script>
 

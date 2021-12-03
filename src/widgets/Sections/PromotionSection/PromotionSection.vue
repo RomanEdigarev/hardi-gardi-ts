@@ -17,7 +17,13 @@
       </BlockWithSliderPhone>
     </div>
     <div v-else class="promotion-section__content-container">
-      <BlockWithSlider :products="actions"  :is-actions="true"/>
+      <template v-if="$route.path === '/actions/'">
+        <BlockWithSlider v-for="action in actions" :products="[action]"  :is-actions="true" title=""/>
+      </template>
+      <template v-else>
+        <BlockWithSlider :products="actions"  :is-actions="true" title=""/>
+      </template>
+
     </div>
   </div>
 </template>
@@ -63,6 +69,9 @@ export default defineComponent({
   &__content-container {
     width: 100%;
     height: 100%;
+    & > div {
+      margin-bottom: 40px;
+    }
   }
 
   &__image-container {

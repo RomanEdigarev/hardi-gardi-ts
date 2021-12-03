@@ -136,7 +136,7 @@ const routes = [
     },
   },
   {
-    path: "/quality",
+    path: "/about/",
     name: "Quality",
     component: Quality,
     meta: {
