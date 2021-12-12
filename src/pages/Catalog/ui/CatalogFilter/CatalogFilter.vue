@@ -153,6 +153,7 @@ import { AlfaButton } from "@/shared/ui/buttons";
 import { useStore } from "@/services/vuex";
 import { Filters } from "@/entities/Products/Filter/model";
 import { Section } from "@/entities/Shop/Catalog/model";
+import {CurrentFilter} from "@/entities/Products/model";
 export default defineComponent({
   name: "CatalogFilter",
   components: {
@@ -160,7 +161,7 @@ export default defineComponent({
     RangeSlider,
     AlfaButton,
   },
-  emits: ["hide-mobile-filter", "filter-section", "set-price", "apply-filter"],
+  emits: ["hide-mobile-filter", "filter-section", "set-price", "apply-filter", "reset-filters"],
   setup(_, { emit }) {
     const store = useStore();
     const isPhone = computed(() => store.getters["getIsPhone"]);
@@ -171,7 +172,7 @@ export default defineComponent({
     const filters = computed<Filters>(
       () => store.getters["products/getFilters"]
     );
-    const currentFilters = computed<string[]>(
+    const currentFilters = computed<CurrentFilter>(
       () => store.getters["products/getCurrentFilters"]
     );
     const setPrice = (arr, str) => {
@@ -186,10 +187,16 @@ export default defineComponent({
         name: str[1],
         value: arr[1],
       });
+      emit('apply-filter')
     };
 
     const setSectionFilter = (value) => {
-      store.commit("products/addCurrentFilter", { name: "section", value });
+      if (currentFilters.value.section === value) {
+        emit('reset-filters')
+      } else {
+        store.commit("products/addCurrentFilter", { name: "section", value });
+        applyFilter()
+      }
     };
 
     const setActiveClass = (e) => {

@@ -86,6 +86,7 @@ export default defineComponent({
   bottom: -16px;
   transform: translateY(100%);
   span {
+    font-size: 12px ;
     cursor: pointer;
   }
 }

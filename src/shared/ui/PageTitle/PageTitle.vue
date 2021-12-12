@@ -25,13 +25,16 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .page-title {
   font-weight: $semi-bold;
   font-size: 45px;
   line-height: 55px;
   color: $clr-nu;
   margin: 0;
+  span {
+    font-size: 45px;
+  }
 }
 @media screen and (min-width: 738px) and (max-width: 1200px),
   (-webkit-min-device-pixel-ratio: 3) {

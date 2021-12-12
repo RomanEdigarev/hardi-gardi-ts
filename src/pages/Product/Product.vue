@@ -259,7 +259,7 @@ export default defineComponent({
 
   // *** Body END *** //
 }
-@media screen and (min-width: 738px) and (max-width: 1360px),
+@media screen and (min-width: 737px) and (max-width: 1360px),
   (-webkit-min-device-pixel-ratio: 3) {
   .product-page {
     margin: 0 auto;

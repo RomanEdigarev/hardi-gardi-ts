@@ -54,7 +54,7 @@
             />
           </div>
           <div
-            v-if="!isLoading || products.length > 0"
+            v-if="!isLoading && products.length > 0"
             class="catalog__results__body"
             :class="phoneView"
           >
@@ -66,8 +66,12 @@
               <ProductCardCatalog :product="product" />
             </div>
           </div>
-          <div class="catalog__results__footer">
+          <div v-else-if="products.length === 0" class="catalog__results__error">
+            В данной категории нет товаров
+          </div>
+          <div class="catalog__results__footer" >
             <AlfaButton
+                v-if="products.length > 0"
               styling="secondary"
               text="Показать еще"
               :is-pending="isLoading"
@@ -137,8 +141,9 @@ export default defineComponent({
     const fetchProducts = () => {
       store.dispatch("products/addProductsByPage");
     };
-    const setFilter = (name: string) => {
+    const setFilter = async (name: string) => {
       store.commit("products/addCurrentFilter", { name });
+      await applyFilter()
     };
     const removeFilter = (name: string) => {
       store.commit("products/removeCurrentFilter", name);
@@ -237,6 +242,13 @@ export default defineComponent({
           font-size: 16px;
         }
       }
+    }
+
+    &__error {
+      width: 100%;
+      object-fit: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 

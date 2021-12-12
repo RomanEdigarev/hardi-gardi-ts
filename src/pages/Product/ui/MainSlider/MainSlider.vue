@@ -24,7 +24,7 @@
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
-                  :src="photo"
+                  :src="IMG_URL + photo"
                   alt=""
                   class="main-slider__body__thumbnails__item__img"
                 />
@@ -52,7 +52,7 @@
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
-                  :src="photo"
+                  :src="IMG_URL + photo"
                   alt=""
                   class="main-slider__body__thumbnails__item__img"
                 />
@@ -80,7 +80,7 @@
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
-                  :src="photo"
+                  :src="IMG_URL + photo"
                   alt=""
                   class="main-slider__body__thumbnails__item__img"
                 />
@@ -108,7 +108,7 @@
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
-                  :src="photo"
+                  :src="IMG_URL + photo"
                   alt=""
                   class="main-slider__body__thumbnails__item__img"
                 />
@@ -150,7 +150,7 @@
         >
           <SplideSlide v-for="photo in photos">
             <img
-              :src="photo"
+              :src="IMG_URL + photo"
               alt=""
               class="main-slider__body__current-slide__img"
             />
@@ -176,7 +176,7 @@
         >
           <SplideSlide v-for="photo in photos">
             <img
-              :src="photo"
+              :src="IMG_URL + photo"
               alt=""
               class="main-slider__body__current-slide__img"
             />
@@ -202,7 +202,7 @@
         >
           <SplideSlide v-for="photo in photos">
             <img
-              :src="photo"
+              :src="IMG_URL + photo"
               alt=""
               class="main-slider__body__current-slide__img"
             />
@@ -229,7 +229,7 @@
           <SplideSlide v-for="(photo, index) in photos">
             <template v-if="index === 0">
               <img
-                :src="photo"
+                :src="IMG_URL + photo"
                 alt=""
                 class="main-slider__body__current-slide__img"
               />
@@ -241,7 +241,7 @@
             </template>
             <template v-else>
               <img
-                :src="photo"
+                :src="IMG_URL + photo"
                 alt=""
                 class="main-slider__body__current-slide__img"
               />
@@ -281,6 +281,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { getPrimaryOptions, useMainSlider } from "./lib";
 import { ProductPhoto } from "@/entities/Products/Product/model";
 import { useStore } from "@/services/vuex";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "MainSlider",
@@ -336,6 +337,7 @@ export default defineComponent({
       isFirstSlide,
       isLastSlide,
       splideMoved,
+      IMG_URL
     };
   },
 });
@@ -492,7 +494,7 @@ export default defineComponent({
     }
   }
 }
-@media screen and (min-width: 738px) and (max-width: 1366px),
+@media screen and (min-width: 737px) and (max-width: 1360px),
   (-webkit-min-device-pixel-ratio: 3) {
   .main-slider {
     &__body {

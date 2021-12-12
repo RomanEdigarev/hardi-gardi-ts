@@ -7,7 +7,7 @@
       </div>
       <div class="contacts__body">
         <div class="contacts__body__map-container">
-          <img src="./assets/map.png" alt="" />
+          <YMap :coordinates="contacts.coordinates"/>
           <div class="contacts__body__map-container__info">
             <Info :contacts="contacts" />
           </div>
@@ -61,13 +61,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent, onMounted} from "vue";
 import { BreadCrumbs } from "@/widgets";
 import { PageTitle } from "@/shared/ui";
 import { VInput } from "@/shared/ui/inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { Info } from "./ui";
 import { useContacts } from "./lib";
+import {YMap} from "@/features";
+
 export default defineComponent({
   name: "Contacts",
   components: {
@@ -76,6 +78,7 @@ export default defineComponent({
     Info,
     VInput,
     AlfaButton,
+    YMap
   },
   setup() {
     return {
@@ -95,12 +98,8 @@ export default defineComponent({
       height: 643px;
       position: relative;
       margin-bottom: 203px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 40px;
-      }
+      border-radius: 40px;
+      overflow: hidden;
       &__info {
         position: absolute;
         top: 113px;

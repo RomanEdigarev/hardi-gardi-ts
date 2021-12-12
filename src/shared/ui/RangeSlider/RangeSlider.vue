@@ -1,5 +1,5 @@
 <template>
-  <div class="range-slider" @mouseleave="$emit('set-price', arr)">
+  <div class="range-slider">
     <input
       class="range-slider__input"
       v-model="arr[0]"
@@ -21,6 +21,7 @@
         :tooltip="'none'"
         :process-style="{ backgroundColor: '#D23C50' }"
         :tooltip-style="{ backgroundColor: 'pink', borderColor: 'pink' }"
+        @drag-end="$emit('set-price', arr)"
       >
         <template v-slot:dot="{ value, focus }">
           <div :class="['custom-dot', { focus }]"></div>

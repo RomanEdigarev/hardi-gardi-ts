@@ -89,15 +89,21 @@
             Иллюстраторы, дизайнеры, технологи. Все вовлечены в процесс создания игр. И на каждом этапе мы стараемся представить, что будет чувствовать ребенок, когда будет играть в «Харди Гарди».
           </div>
           <div class="philosophy__body__item__img-container image-grid">
-            <img src="./assets/01.jpg" alt="" />
-            <img src="./assets/01.jpg" alt="" />
-            <img src="./assets/01.jpg" alt="" />
+            <div  :style="`background-image: url(${require('./assets/3.jpg')})`"
+                  style="    background-size: 382%;background-position: 74% 54%;">
+            </div>
+            <div  :style="`background-image: url(${require('./assets/2.jpg')})`"
+                  style="background-size: 271%;background-position: 86% 95%;">
+            </div>
+            <div  :style="`background-image: url(${require('./assets/4.jpg')})`"
+                  style="background-size: 204%;background-position: 33% 96%;">
+            </div>
           </div>
         </div>
       </div>
       <div class="philosophy__footer">
         <div class="philosophy__footer__img">
-          <img src="./assets/01.jpg" alt="" />
+          <img src="./assets/1.jpg" alt="" />
         </div>
         <div class="philosophy__footer__card">
           <FooterCard bg-string="#ECF0F8">
@@ -267,15 +273,19 @@ export default defineComponent({
     .philosophy__body__item {
       &__img-container {
         grid-template-columns: 434px 257px;
-        img:first-child {
+        div:first-child {
           grid-row: 1 /3;
           grid-column: 2;
+          border-radius: 30px;
         }
-        img:nth-child(2) {
+        div:nth-child(2) {
+          width: 153px;
           max-width: 153px;
           justify-self: flex-end;
+          border-radius: 30px;
         }
-        img:nth-child(3) {
+        div:nth-child(3) {
+          border-radius: 30px;
         }
       }
     }
@@ -368,15 +378,15 @@ export default defineComponent({
         grid-template-columns: 1fr 122px;
         grid-template-rows: 72px 174px;
         gap: 11px;
-        img:first-child {
+        div:first-child {
           width: 100%;
           border-radius: 14px;
         }
-        img:nth-child(2) {
+        div:nth-child(2) {
           max-width: 72px;
           border-radius: 14px;
         }
-        img:nth-child(3) {
+        div:nth-child(3) {
           border-radius: 14px;
         }
       }

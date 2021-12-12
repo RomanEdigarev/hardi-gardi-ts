@@ -55,7 +55,7 @@ export const footerForPhone = (args) => ({
         link: "/about/cooperation.html",
       },
       {
-        name: "Благотворителность",
+        name: "Благотворительность",
         link: "/about/sponsor.html",
       },
     ];

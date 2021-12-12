@@ -95,12 +95,12 @@
             </TextBlock>
           </div>
           <div class="quality__body__item__img-container img-h">
-            <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+            <img :src="require('./assets/4.jpg')" alt="" />
           </div>
         </div>
         <div class="quality__body__item">
-          <div class="quality__body__item__img-container img-v">
-            <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+          <div class="quality__body__item__img-container img-v" :style="`background-image: url(${require('./assets/2.jpg')})`"
+               style="background-size: 270%; background-position: 76% 81%;">
           </div>
           <div class="quality__body__item__text-block mw-580">
             <TextBlock title="Первые эскизы обретают форму">
@@ -166,8 +166,10 @@
               </template>
             </TextBlock>
           </div>
-          <div class="quality__body__item__img-container img-h">
-            <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+          <div class="quality__body__item__img-container img-h"
+               :style="`background-image: url(${require('./assets/3.jpg')})`"
+               style="background-size: 270%; background-position: 48% 64%;">
+<!--            <img :src="require('./assets/3.jpg')" alt="" />-->
           </div>
         </div>
         <div class="quality__body__item pl-87">
@@ -203,17 +205,21 @@
               </template>
             </TextBlock>
           </div>
-          <div class="quality__body__item__img-container img-h">
-            <img
-              :src="require('/public/images/pages/2019.jpg')"
-              alt=""
-              style="margin-bottom: 12px"
-            />
+          <div class="quality__body__item__img-container img-h"
+               :style="`background-image: url(${require('./assets/img.png')})`"
+               style="background-size: 104%; background-position: 48% 51%;">
+<!--            <img-->
+<!--              :src="require('/public/images/pages/2019.jpg')"-->
+<!--              alt=""-->
+<!--              style="margin-bottom: 12px"-->
+<!--            />-->
           </div>
         </div>
         <div class="quality__body__item">
-          <div class="quality__body__item__img-container img-v">
-            <img :src="require('/public/images/pages/2019.jpg')" alt="" />
+          <div class="quality__body__item__img-container img-v"
+               :style="`background-image: url(${require('./assets/5.jpg')})`"
+               style="background-size: 110%; background-position: 48% 51%;">
+<!--            <img :src="require('/public/images/pages/2019.jpg')" alt="" />-->
           </div>
           <div class="quality__body__item__text-block mw-580">
             <TextBlock title="Выход в продажу">
@@ -413,11 +419,13 @@ export default defineComponent({
         width: 100%;
       }
       &__img-container {
+        overflow: hidden;
+        border-radius: 30px;
+        background-size: cover;
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 30px;
         }
       }
     }
@@ -462,6 +470,7 @@ export default defineComponent({
   // *** Other *** //
   .img-h {
     width: 100%;
+    height: 382px;
     max-width: 644px;
     max-height: 382px;
   }

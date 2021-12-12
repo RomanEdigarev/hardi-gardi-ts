@@ -13,5 +13,6 @@ export const getContactsAdapter = async (): Promise<Contacts> => {
     mail: response.data.email,
     openingHours: response.data.schedule,
     phone: response.data.phone,
+    coordinates: [response.data.gps_n, response.data.gps_s],
   };
 };

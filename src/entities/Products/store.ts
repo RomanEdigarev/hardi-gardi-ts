@@ -61,7 +61,8 @@ export const productsModule: Module<Products, State> = {
       payload: { name: string; value: string | number }
     ) => {
       if (
-        Object.keys(state.currentFilter).some((key) => key === payload.name)
+        Object.keys(state.currentFilter).some((key) => key === payload.name) &&
+        !(typeof payload.value === "number")
       ) {
         const {
           [payload.name]: removingFilter,

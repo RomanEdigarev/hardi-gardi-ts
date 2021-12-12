@@ -6,5 +6,6 @@ const getContacts = async (): Promise<Contacts> => {
     mail: "",
     openingHours: "",
     phone: "",
+    coordinates: [0, 0],
   };
 };

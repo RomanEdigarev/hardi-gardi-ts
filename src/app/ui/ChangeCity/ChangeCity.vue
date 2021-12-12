@@ -32,6 +32,7 @@
             :key="`${city}_${index}`"
             class="change-city__body__items__item"
             :class="{ current: index === currentCityIndex }"
+            @click="setNewUserCity(index, city)"
           >
             {{ city }}
           </div>
@@ -42,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 import { CloseIcon } from "@/shared/ui/icons";
 import { useStore } from "@/services/vuex";
 
@@ -52,6 +53,12 @@ export default defineComponent({
   setup(_, { emit }) {
     const store = useStore();
     const searchStr = ref<string>("");
+    onMounted(async () => {
+      const cityInLocalStorage = JSON.parse(localStorage.getItem('city'))
+      if (cityInLocalStorage) {
+        await setNewUserCity(cityInLocalStorage.id, cityInLocalStorage.name)
+      }
+    })
 
     const currentCityIndex = computed(
       () => store.getters["city/getCurrentCityId"]
@@ -62,6 +69,8 @@ export default defineComponent({
     const setNewUserCity = async (index, name) => {
       searchStr.value = name;
       await store.dispatch("city/setNewUserCity", index);
+      localStorage.setItem('city', JSON.stringify({id: index, name}))
+      close()
     };
     const data = {
       cities: computed(() => store.getters["city/getAllCities"]),

@@ -7,7 +7,7 @@
           <div class="catalog-product-card__image-wrapper">
             <img
               class="catalog-product-card__image"
-              :src="product.img"
+              :src="IMG_URL + product.img"
               :alt="product.title"
               @click="$router.push(`/product/${product.id}`)"
             />
@@ -50,6 +50,7 @@ import { defineComponent, onMounted, PropType } from "vue";
 import { AddToBasket, AddToFavorite } from "@/features";
 import { Product } from "@/entities/Products/Product/model";
 import { useProduct } from "@/entities/Products/Product/lib";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -76,6 +77,7 @@ export default defineComponent({
     const { product: productTest } = useProduct();
     return {
       productTest,
+      IMG_URL
     };
   },
 });
