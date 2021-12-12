@@ -5,7 +5,7 @@
         <BreadCrumbs />
         <PageTitle>
           <template v-slot:text>
-            <span class="history__title">Философия</span>
+            <span class="quality__title">Философия</span>
           </template>
         </PageTitle>
       </div>

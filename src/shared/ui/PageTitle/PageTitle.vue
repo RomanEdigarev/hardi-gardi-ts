@@ -33,7 +33,7 @@ export default defineComponent({
   color: $clr-nu;
   margin: 0;
   span {
-    font-size: 45px;
+    font-size: 45px !important;
   }
 }
 @media screen and (min-width: 738px) and (max-width: 1200px),
