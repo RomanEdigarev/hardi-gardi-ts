@@ -23,14 +23,14 @@
             <InfoProductCard v-bind="firstProduct" :is-simple="true" />
           </div>
           <div class="new-games__first-row__image-product-card-container">
-            <ImageProductCard :img-path="firstProduct.img" :title="firstProduct.title" />
+            <ImageProductCard :img-path="IMG_URL + firstProduct.img" :title="firstProduct.title" />
           </div>
           <div class="new-games__first-row__image-card-container">
             <Card>
               <template v-slot:content>
                 <img
                   class="new-games__first-row__image-card"
-                  :src="firstProduct.img2"
+                  :src="IMG_URL + firstProduct.img2"
                   alt=""
                 />
               </template>
@@ -38,15 +38,26 @@
           </div>
         </div>
         <div class="new-games__second-row">
-          <div v-for="product in alsoProducts" class="new-games__second-row__item">
-            <ProductCardHome :product="product" />
+          <div v-for="(product, index) in alsoProducts">
+            <template v-if="index <= 1">
+              <div class="new-games__second-row__item">
+                <ProductCardHome :product="product" />
+              </div>
+            </template>
+            <template v-else>
+              <transition appear @enter="enterElement" @leave="leaveElement">
+                <div v-if="isShow" class="new-games__second-row__item">
+                  <ProductCardHome :product="product" />
+                </div>
+              </transition>
+            </template>
           </div>
         </div>
       </div>
     </div>
 
     <div class="new-games__plus-btn">
-      <BetaButton styling="beta-beta-btn">
+      <BetaButton styling="beta-beta-btn" @click="toggleShow">
         <PlusIcon />
       </BetaButton>
     </div>
@@ -54,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import {defineComponent, PropType, ref} from "vue";
 import { Card } from "@/shared/ui";
 import { InfoProductCard, ImageProductCard } from "@/widgets";
 import { useProduct } from "@/entities/Products/Product/lib";
@@ -62,6 +73,8 @@ import { ProductCardHome } from "@/widgets";
 import { BetaButton } from "@/shared/ui/buttons";
 import { PlusIcon } from "@/shared/ui/icons";
 import { Product } from "@/entities/Products/Product/model";
+import {IMG_URL} from "@/shared/config";
+import anime from "animejs";
 
 export default defineComponent({
     name: "SectionNewGames",
@@ -81,11 +94,40 @@ export default defineComponent({
   },
   setup(props) {
     const [firstProduct, ...alsoProducts] = props.products as Product[]
+    const isShow = ref<boolean>(false)
+
+    const toggleShow = () => {
+      isShow.value = !isShow.value
+    }
+
+    const enterElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        duration: 600,
+        easing: "linear",
+        complete: done,
+      });
+    }
+    const leaveElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [1, 0],
+        easing: "linear",
+        duration: 600,
+        complete: done,
+      });
+    }
 
 
     return {
       firstProduct,
-      alsoProducts
+      alsoProducts,
+      isShow,
+      toggleShow,
+      IMG_URL,
+      enterElement,
+      leaveElement
     };
   },
 });
@@ -155,14 +197,21 @@ export default defineComponent({
 
   &__second-row {
     width: 100%;
-    height: 390px;
-    display: flex;
-    justify-content: space-between;
+    //height: 390px;
+    //display: flex;
+    //justify-content: space-between;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: 50px;
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
 
     &__item {
       width: 100%;
-      max-width: 48.7%;
+      //max-width: 48.7%;
+      height: 390px;
     }
   }
 

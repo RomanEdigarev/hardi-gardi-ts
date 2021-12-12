@@ -37,7 +37,7 @@
             <img
               class="history__body__item__img"
               :class="{ firstImageMobile: isMobile }"
-              :src="require('/public/images/pages/2019.jpg')"
+              :src="IMG_URL + history[0].img"
               alt=""
             />
           </div>
@@ -59,7 +59,7 @@
 
             <img
               class="history__body__item__img"
-              src="./assets/2019.jpg"
+              :src="IMG_URL + history[1].img"
               alt=""
             />
           </div>
@@ -104,7 +104,7 @@
             <img src="./assets/03.svg" alt="" />
             <img
               class="history__body__item__img"
-              src="./assets/2019.jpg"
+              :src="IMG_URL + history[2].img"
               alt=""
             />
             <img src="./assets/star.svg" alt="" />
@@ -148,6 +148,7 @@ import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, FooterCard } from "@/widgets";
 import { TextBlock } from "./ui";
 import { useStore } from "@/services/vuex";
+import {IMG_URL} from "@/shared/config";
 export default defineComponent({
   name: "History",
   components: { PageTitle, BreadCrumbs, TextBlock, FooterCard },
@@ -160,6 +161,7 @@ export default defineComponent({
       isMobile,
       history,
       isPhone,
+      IMG_URL
     };
   },
 });

@@ -31,14 +31,25 @@
         </div>
 
         <div v-else class="sales-section__items-container">
-          <div v-for="product in products" class="sales-section__item">
-            <ProductCardHome :product="product" />
+          <div v-for="(product, index) in products" >
+            <template v-if="index <= 3">
+              <div class="sales-section__item">
+                <ProductCardHome :product="product" />
+              </div>
+            </template>
+            <template v-else>
+              <transition appear @enter="enterElement" @leave="leaveElement">
+                <div v-if="isShow" class="sales-section__item">
+                  <ProductCardHome :product="product" />
+                </div>
+              </transition>
+            </template>
           </div>
         </div>
       </div>
     </div>
     <div class="sales-section__plus-btn-container">
-      <BetaButton styling="beta-beta-btn">
+      <BetaButton styling="beta-beta-btn" @click="toggleShow">
         <PlusIcon />
       </BetaButton>
     </div>
@@ -46,12 +57,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import {computed, defineComponent, PropType, ref} from "vue";
 import { ProductCardHome, ProductCardHomePhone } from "@/widgets";
 import { PlusIcon } from "@/shared/ui/icons";
 import { BetaButton } from "@/shared/ui/buttons";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
+import anime from "animejs";
 
 export default defineComponent({
   name: "SectionSales",
@@ -69,8 +81,36 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const isShow = ref<boolean>(false)
+
+    const toggleShow = () => {
+      isShow.value = !isShow.value
+    }
+
+    const enterElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        duration: 600,
+        easing: "linear",
+        complete: done,
+      });
+    }
+    const leaveElement = (el, done) => {
+      anime({
+        targets: el,
+        opacity: [1, 0],
+        easing: "linear",
+        duration: 600,
+        complete: done,
+      });
+    }
     return {
       isPhone: computed(() => store.state.isPhone),
+      enterElement,
+      leaveElement,
+      toggleShow,
+      isShow
     };
   },
 });
@@ -109,7 +149,7 @@ export default defineComponent({
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
-    grid-auto-rows: 390px;
+    //grid-auto-rows: 390px;
     column-gap: 30px;
     row-gap: 40px;
   }
@@ -134,6 +174,7 @@ export default defineComponent({
   }
 
   &__item {
+    height: 390px;
   }
 }
 

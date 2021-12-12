@@ -2,7 +2,7 @@
   <div class="home-product-card" :class="{ isReverse }">
     <!-- Product Image -->
     <div class="home-product-card__image-wrapper">
-      <ImageProductCard :img-path="product.img" />
+      <ImageProductCard :img-path="IMG_URL + product.img" />
     </div>
 
     <!-- Product Info -->
@@ -28,6 +28,7 @@ import { Card } from "@/shared/ui";
 import { useProduct } from "@/entities/Products/Product/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "ProductCardHome",
@@ -55,6 +56,7 @@ export default defineComponent({
 
     return {
       isPhone,
+      IMG_URL
     };
   },
 });

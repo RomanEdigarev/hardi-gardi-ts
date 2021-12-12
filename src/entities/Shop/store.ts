@@ -25,13 +25,13 @@ export const shopModule: Module<Shop, State> = {
       return state.catalog;
     },
     getTopMenu: (state): MenuLink[] => {
-      return state.menu.top.main;
+      return state.menu.top.main.slice(0, 3);
     },
     getFooterMenu: (state): FooterMenu => {
       return state.menu.footer;
     },
     getTooltipMenu: (state): MenuLink[] => {
-      return state.menu.top.tooltip;
+      return state.menu.top.main.slice(3);
     },
     getHistory: (state): History => {
       return state.history;

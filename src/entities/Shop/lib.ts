@@ -26,6 +26,7 @@ export const initShop = async (store): Promise<Shop> => {
   await store.dispatch("products/fetchBestProducts", "best");
   await store.dispatch("products/fetchBestProducts", "new");
   await store.dispatch("products/fetchBestProducts", "sale");
+  await store.dispatch("products/fetchBestProducts", "best_set");
   if (store.state.user.isAuth) {
     await store.dispatch("order/fetchHistoryOrders");
   }

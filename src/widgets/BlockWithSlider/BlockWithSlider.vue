@@ -3,7 +3,7 @@
     <div ref="imageCard" class="block-with-slider__image-card-container">
       <ImageProductCard
         :title="currentProduct.title"
-        :img-path="currentProduct.img"
+        :img-path="IMG_URL + currentProduct.img"
       />
       <div class="block-with-slider__image-card-container__bg-container">
         <slot name="image-bg-container"></slot>
@@ -43,7 +43,7 @@ import { Product } from "@/entities/Products/Product/model";
 import InfoProductCard from "@/widgets/Product/InfoProductCard/InfoProductCard.vue";
 import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCard.vue";
 import { useAnimation } from "./animations";
-import {Action} from "@/entities/Actions/model";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "BlockWithSlider",
@@ -97,6 +97,7 @@ export default defineComponent({
       currentSlide,
       prevProduct,
       imageCard,
+      IMG_URL
     };
   },
 });
@@ -161,6 +162,7 @@ export default defineComponent({
       top: -18px;
       left: 0;
       z-index: -1;
+      width: 496px;
     }
   }
 
