@@ -53,7 +53,7 @@ export const getPrimaryOptions = (status?: string, isZoom?: boolean) => {
   return options;
 };
 
-export const useMainSlider = (isZoom) => {
+export const useMainSlider = ({isZoom, video}) => {
   const secondaryOptions = getSecondaryOptions();
   const primaryOptions = getPrimaryOptions(isZoom);
   const secondarySplide = ref(null);

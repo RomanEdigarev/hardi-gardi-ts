@@ -24,7 +24,7 @@
             bg-color="#FFEDC6"
           />
         </div>
-        <div class="block-with-slider__slider-panel">
+        <div v-if="products.length > 1" class="block-with-slider__slider-panel">
           <SliderPanel
             @next-slide="nextProduct"
             @prev-slide="prevProduct"

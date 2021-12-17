@@ -7,4 +7,5 @@ export { default as Sorting } from "./Sorting/Sorting.vue";
 export { default as ObtainingItem } from "./Obtaining/ui/ObtainingItem/ObtainingItem.vue";
 export { default as IconWithCount } from "./IconWithCount/IconWithCount.vue";
 export { default as YMap } from "./YMap/YMap.vue";
+export { default as YTPlayer } from "./YTPlayer/YTPlayer.vue";
 export * from "./Slider";

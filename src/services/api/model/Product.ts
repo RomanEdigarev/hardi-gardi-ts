@@ -73,6 +73,7 @@ export type ProductItem = {
   section: Section;
   price: Price;
   props: Props[];
+  preview: string;
   seo: Seo;
   linkProducts: LinkProduct[];
   isComplect: ProductIsComplect;

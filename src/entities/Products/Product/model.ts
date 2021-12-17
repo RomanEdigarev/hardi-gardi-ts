@@ -34,6 +34,9 @@ export type Product = {
   description?: string;
   characteristics?: Characteristics;
   photos?: ProductPhoto[];
+  preview?: string;
+  anonce?:string;
+  video?: string;
   linkProducts?: Product[];
   isComplect?: boolean;
   parts?: Product[];

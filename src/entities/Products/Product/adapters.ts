@@ -33,10 +33,12 @@ export const getProductAdapter = async (id: number): Promise<Product> => {
     id: response.id,
     currentPrice: response.price.sum,
     prevPrice: response.price.oldSum,
-    description: response.anonce,
+    description: response.describe,
     img: response.photos[0].src,
     isFavorite: false,
     title: response.name,
+    anonce: response.anonce,
+    video: response.video,
     photos: response.photos.map((photo) => photo.src),
     characteristics,
     linkProducts: response.linkProducts.map((linkProduct) => {

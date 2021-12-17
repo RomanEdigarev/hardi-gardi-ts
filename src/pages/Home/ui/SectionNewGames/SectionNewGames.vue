@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType, ref} from "vue";
+import {defineComponent, onMounted, PropType, ref} from "vue";
 import { Card } from "@/shared/ui";
 import { InfoProductCard, ImageProductCard } from "@/widgets";
 import { useProduct } from "@/entities/Products/Product/lib";
@@ -99,6 +99,10 @@ export default defineComponent({
     const toggleShow = () => {
       isShow.value = !isShow.value
     }
+
+    onMounted(() => {
+      console.log(props)
+    })
 
     const enterElement = (el, done) => {
       anime({

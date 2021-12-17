@@ -1,7 +1,7 @@
 <template>
   <div ref="layer" class="home-animation-bg">
     <div ref="closeIcon" class="home-animation-bg__close-icon">
-      <CloseIcon />
+      <CloseIcon @click="playStarAnimation"/>
     </div>
     <svg
       id="shape-2"
@@ -122,10 +122,11 @@ import {
 } from "./animations";
 import { CloseIcon } from "@/shared/ui/icons";
 import {useStore} from "@/services/vuex";
+import {YTPlayer} from "@/features";
 
 export default defineComponent({
   name: "HomeAnimationBG",
-  components: { CloseIcon },
+  components: { CloseIcon, YTPlayer },
   setup() {
     const layer = ref<HTMLElement>(null);
     const shapeForth = ref<HTMLElement>(null);
@@ -136,6 +137,7 @@ export default defineComponent({
     const gammaShape = ref<HTMLElement>(null);
     const closeIcon = ref<HTMLElement>(null);
     const isOpen = ref(false);
+    const currentShape = ref("")
     const alfaAnimationShape = computed(() => starAnimation(alfaShape.value));
     const betaAnimationShape = computed(() => charAnimation(betaShape.value));
     const gammaAnimationShape = computed(() =>
@@ -175,8 +177,11 @@ export default defineComponent({
     });
 
     const playStarAnimation = (event) => {
+      if (event.currentTarget.id) {
+        currentShape.value = event.currentTarget.id
+      }
       closeIcon.value.style.display = isOpen.value ? "none" : "block";
-      animations.value[event.currentTarget.id].play();
+      animations.value[currentShape.value].play();
       isOpen.value = !isOpen.value;
     };
     const toggleLoopAnimation = (event) => {

@@ -6,10 +6,8 @@
       </div>
     </div>
     <div class="about-product__body">
-      <div class="about-product__body__text">
-        Ты знаешь кто такой тиранозавр? Умеет ли птеродактиль летать? Кто такие
-        палеонтологи и что они изучают? Давай разбираться вместе с магнитной
-        игрой «Познаём мир. Юрских период. Динозавры» от Харди Гарди.
+      <div class="about-product__body__text" v-html="text">
+
       </div>
       <div class="about-product__body__price-container">
         <div class="about-product__body__price-container__price-prev">
@@ -143,6 +141,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    text: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     const store = useStore();

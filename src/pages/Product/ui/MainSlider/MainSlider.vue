@@ -105,6 +105,16 @@
             ref="secondarySplide"
             :options="getSecondaryOptions()"
           >
+            <SplideSlide v-if="video.length > 0">
+              <div class="main-slider__body__thumbnails__item">
+                <img
+                    src="./assets/video-icon.svg"
+                    alt=""
+                    class="main-slider__body__thumbnails__item__img"
+                />
+              </div>
+            </SplideSlide>
+
             <SplideSlide v-for="photo in photos">
               <div class="main-slider__body__thumbnails__item">
                 <img
@@ -225,7 +235,11 @@
           ref="primarySplide"
           :options="getPrimaryOptions()"
           @splide:click="$emit('zoom')"
+          @splide:move="changeVideoStatus('stop')"
         >
+          <splide-slide v-if="video.length > 0">
+            <YTPlayer id="videoSlide" :video-url="video" :status="videoStatus"/>
+          </splide-slide>
           <SplideSlide v-for="(photo, index) in photos">
             <template v-if="index === 0">
               <img
@@ -234,7 +248,7 @@
                 class="main-slider__body__current-slide__img"
               />
               <img
-                :src="photos[index + 1]"
+                :src="IMG_URL + photos[index + 1]"
                 alt=""
                 class="main-slider__body__current-slide__img"
               />
@@ -282,6 +296,7 @@ import { getPrimaryOptions, useMainSlider } from "./lib";
 import { ProductPhoto } from "@/entities/Products/Product/model";
 import { useStore } from "@/services/vuex";
 import {IMG_URL} from "@/shared/config";
+import {YTPlayer} from "@/features";
 
 export default defineComponent({
   name: "MainSlider",
@@ -291,6 +306,7 @@ export default defineComponent({
     Splide,
     SplideSlide,
     CloseIcon,
+    YTPlayer
   },
   emits: ["zoom"],
   props: {
@@ -303,12 +319,17 @@ export default defineComponent({
       type: Object as PropType<ProductPhoto[]>,
       required: true,
     },
+    video: {
+      type: Array,
+      required: true
+    }
   },
   setup(props) {
-    const slider = useMainSlider(props.isZoom);
+    const slider = useMainSlider(props);
     const store = useStore();
     const isFirstSlide = ref(true);
     const isLastSlide = ref(false);
+    const videoStatus = ref('')
 
     onUpdated(() => {
       document.documentElement.style.overflow = props.isZoom
@@ -316,6 +337,11 @@ export default defineComponent({
         : "visible";
       slider.primarySplide.value.splide.refresh();
     });
+
+    const changeVideoStatus = (status: string) => {
+      videoStatus.value = status
+    }
+
 
     const splideMoved = (value) => {
       if (value.index === 0) {
@@ -337,7 +363,9 @@ export default defineComponent({
       isFirstSlide,
       isLastSlide,
       splideMoved,
-      IMG_URL
+      IMG_URL,
+      changeVideoStatus,
+      videoStatus
     };
   },
 });
@@ -613,5 +641,12 @@ export default defineComponent({
       }
     }
   }
+}
+</style>
+<style lang="scss">
+#videoSlide {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
 }
 </style>

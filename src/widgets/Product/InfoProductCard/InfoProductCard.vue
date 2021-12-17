@@ -18,7 +18,7 @@
                 {{ currentPrice }} &#8381;/шт
               </div>
             </div>
-            <div class="product-card-info__description">{{ description }}</div>
+            <div class="product-card-info__description" v-html="preview || description"></div>
             <div class="product-card-info__link alfa-link" @click="$router.push(`/product/${id}`)">Подробнее</div>
           </div>
         </template>
@@ -60,6 +60,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    preview: {
+      type: String,
+      required: true,
+    },
     isFavorite: {
       type: Boolean,
       required: false,
@@ -95,6 +99,9 @@ export default defineComponent({
   height: 100%;
   position: relative;
   color: $clr-phi;
+  :deep ul {
+    padding: 0;
+  }
 
   &__content-container {
     width: 100%;

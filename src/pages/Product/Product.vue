@@ -10,6 +10,7 @@
             @zoom="zoomSlider"
             :is-zoom="isZoomSlider"
             :photos="currentProduct.photos"
+            :video="currentProduct.video"
           />
         </div>
       </div>
@@ -22,6 +23,7 @@
             :price-current="currentProduct.currentPrice"
             :parts-products="currentProduct.parts"
             :product-id="currentProduct.id"
+            :text="currentProduct.anonce"
           />
         </div>
         <div class="product-page__body__right-body">

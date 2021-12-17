@@ -93,9 +93,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      debugger
       const response = await getOrderAPI(order.value.id)
-      debugger
     })
 
     return {

@@ -50,6 +50,7 @@ export const getBestProductsAdapter = async (
       img: product.img,
       img2: product.img2,
       isFavorite: false,
+      preview: product.preview
     };
   });
   return products;

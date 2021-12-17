@@ -42,12 +42,12 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { ObtainingInfo, ObtainingItem } from "@/features/Obtaining/ui";
-import { VInput } from "@/shared/ui/inputs";
 import { useStore } from "@/services/vuex";
 import { OrderDeliveryVariant } from "@/entities/Order/model";
 import anime from "animejs";
 import * as yup from "yup";
 import { useForm } from "vee-validate";
+import {VInput} from "@/shared/ui/inputs";
 
 export default defineComponent({
   name: "Post",
