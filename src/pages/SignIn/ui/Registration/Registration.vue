@@ -73,7 +73,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, watch } from "vue";
-import { Checkbox, VInput } from "@/shared/ui/inputs";
+import { Checkbox, VInput } from "@/shared/ui/Inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import * as yup from "yup";
 import { useForm } from "vee-validate";

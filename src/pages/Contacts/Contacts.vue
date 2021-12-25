@@ -64,7 +64,7 @@
 import {defineComponent, onMounted} from "vue";
 import { BreadCrumbs } from "@/widgets";
 import { PageTitle } from "@/shared/ui";
-import { VInput } from "@/shared/ui/inputs";
+import { VInput } from "@/shared/ui/Inputs";
 import { AlfaButton } from "@/shared/ui/buttons";
 import { Info } from "./ui";
 import { useContacts } from "./lib";

@@ -35,7 +35,9 @@
     </div>
     <div class="search-modal-phone__footer">
       <button class="search-modal-phone__footer__btn">
-        <span>Все результаты</span>
+        <router-link to="/catalog" @click="close">
+          <span>Все результаты</span>
+        </router-link>
         <svg
           width="18"
           height="18"
@@ -158,7 +160,8 @@ export default defineComponent({
   padding: 24px 18px;
   color: $clr-phi;
   position: relative;
-  display: none;
+  overflow-y: auto;
+  //display: none;
   // *** Header *** //
   &__header {
     margin-bottom: 30px;
@@ -203,6 +206,9 @@ export default defineComponent({
       display: grid;
       grid-template-columns: 1fr;
       grid-auto-rows: 131px;
+      height: 65vh;
+      overflow: scroll;
+      padding-bottom: 10vh;
     }
     &__item {
       padding: 8px 0px;

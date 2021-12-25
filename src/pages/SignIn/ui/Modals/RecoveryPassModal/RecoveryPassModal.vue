@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { VInput } from "@/shared/ui/inputs";
+import { VInput } from "@/shared/ui/Inputs";
 import * as yup from "yup";
 import { AlfaButton, BetaButton } from "@/shared/ui/buttons";
 import { CloseIcon } from "@/shared/ui/icons";

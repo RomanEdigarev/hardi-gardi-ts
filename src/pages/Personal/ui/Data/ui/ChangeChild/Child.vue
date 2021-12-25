@@ -60,7 +60,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { DateInput, RadioInput, VInput } from "@/shared/ui/inputs";
+import { DateInput, RadioInput, VInput } from "@/shared/ui/Inputs";
 import { UserChild } from "@/entities/User/model";
 
 export default defineComponent({

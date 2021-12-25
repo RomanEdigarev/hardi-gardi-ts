@@ -13,7 +13,7 @@
 import { defineComponent } from "vue";
 import { BetaButton } from "@/shared/ui/buttons";
 import { ArrowIcon } from "@/shared/ui/icons";
-import { VInput } from "@/shared/ui/inputs";
+import { VInput } from "@/shared/ui/Inputs";
 
 export default defineComponent({
   name: "SearchInput",

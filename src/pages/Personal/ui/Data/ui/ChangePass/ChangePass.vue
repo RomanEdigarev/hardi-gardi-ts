@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import { VInput } from "@/shared/ui/inputs";
+import { VInput } from "@/shared/ui/Inputs";
 import * as yup from "yup";
 import anime from "animejs";
 import { useStore } from "@/services/vuex";

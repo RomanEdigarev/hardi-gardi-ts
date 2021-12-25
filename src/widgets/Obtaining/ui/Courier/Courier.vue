@@ -28,7 +28,7 @@
 <script lang="ts">
 import {computed, defineComponent, onMounted} from "vue";
 import {ObtainingInfo, ObtainingItem} from "@/features/Obtaining/ui";
-import {VInput} from "@/shared/ui/inputs";
+import {VInput} from "@/shared/ui/Inputs";
 import {useStore} from "@/services/vuex";
 import {OrderDeliveryVariant} from "@/entities/Order/model";
 import anime from "animejs";

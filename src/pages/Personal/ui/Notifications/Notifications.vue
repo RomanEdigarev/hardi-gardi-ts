@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Checkbox } from "@/shared/ui/inputs";
+import { Checkbox } from "@/shared/ui/Inputs";
 
 export default defineComponent({
   name: "Notifications",

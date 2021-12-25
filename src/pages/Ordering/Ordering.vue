@@ -92,7 +92,7 @@ import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { PageTitle, ToggleMenu } from "@/shared/ui";
 import { Checkout, Obtaining } from "@/widgets";
 import { Contacts, Goods } from "./ui";
-import { Checkbox } from "@/shared/ui/inputs";
+import { Checkbox } from "@/shared/ui/Inputs";
 import { Basket } from "@/entities/Basket/model";
 import { useStore } from "@/services/vuex";
 import { Order } from "@/entities/Order/model";

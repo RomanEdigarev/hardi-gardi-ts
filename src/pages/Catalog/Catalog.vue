@@ -14,7 +14,6 @@
           <PageTitle text="Весь каталог" />
         </div>
       </div>
-
       <div class="catalog__content">
         <button
           class="catalog__content__mobile-filter-btn"
@@ -66,8 +65,14 @@
               <ProductCardCatalog :product="product" />
             </div>
           </div>
-          <div v-else-if="products.length === 0" class="catalog__results__error">
+
+          <div v-else-if="!productLoading && products.length === 0" class="catalog__results__error">
             В данной категории нет товаров
+          </div>
+          <div v-else>
+            <div class="loader__container">
+              <div class="loader"></div>
+            </div>
           </div>
           <div class="catalog__results__footer" >
             <AlfaButton
@@ -126,13 +131,13 @@ export default defineComponent({
     const changePhoneView = (viewType: string) => {
       phoneView.value = viewType;
     };
+    const productLoading = computed(() => store.state.products.isLoading)
 
     onMounted(async () => {
       if(route.params.section) {
         store.commit("products/addCurrentFilter", { name: "section", value: route.params.section });
       }
       await initCatalog();
-      console.log(route.params.section)
     });
 
     const applyFilter = async () => {
@@ -178,7 +183,8 @@ export default defineComponent({
       applyFilter,
       setPrice,
       filters,
-      actions: computed(() => store.getters['actions/getActions'])
+      actions: computed(() => store.getters['actions/getActions']),
+      productLoading
     };
   },
 });
