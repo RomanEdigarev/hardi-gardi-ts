@@ -415,7 +415,7 @@ export default defineComponent({
   }
 }
 </style>
-<style scoped lang="scss">
+<style lang="scss">
 .loader__container {
   width: 100vw;
   height: 100vw;

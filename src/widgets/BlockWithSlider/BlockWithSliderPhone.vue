@@ -11,18 +11,19 @@
     </div>
     <div class="block-with-slider-phone__body">
       <div class="block-with-slider-phone__body__left-btn">
-        <BetaButton styling="beta-zeta-btn" @click="prevProduct">
+        <BetaButton styling="beta-zeta-btn" @click="prevProduct" :is-disabled="currentSlide === 0">
           <SlideArrowIcon />
         </BetaButton>
       </div>
       <div ref="imageCard" class="block-with-slider-phone__body__image-slider">
         <ImageProductCard
           :title="currentProduct.title"
-          :img-path="currentProduct.img"
+          :img-path="IMG_URL + currentProduct.img"
         />
       </div>
+
       <div class="block-with-slider-phone__body__right-btn">
-        <BetaButton styling="beta-zeta-btn" @click="nextProduct">
+        <BetaButton styling="beta-zeta-btn" @click="nextProduct" :is-disabled="currentSlide === products.length - 1">
           <SlideArrowIcon />
         </BetaButton>
       </div>
@@ -43,6 +44,7 @@ import ImageProductCard from "@/widgets/Product/ImageProductCard/ImageProductCar
 import {BetaButton} from "@/shared/ui/buttons";
 import {SlideArrowIcon} from "@/shared/ui/icons";
 import {useAnimation} from "@/widgets/BlockWithSlider/animations";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "BlockWithSliderPhone",
@@ -81,7 +83,6 @@ export default defineComponent({
     });
 
     const nextProduct = () => {
-      console.log(currentProduct.value)
       slideNumber++;
       animation.value.play();
     };
@@ -98,6 +99,7 @@ export default defineComponent({
       currentSlide,
       prevProduct,
       imageCard,
+      IMG_URL
     };
   },
 });
@@ -179,6 +181,7 @@ export default defineComponent({
       overflow: hidden;
     }
     &__price {
+      margin-bottom: 0;
       &__current {
         font-size: 22px;
         line-height: 24px;

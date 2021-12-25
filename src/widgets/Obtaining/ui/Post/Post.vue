@@ -47,7 +47,7 @@ import { OrderDeliveryVariant } from "@/entities/Order/model";
 import anime from "animejs";
 import * as yup from "yup";
 import { useForm } from "vee-validate";
-import {VInput} from "@/shared/ui/inputs";
+import {VInput} from "@/shared/ui/Inputs";
 
 export default defineComponent({
   name: "Post",

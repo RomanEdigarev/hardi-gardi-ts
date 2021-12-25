@@ -2,27 +2,26 @@
   <div class="product-card-info-phone">
     <div class="product-card-info-phone__header">
       <div class="product-card-info-phone__header__title">
-        Магнитная игра «Одень девочку»
+        {{title}}
       </div>
     </div>
     <div class="product-card-info-phone__body">
-      <div class="product-card-info-phone__body__text">
-        Крупные детали каждого пазла удобны для игры...
+      <div class="product-card-info-phone__body__text" v-html="preview">
       </div>
     </div>
     <div class="product-card-info-phone__footer">
       <div class="product-card-info-phone__footer__price">
-        <div class="product-card-info-phone__footer__price__prev">430₽</div>
+        <div class="product-card-info-phone__footer__price__prev">{{prevPrice}}</div>
         <div class="product-card-info-phone__footer__price__current">
-          400 ₽/шт
+          {{currentPrice}} ₽/шт
         </div>
       </div>
     </div>
     <div class="product-card-info-phone__favorite-btn">
-      <AddToFavorite :is-favorite="false" />
+      <AddToFavorite :is-favorite="false"  :product-id="id"/>
     </div>
     <div class="product-card-info-phone__add-to-shop-btn">
-      <AddToBasket />
+      <AddToBasket :product-id="id"/>
     </div>
   </div>
 </template>
@@ -57,6 +56,10 @@ export default defineComponent({
       type: Boolean,
       required: false,
     },
+    preview: {
+      type: String,
+      required: true
+    },
     bgColor: {
       type: String,
       default: "#fceef4",
@@ -67,6 +70,10 @@ export default defineComponent({
       default: false,
       required: false,
     },
+    id: {
+      type: String,
+      required: true
+    }
   },
   setup() {
     const content = ref<HTMLElement>(null);
@@ -107,6 +114,10 @@ export default defineComponent({
     &__text {
       font-size: 12px;
       line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
   // *** Body END *** //

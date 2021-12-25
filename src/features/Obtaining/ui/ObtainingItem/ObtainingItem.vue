@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from "vue";
-import { RadioInput } from "@/shared/ui/inputs";
+import { RadioInput } from "@/shared/ui/Inputs";
 import {useStore} from "@/services/vuex";
 
 export default defineComponent({

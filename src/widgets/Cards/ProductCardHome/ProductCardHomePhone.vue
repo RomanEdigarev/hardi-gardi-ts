@@ -1,23 +1,21 @@
 <template>
   <div class="home-product-card-phone">
     <div class="home-product-card-phone__left">
-      <ImageProductCard :img-path="product.img" />
+      <ImageProductCard :img-path="IMG_URL + product.img" />
     </div>
     <div class="home-product-card-phone__right">
       <InfoProductCardPhone
-        :title="product.title"
-        :description="product.description"
-        :current-price="product.currentPrice"
-        :prev-price="product.prevPrice"
+        v-bind="product"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent, PropType} from "vue";
 import { ImageProductCard, InfoProductCardPhone } from "@/widgets";
-import { useProduct } from "@/entities/Products/Product/lib";
+import {Product} from "@/entities/Products/Product/model";
+import {IMG_URL} from "@/shared/config";
 
 export default defineComponent({
   name: "ProductCardHomePhone",
@@ -27,13 +25,15 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    product: {
+      type: Object as PropType<Product>,
+      required: true,
+    },
   },
   setup() {
-    const { product } = useProduct();
-
     return {
-      product,
-    };
+      IMG_URL
+    }
   },
 });
 </script>
@@ -42,7 +42,7 @@ export default defineComponent({
 .home-product-card-phone {
   width: 100%;
   max-width: 100%;
-  max-height: none;
+  max-height: 230px;
   display: flex;
   &__left {
     max-width: 46.9%;
@@ -67,7 +67,7 @@ export default defineComponent({
     }
     &__footer__price {
       div {
-        font-size: 3vw;
+        font-size: 14px;
       }
     }
     &__add-to-shop-btn {

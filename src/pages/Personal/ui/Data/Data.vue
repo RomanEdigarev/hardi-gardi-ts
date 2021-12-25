@@ -73,7 +73,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, reactive, ref } from "vue";
-import { DateInput, VInput } from "@/shared/ui/inputs";
+import { DateInput, VInput } from "@/shared/ui/Inputs";
 import * as yup from "yup";
 import { ChangeChild, ChangePass } from "./ui";
 import { User, UserProfileDataModel } from "@/entities/User/model";

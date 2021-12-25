@@ -22,11 +22,19 @@
         </div>
 
         <div v-if="isPhone" class="sales-section__items-container">
-          <div class="sales-section__item">
-            <ProductCardHomePhone />
-          </div>
-          <div class="sales-section__item">
-            <ProductCardHomePhone />
+          <div v-for="(product, index) in products" >
+            <template v-if="index <= 1">
+              <div class="sales-section__item">
+                <ProductCardHomePhone :product="product" />
+              </div>
+            </template>
+            <template v-else>
+              <transition appear @enter="enterElement" @leave="leaveElement">
+                <div v-if="isShow" class="sales-section__item">
+                  <ProductCardHomePhone :product="product" />
+                </div>
+              </transition>
+            </template>
           </div>
         </div>
 
@@ -48,7 +56,7 @@
         </div>
       </div>
     </div>
-    <div class="sales-section__plus-btn-container">
+    <div class="sales-section__plus-btn-container" v-if="!isShow">
       <BetaButton styling="beta-beta-btn" @click="toggleShow">
         <PlusIcon />
       </BetaButton>
@@ -175,6 +183,9 @@ export default defineComponent({
 
   &__item {
     height: 390px;
+    @include phone {
+      height: auto;
+    }
   }
 }
 
