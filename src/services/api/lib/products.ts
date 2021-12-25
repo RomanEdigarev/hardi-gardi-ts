@@ -3,12 +3,19 @@ import { apiInstance } from "@/services/api/config";
 import { Filters } from "@/services/api/model/Filter";
 import { LayoutAPI } from "@/services/api/model/LayoutAPI";
 import { Product } from "@/entities/Products/Product/model";
+import {Sorting} from "@/entities/Products/model";
 
 export const getProductsByPageAPI = async (
   page: number,
-  filters: string[] = []
+  filters: string[] = [],
+  sorting: Sorting
 ): Promise<Products> => {
   let requestString = "";
+
+  const formData = new FormData();
+  Object.entries(sorting).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
 
   if (filters.length === 0) {
     requestString = "catalog/list.php";
@@ -17,7 +24,7 @@ export const getProductsByPageAPI = async (
   }
 
   try {
-    const { data, status } = await apiInstance().post(requestString);
+    const { data, status } = await apiInstance().post(requestString, formData);
     if (status === 200 && data.isSuccess) {
       return data;
     } else {

@@ -1,8 +1,11 @@
 <template>
   <div class="sorting">
     <div class="sorting__title">Сортировать по:</div>
-    <div class="sorting__item current" @click="dropdownIsOpen = !dropdownIsOpen">
-      {{map[currentSortingType]}}
+    <div
+      class="sorting__item current"
+      @click="dropdownIsOpen = !dropdownIsOpen"
+    >
+      <span>{{ map[currentSortingType].name }}</span>
       <svg
         width="11"
         height="6"
@@ -37,7 +40,7 @@
           :class="{ current: sortingItem[0] === currentSortingType }"
           @click="setNewSortingType(sortingItem[0])"
         >
-          {{ sortingItem[1] }}
+          {{ sortingItem[1].name }}
         </div>
       </div>
     </transition>
@@ -48,17 +51,34 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "@/services/vuex";
 import anime from "animejs";
+import { Sorting } from "@/entities/Products/model";
 export default defineComponent({
   name: "Sorting",
   setup() {
     const store = useStore();
-    const currentSortingType = ref("polarity");
+    const currentSortingType = ref("popular");
     const dropdownIsOpen = ref(false);
     const map = {
-      polarity: "популярности",
-      newness: "новизне",
-      ascendingPrice: "цена по возрастанию",
-      descendingPrice: "цена по убыванию",
+      popular: {
+        sortField: "popular",
+        sortOrder: "asc",
+        name: "популярности",
+      },
+      newness: {
+        sortField: "news",
+        sortOrder: "asc",
+        name: "новизне",
+      },
+      ascendingPrice: {
+        sortField: "price",
+        sortOrder: "asc",
+        name: "цена по возрастанию",
+      },
+      descendingPrice: {
+        sortField: "price",
+        sortOrder: "desc",
+        name: "цена по убыванию",
+      },
       sales: "скидке",
     };
 
@@ -81,9 +101,16 @@ export default defineComponent({
       });
     };
 
-    const setNewSortingType = (type) => {
-      dropdownIsOpen.value = !dropdownIsOpen.value
+    const setNewSortingType = async (type) => {
+      dropdownIsOpen.value = !dropdownIsOpen.value;
       currentSortingType.value = type;
+      const newSorting: Sorting = {
+        sortField: map[type].sortField,
+        sortOrder: map[type].sortOrder,
+      };
+      store.commit('products/setSorting' , newSorting)
+      await store.dispatch('products/setProductsByPage')
+
     };
 
     return {
@@ -93,7 +120,7 @@ export default defineComponent({
       setNewSortingType,
       enterElement,
       leaveElement,
-      dropdownIsOpen
+      dropdownIsOpen,
     };
   },
 });
@@ -122,6 +149,13 @@ export default defineComponent({
     cursor: pointer;
     margin-right: 19px;
     transition: text-shadow 0.3s ease-in-out;
+    span {
+      display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 120px;
+      white-space: nowrap;
+    }
     svg {
       display: none;
     }

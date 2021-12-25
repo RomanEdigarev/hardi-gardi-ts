@@ -11,7 +11,7 @@
       <div class="burger-menu__body__links">
         <div
           class="burger-menu__body__links__link"
-          @click="setCurrentSubmenu('catalog-component', 'Каталог')"
+          @click="setCurrentSubmenu('catalog-submenu', 'Каталог')"
         >
           <b>Каталог</b>
           <svg
@@ -52,10 +52,9 @@
         >
           <span>Контакты</span>
         </router-link>
-        <router-link
-          to="/about/history.html"
+        <div
           class="burger-menu__body__links__link"
-          @click="$emit('close-burger-menu')"
+          @click="setCurrentSubmenu('about-submenu', 'О компании')"
         >
           <span>О компании</span>
           <svg
@@ -74,8 +73,8 @@
               stroke-linejoin="round"
             />
           </svg>
-        </router-link>
-        <div class="burger-menu__body__links__link">
+        </div>
+        <div class="burger-menu__body__links__link" @click="setCurrentSubmenu('help-submenu', 'Помощь ')">
           <span>Помощь</span>
           <svg
             width="8"
@@ -119,7 +118,7 @@
       <div>
         <component
           @close-burger-menu="$emit('close-burger-menu')"
-          is="catalog-submenu"
+          :is="currenSubmenu.component"
         ></component>
       </div>
     </div>
@@ -138,12 +137,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { CatalogSubmenu } from "@/app/ui/Header/ui";
+import { CatalogSubmenu, AboutSubmenu, HelpSubmenu } from "@/app/ui/Header/ui";
 import { useBurgerSubmenu } from "./lib";
 
 export default defineComponent({
   name: "BurgerMenu",
-  components: { CatalogSubmenu },
+  components: { CatalogSubmenu, AboutSubmenu, HelpSubmenu },
   emits: ["close-burger-menu"],
   setup() {
     return {
@@ -229,6 +228,8 @@ export default defineComponent({
   // *** Footer END *** //
 
   &__submenu {
+    width: 100%;
+    height: 100%;
     margin-top: 65px;
     position: absolute;
     background-color: white;

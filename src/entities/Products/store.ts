@@ -1,6 +1,6 @@
 import { Module } from "vuex";
 import { State } from "@/services/vuex";
-import { Products, ProductsPage } from "./model";
+import { Products, ProductsPage, Sorting } from "./model";
 import { getProductAdapter } from "@/entities/Products/Product/adapters";
 import { Product } from "./Product/model";
 import {
@@ -30,6 +30,10 @@ export const productsModule: Module<Products, State> = {
       new: [],
       sale: [],
       best_set: [],
+      sorting: {
+        sortField: "price",
+        sortOrder: "asc",
+      },
     };
   },
   mutations: {
@@ -90,6 +94,9 @@ export const productsModule: Module<Products, State> = {
     setBestItems: (state, payload) => {
       state[payload.type] = payload.items;
     },
+    setSorting: (state, payload: Sorting) => {
+      state.sorting = payload;
+    },
   },
   actions: {
     initSections: async ({ commit, rootState }) => {
@@ -120,7 +127,8 @@ export const productsModule: Module<Products, State> = {
         commit("toggleLoading", true);
         const products = await getProductsByPageAdapter(
           page,
-          state.currentFilter
+          state.currentFilter,
+          state.sorting
         );
         commit("setProductsByPage", { value: page, products });
         commit("toggleLoading", false);
@@ -139,6 +147,7 @@ export const productsModule: Module<Products, State> = {
       const products = await getBestProductsAdapter(type);
       commit("setBestItems", { type, items: products });
     },
+    fetchNewSorting: async ({ commit }, payload: Sorting) => {},
   },
   getters: {
     getCurrentProduct: (state) => state.currentProduct,

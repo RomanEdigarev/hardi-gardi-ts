@@ -4,11 +4,17 @@ import {
   getBestProductsAPI,
   getProductsByPageAPI,
 } from "@/services/api/lib/products";
-import { CurrentFilter } from "@/entities/Products/model";
+import {CurrentFilter, Sorting} from "@/entities/Products/model";
+
+const defaultSorting: Sorting = {
+  sortField: 'price',
+  sortOrder: 'asc'
+}
 
 export const getProductsByPageAdapter = async (
   page: number,
-  currentFilter: CurrentFilter = {}
+  currentFilter: CurrentFilter = {},
+  sorting: Sorting = defaultSorting
 ): Promise<Product[]> => {
   const filters: string[] = Object.entries(currentFilter).map(
     ([key, value]) => {
@@ -19,7 +25,7 @@ export const getProductsByPageAdapter = async (
     }
   );
   // Response API here //
-  const response = await getProductsByPageAPI(page, filters);
+  const response = await getProductsByPageAPI(page, filters, sorting);
   // Response API  //
   // Transformation API data here //
   const products: Product[] = response.data.products.map((product) => {
