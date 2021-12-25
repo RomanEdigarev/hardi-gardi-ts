@@ -66,7 +66,10 @@
             </div>
           </div>
 
-          <div v-else-if="!productLoading && products.length === 0" class="catalog__results__error">
+          <div
+            v-else-if="!productLoading && products.length === 0"
+            class="catalog__results__error"
+          >
             В данной категории нет товаров
           </div>
           <div v-else>
@@ -74,9 +77,9 @@
               <div class="loader"></div>
             </div>
           </div>
-          <div class="catalog__results__footer" >
+          <div class="catalog__results__footer">
             <AlfaButton
-                v-if="products.length > 0"
+              v-if="products.length > 0"
               styling="secondary"
               text="Показать еще"
               :is-pending="isLoading"
@@ -93,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { PageTitle } from "@/shared/ui";
 import { BreadCrumbs, ProductCardCatalog, PromotionSection } from "@/widgets";
 import { CatalogFilter } from "./ui";
@@ -104,7 +107,7 @@ import { defineTitle, useMobileFilter } from "@/pages/Catalog/lib";
 import { getProductByPage, initCatalog } from "@/entities/Products/lib";
 import { useStore } from "@/services/vuex";
 import { Product } from "@/entities/Products/Product/model";
-import {useRoute} from "vue-router";
+import { useRoute } from "vue-router";
 const { product } = useProduct();
 
 export default defineComponent({
@@ -125,17 +128,29 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const route = useRoute()
+    const route = useRoute();
     const { product } = useProduct();
     const phoneView = ref("cl-2");
     const changePhoneView = (viewType: string) => {
       phoneView.value = viewType;
     };
-    const productLoading = computed(() => store.state.products.isLoading)
+    const productLoading = computed(() => store.state.products.isLoading);
+    const mapBreadcrumbs = computed(() => store.getters["shop/getBreadcrumbs"]);
+
+    watch(route, async () => {
+      if (!route.params.section) {
+        store.commit('products/resetCurrentFilters')
+      }
+      await store.dispatch("products/initFilters");
+      await store.dispatch("products/setProductsByPage", 1);
+    });
 
     onMounted(async () => {
-      if(route.params.section) {
-        store.commit("products/addCurrentFilter", { name: "section", value: route.params.section });
+      if (route.params.section) {
+        store.commit("products/addCurrentFilter", {
+          name: "section",
+          value: mapBreadcrumbs.value[route.params.section as string].id,
+        });
       }
       await initCatalog();
     });
@@ -148,7 +163,7 @@ export default defineComponent({
     };
     const setFilter = async (name: string) => {
       store.commit("products/addCurrentFilter", { name });
-      await applyFilter()
+      await applyFilter();
     };
     const removeFilter = (name: string) => {
       store.commit("products/removeCurrentFilter", name);
@@ -183,8 +198,8 @@ export default defineComponent({
       applyFilter,
       setPrice,
       filters,
-      actions: computed(() => store.getters['actions/getActions']),
-      productLoading
+      actions: computed(() => store.getters["actions/getActions"]),
+      productLoading,
     };
   },
 });

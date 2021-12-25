@@ -1,10 +1,10 @@
 <template>
   <div class="breadcrumbs">
     <router-link class="breadcrumbs__link" to="/">Главная</router-link>
-    <router-link
+    <span
       class="breadcrumbs__link"
-      v-for="breadcrumb in breadcrumbs"
-      :to="breadcrumb.link"
+      v-for="breadcrumb in resultBreadcrumbs"
+      @click="$router.push(breadcrumb.link)"
     >
       <svg
         width="5"
@@ -25,7 +25,7 @@
       <span>
         {{ breadcrumb.name }}
       </span>
-    </router-link>
+    </span>
   </div>
 </template>
 
@@ -41,6 +41,7 @@ import {
   watch,
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import {useStore} from "@/services/vuex";
 
 export default defineComponent({
   name: "BreadCrumbs",
@@ -50,6 +51,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore()
     const route = useRoute();
     let breadcrumbs = computed(() => {
       if (props.items) {
@@ -58,13 +60,26 @@ export default defineComponent({
         return [...route.meta.breadcrumb];
       }
     });
+    const resultBreadcrumbs = ref(null);
+    const isCatalog = computed(() => route.path.split("/").includes("catalog"));
+    const mapBreadcrumbs = computed(() => store.getters['shop/getBreadcrumbs'])
 
-    // watch(route, (newRoute) => {
-    //   breadcrumbs = newRoute.meta.breadcrumb;
-    // });
+    watch(route, () => {
+      const currentSection = route.params.section;
+      if (isCatalog.value && currentSection) {
+        resultBreadcrumbs.value.push(mapBreadcrumbs.value[currentSection as string]);
+      } else {
+        resultBreadcrumbs.value = [...breadcrumbs.value];
+      }
+    })
+
+    onMounted(() => {
+      resultBreadcrumbs.value = [...breadcrumbs.value];
+    });
 
     return {
       breadcrumbs,
+      resultBreadcrumbs,
     };
   },
 });

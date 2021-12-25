@@ -57,7 +57,7 @@ const routes = [
       breadcrumb: [
         {
           name: "Весь каталог",
-          link: "catalog",
+          link: "/catalog",
         },
       ],
     },

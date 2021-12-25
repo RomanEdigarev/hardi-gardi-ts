@@ -13,6 +13,7 @@ import {
 } from "@/entities/Products/Filter/adapters";
 import { Filters } from "@/entities/Products/Filter/model";
 import { Section } from "@/entities/Shop/Catalog/model";
+import { Breadcrumb } from "@/entities/Breadcrumb/model";
 
 export const productsModule: Module<Products, State> = {
   state: () => {

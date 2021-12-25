@@ -2,7 +2,7 @@ import { State } from "@/services/vuex";
 import { Shop } from "./model";
 import { Module } from "vuex";
 import { getShopAdapter } from "./adapters";
-import { Catalog } from "./Catalog/model";
+import { Catalog, Section } from "./Catalog/model";
 import { History } from "./History/model";
 import { FooterMenu, MenuLink, TopMenu } from "./Menu/model";
 import { Contacts } from "@/entities/Shop/Contacts/model";
@@ -41,6 +41,30 @@ export const shopModule: Module<Shop, State> = {
     },
     getSocial: (state): Social => {
       return state.social;
+    },
+    getBreadcrumbs: ({ catalog }) => {
+      let map = {};
+      const breadcrumb = (section: Section) => {
+        const arr = section.link.split("/");
+        const key = arr.slice(1, arr.length - 1).pop();
+        map[key.toLowerCase()] = {
+          name: section.name,
+          link: section.link,
+          id: section.id,
+        };
+      };
+
+      for (let i = 0; i < catalog.sections.length; i++) {
+        if (catalog.sections[i].sections.length > 0) {
+          for (let j = 0; j < catalog.sections[i].sections.length; j++) {
+            breadcrumb(catalog.sections[i].sections[j]);
+          }
+        } else {
+          breadcrumb(catalog.sections[i]);
+        }
+      }
+
+      return map;
     },
   },
   mutations: {
